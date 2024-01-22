@@ -1,0 +1,7 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:PackageEasy.Converters">
+    <converters:ButtonTypeToBoolConverter x:Key="ButtonTypeToBoolConverter"></converters:ButtonTypeToBoolConverter>
+    <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"></converters:BoolToVisibilityConverter>
+    <converters:Base64ToImageConverter x:Key="Base64ToImageConverter"></converters:Base64ToImageConverter>
+</ResourceDictionary>

@@ -1,0 +1,69 @@
+﻿<!--作者：TT 时间:2023-03-14 23:27:58 描述：PackageEasy.Views.EndView界面 TANGMANGER-->
+<UserControl x:Class="PackageEasy.Views.EndView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PackageEasy.Views"
+             xmlns:controls="clr-namespace:PackageEasy.Controls.Controls;assembly=PackageEasy.Controls"
+             xmlns:lang="clr-namespace:PackageEasy.Common.Data;assembly=PackageEasy.Common"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid  Margin="30,20,0,0" HorizontalAlignment="Left">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.3*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="0.3*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" ></RowDefinition>
+            <RowDefinition  Height="auto" ></RowDefinition>
+            <RowDefinition  Height="auto" ></RowDefinition>
+            <RowDefinition Height="auto" ></RowDefinition>
+            <RowDefinition Height="auto" ></RowDefinition>
+            <RowDefinition Height="auto" ></RowDefinition>
+            <RowDefinition Height="auto" ></RowDefinition>
+            <RowDefinition Height="auto" ></RowDefinition>
+            <RowDefinition Height="auto" ></RowDefinition>
+            <RowDefinition Height="auto" ></RowDefinition>
+            <RowDefinition Height="auto" ></RowDefinition>
+            <RowDefinition Height="auto" ></RowDefinition>
+            <RowDefinition Height="auto" ></RowDefinition>
+            <RowDefinition Height="*" ></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Text="程序:" lang:LanguageManager.LangText="程序:" VerticalAlignment="Center" HorizontalAlignment="Right" ></TextBlock>
+        <ComboBox Grid.Column="1" Width="220" Height="30" Style="{StaticResource CommonComboBoxStyle}" HorizontalAlignment="Left" VerticalContentAlignment="Center" ItemsSource="{Binding TargetFilesList}" SelectedItem="{Binding ApplicationName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5,0,0,0"></ComboBox>
+        <CheckBox Grid.Column="2" IsChecked="{Binding IsAutoRun,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Grid.ColumnSpan="2" Margin="5,0,0,0" VerticalAlignment="Center" Content="安装完成后启动" lang:LanguageManager.LangText="安装完成后启动"></CheckBox>
+
+        <TextBlock Text="参数:" Margin="0,10,0,0" Grid.Row="1" lang:LanguageManager.LangText="参数:" VerticalAlignment="Center" HorizontalAlignment="Right" ></TextBlock>
+        <TextBox Grid.Column="1"   Grid.Row="1" Width="220" Height="30" Style="{StaticResource CommonTextBox}" Text="{Binding RunParam,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,10,0,0"></TextBox>
+
+        <TextBlock Text="自述:" Grid.Row="2" lang:LanguageManager.LangText="自述:" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,0,0"></TextBlock>
+        <ComboBox Grid.Column="1"  Grid.Row="2"  Width="220" Height="30" VerticalContentAlignment="Center"  ItemsSource="{Binding TargetFilesList}" SelectedItem="{Binding ReadMeName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource CommonComboBoxStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,10,0,0"></ComboBox>
+        <!--<Border Grid.Row="3" Grid.ColumnSpan="7" BorderBrush="{DynamicResource borderBrush}" Height="30" Background="Red" Margin="0,5,0,0" BorderThickness="0,0.5,0,0"></Border>-->
+        <CheckBox Grid.Row="7" Content="使用解除安装程序" Grid.ColumnSpan="2" Margin="0,10,0,0" Visibility="Collapsed" lang:LanguageManager.LangText="使用解除安装程序"></CheckBox>
+
+        <TextBlock Text="解除安装提示:"  Margin="0,10,0,0" Grid.Row="4" lang:LanguageManager.LangText="解除安装提示:" VerticalAlignment="Center" HorizontalAlignment="Right" ></TextBlock>
+        <TextBox Grid.Column="1"   Grid.Row="4" Width="220" MinHeight="30" Style="{StaticResource CommonTextBox}" TextWrapping="Wrap" Text="{Binding UninstallTip,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,10,0,0"></TextBox>
+
+        <TextBlock Text="解除安装消息:" Margin="0,10,0,0" Grid.Row="5" lang:LanguageManager.LangText="解除安装消息:" VerticalAlignment="Center" HorizontalAlignment="Right" ></TextBlock>
+        <TextBox Grid.Column="1"   Grid.Row="5" Width="220" MinHeight="30" Style="{StaticResource CommonTextBox}"   TextWrapping="Wrap" Text="{Binding UninstallMsg,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,10,0,0"></TextBox>
+        <TextBlock Text="检测的进程名:" Margin="0,10,0,0" Grid.Row="6" lang:LanguageManager.LangText="检测的进程名:" VerticalAlignment="Center" HorizontalAlignment="Right" ></TextBlock>
+        <controls:PlaceholderTextBox Grid.Column="1" PlaceHolderText="例如:PackageEasy.exe" IsEnabled="{Binding IsEnableProcess}" Grid.Row="6" Width="220" MinHeight="30" Style="{StaticResource PlaceholderTextBoxStyle}"   TextWrapping="Wrap" Text="{Binding ProcessName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,10,0,0"></controls:PlaceholderTextBox>
+
+        <TextBlock Text="安装提示:" Margin="0,10,0,0" Grid.Row="7" lang:LanguageManager.LangText="安装提示:" VerticalAlignment="Center" HorizontalAlignment="Right" ></TextBlock>
+        <TextBox  IsEnabled="{Binding IsEnableProcess}" Grid.Column="1" Grid.Row="7" Width="220" MinHeight="30" Style="{StaticResource CommonTextBox}"   TextWrapping="Wrap" Text="{Binding InstallProcessTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,10,0,0"></TextBox>
+        <TextBlock Text="卸载提示:" Margin="0,10,0,0" Grid.Row="8" lang:LanguageManager.LangText="卸载提示:" VerticalAlignment="Center" HorizontalAlignment="Right" ></TextBlock>
+        <TextBox Grid.Column="1" Grid.Row="8" IsEnabled="{Binding IsEnableProcess}"  Width="220" MinHeight="30" Style="{StaticResource CommonTextBox}"   TextWrapping="Wrap" Text="{Binding UninstallProcessTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,10,0,0"></TextBox>
+        <CheckBox Grid.Column="2"  Grid.Row="6" IsChecked="{Binding IsEnableProcess,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Grid.ColumnSpan="2" Margin="5,0,0,0" VerticalAlignment="Center" Content="启用进程检测" lang:LanguageManager.LangText="启用进程检测"></CheckBox>
+        <!--<TextBlock Grid.Row="6" Text="解除安装图标:" lang:LanguageManager.LangText="解除安装图标:" VerticalAlignment="Center"  HorizontalAlignment="Right"></TextBlock>
+        <StackPanel Orientation="Horizontal" Grid.Row="6" Grid.Column="1">
+            <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource CommonTextBox}" Width="150" Height="25" VerticalContentAlignment="Center" Margin="5,10,0,10"></TextBox>
+            <Button Width="50" Height="25" Content="..." Style="{StaticResource CommonButtonStyle}" Margin="5,0,0,0"></Button>
+        </StackPanel>-->
+
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,35 @@
+﻿<!--作者：TT 时间:2023-03-15 22:20:45 描述：PackageEasy.Views.RegistryView界面 TANGMANGER-->
+<UserControl x:Class="PackageEasy.Views.RegistryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PackageEasy.Views"
+             xmlns:lang="clr-namespace:PackageEasy.Common.Data;assembly=PackageEasy.Common"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid  Margin="30,20,0,0" HorizontalAlignment="Left">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.3*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="0.3*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" ></RowDefinition>
+            <RowDefinition  Height="auto" ></RowDefinition>
+            <RowDefinition  Height="auto" ></RowDefinition>
+            <RowDefinition Height="auto" ></RowDefinition>
+            <RowDefinition Height="auto" ></RowDefinition>
+            <RowDefinition Height="auto" ></RowDefinition>
+            <RowDefinition Height="auto" ></RowDefinition>
+            <RowDefinition Height="auto" ></RowDefinition>
+            <RowDefinition Height="auto" ></RowDefinition>
+            <RowDefinition Height="auto" ></RowDefinition>
+            <RowDefinition Height="*" ></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Text="注册文件格式:"  Margin="0,10,0,0" Grid.Row="0" lang:LanguageManager.LangText="注册文件格式:" VerticalAlignment="Center" HorizontalAlignment="Right" ></TextBlock>
+        <TextBox Grid.Column="1" Text="{Binding RegistryFormat,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Grid.Row="0" Width="220" Height="30" Style="{StaticResource CommonTextBox}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,10,0,0"></TextBox>
+    </Grid>
+</UserControl>

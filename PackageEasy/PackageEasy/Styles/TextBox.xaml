@@ -1,0 +1,70 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:PackageEasy.Controls.Controls;assembly=PackageEasy.Controls">
+    <Style x:Key="CommonTextBox" TargetType="TextBox">
+        <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+        <Setter Property="Background" Value="{DynamicResource commonTextBoxBackground}"></Setter>
+        <Setter Property="BorderBrush" Value="{DynamicResource commonTextBoxBorderBrush}"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border CornerRadius="4" Background="{TemplateBinding Background}" x:Name="BORDER" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
+                        <ScrollViewer x:Name="PART_ContentHost" Focusable="False" 
+                              HorizontalScrollBarVisibility="Hidden" 
+                              VerticalScrollBarVisibility="Hidden" 
+                              HorizontalAlignment="Stretch" 
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="6,1,6,0" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="{DynamicResource commonDisableTextBoxBackground}" TargetName="BORDER"></Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="PlaceholderTextBoxStyle" TargetType="controls:PlaceholderTextBox">
+        <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:PlaceholderTextBox">
+                    <ControlTemplate.Resources>
+                        <TextBlock x:Key="ProxyElement"  Text="{Binding }"/>
+                    </ControlTemplate.Resources>
+                    <Border Cursor="IBeam" CornerRadius="{TemplateBinding CornerRadius}" BorderThickness="0.5" BorderBrush="{DynamicResource commonTextBoxBorderBrush}" x:Name="borderRoot">
+                        <Grid>
+
+                            <Border  x:Name="PART_DropButton" Tag="dd" DataContext="{Binding PlaceHolderText,RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                <ScrollViewer x:Name="PART_ContentHost" Focusable="False" 
+                           HorizontalScrollBarVisibility="Hidden" 
+                           VerticalScrollBarVisibility="Hidden" 
+                           HorizontalAlignment="Stretch" 
+                           VerticalAlignment="{TemplateBinding VerticalContentAlignment }" Margin="6,2,6,0" />
+                            </Border>
+                            <ContentControl Visibility="Collapsed"
+          Content="{StaticResource ProxyElement}" DataContext="{Binding PlaceHolderText,RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="{DynamicResource commonDisableTextBoxBackground}" TargetName="borderRoot"></Setter>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsKeyboardFocused" Value="False" />
+                                <Condition Property="Text" Value="" />
+                                <Condition Property="IsShowError" Value="true"></Condition>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="BorderBrush" Value="red" TargetName="borderRoot"></Setter>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

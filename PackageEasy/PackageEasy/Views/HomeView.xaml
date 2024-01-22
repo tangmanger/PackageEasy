@@ -1,0 +1,99 @@
+﻿<!--作者：TT 时间:2023-03-11 15:54:14 描述：PackageEasy.Views.HomeView界面 TANGMANGER-->
+<UserControl x:Class="PackageEasy.Views.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PackageEasy.Views"
+             xmlns:lang="clr-namespace:PackageEasy.Common.Data;assembly=PackageEasy.Common"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" DataContext="{Binding Home,Source={StaticResource locator}}">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}"></i:InvokeCommandAction>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <UserControl.Resources>
+        <ControlTemplate x:Key="AddNewProject" TargetType="Button">
+            <Border CornerRadius="8" Background="{DynamicResource projectNewCreateBackground}" x:Name="border" RenderTransformOrigin="0.5,0.5" BorderThickness="1" BorderBrush="#26000000">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Image Source="/Resources/Images/NewProject.png" Height="28" Width="28"></Image>
+                    <TextBlock Text="新建工程" Foreground="{DynamicResource projectNewCreateForeground}" lang:LanguageManager.LangText="新建工程" FontSize="16" Margin="0,5,0,0"></TextBlock>
+                </StackPanel>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsPressed" Value="true">
+                    <Setter Property="RenderTransform" Value="{DynamicResource buttonScale}" TargetName="border"></Setter>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="BorderBrush" Value="{DynamicResource projectNewCreateIsMouseOver}" TargetName="border"></Setter>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </UserControl.Resources>
+    <Grid >
+        <!--<Grid.ColumnDefinitions>
+            <ColumnDefinition Width="139"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        -->
+        <!--<Border Grid.Column="1" BorderBrush="LightGray" BorderThickness="1,0,0,0"></Border>-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Vertical">
+            <TextBlock Text="新建工程" lang:LanguageManager.LangText="新建工程" Margin="20,16.5,0,0" FontSize="16"></TextBlock>
+            <Button Width="242" Height="188" HorizontalAlignment="Left"  Margin="20,16.5,0,0" VerticalAlignment="Top" Command="{Binding CreateCommand}" Template="{StaticResource AddNewProject}"></Button>
+        </StackPanel>
+        <ItemsControl Grid.Row="1" ItemsSource="{Binding RecentlyList}" Margin="15">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel></WrapPanel>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.Template>
+                <ControlTemplate>
+                    <ScrollViewer>
+                        <ItemsPresenter/>
+                    </ScrollViewer>
+                </ControlTemplate>
+            </ItemsControl.Template>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Command="{Binding DataContext.OpenRecentlyCommand,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}}" CommandParameter="{Binding }">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Margin="5" RenderTransformOrigin="0.5,0.5" x:Name="border" Width="242" Height="188" BorderThickness="1" BorderBrush="{DynamicResource borderBrush}" CornerRadius="4" Background="{DynamicResource projectNewCreateBackground}">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition Height="auto"></RowDefinition>
+                                        </Grid.RowDefinitions>
+                                        <Image Source="{Binding Icon,Converter={StaticResource Base64ToImageConverter},UpdateSourceTrigger=PropertyChanged}" Height="50" Width="50"></Image>
+                                        <Grid Grid.Row="1" Margin="5,0,5,5">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition></ColumnDefinition>
+                                                <ColumnDefinition Width="auto"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBlock Text="{Binding RecentlyName}"></TextBlock>
+                                            <TextBlock Text="{Binding UpdateTime,StringFormat='yyyy/MM/dd HH:mm:ss'}" HorizontalAlignment="Right" Grid.Column="1"></TextBlock>
+                                        </Grid>
+                                    </Grid>
+
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsPressed" Value="true">
+                                        <Setter Property="RenderTransform" TargetName="border" Value="{StaticResource buttonScale}"></Setter>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</UserControl>

@@ -1,0 +1,62 @@
+﻿<Window x:Class="PackageEasy.Views.Dialogs.ShowWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:local="clr-namespace:PackageEasy.Views.Dialogs"
+        mc:Ignorable="d"
+        xmlns:lang="clr-namespace:PackageEasy.Common.Data;assembly=PackageEasy.Common"
+        ShowInTaskbar="False"
+       
+        AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize" Background="Transparent" Loaded="Window_Loaded" Height="400" Width="650"
+        WindowStartupLocation="CenterOwner" >
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Unload" >
+            <i:InvokeCommandAction Command="{Binding UnloadCommand}"></i:InvokeCommandAction>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="30"
+                    GlassFrameThickness="0"
+                    NonClientFrameEdges="None"
+                    CornerRadius="0"
+                    ResizeBorderThickness="1"
+                    UseAeroCaptionButtons="False"
+                     />
+
+    </WindowChrome.WindowChrome>
+    <Border  BorderThickness="0.8" Background="{DynamicResource MainWorkAreaBackgroud}" CornerRadius="4" BorderBrush="{DynamicResource MainWindowBorderBrush}">
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="45"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Border Background="{DynamicResource titleColoBrushes}">
+                <Grid WindowChrome.IsHitTestVisibleInChrome="True" Margin="0,6,0,6">
+                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" >
+                        <Image Height="18" Width="18" VerticalAlignment="Center" Margin="15,0,0,0" Source="/Resources/Images/tools.png"></Image>
+                        <TextBlock  Margin="5,0,0,0" VerticalAlignment="Center" Text="{Binding Title,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                    </StackPanel>
+
+                    <StackPanel WindowChrome.IsHitTestVisibleInChrome="True"  Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
+                        <!--<Button Style="{StaticResource IconButtonStyle}" FontSize="16" Margin="10,0,10,0"  Command="{x:Static SystemCommands.MinimizeWindowCommand}"  Foreground="{DynamicResource mainOperateButtonBrushes}" Content="&#xea6a;"></Button>-->
+                        <!--<Button Style="{StaticResource IconButtonStyle}" FontSize="16" Margin="10,0,10,0"  Command="{x:Static SystemCommands.MaximizeWindowCommand}"  x:Name="max" Foreground="{DynamicResource mainOperateButtonBrushes}" Content="&#xe65d;"></Button>-->
+                        <!--<Button Style="{StaticResource IconButtonStyle}" FontSize="16" Margin="10,0,10,0"  Command="{x:Static SystemCommands.RestoreWindowCommand}" x:Name="normal" Foreground="{DynamicResource mainOperateButtonBrushes}" Content="&#xe692;"></Button>-->
+                        <Button Style="{StaticResource IconButtonStyle}" FontSize="16" Foreground="{DynamicResource mainOperateButtonBrushes}" Command="{x:Static SystemCommands.CloseWindowCommand}" Content="&#xe607;"></Button>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <Border Grid.Row="1" Background="{DynamicResource InputBackground}">
+                <ContentControl Content="{Binding WorkView}"></ContentControl>
+            </Border>
+            <Border Grid.Row="2" Background="{DynamicResource showWindowsBottonBackground}">
+                <StackPanel Grid.Row="2" HorizontalAlignment="Right" Orientation="Horizontal">
+                    <Button Style="{StaticResource CommonButtonStyle}" Visibility="{Binding ShowSureVisibility}"  Height="25" MinWidth="80" Content="确认" lang:LanguageManager.LangText="确认"></Button>
+                    <Button Style="{StaticResource CommonButtonStyle}" Margin="10,0,10,0" Height="25"  Click="Button_Click" MinWidth="80" Content="取消" lang:LanguageManager.LangText="取消" ></Button>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Border>
+</Window>
