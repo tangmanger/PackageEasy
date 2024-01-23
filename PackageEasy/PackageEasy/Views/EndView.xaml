@@ -41,7 +41,8 @@
         <TextBox Grid.Column="1"   Grid.Row="1" Width="220" Height="30" Style="{StaticResource CommonTextBox}" Text="{Binding RunParam,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,10,0,0"></TextBox>
 
         <TextBlock Text="自述:" Grid.Row="2" lang:LanguageManager.LangText="自述:" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,0,0"></TextBlock>
-        <ComboBox Grid.Column="1"  Grid.Row="2"  Width="220" Height="30" VerticalContentAlignment="Center"  ItemsSource="{Binding TargetFilesList}" SelectedItem="{Binding ReadMeName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource CommonComboBoxStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,10,0,0"></ComboBox>
+        <ComboBox Grid.Column="1"  Grid.Row="2" IsEnabled="{Binding IsShowReadme,UpdateSourceTrigger=PropertyChanged}" Width="220" Height="30" VerticalContentAlignment="Center"  ItemsSource="{Binding TargetFilesList}" SelectedItem="{Binding ReadMeName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource CommonComboBoxStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,10,0,0"></ComboBox>
+        <CheckBox Grid.Column="2"  Grid.Row="2"  IsChecked="{Binding IsShowReadme,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Grid.ColumnSpan="2" Margin="5,10,0,0" VerticalAlignment="Center" VerticalContentAlignment="Center" Content="展示自述" lang:LanguageManager.LangText="展示自述"></CheckBox>
         <!--<Border Grid.Row="3" Grid.ColumnSpan="7" BorderBrush="{DynamicResource borderBrush}" Height="30" Background="Red" Margin="0,5,0,0" BorderThickness="0,0.5,0,0"></Border>-->
         <CheckBox Grid.Row="7" Content="使用解除安装程序" Grid.ColumnSpan="2" Margin="0,10,0,0" Visibility="Collapsed" lang:LanguageManager.LangText="使用解除安装程序"></CheckBox>
 

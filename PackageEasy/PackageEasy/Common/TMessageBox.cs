@@ -28,6 +28,7 @@ namespace PackageEasy.Common
             messageBox.ShowDialog();
             return messageBox.MessageBoxResult;
         }
+      
         /// <summary>
         ///弹窗
         /// </summary>

@@ -153,5 +153,15 @@ namespace PackageEasy.ViewModels
         {
 
         }
+        /// <summary>
+        /// 判断工作区文件是否存在
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        public bool CheckFileExist(string path)
+        {
+            var filePath = ProjectInfo.BaseInfo.WorkSpace + path;
+            return File.Exists(filePath);
+        }
     }
 }

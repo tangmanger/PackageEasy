@@ -1,4 +1,5 @@
-﻿using PackageEasy.Common.Data;
+﻿using PackageEasy.Common;
+using PackageEasy.Common.Data;
 using PackageEasy.Common.Helpers;
 using PackageEasy.Domain.Enums;
 using PackageEasy.Domain.Interfaces;
@@ -42,6 +43,7 @@ namespace PackageEasy.ViewModels
         private string uninstallProcessTips;
         private string installProcessTips;
         private string processName;
+        private bool isShowReadme;
 
         /// <summary>
         /// 自动运行
@@ -185,6 +187,19 @@ namespace PackageEasy.ViewModels
             }
         }
 
+        /// <summary>
+        /// 展示自述
+        /// </summary>
+        public bool IsShowReadme
+        {
+            get => isShowReadme;
+            set
+            {
+                isShowReadme = value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         #region 方法
@@ -197,6 +212,7 @@ namespace PackageEasy.ViewModels
             if (ProjectInfo != null && ProjectInfo.FinishInfo != null)
             {
                 IsAutoRun = ProjectInfo.FinishInfo.IsAutoRun;
+                IsShowReadme = ProjectInfo.FinishInfo.IsShowReadme;
                 ApplicationName = TargetFilesList.Find(p => p == ProjectInfo.FinishInfo.ApplicationName) ?? "";
                 ReadMeName = TargetFilesList.Find(p => p == ProjectInfo.FinishInfo.ReadMeFileName) ?? "";
                 RunParam = ProjectInfo.FinishInfo.RunParam;
@@ -208,7 +224,7 @@ namespace PackageEasy.ViewModels
                     UninstallProcessTips = ProjectInfo.FinishInfo.UninstallProcessTips;
                 if (!string.IsNullOrWhiteSpace(ProjectInfo.FinishInfo.InstallProcessTips))
                     InstallProcessTips = ProjectInfo.FinishInfo.InstallProcessTips;
-                if (!string.IsNullOrWhiteSpace(ProjectInfo.FinishInfo.ProcessName)) 
+                if (!string.IsNullOrWhiteSpace(ProjectInfo.FinishInfo.ProcessName))
                     ProcessName = ProjectInfo.FinishInfo.ProcessName;
                 IsEnableProcess = ProjectInfo.FinishInfo.IsEnableProcess;
             }
@@ -230,6 +246,7 @@ namespace PackageEasy.ViewModels
                 finishModel.UninstallProcessTips = UninstallProcessTips;
                 finishModel.InstallProcessTips = InstallProcessTips;
                 finishModel.ProcessName = ProcessName;
+                finishModel.IsShowReadme = IsShowReadme;
                 var path = Path.Combine(SavePath, "FinishInfo.json");
                 File.WriteAllText(path, finishModel.SerializeObject());
             }
@@ -237,6 +254,39 @@ namespace PackageEasy.ViewModels
         public void NavigateIn()
         {
             RefreshData();
+        }
+
+        public override bool ValidateData()
+        {
+            if (IsAutoRun && string.IsNullOrWhiteSpace(ApplicationName))
+            {
+                TMessageBox.ShowMsg("要运行的程序不能为空!");
+                return false;
+            }
+            if (IsEnableProcess)
+            {
+                if (string.IsNullOrWhiteSpace(ProcessName))
+                {
+                    TMessageBox.ShowMsg("检测的进程名不能空!");
+                    return false;
+                }
+                if (string.IsNullOrWhiteSpace(UninstallProcessTips))
+                {
+                    TMessageBox.ShowMsg("卸载提示不能为空!");
+                    return false;
+                }
+                if (string.IsNullOrWhiteSpace(UninstallProcessTips))
+                {
+                    TMessageBox.ShowMsg("安装提示不能为空!");
+                    return false;
+                }
+            }
+            if (IsShowReadme && string.IsNullOrWhiteSpace(ReadMeName))
+            {
+                TMessageBox.ShowMsg("自述文件不能为空!");
+                return false;
+            }
+            return base.ValidateData();
         }
 
         #endregion

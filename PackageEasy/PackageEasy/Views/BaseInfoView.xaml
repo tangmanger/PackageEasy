@@ -103,8 +103,9 @@
 
         <TextBlock Grid.Row="3" Text="授权文件:" Grid.Column="2" lang:LanguageManager.LangText="授权文件:" VerticalAlignment="Center"  HorizontalAlignment="Right"></TextBlock>
         <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="3">
-            <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Text="{Binding LicenseFilePath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource CommonTextBox}" Width="150" Height="25" VerticalContentAlignment="Center" Margin="5,10,0,10"></TextBox>
-            <Button Width="50" Height="25" Content="..." Style="{StaticResource CommonButtonStyle}" Command="{Binding SelectedLicenseCommand}" Margin="5,0,0,0"></Button>
+            <TextBox Grid.Row="1" IsEnabled="{Binding Path=IsChecked,ElementName=licenseChecked}" Grid.Column="1" HorizontalAlignment="Left" Text="{Binding LicenseFilePath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource CommonTextBox}" Width="150" Height="25" VerticalContentAlignment="Center" Margin="5,10,0,10"></TextBox>
+            <Button Width="50"  IsEnabled="{Binding Path=IsChecked,ElementName=licenseChecked}"  Height="25" Content="..." Style="{StaticResource CommonButtonStyle}" Command="{Binding SelectedLicenseCommand}" Margin="5,0,0,0"></Button>
+            <CheckBox Content="启用授权" lang:LanguageManager.LangText="启用授权" IsChecked="{Binding IsLicenseChecked,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" Margin="5,0,0,0" x:Name="licenseChecked"></CheckBox>
         </StackPanel>
 
         <TextBlock Grid.Row="4" Text="按钮类型:" Grid.Column="2" lang:LanguageManager.LangText="按钮类型:" VerticalAlignment="Center"  HorizontalAlignment="Right"></TextBlock>

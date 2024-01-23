@@ -98,6 +98,7 @@ namespace PackageEasy.ViewModels
         private List<InstallLanguageModel> installList;
         private InstallLanguageModel selectedLanguage;
         private string languagePath;
+        private bool isLicenseChecked;
 
         /// <summary>
         /// 应用程序名称
@@ -362,6 +363,18 @@ namespace PackageEasy.ViewModels
                 OnPropertyChanged();
             }
         }
+        /// <summary>
+        /// 启用授权
+        /// </summary>
+        public bool IsLicenseChecked
+        {
+            get => isLicenseChecked;
+            set
+            {
+                isLicenseChecked = value;
+                OnPropertyChanged();
+            }
+        }
 
         #endregion
 
@@ -392,6 +405,7 @@ namespace PackageEasy.ViewModels
             baseInfoModel.InstallIconPath = InstallIconPath;
             baseInfoModel.UnInstallIconPath = UnInstallIconPath;
             baseInfoModel.LanguagePath = LanguagePath;
+            baseInfoModel.IsLicenseChecked = IsLicenseChecked;
             baseInfoModel.LanguageList = InstallList.FindAll(c => c.IsSelected);
             if (baseInfoModel.LanguageList == null || baseInfoModel.LanguageList.Count == 0)
             {
@@ -456,6 +470,7 @@ namespace PackageEasy.ViewModels
                     }
                 }
                 LanguagePath = ProjectInfo.BaseInfo.LanguagePath;
+                IsLicenseChecked = ProjectInfo.BaseInfo.IsLicenseChecked;
                 var str = WorkSpace + LanguagePath;
                 if (!string.IsNullOrWhiteSpace(LanguagePath) && File.Exists(str))
                 {
@@ -502,6 +517,7 @@ namespace PackageEasy.ViewModels
             baseInfoModel.InstallIconPath = InstallIconPath;
             baseInfoModel.UnInstallIconPath = UnInstallIconPath;
             baseInfoModel.LanguagePath = LanguagePath;
+            baseInfoModel.IsLicenseChecked = IsLicenseChecked;
             var str = WorkSpace + LanguagePath;
             if (!string.IsNullOrWhiteSpace(LanguagePath) && File.Exists(str))
             {
@@ -535,18 +551,41 @@ namespace PackageEasy.ViewModels
 
         public override bool ValidateData()
         {
-            if(string.IsNullOrWhiteSpace(ApplicationName))
+            if (string.IsNullOrWhiteSpace(ApplicationName))
             {
                 TMessageBox.ShowMsg("", "应用程序名不能为空!");
                 return false;
             }
-            if(string.IsNullOrWhiteSpace(AppOutPath))
+            if (string.IsNullOrWhiteSpace(AppOutPath))
             {
                 TMessageBox.ShowMsg("", "输出文件名称不能为空!");
                 return false;
             }
-           return true;
+            if (IsLicenseChecked && (string.IsNullOrWhiteSpace(ProjectInfo.BaseInfo.LicenseFilePath) || !File.Exists(ProjectInfo.BaseInfo.LicenseFilePath)))
+            {
+                TMessageBox.ShowMsg("", "授权不存在!");
+                return false;
+            }
+            if (!string.IsNullOrWhiteSpace(AppIconPath)&&!CheckFileExist(AppIconPath))
+            {
+                TMessageBox.ShowMsg("", "应用程序图标不存在!");
+                return false;
+            }
+            if (!string.IsNullOrWhiteSpace(UnInstallIconPath) && !CheckFileExist(UnInstallIconPath))
+            {
+                TMessageBox.ShowMsg("", "卸载图标不存在!");
+                return false;
+            }
+            if (!string.IsNullOrWhiteSpace(InstallIconPath) && !CheckFileExist(InstallIconPath))
+            {
+                TMessageBox.ShowMsg("", "安装包图标不存在!");
+                return false;
+            }
+            return true;
         }
+
+
+
 
         #endregion
 

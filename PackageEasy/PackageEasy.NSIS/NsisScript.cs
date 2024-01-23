@@ -98,7 +98,7 @@ namespace PackageEasy.NSIS
                     }
 
                     list.Add(";授权界面");
-                    if (!string.IsNullOrWhiteSpace(projectInfoModel.BaseInfo.LicenseFilePath) && File.Exists(projectInfoModel.BaseInfo.LicenseFilePath))
+                    if (projectInfoModel.BaseInfo.IsLicenseChecked && !string.IsNullOrWhiteSpace(projectInfoModel.BaseInfo.LicenseFilePath) && File.Exists(projectInfoModel.BaseInfo.LicenseFilePath))
                     {
                         if (projectInfoModel.BaseInfo.ButtonType == ButtonType.Choose)
                         {
@@ -161,7 +161,7 @@ namespace PackageEasy.NSIS
                                 list.Add($"!define MUI_FINISHPAGE_RUN \"{projectInfoModel.FinishInfo.ApplicationName}\"");
                                 list.Add($"!define MUI_FINISHPAGE_RUN_PARAMETERS \"{projectInfoModel.FinishInfo.RunParam}\"");
                             }
-                            if (!string.IsNullOrWhiteSpace(projectInfoModel.FinishInfo.ReadMeFileName))
+                            if (projectInfoModel.FinishInfo.IsShowReadme && !string.IsNullOrWhiteSpace(projectInfoModel.FinishInfo.ReadMeFileName))
                             {
                                 list.Add($"!define MUI_FINISHPAGE_SHOWREADME \"{projectInfoModel.FinishInfo.ReadMeFileName}\"");
                             }

@@ -161,5 +161,9 @@ namespace PackageEasy.Domain.Models
         /// 语言路径
         /// </summary>
         public string LanguagePath { get; set; }
+        /// <summary>
+        /// 启用授权
+        /// </summary>
+        public bool IsLicenseChecked { get; set; }
     }
 }

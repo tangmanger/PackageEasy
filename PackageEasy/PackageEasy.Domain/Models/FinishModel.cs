@@ -48,5 +48,9 @@ namespace PackageEasy.Domain.Models
         /// 进程名
         /// </summary>
         public string ProcessName { get; set; }
+        /// <summary>
+        /// 展示自述
+        /// </summary>
+        public bool IsShowReadme { get; set; }
     }
 }

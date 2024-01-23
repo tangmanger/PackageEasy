@@ -20,6 +20,9 @@
                      />
 
     </WindowChrome.WindowChrome>
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Control" Key="S" Command="{Binding SaveCommand}" />
+    </Window.InputBindings>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadCommand}" ></i:InvokeCommandAction>

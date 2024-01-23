@@ -286,7 +286,36 @@ namespace PackageEasy.ViewModels
             RefreshData();
         }
 
-
+        public override bool ValidateData()
+        {
+            if (string.IsNullOrWhiteSpace(StartMenuName))
+            {
+                TMessageBox.ShowMsg("应用程序\"开始菜单\"文件夹名称不能为空!");
+                return false;
+            }
+            if (AppIconInfoList != null && AppIconInfoList.Count > 0)
+            {
+                foreach (var item in AppIconInfoList)
+                {
+                    if (item.IconDir == null)
+                    {
+                        TMessageBox.ShowMsg("目标文件夹名称不能为空!");
+                        return false;
+                    }
+                    if (string.IsNullOrWhiteSpace(item.ShortcutPath))
+                    {
+                        TMessageBox.ShowMsg("快捷方式名称不能为空!");
+                        return false;
+                    }
+                    if (string.IsNullOrWhiteSpace(item.FilePath))
+                    {
+                        TMessageBox.ShowMsg("目的文件不能为空!");
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
 
         #endregion
     }
