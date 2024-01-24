@@ -163,5 +163,6 @@ namespace PackageEasy.ViewModels
             var filePath = ProjectInfo.BaseInfo.WorkSpace + path;
             return File.Exists(filePath);
         }
+      
     }
 }

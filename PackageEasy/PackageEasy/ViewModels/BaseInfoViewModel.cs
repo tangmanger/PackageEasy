@@ -99,6 +99,7 @@ namespace PackageEasy.ViewModels
         private InstallLanguageModel selectedLanguage;
         private string languagePath;
         private bool isLicenseChecked;
+        private string companyName;
 
         /// <summary>
         /// 应用程序名称
@@ -376,6 +377,19 @@ namespace PackageEasy.ViewModels
             }
         }
 
+        /// <summary>
+        /// 公司名称
+        /// </summary>
+        public string CompanyName
+        {
+            get => companyName;
+            set
+            {
+                companyName = value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         #region 方法
@@ -406,6 +420,7 @@ namespace PackageEasy.ViewModels
             baseInfoModel.UnInstallIconPath = UnInstallIconPath;
             baseInfoModel.LanguagePath = LanguagePath;
             baseInfoModel.IsLicenseChecked = IsLicenseChecked;
+            baseInfoModel.CompanyName = CompanyName;
             baseInfoModel.LanguageList = InstallList.FindAll(c => c.IsSelected);
             if (baseInfoModel.LanguageList == null || baseInfoModel.LanguageList.Count == 0)
             {
@@ -448,6 +463,7 @@ namespace PackageEasy.ViewModels
                 UserDirPath = ProjectInfo.BaseInfo.UserDirPath;
                 CanUserChangeDir = ProjectInfo.BaseInfo.CanUserChangeDir;
                 LicenseFilePath = ProjectInfo.BaseInfo.LicenseFilePath;
+                CompanyName = ProjectInfo.BaseInfo.CompanyName;
                 ButtonType = ProjectInfo.BaseInfo.ButtonType;
                 if (!string.IsNullOrWhiteSpace(ProjectInfo.BaseInfo.WorkSpace))
                     WorkSpace = ProjectInfo.BaseInfo.WorkSpace;
@@ -518,6 +534,7 @@ namespace PackageEasy.ViewModels
             baseInfoModel.UnInstallIconPath = UnInstallIconPath;
             baseInfoModel.LanguagePath = LanguagePath;
             baseInfoModel.IsLicenseChecked = IsLicenseChecked;
+            baseInfoModel.CompanyName = CompanyName;
             var str = WorkSpace + LanguagePath;
             if (!string.IsNullOrWhiteSpace(LanguagePath) && File.Exists(str))
             {
@@ -566,7 +583,7 @@ namespace PackageEasy.ViewModels
                 TMessageBox.ShowMsg("", "授权不存在!");
                 return false;
             }
-            if (!string.IsNullOrWhiteSpace(AppIconPath)&&!CheckFileExist(AppIconPath))
+            if (!string.IsNullOrWhiteSpace(AppIconPath) && !CheckFileExist(AppIconPath))
             {
                 TMessageBox.ShowMsg("", "应用程序图标不存在!");
                 return false;

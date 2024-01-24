@@ -395,7 +395,7 @@ namespace PackageEasy.ViewModels
             }
             else
             {
-                if (result != null)
+                if (result != null && !string.IsNullOrWhiteSpace(result.Item2))
                     TMessageBox.ShowMsg("", result.Item2);
             }
         });
@@ -444,44 +444,9 @@ namespace PackageEasy.ViewModels
         /// </summary>
         public RelayCommand<TableModel> CloseCommand => new RelayCommand<TableModel>((t) =>
         {
-            if (CacheDataHelper.ProjectCahes.ContainsKey(t.ProjectKey))
-            {
-                var viewCaheModel = CacheDataHelper.ProjectCahes[t.ProjectKey];
-                if (viewCaheModel != null)
-                {
-                    ProjectViewModel? projectViewModel = viewCaheModel.BaseProjectViewModel as ProjectViewModel;
-                    if (projectViewModel != null)
-                    {
-                        projectViewModel.Dispose();
-                        CacheDataHelper.ProjectCahes.Remove(t.ProjectKey);
-                        if (CacheDataHelper.FileOpenDic.ContainsKey(t.ProjectKey))
-                            CacheDataHelper.FileOpenDic.Remove(t.ProjectKey);
-                        ///找到当前索引
-                        var index = TableList.FindIndex(p => p == t);
-                        ///关掉最后一个标签，则将它的上个标签激活
-                        ///如果不是最后一个标签，则将它的下个标签激活
-                        var activiteId = index + 1;
-                        if (activiteId >= TableList.Count)
-                        {
-                            activiteId = index - 1;
-                        }
-                        if (activiteId >= 0)
-                        {
-                            var table = TableList[activiteId];
-                            if (t.IsActive)
-                                table.IsActive = true;
-                            SwitchProjectCommand?.Execute(table);
-                        }
-                        else
-                        {
-                            BackToHomeCommand?.Execute(null);
-                        }
-                        TableList.Remove(t);
-                        TableList = new List<TableModel>(TableList);
-                    }
-                }
-            }
+            CloseTips(t);
         });
+
 
         /// <summary>
         /// 加载
@@ -584,6 +549,107 @@ namespace PackageEasy.ViewModels
             }
         }
 
+        /// <summary>
+        /// 关闭全部
+        /// </summary>
+        /// <returns></returns>
+        internal bool CloseAll()
+        {
+            int index = 0;
+            int tableCount = TableList.Count;
+
+            while (TableList.Count > 0 && index <= tableCount - 1)
+            {
+                var item = TableList[index];
+                item.IsActive = true;
+                //CloseCommand.Execute(item);
+                var result = CloseTips(item);
+                if (result == false)
+                    break;
+                if (tableCount == TableList.Count)
+                {
+
+                    index++;
+                }
+                else
+                {
+                    tableCount = TableList.Count;
+                }
+            }
+            if (TableList.Count == 0)
+            {
+                Environment.Exit(0);
+                return true;
+            }
+            return false;
+        }
+        /// <summary>
+        /// 关闭所有标签
+        /// </summary>
+        /// <param name="t"></param>
+        /// <returns></returns>
+        private bool CloseTips(TableModel? t)
+        {
+            if (CacheDataHelper.ProjectCahes.ContainsKey(t.ProjectKey))
+            {
+                var viewCaheModel = CacheDataHelper.ProjectCahes[t.ProjectKey];
+                if (viewCaheModel != null)
+                {
+                    ProjectViewModel? projectViewModel = viewCaheModel.BaseProjectViewModel as ProjectViewModel;
+                    if (projectViewModel != null)
+                    {
+                        bool flage = true;
+
+                        if (CacheDataHelper.OldProjectDic.ContainsKey(t.ProjectKey))
+                        {
+                            projectViewModel.Save();
+                            var old = CacheDataHelper.OldProjectDic[t.ProjectKey];
+                            if (old != null)
+                            {
+                                flage = projectViewModel.ProjectInfo.CheckIsChanged(old);
+                            }
+                        }
+                        if (flage)
+                        {
+                            var result = TMessageBox.ShowMsg(string.Format("当前标签 {0} 未保存,是否放弃修改?", t.ProjectName), MessageLevel.YesNoCancel);
+                            if (result != TMessageBoxResult.Cancel && result != TMessageBoxResult.OK)
+                            {
+                                return false;
+                            }
+                        }
+
+                        projectViewModel.Dispose();
+                        CacheDataHelper.ProjectCahes.Remove(t.ProjectKey);
+                        if (CacheDataHelper.FileOpenDic.ContainsKey(t.ProjectKey))
+                            CacheDataHelper.FileOpenDic.Remove(t.ProjectKey);
+                        ///找到当前索引
+                        var index = TableList.FindIndex(p => p == t);
+                        ///关掉最后一个标签，则将它的上个标签激活
+                        ///如果不是最后一个标签，则将它的下个标签激活
+                        var activiteId = index + 1;
+                        if (activiteId >= TableList.Count)
+                        {
+                            activiteId = index - 1;
+                        }
+                        if (activiteId >= 0)
+                        {
+                            var table = TableList[activiteId];
+                            if (t.IsActive)
+                                table.IsActive = true;
+                            SwitchProjectCommand?.Execute(table);
+                        }
+                        else
+                        {
+                            BackToHomeCommand?.Execute(null);
+                        }
+                        TableList.Remove(t);
+                        TableList = new List<TableModel>(TableList);
+                    }
+                }
+            }
+            return true;
+
+        }
         #endregion
     }
 }

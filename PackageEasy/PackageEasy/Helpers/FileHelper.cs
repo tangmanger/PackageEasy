@@ -138,6 +138,8 @@ namespace PackageEasy.Helpers
                 else
                     CacheDataHelper.FileOpenDic.Add(projectViewModel.Key, filePath);
             }
+            if (!CacheDataHelper.OldProjectDic.ContainsKey(projectViewModel.Key))
+                CacheDataHelper.OldProjectDic.Add(projectViewModel.Key, projectViewModel.ProjectInfo.Clone<ProjectInfoModel>());
             return new Tuple<bool, string>(true, "");
         }
         /// <summary>
@@ -193,6 +195,12 @@ namespace PackageEasy.Helpers
             FileInfo fileInfo = new FileInfo(filePath);
             projectViewModel.ProjectName = fileInfo.Name.Replace(fileInfo.Extension, "");
             projectViewModel.Save();
+            if (!CacheDataHelper.OldProjectDic.ContainsKey(projectViewModel.Key))
+                CacheDataHelper.OldProjectDic.Add(projectViewModel.Key, projectViewModel.ProjectInfo.Clone<ProjectInfoModel>());
+            else
+            {
+                CacheDataHelper.OldProjectDic[projectViewModel.Key] = projectViewModel.ProjectInfo.Clone<ProjectInfoModel>();
+            }
             var success = ZipHelper.Compress(projectViewModel.SavePath, filePath);
             Directory.Delete(projectViewModel.SavePath, true);
             return success == true;

@@ -23,6 +23,7 @@ using System.Windows.Shapes;
 using PackageEasy.Common.Logs;
 using System.IO;
 using CommunityToolkit.Mvvm.DependencyInjection;
+using System.ComponentModel;
 
 namespace PackageEasy
 {
@@ -61,7 +62,7 @@ namespace PackageEasy
             CommandBindings.Add(new CommandBinding(SystemCommands.MinimizeWindowCommand, MinimizeExecute));
             NavigationHelper.GoTo(ViewType.Home);
 
-            
+
 
         }
 
@@ -84,7 +85,15 @@ namespace PackageEasy
         {
             this.Close();
         }
-
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            var vm = this.DataContext as MainViewModel;
+            if (vm != null)
+            {
+                var result = vm.CloseAll();
+                e.Cancel = !result;
+            }
+        }
         private void ItemsControl_MouseWheel(object sender, MouseWheelEventArgs e)
         {
             scroller.ScrollToHorizontalOffset(scroller.HorizontalOffset - e.Delta);

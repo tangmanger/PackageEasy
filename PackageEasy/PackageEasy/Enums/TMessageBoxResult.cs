@@ -16,5 +16,6 @@ namespace PackageEasy.Enums
         None = 0,
         OK = 1,
         Cancel = 2,
+        Close= 3,
     }
 }

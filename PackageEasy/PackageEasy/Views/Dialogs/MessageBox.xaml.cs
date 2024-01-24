@@ -1,4 +1,5 @@
-﻿using PackageEasy.Common.Data;
+﻿using log4net.Core;
+using PackageEasy.Common.Data;
 using PackageEasy.Common.Helpers;
 using PackageEasy.Enums;
 using System;
@@ -30,12 +31,14 @@ namespace PackageEasy.Views.Dialogs
             InitializeComponent();
             CommandBindings.Add(new CommandBinding(SystemCommands.CloseWindowCommand, CloseExecute));
         }
+        MessageLevel MessageLevel { get; set; }
         public MessageBox(string captionInfo, string msgInfo, MessageLevel level)
         {
             InitializeComponent();
             //Window owner = WinHelper.GetActiveWindowEx();
             //if (owner != null)
             //    Owner = owner;
+            MessageLevel = level;
             this.Owner = App.Current.MainWindow;
             this.Title = captionInfo.GetLangText();
             msg.Text = msgInfo.GetLangText();
@@ -54,6 +57,11 @@ namespace PackageEasy.Views.Dialogs
                 case MessageLevel.Error:
                     ok.Visibility = Visibility.Visible;
                     break;
+                case MessageLevel.YesNoCancel:
+                    ok.Visibility = Visibility.Visible;
+                    cancel.Visibility = Visibility.Visible;
+                    no.Visibility = Visibility.Visible;
+                    break;
                 default:
                     break;
             }
@@ -70,7 +78,7 @@ namespace PackageEasy.Views.Dialogs
 
         private void ImageButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult = TMessageBoxResult.Cancel;
+            MessageBoxResult = TMessageBoxResult.Close;
             Close();
         }
         private void CloseExecute(object sender, ExecutedRoutedEventArgs e)
@@ -85,6 +93,15 @@ namespace PackageEasy.Views.Dialogs
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
+        }
+
+        private void no_Click(object sender, RoutedEventArgs e)
+        {
+            //if (MessageLevel != MessageLevel.Question && MessageLevel != MessageLevel.YesNoCancel)
+            //    MessageBoxResult = TMessageBoxResult.OK;
+            //else
+            MessageBoxResult = TMessageBoxResult.Cancel;
+            this.Close();
         }
     }
 }

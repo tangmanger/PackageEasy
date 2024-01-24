@@ -54,7 +54,7 @@ namespace PackageEasy.NSIS
                     //!define PRODUCT_STARTMENU_REGVAL "NSIS:StartMenuDir"
                     list.Add($"!define PRODUCT_NAME {baseInfo.ApplicationName}");
                     list.Add($"!define PRODUCT_VERSION {baseInfo.ApplicationVersion}");
-                    list.Add($"!define PRODUCT_PUBLISHER $(ApplicationPublisher)");
+                    list.Add($"!define PRODUCT_PUBLISHER $(CompanyName)");
                     list.Add($"!define PRODUCT_WEB_SITE {baseInfo.ApplicationUrl}");
                     list.Add($"!define PRODUCT_UNINST_ROOT_KEY \"HKLM\"");
                     bool isMorden = false;
@@ -211,6 +211,7 @@ namespace PackageEasy.NSIS
                         foreach (var item in projectInfoModel.BaseInfo.LanguageList)
                         {
                             list.Add($"LangString ApplicationPublisher {item.LanguageDisplayKey} \"{GetLanguage(projectInfoModel.BaseInfo?.ApplicationPublisher, item.LanguageType)}\"");
+                            list.Add($"LangString CompanyName {item.LanguageDisplayKey} \"{GetLanguage(projectInfoModel.BaseInfo?.CompanyName, item.LanguageType)}\"");
                             if (projectInfoModel.FinishInfo != null)
                             {
                                 if (!string.IsNullOrWhiteSpace(projectInfoModel.FinishInfo.UninstallTip))
@@ -251,12 +252,20 @@ namespace PackageEasy.NSIS
                     list.Add($"InstallDirRegKey HKLM \"${{PRODUCT_DIR_REGKEY}}\" \"\"");
                     list.Add("ShowInstDetails show");
                     list.Add("ShowUnInstDetails show");
-
+                    if (!string.IsNullOrWhiteSpace(projectInfoModel.BaseInfo?.ApplicationPublisher))
+                    {
+                        list.Add($"  BrandingText \"{projectInfoModel.BaseInfo?.ApplicationPublisher}\"");
+                    }
+                    else
+                    {
+                        list.Add($"  BrandingText \"PackageEasy\"");
+                    }
 
                 }
 
                 list.Add("Function .onInit");
                 list.Add("  !insertmacro MUI_LANGDLL_DISPLAY");
+             
                 //检测进程
                 if (projectInfoModel.FinishInfo != null && projectInfoModel.FinishInfo.IsEnableProcess)
                 {

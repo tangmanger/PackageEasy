@@ -1,4 +1,5 @@
 ﻿using PackageEasy.Common.Data;
+using PackageEasy.Domain;
 using PackageEasy.Domain.Attributes;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,87 @@ namespace PackageEasy.Common.Helpers
             }
             else
                 return type.ToString();
+        }
+        public static bool CheckIsChanged(this ProjectInfoModel projectInfoModel, ProjectInfoModel oldProjectInfo)
+        {
+
+            return CheckChanged(projectInfoModel, oldProjectInfo);
+        }
+        public static bool CheckChanged<T>(T model, T old)
+        {
+            var modelProperties = model.GetType().GetProperties().ToList();
+            foreach (var property in modelProperties)
+            {
+                if (property.PropertyType == (typeof(string)) || property.PropertyType == typeof(bool)
+                        || property.PropertyType == typeof(double) || property.PropertyType == typeof(int) || property.PropertyType.IsEnum || property.PropertyType == typeof(DateTime))
+                {
+                    var newValue = property.GetValue(model);
+                    var oldValue = property.GetValue(old);
+                    if (newValue != null && !newValue.Equals(oldValue))
+                    {
+                        return true;
+                    }
+                }
+                else if (IsEnumerable(property.PropertyType))
+                {
+                    object value = property.GetValue(model, null);
+                    object oldValue = property.GetValue(old, null);
+                    if (value != null)
+                    {
+                        Type objType = value.GetType();
+                        Type oldType = oldValue.GetType();
+                        int count = Convert.ToInt32(objType.GetProperty("Count").GetValue(value, null));
+                        int oldCount = Convert.ToInt32(objType.GetProperty("Count").GetValue(oldValue, null));
+                        if (count != oldCount) return true;
+                        for (int i = 0; i < count; i++)
+                        {
+
+
+                            object listItem = objType.GetProperty("Item").GetValue(value, new object[] { i });
+                            var oldListItem = oldType.GetProperty("Item").GetValue(oldValue, new object[] { i });
+                            if (CheckChanged(listItem, oldListItem))
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+                else if (property is PropertyInfo)
+                {
+
+                    var data = property.GetValue(model, null);
+                    var oldData = property.GetValue(old, null);
+                    var flage = CheckChanged(data, oldData);
+                    if (flage)
+                        return true;
+                }
+                else
+                {
+
+
+                }
+            }
+            return false;
+        }
+        /// <summary>
+        /// 判断是不是列表
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public static bool IsEnumerable(Type type)
+        {
+            if (type.IsArray)
+            {
+                return true;
+            }
+            if (typeof(System.Collections.IEnumerable).IsAssignableFrom(type))
+            {
+                return true;
+            }
+            foreach (var it in type.GetInterfaces())
+                if (it.IsGenericType && typeof(IEnumerable<>) == it.GetGenericTypeDefinition())
+                    return true;
+            return false;
         }
     }
 }

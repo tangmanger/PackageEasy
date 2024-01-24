@@ -28,6 +28,10 @@ namespace PackageEasy.Enums
         /// <summary>
         /// 错误
         /// </summary>
-        Error = 3
+        Error = 3,
+        /// <summary>
+        /// 是否取消
+        /// </summary>
+        YesNoCancel = 4
     }
 }

@@ -41,7 +41,10 @@ namespace PackageEasy.Helpers
         /// 最近打开的文件
         /// </summary>
         public static List<RecentlyModel> RecentlyList = new List<RecentlyModel>();
-
+        /// <summary>
+        /// 项目副本用来比较是否修改了
+        /// </summary>
+        public static Dictionary<string, ProjectInfoModel> OldProjectDic = new Dictionary<string, ProjectInfoModel>();
         /// <summary>
         /// 更新最近打开的文件
         /// </summary>

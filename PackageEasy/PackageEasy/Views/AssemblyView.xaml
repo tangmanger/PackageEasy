@@ -152,7 +152,27 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn  MinWidth="150">
+                <!--<DataGridTemplateColumn  MinWidth="150">
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="复制到根目录" Foreground="{DynamicResource DataGridForeground}" lang:LanguageManager.LangText="复制到根目录" FontSize="14">
+                                <TextBlock.ToolTip>
+                                    <TextBlock Text="启用后将无视子级目录，将文件复制到根目录!" lang:LanguageManager.LangText="启用后将无视子级目录，将文件复制到根目录!"></TextBlock>
+                                </TextBlock.ToolTip>
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <CheckBox IsChecked="{Binding IsCopyToRootDir,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" >
+                                </CheckBox>
+
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>-->
+                <DataGridTemplateColumn  MinWidth="50">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
                             <TextBlock Text="操作" Foreground="{DynamicResource DataGridForeground}" lang:LanguageManager.LangText="操作" FontSize="14"></TextBlock>
@@ -160,9 +180,11 @@
                     </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <StackPanel IsEnabled="{Binding IsExe,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Orientation="Horizontal" HorizontalAlignment="Center">
-                                <CheckBox IsChecked="{Binding IsNeedInstall,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  VerticalContentAlignment="Center" HorizontalContentAlignment="Left"  Content="安装" lang:LanguageManager.LangText="安装"></CheckBox>
-                                <CheckBox IsChecked="{Binding IsNeedQuietInstall,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Margin="5,0,0,0" Content="静默安装" lang:LanguageManager.LangText="静默安装"></CheckBox>
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel IsEnabled="{Binding IsExe,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <CheckBox IsChecked="{Binding IsNeedInstall,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  VerticalContentAlignment="Center" HorizontalContentAlignment="Left"  Content="安装" lang:LanguageManager.LangText="安装"></CheckBox>
+                                    <CheckBox IsChecked="{Binding IsNeedQuietInstall,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Margin="5,0,0,0" Content="静默安装" lang:LanguageManager.LangText="静默安装"></CheckBox>
+                                </StackPanel>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

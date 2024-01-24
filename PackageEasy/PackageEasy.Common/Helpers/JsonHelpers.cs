@@ -32,5 +32,25 @@ namespace PackageEasy.Common.Helpers
         {
             return JsonConvert.DeserializeObject<T>(str);
         }
+        /// <summary>
+        /// 克隆
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static T Clone<T>(this object obj)
+        {
+            try
+            {
+
+                return obj.SerializeObject().DeserializeObject<T>();
+
+            }
+            catch (Exception ex)
+            {
+
+                return default(T);
+            }
+        }
     }
 }

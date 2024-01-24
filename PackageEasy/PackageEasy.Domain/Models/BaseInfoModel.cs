@@ -165,5 +165,9 @@ namespace PackageEasy.Domain.Models
         /// 启用授权
         /// </summary>
         public bool IsLicenseChecked { get; set; }
+        /// <summary>
+        /// 公司名称
+        /// </summary>
+        public string CompanyName { get; set; }
     }
 }
