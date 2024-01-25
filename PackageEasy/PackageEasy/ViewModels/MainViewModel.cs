@@ -24,6 +24,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Forms;
 using Application = System.Windows.Application;
 
@@ -611,10 +612,24 @@ namespace PackageEasy.ViewModels
                         }
                         if (flage)
                         {
-                            var result = TMessageBox.ShowMsg(string.Format("当前标签 {0} 未保存,是否放弃修改?", t.ProjectName), MessageLevel.YesNoCancel);
+                            var result = TMessageBox.ShowMsg(string.Format("当前标签 {0} 未保存,是否保存?", t.ProjectName), MessageLevel.YesNoCancel);
                             if (result != TMessageBoxResult.Cancel && result != TMessageBoxResult.OK)
                             {
                                 return false;
+                            }
+                            if(result==TMessageBoxResult.OK)
+                            {
+                                var flag = FileHelper.Save(projectViewModel);
+                                if (flag)
+                                {
+                                    t.ProjectName = projectViewModel.ProjectName;
+                                    //TMessageBox.ShowMsg("保存成功!");
+                                    SaveRecently(projectViewModel);
+                                }
+                                else
+                                {
+                                    //TMessageBox.ShowMsg("保存失败!");
+                                }
                             }
                         }
 

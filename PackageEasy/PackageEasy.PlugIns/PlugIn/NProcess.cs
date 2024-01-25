@@ -18,6 +18,8 @@ namespace PackageEasy.PlugIns
 
         public string Icon => "\ue675";
 
+        public override string Uid => uid;
+        string uid = Guid.NewGuid().ToString();
         public override Tuple<bool, string> Execute()
         {
             var filePath = Path.Combine(DataHelper.Plugin, "nsProcess.zip");
@@ -26,7 +28,7 @@ namespace PackageEasy.PlugIns
                 return new Tuple<bool, string>(true, "文件不存在!".GetLangText());
             }
             var tempDir = DataHelper.Temp;
-            var result = ZipHelper.UnZipFile(filePath,"", tempDir);
+            var result = ZipHelper.UnZipFile(filePath, "", tempDir);
             if (!result.Item1)
             {
                 return result;
@@ -38,7 +40,7 @@ namespace PackageEasy.PlugIns
                 foreach (var file in files)
                 {
                     FileInfo fileInfo = new FileInfo(file);
-                   
+
                     if (fileInfo.Name == "nsProcess.nsh")
                     {
                         var targetFilePath = Path.Combine(rootDir.FullName, "Include", fileInfo.Name);

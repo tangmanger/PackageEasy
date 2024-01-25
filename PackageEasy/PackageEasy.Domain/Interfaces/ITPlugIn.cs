@@ -11,6 +11,7 @@ namespace PackageEasy.Domain.Interfaces
     /// </summary>
     public interface ITPlugIn
     {
+        string Uid { get; }
         /// <summary>
         /// 载入
         /// </summary>

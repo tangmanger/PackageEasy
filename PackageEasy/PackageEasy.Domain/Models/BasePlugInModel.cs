@@ -9,7 +9,7 @@ namespace PackageEasy.Domain.Models
 {
     public abstract class BasePlugInModel : ITPlugIn
     {
-     
+        public abstract string Uid { get; }
 
         public abstract Tuple<bool, string> Execute();
         public abstract void Loaded();

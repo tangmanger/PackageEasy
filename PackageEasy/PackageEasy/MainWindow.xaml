@@ -23,6 +23,7 @@
     <Window.InputBindings>
         <KeyBinding Modifiers="Control" Key="S" Command="{Binding SaveCommand}" />
         <KeyBinding Modifiers="Control" Key="O" Command="{Binding OpenFileCommand}" />
+        <KeyBinding Modifiers="Control" Key="W" Command="{Binding CloseTableCommand}"/>
     </Window.InputBindings>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -45,7 +46,7 @@
                                 <MenuItem Header="新建" lang:LanguageManager.LangText="新建" Command="{Binding NewProjectCommand}" InputGestureText="    ">
                                 </MenuItem>
                                 <MenuItem Header="打开.."  lang:LanguageManager.LangText="打开.." Command="{Binding OpenFileCommand}" InputGestureText="Ctrl+O"></MenuItem>
-                                <MenuItem Header="关闭" IsEnabled="{Binding IsMenuCanEdit}" Command="{Binding CloseTableCommand}"  lang:LanguageManager.LangText="关闭" Width="auto" InputGestureText="    ">
+                                <MenuItem Header="关闭" IsEnabled="{Binding IsMenuCanEdit}" Command="{Binding CloseTableCommand}"   InputGestureText="Ctrl+W" lang:LanguageManager.LangText="关闭" Width="auto" >
                                 </MenuItem>
                                 <Separator Style="{StaticResource sep}"/>
                                 <MenuItem Header="保存" IsEnabled="{Binding IsMenuCanEdit}"   lang:LanguageManager.LangText="保存" InputGestureText="Ctrl+S" Command="{Binding SaveCommand}"></MenuItem>
