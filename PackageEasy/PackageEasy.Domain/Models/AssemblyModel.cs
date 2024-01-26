@@ -77,6 +77,10 @@ namespace PackageEasy.Domain.Models
                 RaisePropertyChanged();
             }
         }
+        /// <summary>
+        /// 中间变量
+        /// </summary>
+        [JsonIgnore]
         public string SectionName { get; set; }
     }
 }
