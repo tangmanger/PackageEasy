@@ -1,4 +1,5 @@
-﻿using PackageEasy.Domain.Enums;
+﻿using PackageEasy.Domain.Attributes;
+using PackageEasy.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,6 +64,7 @@ namespace PackageEasy.Domain.Models
         /// 选择
         /// </summary>
         [JsonIgnore]
+        [SaveIgnore]
         public bool IsSelected
         {
             get => isSelected;

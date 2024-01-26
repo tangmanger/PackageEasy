@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PackageEasy.Domain.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace PackageEasy.Domain.Models
         /// 选择
         /// </summary>
         [JsonIgnore]
+        [SaveIgnore]
         public bool IsSelected
         {
             get => isSelected;
@@ -80,7 +82,7 @@ namespace PackageEasy.Domain.Models
         /// <summary>
         /// 中间变量
         /// </summary>
-        [JsonIgnore]
+        [SaveIgnore]
         public string SectionName { get; set; }
     }
 }

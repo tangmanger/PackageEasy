@@ -40,6 +40,12 @@ namespace PackageEasy.Common.Helpers
             var modelProperties = model.GetType().GetProperties().ToList();
             foreach (var property in modelProperties)
             {
+                //不进行保存校验
+                var attribute = property.GetCustomAttribute(typeof(SaveIgnoreAttribute));
+                if (attribute != null)
+                {
+                    continue;
+                }
                 if (property.PropertyType == (typeof(string)) || property.PropertyType == typeof(bool)
                         || property.PropertyType == typeof(double) || property.PropertyType == typeof(int) || property.PropertyType.IsEnum || property.PropertyType == typeof(DateTime))
                 {
