@@ -21,6 +21,7 @@ namespace PackageEasy.Helpers
         /// </summary>
         public static void InitPlugIns()
         {
+            PlugInList.Clear();
             var types = GetAlTypes();
             foreach (var item in types)
             {

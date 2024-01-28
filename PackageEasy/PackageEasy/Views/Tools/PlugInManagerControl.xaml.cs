@@ -33,6 +33,11 @@ namespace PackageEasy.Views.Tools
         {
             InitializeComponent();
             DataContext = this;
+            Task.Run(() =>
+            {
+                PlugInHelper.InitPlugIns();
+                PlugIns = PlugInHelper.PlugInList;
+            });
         }
         public override string Description => "插件设置".GetLangText();
 
@@ -55,11 +60,7 @@ namespace PackageEasy.Views.Tools
         }
         public override void Load()
         {
-            Task.Run(() =>
-            {
-                PlugInHelper.InitPlugIns();
-                PlugIns = PlugInHelper.PlugInList;
-            });
+
         }
 
 
@@ -79,6 +80,10 @@ namespace PackageEasy.Views.Tools
             if (instance != null)
             {
                 var result = instance.Execute();
+                if (result.Item1)
+                {
+                    CacheDataHelper.OperatePlugin(instance.Uid, true);
+                }
                 TMessageBox.ShowMsg(result.Item2);
             }
 

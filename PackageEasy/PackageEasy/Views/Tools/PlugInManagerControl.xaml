@@ -24,7 +24,7 @@
             </ItemsControl.Template>
             <ItemsControl.ItemTemplate>
                 <DataTemplate >
-                    <Button Command="{Binding DataContext.ExecuteCommand,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}}" CommandParameter="{Binding }">
+                    <Button Margin="5,0,5,0" Command="{Binding DataContext.ExecuteCommand,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}}" CommandParameter="{Binding }">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Grid x:Name="grid" RenderTransformOrigin="0.5,0.5">

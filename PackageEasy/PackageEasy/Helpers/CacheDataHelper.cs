@@ -46,6 +46,10 @@ namespace PackageEasy.Helpers
         /// </summary>
         public static Dictionary<string, ProjectInfoModel> OldProjectDic = new Dictionary<string, ProjectInfoModel>();
         /// <summary>
+        /// 插件列表
+        /// </summary>
+        public static List<string> PluginList = new List<string>();
+        /// <summary>
         /// 更新最近打开的文件
         /// </summary>
         /// <param name="recently"></param>
@@ -81,6 +85,7 @@ namespace PackageEasy.Helpers
         public static void Init()
         {
             InitRecently();
+            InitPlugins();
         }
 
         /// <summary>
@@ -97,6 +102,38 @@ namespace PackageEasy.Helpers
                 var recentlyPath = Path.Combine(DataHelper.Store, "Recently.json");
                 File.WriteAllText(recentlyPath, RecentlyList.SerializeObject());
             }
+        }
+        /// <summary>
+        /// 插件列表
+        /// </summary>
+        /// <param name="pluginId"></param>
+        /// <param name="isAdd"></param>
+        public static void OperatePlugin(string pluginId, bool isAdd = false)
+        {
+            var plugin = PluginList.Find(p => p == pluginId);
+            if (plugin == null)
+            {
+                plugin = pluginId;
+            }
+            if (isAdd)
+            {
+                PluginList.Add(plugin);
+            }
+            else
+            {
+                PluginList.Remove(plugin);
+            }
+            var pluginPath = Path.Combine(DataHelper.Store, "Plugins.json");
+            File.WriteAllText(pluginPath, PluginList.SerializeObject());
+        }
+        /// <summary>
+        /// 初始化插件
+        /// </summary>
+        public static void InitPlugins()
+        {
+            var pluginPath = Path.Combine(DataHelper.Store, "Plugins.json");
+            if (File.Exists(pluginPath))
+                PluginList = File.ReadAllText(pluginPath).DeserializeObject<List<string>>();
         }
     }
 }

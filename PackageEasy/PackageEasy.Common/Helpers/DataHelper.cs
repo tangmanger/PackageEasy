@@ -96,7 +96,7 @@ namespace PackageEasy.Common.Helpers
         {
             get
             {
-                string path = Path.Combine(Path.GetTempPath(), "Store");
+                string path = Path.Combine(Data, "Store");
                 if (!Directory.Exists(path))
                     Directory.CreateDirectory(path);
                 return path;
