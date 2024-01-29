@@ -3,6 +3,7 @@ using PackageEasy.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 [assembly: log4net.Config.XmlConfigurator(ConfigFile = "Config/log4net.config", ConfigFileExtension = "config", Watch = true)]
@@ -41,12 +42,13 @@ namespace PackageEasy.Common.Logs
         /// </summary>
         /// <param name="content"></param>
         /// <param name="logLevelEnum"></param>
-        public static void Write(string content, Exception ex, LogLevelType logLevelEnum = LogLevelType.Error)
+        public static void Write(string content, Exception ex, LogLevelType logLevelEnum = LogLevelType.Error, int rowNumber = 0, [CallerMemberName] string methodName = "")
         {
 #if DEBUG
             Console.WriteLine(content + ex.Message + ex.StackTrace);
 #endif
             content = content + ex.Message + ex.StackTrace;
+            content = $"方法:{methodName} 行号:{rowNumber} {content}";
             switch (logLevelEnum)
             {
                 case LogLevelType.Info:
@@ -81,8 +83,9 @@ namespace PackageEasy.Common.Logs
         /// </summary>
         /// <param name="content"></param>
         /// <param name="logLevelEnum"></param>
-        public static void Write(string content, LogLevelType logLevelEnum = LogLevelType.Info)
+        public static void Write(string content, LogLevelType logLevelEnum = LogLevelType.Info, [CallerLineNumber] int rowNumber = 0, [CallerMemberName] string methodName = "")
         {
+            content = $"方法:{methodName} 行号:{rowNumber} {content}";
 #if DEBUG
             Console.WriteLine(content);
 #endif
