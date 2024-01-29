@@ -49,6 +49,22 @@ namespace PackageEasy.Helpers
         /// 插件列表
         /// </summary>
         public static List<string> PluginList = new List<string>();
+
+        public static int Version
+        {
+            get
+            {
+                return 1;
+            }
+        }
+
+        public static string InternalVersion
+        {
+            get
+            {
+                return "2024年1月29日 11:38:13";
+            }
+        }
         /// <summary>
         /// 更新最近打开的文件
         /// </summary>
