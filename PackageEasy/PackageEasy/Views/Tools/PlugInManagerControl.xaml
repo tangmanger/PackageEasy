@@ -24,25 +24,53 @@
             </ItemsControl.Template>
             <ItemsControl.ItemTemplate>
                 <DataTemplate >
-                    <Button Margin="5,0,5,0" Command="{Binding DataContext.ExecuteCommand,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}}" CommandParameter="{Binding }">
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
+                    <controls:PlugInButton Width="75" Height="50" PlugInState="{Binding PlugInState,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,0" Command="{Binding DataContext.ExecuteCommand,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}}" CommandParameter="{Binding }">
+                        <controls:PlugInButton.Template>
+                            <ControlTemplate TargetType="controls:PlugInButton">
                                 <Grid x:Name="grid" RenderTransformOrigin="0.5,0.5">
                                     <Grid.RowDefinitions>
                                         <RowDefinition></RowDefinition>
                                         <RowDefinition Height="auto"></RowDefinition>
                                     </Grid.RowDefinitions>
                                     <TextBlock Style="{StaticResource IconFontStyle}" FontSize="35" Foreground="Red" Text="{Binding Icon}"></TextBlock>
-                                    <TextBlock Grid.Row="1" Text="{Binding DisplayName}"></TextBlock>
+                                    <TextBlock Grid.Row="1" Text="{Binding DisplayName}" HorizontalAlignment="Center"></TextBlock>
+                                    <!--<Border x:Name="border" Visibility="Collapsed" Background="Transparent" Opacity="0.5">
+                                        <Grid>
+                                            <TextBlock x:Name="install" Visibility="Collapsed" HorizontalAlignment="Center" Text="安装" lang:LanguageManager.LangText="安装" VerticalAlignment="Center"></TextBlock>
+                                            <TextBlock x:Name="reInstall" Visibility="Collapsed" HorizontalAlignment="Center" Text="安装" lang:LanguageManager.LangText="安装" VerticalAlignment="Center"></TextBlock>
+                                        </Grid>
+                                    </Border>-->
                                 </Grid>
                                 <ControlTemplate.Triggers>
+                                    <!--<MultiTrigger>
+                                        <MultiTrigger.Conditions>
+                                            <Condition Property="IsMouseOver" Value="True"/>
+                                            <Condition Property="PlugInState" Value="UnInstalled"/>
+                                        </MultiTrigger.Conditions>
+                                        <Setter Property="Visibility" Value="Visible" TargetName="border"></Setter>
+                                        <Setter Property="Background" Value="{DynamicResource pluginMouseOverBackground}" TargetName="border"></Setter>
+                                        <Setter Property="Visibility" Value="Visible" TargetName="install"></Setter>
+                                        <Setter Property="Visibility" Value="Collapsed" TargetName="reInstall"></Setter>
+                                        --><!--<Setter Property="lang:LanguageManager.LangText" Value="安装" TargetName="state"></Setter>--><!--
+                                    </MultiTrigger>
+                                    <MultiTrigger>
+                                        <MultiTrigger.Conditions>
+                                            <Condition Property="IsMouseOver" Value="True"/>
+                                            <Condition Property="PlugInState" Value="UnInstalled"/>
+                                        </MultiTrigger.Conditions>
+                                        <Setter Property="Visibility" Value="Visible" TargetName="border"></Setter>
+                                        <Setter Property="Background" Value="{DynamicResource pluginMouseOverBackground}" TargetName="border"></Setter>
+                                        <Setter Property="Visibility" Value="Visible" TargetName="reInstall"></Setter>
+                                        <Setter Property="Visibility" Value="Collapsed" TargetName="install"></Setter>
+                                        --><!--<Setter Property="lang:LanguageManager.LangText" Value="重新安装" TargetName="state"></Setter>--><!--
+                                    </MultiTrigger>-->
                                     <Trigger Property="IsPressed" Value="true">
                                         <Setter Property="RenderTransform" Value="{StaticResource buttonScale}" TargetName="grid"></Setter>
                                     </Trigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
-                        </Button.Template>
-                    </Button>
+                        </controls:PlugInButton.Template>
+                    </controls:PlugInButton>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

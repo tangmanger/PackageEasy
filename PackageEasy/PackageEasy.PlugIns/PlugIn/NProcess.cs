@@ -11,14 +11,13 @@ using PackageEasy.Common.Helpers;
 
 namespace PackageEasy.PlugIns
 {
-    [PlugIn("进程检测", "\ue675", typeof(NProcess))]
+    [PlugIn("进程检测", "\ue675", typeof(NProcess), "b4a3ab4f-9cd3-401d-acd9-8058c4028211")]
     public class NProcess : BasePlugInModel
     {
         public string Description => "NProcess";
 
         public string Icon => "\ue675";
 
-        public override string Uid => uid;
         string uid = Guid.NewGuid().ToString();
         public override Tuple<bool, string> Execute()
         {

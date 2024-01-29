@@ -37,6 +37,18 @@ namespace PackageEasy.Views.Tools
             {
                 PlugInHelper.InitPlugIns();
                 PlugIns = PlugInHelper.PlugInList;
+                foreach (PlugInModel plug in PlugIns)
+                {
+                    if (CacheDataHelper.PluginList.Exists(C => C == plug.Uid))
+                    {
+                        plug.InstallState = Domain.Enums.PlugInState.Installed;
+                    }
+                    else
+                    {
+                        plug.InstallState = Domain.Enums.PlugInState.UnInstalled;
+                    }
+                }
+                PlugIns = new List<PlugInModel>(PlugIns);
             });
         }
         public override string Description => "插件设置".GetLangText();
@@ -82,7 +94,8 @@ namespace PackageEasy.Views.Tools
                 var result = instance.Execute();
                 if (result.Item1)
                 {
-                    CacheDataHelper.OperatePlugin(instance.Uid, true);
+                    i.InstallState = Domain.Enums.PlugInState.Installed;
+                    CacheDataHelper.OperatePlugin(i.Uid, true);
                 }
                 TMessageBox.ShowMsg(result.Item2);
             }

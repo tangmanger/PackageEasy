@@ -117,7 +117,8 @@ namespace PackageEasy.Helpers
             }
             if (isAdd)
             {
-                PluginList.Add(plugin);
+                if (!PluginList.Exists(c => c == plugin))
+                    PluginList.Add(plugin);
             }
             else
             {

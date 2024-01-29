@@ -18,18 +18,20 @@ namespace PackageEasy.Domain.Attributes
         /// 插件
         /// </summary>
         public PlugInModel PlugIn { get; set; }
+   
         /// <summary>
         /// 插件
         /// </summary>
         /// <param name="name"></param>
         /// <param name="icon"></param>
         /// <param name="type"></param>
-        public PlugInAttribute(string name, string icon, Type type)
+        public PlugInAttribute(string name, string icon, Type type,string uid)
         {
             PlugIn = new PlugInModel();
             PlugIn.Name = name;
             PlugIn.Icon = icon;
             PlugIn.PlugInType = type;
+            PlugIn.Uid = uid;
         }
     }
 }

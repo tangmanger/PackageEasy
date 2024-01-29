@@ -6,6 +6,7 @@ namespace PackageEasyTest
         [TestMethod]
         public void TestMethod1()
         {
+            Console.WriteLine(Guid.NewGuid().ToString());
         }
     }
 }
