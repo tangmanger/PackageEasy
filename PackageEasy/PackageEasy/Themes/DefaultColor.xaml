@@ -8,6 +8,7 @@
     <SolidColorBrush x:Key="MainWorkAreaBackgroud" Color="White"></SolidColorBrush>
     <SolidColorBrush x:Key="MainWindowBorderBrush" Color="#FFA49F9F"></SolidColorBrush>
     <SolidColorBrush x:Key="menuOverBorderBrush" Color="Black"></SolidColorBrush>
+    <SolidColorBrush x:Key="watingBackground" Color="LightGray"></SolidColorBrush>
     <!--button-->
     <SolidColorBrush x:Key="CommonButtonBackgroundBrush" Color="White"></SolidColorBrush>
     <SolidColorBrush x:Key="CommonButtonBorderBrush" Color="LightGray"></SolidColorBrush>

@@ -211,6 +211,8 @@ namespace PackageEasy.ViewModels
                                 return;
                             }
                         }
+                        Wating wating = new Wating();
+                        wating.Show();
                         NSISScript nSISScript = new NSISScript();
                         try
                         {
@@ -247,7 +249,13 @@ namespace PackageEasy.ViewModels
                                         Log.Write(e.Data ?? "");
                                         if (!string.IsNullOrWhiteSpace(e.Data) && e.Data.Contains(nSISScript.OutPutFilePath))
                                         {
+                                            App.Current.Dispatcher.Invoke(() =>
+                                            {
+
+                                                wating.Close();
+                                            });
                                             TMessageBox.MainShowMsg("", "编译成功!", MessageLevel.Information);
+                                        
                                             if (File.Exists(nSISScript.OutPutFilePath))
                                             {
                                                 FileInfo fileInfo = new FileInfo(nSISScript.OutPutFilePath);
@@ -300,8 +308,14 @@ namespace PackageEasy.ViewModels
                         }
                         catch (Exception ex)
                         {
+                            wating.Close();
+
                             TMessageBox.MainShowMsg("", "编译失败!", MessageLevel.Information);
                             Log.Write("编译失败!", ex);
+                        }
+                        finally
+                        {
+
                         }
                     }
                 }
@@ -617,7 +631,7 @@ namespace PackageEasy.ViewModels
                             {
                                 return false;
                             }
-                            if(result==TMessageBoxResult.OK)
+                            if (result == TMessageBoxResult.OK)
                             {
                                 var flag = FileHelper.Save(projectViewModel);
                                 if (flag)
