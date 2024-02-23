@@ -26,6 +26,8 @@
     <SolidColorBrush x:Key="InputTextDisabled" Color="#919191" />
     <Color x:Key="AccentColor">#FF0F93A5</Color>
     <SolidColorBrush x:Key="Accent" Color="{DynamicResource AccentColor}" />
+    <!-- default accent colors and brushes -->
+    <SolidColorBrush x:Key="progressColoBrush" Color="#5D6B99" />
     <!--CommonTextBox-->
     <SolidColorBrush x:Key="commonTextBoxBackground" Color="#FFFFFF" />
     <SolidColorBrush x:Key="commonTextBoxBorderBrush" Color="#26000000" />

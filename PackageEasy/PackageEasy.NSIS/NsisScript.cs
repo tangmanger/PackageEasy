@@ -243,6 +243,10 @@ namespace PackageEasy.NSIS
                         Directory.CreateDirectory(outPath);
                     }
                     var filePath = Path.Combine(outPath, baseInfo.AppOutPath.Replace(".exe", "") + ".exe");
+                    if (projectInfoModel.FinishInfo.IsEnableProcess == true && projectInfoModel.BaseInfo.AppOutPath.Replace(".exe", "").ToLower() == projectInfoModel.FinishInfo.ProcessName.Replace(".exe", "").ToLower())
+                    {
+                        filePath = Path.Combine(outPath, baseInfo.AppOutPath.Replace(".exe", "") + " V" + baseInfo.ApplicationVersion + ".exe");
+                    }
                     OutPutFilePath = filePath;
                     list.Add($"OutFile \"{filePath}\"");
                     var path = baseInfo.UserDirPath;
@@ -265,7 +269,7 @@ namespace PackageEasy.NSIS
 
                 list.Add("Function .onInit");
                 list.Add("  !insertmacro MUI_LANGDLL_DISPLAY");
-             
+
                 //检测进程
                 if (projectInfoModel.FinishInfo != null && projectInfoModel.FinishInfo.IsEnableProcess)
                 {

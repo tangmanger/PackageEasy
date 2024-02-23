@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:PackageEasy.Views.Dialogs"
         xmlns:controls="https://dicgo.com/controls"
         mc:Ignorable="d"
-        Title="Wating" Height="450" Background="Transparent" Width="800" WindowStyle="None" WindowStartupLocation="CenterOwner" AllowsTransparency="True">
+        Title="Wating" Height="450" Background="Transparent" ShowInTaskbar="False" Width="800" WindowStyle="None" WindowStartupLocation="CenterOwner" AllowsTransparency="True">
     <Grid Background="Transparent">
         <Border Background="{DynamicResource watingBackground}" Opacity="0.3"></Border>
-        <controls:TProgressRing Style="{StaticResource WanderingCubesProgressRingStyle}" IsActive="True"></controls:TProgressRing>
+        <controls:TProgressRing Style="{StaticResource WanderingCubesProgressRingStyle}"  IsActive="True"></controls:TProgressRing>
     </Grid>
 </Window>
