@@ -24,6 +24,7 @@ using PackageEasy.Common.Logs;
 using System.IO;
 using CommunityToolkit.Mvvm.DependencyInjection;
 using System.ComponentModel;
+using PackageEasy.Domain.Models;
 
 namespace PackageEasy
 {
@@ -61,7 +62,8 @@ namespace PackageEasy
             CommandBindings.Add(new CommandBinding(SystemCommands.RestoreWindowCommand, RestoreExecute));
             CommandBindings.Add(new CommandBinding(SystemCommands.MinimizeWindowCommand, MinimizeExecute));
             NavigationHelper.GoTo(ViewType.Home);
-
+            var currentTheme = ThemeHelper.Themes.Find(p => p.ThemeId == ConfigHelper.Config.ThemeId);
+            ThemeHelper.UpdateTheme(currentTheme ?? new ThemeModel());
 
 
         }

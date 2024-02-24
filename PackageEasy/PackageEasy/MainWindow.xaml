@@ -41,7 +41,7 @@
                 <Grid WindowChrome.IsHitTestVisibleInChrome="True" Margin="0,8,0,8">
                     <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" >
                         <Image Height="18" Width="18" VerticalAlignment="Center" Margin="15,0,0,0" Source="/Resources/Images/tools.png"></Image>
-                        <Menu FontSize="14" Background="Transparent" Margin="10,0,0,0">
+                        <Menu FontSize="14" Background="Transparent" Margin="10,0,0,0" Foreground="{DynamicResource menuForeground}">
                             <MenuItem   MinWidth="50" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="14" HorizontalContentAlignment="Center" Header="文件" lang:LanguageManager.LangText="文件">
                                 <MenuItem Header="新建" lang:LanguageManager.LangText="新建" Command="{Binding NewProjectCommand}" InputGestureText="    ">
                                 </MenuItem>

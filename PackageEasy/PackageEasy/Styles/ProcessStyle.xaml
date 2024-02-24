@@ -3,7 +3,7 @@
                     xmlns:controls="https://dicgo.com/controls">
     <Style x:Key="CircleProgressRingStyle" TargetType="{x:Type controls:TProgressRing}">
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground" Value="{DynamicResource Accent}" />
+        <Setter Property="Foreground" Value="{DynamicResource progressColoBrush}" />
         <Setter Property="IsHitTestVisible" Value="False" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
@@ -358,7 +358,7 @@
     </Style>
     <Style x:Key="WanderingCubesProgressRingStyle" TargetType="controls:TProgressRing">
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground" Value="{DynamicResource selecetRadioIsCheckedForeground}" />
+        <Setter Property="Foreground" Value="{DynamicResource progressColoBrush}" />
         <Setter Property="IsHitTestVisible" Value="False" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
@@ -500,7 +500,7 @@
     </Style>
     <Style x:Key="ThreeBounceProgressRingStyle" TargetType="controls:TProgressRing">
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground" Value="{DynamicResource Accent}" />
+        <Setter Property="Foreground" Value="{DynamicResource progressColoBrush}" />
         <Setter Property="IsHitTestVisible" Value="False" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />

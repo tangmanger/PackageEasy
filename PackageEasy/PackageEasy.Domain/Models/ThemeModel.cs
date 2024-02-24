@@ -6,14 +6,16 @@ using System.Threading.Tasks;
 
 namespace PackageEasy.Domain.Models
 {
-    public class ConfigModel
+    public class ThemeModel
     {
-        public string NSISMakePath { get; set; }
-        public string NSISHelperPath { get; set; }
         /// <summary>
-        /// 工作目录
+        /// 主题文件名称
         /// </summary>
-        public string WorkSpace { get; set; }
+        public string ThemeName { get; set; }
+        /// <summary>
+        /// 主题描述
+        /// </summary>
+        public string ThemeDescription { get; set; }
         /// <summary>
         /// 主题id
         /// </summary>

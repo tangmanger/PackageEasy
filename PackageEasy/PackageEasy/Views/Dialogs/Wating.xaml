@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="Wating" Height="450" Background="Transparent" ShowInTaskbar="False" Width="800" WindowStyle="None" WindowStartupLocation="CenterOwner" AllowsTransparency="True">
     <Grid Background="Transparent">
-        <Border Background="{DynamicResource watingBackground}" Opacity="0.3"></Border>
-        <controls:TProgressRing Style="{StaticResource WanderingCubesProgressRingStyle}"  IsActive="True"></controls:TProgressRing>
+        <Border Background="{DynamicResource watingBackground}" Opacity="0.5"></Border>
+        <controls:TProgressRing Style="{StaticResource CircleProgressRingStyle}" Width="80" Height="80"  IsActive="True"></controls:TProgressRing>
     </Grid>
 </Window>
