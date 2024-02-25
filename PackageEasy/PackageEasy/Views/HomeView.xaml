@@ -16,7 +16,7 @@
     </i:Interaction.Triggers>
     <UserControl.Resources>
         <ControlTemplate x:Key="AddNewProject" TargetType="Button">
-            <Border CornerRadius="8" Background="{DynamicResource projectNewCreateBackground}" x:Name="border" RenderTransformOrigin="0.5,0.5" BorderThickness="1" BorderBrush="#26000000">
+            <Border CornerRadius="8" Background="{DynamicResource projectNewCreateBackground}" x:Name="border" RenderTransformOrigin="0.599,0.647" BorderThickness="1" BorderBrush="#26000000">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Image Source="/Resources/Images/NewProject.png" Height="28" Width="28"></Image>
                     <TextBlock Text="新建工程" Foreground="{DynamicResource projectNewCreateForeground}" lang:LanguageManager.LangText="新建工程" FontSize="16" Margin="0,5,0,0"></TextBlock>

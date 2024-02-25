@@ -122,7 +122,7 @@
                     </ScrollViewer>
                 </Grid>
             </Border>
-            <ContentControl  Content="{Binding WorkView}" Grid.Row="2"></ContentControl>
+            <ContentControl  Content="{Binding WorkView}" Background="{DynamicResource MainWorkAreaBackgroud}" Grid.Row="2"></ContentControl>
         </Grid>
     </Border>
 </Window>
