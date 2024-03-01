@@ -28,6 +28,8 @@
 
 
     <Style x:Key="PlaceholderTextBoxStyle" TargetType="controls:PlaceholderTextBox">
+        <Setter Property="BorderBrush" Value="{DynamicResource commonTextBoxBorderBrush}"></Setter>
+        <Setter Property="BorderThickness" Value="0.5"></Setter>
         <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
         <Setter Property="Template">
             <Setter.Value>
@@ -35,7 +37,7 @@
                     <ControlTemplate.Resources>
                         <TextBlock x:Key="ProxyElement"  Text="{Binding }"/>
                     </ControlTemplate.Resources>
-                    <Border Cursor="IBeam" CornerRadius="{TemplateBinding CornerRadius}" BorderThickness="0.5" BorderBrush="{DynamicResource commonTextBoxBorderBrush}" x:Name="borderRoot">
+                    <Border Cursor="IBeam"  CornerRadius="{TemplateBinding CornerRadius}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" x:Name="borderRoot">
                         <Grid>
 
                             <Border  x:Name="PART_DropButton" Tag="dd" DataContext="{Binding PlaceHolderText,RelativeSource={RelativeSource Mode=TemplatedParent}}">

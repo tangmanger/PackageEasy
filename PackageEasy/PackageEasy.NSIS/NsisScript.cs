@@ -54,9 +54,13 @@ namespace PackageEasy.NSIS
                     //!define PRODUCT_STARTMENU_REGVAL "NSIS:StartMenuDir"
                     list.Add($"!define PRODUCT_NAME {baseInfo.ApplicationName}");
                     list.Add($"!define PRODUCT_VERSION {baseInfo.ApplicationVersion}");
+
+                    if (!string.IsNullOrWhiteSpace(projectInfoModel.BaseInfo.ProductVersion))
+                        list.Add($"!define PRODUCT_VERSION_A \"{projectInfoModel.BaseInfo.ProductVersion}\"");
                     list.Add($"!define PRODUCT_PUBLISHER $(CompanyName)");
                     list.Add($"!define PRODUCT_WEB_SITE {baseInfo.ApplicationUrl}");
                     list.Add($"!define PRODUCT_UNINST_ROOT_KEY \"HKLM\"");
+
                     bool isMorden = false;
                     if (projectInfoModel.BaseInfo.ComPressAlgo != null && projectInfoModel.BaseInfo.ComPressAlgo.Data != CompressionAlgoType.None && projectInfoModel.BaseInfo.ComPressAlgo.Data != CompressionAlgoType.Zlib)
                     {
@@ -235,7 +239,10 @@ namespace PackageEasy.NSIS
 
                     }
                     list.Add(";多语言结束");
-
+                    if (!string.IsNullOrWhiteSpace(projectInfoModel.BaseInfo.ProductVersion))
+                        list.Add(" VIProductVersion \"${PRODUCT_VERSION_A}\" ;");
+                    list.Add($" VIAddVersionKey  \"ProductName\" \"${{PRODUCT_NAME}}\"");
+                    list.Add($" VIAddVersionKey  \"FileVersion\" \"${{PRODUCT_VERSION}}\"");
                     list.Add("Name \"${PRODUCT_NAME} ${PRODUCT_VERSION}\"");
                     string outPath = Path.Combine(baseInfo.WorkSpace, "OutPut");
                     if (!Directory.Exists(outPath))

@@ -100,6 +100,7 @@ namespace PackageEasy.ViewModels
         private string languagePath;
         private bool isLicenseChecked;
         private string companyName;
+        private string productVersion;
 
         /// <summary>
         /// 应用程序名称
@@ -389,6 +390,19 @@ namespace PackageEasy.ViewModels
                 OnPropertyChanged();
             }
         }
+        /// <summary>
+        /// 产品版本
+        /// </summary>
+
+        public string ProductVersion
+        {
+            get => productVersion;
+            set
+            {
+                productVersion = value;
+                OnPropertyChanged();
+            }
+        }
 
         #endregion
 
@@ -421,6 +435,7 @@ namespace PackageEasy.ViewModels
             baseInfoModel.LanguagePath = LanguagePath;
             baseInfoModel.IsLicenseChecked = IsLicenseChecked;
             baseInfoModel.CompanyName = CompanyName;
+            baseInfoModel.ProductVersion = ProductVersion;
             baseInfoModel.LanguageList = InstallList.FindAll(c => c.IsSelected);
             if (baseInfoModel.LanguageList == null || baseInfoModel.LanguageList.Count == 0)
             {
@@ -465,6 +480,7 @@ namespace PackageEasy.ViewModels
                 LicenseFilePath = ProjectInfo.BaseInfo.LicenseFilePath;
                 CompanyName = ProjectInfo.BaseInfo.CompanyName;
                 ButtonType = ProjectInfo.BaseInfo.ButtonType;
+                ProductVersion = ProjectInfo.BaseInfo.ProductVersion;
                 if (!string.IsNullOrWhiteSpace(ProjectInfo.BaseInfo.WorkSpace))
                     WorkSpace = ProjectInfo.BaseInfo.WorkSpace;
                 else
@@ -535,6 +551,7 @@ namespace PackageEasy.ViewModels
             baseInfoModel.LanguagePath = LanguagePath;
             baseInfoModel.IsLicenseChecked = IsLicenseChecked;
             baseInfoModel.CompanyName = CompanyName;
+            baseInfoModel.ProductVersion = ProductVersion;
             var str = WorkSpace + LanguagePath;
             if (!string.IsNullOrWhiteSpace(LanguagePath) && File.Exists(str))
             {
@@ -573,6 +590,21 @@ namespace PackageEasy.ViewModels
                 TMessageBox.ShowMsg("", "应用程序名不能为空!");
                 return false;
             }
+            if (!string.IsNullOrWhiteSpace(ProductVersion))
+            {
+                var data = ProductVersion.Split('.').ToList();
+                if (data.Count != 4)
+                {
+                    TMessageBox.ShowMsg("", "产品版本格式必须为X.X.X.X (X为数字)!");
+                    return false;
+                }
+                int d = 0;
+                if (data.Exists(C => int.TryParse(C, out d) == false))
+                {
+                    TMessageBox.ShowMsg("", "产品版本格式必须为X.X.X.X (X为数字)!");
+                    return false;
+                }
+            }
             if (string.IsNullOrWhiteSpace(AppOutPath))
             {
                 TMessageBox.ShowMsg("", "输出文件名称不能为空!");
@@ -598,6 +630,7 @@ namespace PackageEasy.ViewModels
                 TMessageBox.ShowMsg("", "安装包图标不存在!");
                 return false;
             }
+
             return true;
         }
 

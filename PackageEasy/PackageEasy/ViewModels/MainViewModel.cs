@@ -211,6 +211,7 @@ namespace PackageEasy.ViewModels
                                 return;
                             }
                         }
+                        List<string> errorMsg = new List<string>();
                         Wating wating = new Wating();
                         wating.Show();
                         NSISScript nSISScript = new NSISScript();
@@ -255,7 +256,7 @@ namespace PackageEasy.ViewModels
                                                 wating.Close();
                                             });
                                             TMessageBox.MainShowMsg("", "编译成功!", MessageLevel.Information);
-                                        
+
                                             if (File.Exists(nSISScript.OutPutFilePath))
                                             {
                                                 FileInfo fileInfo = new FileInfo(nSISScript.OutPutFilePath);
@@ -283,7 +284,21 @@ namespace PackageEasy.ViewModels
                                     process.ErrorDataReceived += (s, e) =>
                                     {
                                         Log.Write(e.Data ?? "", LogLevelType.Error);
+                                        if (!string.IsNullOrWhiteSpace(e.Data))
+                                        {
+                                            errorMsg.Add(e.Data);
+                                            if (e.Data.ToLower().Contains("aborting creation process".ToLower()))
+                                            {
+                                                App.Current.Dispatcher.Invoke(() =>
+                                                {
 
+                                                    wating.Close();
+                                                });
+                                                string format = string.Format("编译失败!{0}".GetLangText(), $"\r{string.Join("\r", errorMsg)}");
+                                                TMessageBox.MainShowMsg("", format, MessageLevel.Information);
+                                                Log.Write(format);
+                                            }
+                                        }
                                     };
                                     process.Start();
                                     //process.WaitForExit();

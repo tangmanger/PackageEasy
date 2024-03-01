@@ -169,5 +169,9 @@ namespace PackageEasy.Domain.Models
         /// 公司名称
         /// </summary>
         public string CompanyName { get; set; }
+        /// <summary>
+        /// 产品版本
+        /// </summary>
+        public string ProductVersion { get; set; }
     }
 }
