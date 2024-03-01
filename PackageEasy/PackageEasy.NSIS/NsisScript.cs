@@ -243,6 +243,7 @@ namespace PackageEasy.NSIS
                         list.Add(" VIProductVersion \"${PRODUCT_VERSION_A}\" ;");
                     list.Add($" VIAddVersionKey  \"ProductName\" \"${{PRODUCT_NAME}}\"");
                     list.Add($" VIAddVersionKey  \"FileVersion\" \"${{PRODUCT_VERSION}}\"");
+                    list.Add($" VIAddVersionKey  \"ProductVersion\" \"${{PRODUCT_VERSION}}\"");
                     list.Add("Name \"${PRODUCT_NAME} ${PRODUCT_VERSION}\"");
                     string outPath = Path.Combine(baseInfo.WorkSpace, "OutPut");
                     if (!Directory.Exists(outPath))

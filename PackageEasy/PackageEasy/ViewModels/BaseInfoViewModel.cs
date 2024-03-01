@@ -595,13 +595,13 @@ namespace PackageEasy.ViewModels
                 var data = ProductVersion.Split('.').ToList();
                 if (data.Count != 4)
                 {
-                    TMessageBox.ShowMsg("", "产品版本格式必须为X.X.X.X (X为数字)!");
+                    TMessageBox.ShowMsg("", "文件版本格式必须为X.X.X.X (X为数字)!");
                     return false;
                 }
                 int d = 0;
                 if (data.Exists(C => int.TryParse(C, out d) == false))
                 {
-                    TMessageBox.ShowMsg("", "产品版本格式必须为X.X.X.X (X为数字)!");
+                    TMessageBox.ShowMsg("", "文件版本格式必须为X.X.X.X (X为数字)!");
                     return false;
                 }
             }

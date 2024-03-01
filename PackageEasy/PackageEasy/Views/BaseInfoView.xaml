@@ -38,9 +38,9 @@
         <TextBlock Grid.Row="1" Text="应用程序版本:" lang:LanguageManager.LangText="应用程序版本:" VerticalAlignment="Center"  HorizontalAlignment="Right"></TextBlock>
         <TextBox   Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource CommonTextBox}" Text="{Binding ApplicationVersion,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Width="150" Height="25" VerticalContentAlignment="Center" Margin="5,10,0,10"></TextBox>
 
-        <TextBlock Grid.Row="2" Text="产品版本:" lang:LanguageManager.LangText="产品版本:" VerticalAlignment="Center"  HorizontalAlignment="Right"></TextBlock>
+        <TextBlock Grid.Row="2" Text="文件版本:" lang:LanguageManager.LangText="文件版本:" VerticalAlignment="Center"  HorizontalAlignment="Right"></TextBlock>
         <!--<TextBox   Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource CommonTextBox}" Text="{Binding ApplicationVersion,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Width="150" Height="25" VerticalContentAlignment="Center" Margin="5,10,0,10"></TextBox>-->
-        <controls:PlaceholderTextBox Grid.Column="1" Background="White"  Grid.Row="2" PlaceHolderText="例如:1.0.0.1"  HorizontalAlignment="Left"  Width="150" Height="25" Style="{StaticResource PlaceholderTextBoxStyle}"   TextWrapping="Wrap" Text="{Binding ProductVersion,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Center" Margin="5,10,0,0"></controls:PlaceholderTextBox>
+        <controls:PlaceholderTextBox Grid.Column="1" TipsTop="5"  Grid.Row="2" PlaceHolderText="例如:1.0.0.1"  HorizontalAlignment="Left"  Width="150" Height="25" Style="{StaticResource PlaceholderTextBoxStyle}"  Margin="5,10,0,10" TextWrapping="Wrap" Text="{Binding ProductVersion,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Center" ></controls:PlaceholderTextBox>
         
         <TextBlock  Grid.Row="3" Text="公司名称:" lang:LanguageManager.LangText="公司名称:" VerticalAlignment="Center"  HorizontalAlignment="Right"></TextBlock>
         <TextBox    Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource CommonTextBox}" Text="{Binding CompanyName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Width="150" Height="25" VerticalContentAlignment="Center" Margin="5,10,0,10"></TextBox>
