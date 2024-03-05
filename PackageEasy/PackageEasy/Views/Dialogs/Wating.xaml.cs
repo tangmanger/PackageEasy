@@ -19,7 +19,7 @@ namespace PackageEasy.Views.Dialogs
     /// </summary>
     public partial class Wating : Window
     {
-      
+
         public bool IsRunning { get; set; }
         public Wating(bool setOwner = true)
         {
@@ -44,6 +44,11 @@ namespace PackageEasy.Views.Dialogs
             }
 
             IsRunning = true;
+        }
+
+        private void Grid_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            e.Handled = true;
         }
     }
 }

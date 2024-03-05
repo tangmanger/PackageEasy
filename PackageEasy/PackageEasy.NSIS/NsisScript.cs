@@ -78,11 +78,13 @@ namespace PackageEasy.NSIS
                         list.Add($"!define PRODUCT_STARTMENU_REGVAL \"NSIS:StartMenuDir\"");
                     list.Add("!include \"nsProcess.nsh\"");
                     list.Add("!include \"LogicLib.nsh\"");
+                    list.Add(" !include \"FileFunc.nsh\"");
                     if (isMorden)
                     {
                         list.Add("!include \"MUI.nsh\"");
                         list.Add("!define MUI_ABORTWARNING");
                     }
+                   
 
                     string iconPath = "${NSISDIR}\\Contrib\\Graphics\\Icons\\modern-install.ico";
                     if (!string.IsNullOrWhiteSpace(baseInfo.InstallIconPath))
@@ -345,6 +347,9 @@ namespace PackageEasy.NSIS
                             if (!hasSetIcon)
                             {
                                 hasSetIcon = true;
+                                list.Add(" ${GetSize} \"$INSTDIR\" \"/S=0K\" $0 $1 $2");
+                                list.Add(" IntFmt $0 \"0x%08X\" $0");
+                                list.Add("  WriteRegDWORD ${PRODUCT_UNINST_ROOT_KEY} \"${PRODUCT_UNINST_KEY}\" \"EstimatedSize\" \"$0\"");
                                 if (projectInfoModel.AppIcon != null)
                                 {
                                     string dirName = projectInfoModel?.BaseInfo?.ApplicationName;
