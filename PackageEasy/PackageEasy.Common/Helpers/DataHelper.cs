@@ -14,6 +14,8 @@ namespace PackageEasy.Common.Helpers
     /// </summary>
     public class DataHelper
     {
+
+
         /// <summary>
         /// 根目录
         /// </summary>
@@ -97,6 +99,20 @@ namespace PackageEasy.Common.Helpers
             get
             {
                 string path = Path.Combine(Data, "Store");
+                if (!Directory.Exists(path))
+                    Directory.CreateDirectory(path);
+                return path;
+            }
+        }
+        /// <summary>
+        /// 主题
+        /// </summary>
+        public static string Themes
+        {
+            get
+            {
+
+                string path = Path.Combine(Data, "Themes");
                 if (!Directory.Exists(path))
                     Directory.CreateDirectory(path);
                 return path;

@@ -27,11 +27,37 @@ namespace PackageEasy.Controls.Controls
             visualBrush.Stretch = Stretch.None;
             TranslateTransform translateTransform = new TranslateTransform();
             translateTransform.X = 16;
-            translateTransform.Y = 8;
+            translateTransform.Y = TipsTop;
             visualBrush.Transform = translateTransform;
             this.IsKeyboardFocusedChanged += PlaceholderTextBox_IsKeyboardFocusedChanged;
             this.TextChanged += PlaceholderTextBox_TextChanged;
             this.Loaded += PlaceholderTextBox_Loaded;
+        }
+
+
+        public int TipsTop
+        {
+            get { return (int)GetValue(TipsTopProperty); }
+            set { SetValue(TipsTopProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for TipsTop.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty TipsTopProperty =
+            DependencyProperty.Register("TipsTop", typeof(int), typeof(PlaceholderTextBox), new PropertyMetadata(8, new PropertyChangedCallback(TipsCallBack)));
+
+        private static void TipsCallBack(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (e.NewValue != null)
+            {
+                PlaceholderTextBox placeholderTextBox = (PlaceholderTextBox)d;
+                TranslateTransform translateTransform = placeholderTextBox.visualBrush.Transform as TranslateTransform;
+                if (translateTransform != null)
+                {
+                    int ds = 0;
+                    int.TryParse(e.NewValue.ToString(), out ds);
+                    translateTransform.Y = ds;
+                }
+            }
         }
 
         private void PlaceholderTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -65,6 +91,11 @@ namespace PackageEasy.Controls.Controls
             if (border == null) return;
             if (string.IsNullOrWhiteSpace(Text))
             {
+                //TranslateTransform translateTransform = visualBrush.Transform as TranslateTransform;
+                //if(translateTransform != null)
+                //{
+                //    translateTransform.Y = this.ActualHeight / 2;
+                //}
                 border.Background = visualBrush;
             }
             else

@@ -1,24 +1,24 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <!--基础颜色-->
-    <SolidColorBrush x:Key="menuOverBrush" Color="#B1C5FF"></SolidColorBrush>
-    <SolidColorBrush x:Key="menuBackBrush" Color="#E9EEFF"></SolidColorBrush>
-    <SolidColorBrush x:Key="menuLineStep" Color="#C0CAE9"></SolidColorBrush>
+    <SolidColorBrush x:Key="menuOverBrush" Color="#3D3D3D"></SolidColorBrush>
+    <SolidColorBrush x:Key="menuBackBrush" Color="#2E2E2E"></SolidColorBrush>
+    <SolidColorBrush x:Key="menuLineStep" Color="#3D3D3D"></SolidColorBrush>
     <SolidColorBrush x:Key="borderBrush" Color="LightGray"></SolidColorBrush>
-    <SolidColorBrush x:Key="MainWorkAreaBackgroud" Color="White"></SolidColorBrush>
+    <SolidColorBrush x:Key="MainWorkAreaBackgroud" Color="#3D3D3D"></SolidColorBrush>
     <SolidColorBrush x:Key="MainWindowBorderBrush" Color="#FFA49F9F"></SolidColorBrush>
     <SolidColorBrush x:Key="menuOverBorderBrush" Color="Black"></SolidColorBrush>
-    <SolidColorBrush x:Key="menuBorderBrush" Color="LightGray"></SolidColorBrush>
-    <SolidColorBrush x:Key="menuDisabledForground" Color="LightGray"></SolidColorBrush>
+    <SolidColorBrush x:Key="menuBorderBrush" Color="#424242"></SolidColorBrush>
+    <SolidColorBrush x:Key="menuDisabledForground" Color="#5C5C5C"></SolidColorBrush>
     <SolidColorBrush x:Key="watingBackground" Color="LightGray"></SolidColorBrush>
-    <SolidColorBrush x:Key="mainForeground" Color="Black"></SolidColorBrush>
+    <SolidColorBrush x:Key="mainForeground" Color="White"></SolidColorBrush>
     <!--button-->
     <SolidColorBrush x:Key="CommonButtonBackgroundBrush" Color="White"></SolidColorBrush>
     <SolidColorBrush x:Key="CommonButtonBorderBrush" Color="LightGray"></SolidColorBrush>
     <!--SelecetRadioButtonStyle-->
     <SolidColorBrush x:Key="selecetRadioIsCheckedForeground" Color="#5E70A7" />
     <SolidColorBrush x:Key="selecetRadioIsCheckedBackground" Color="#D9E6F6" />
-    <SolidColorBrush x:Key="selecetRadioForeground" Color="Black" />
+    <SolidColorBrush x:Key="selecetRadioForeground" Color="White" />
     <!--COMBOX-->
     <SolidColorBrush x:Key="InputBackground" Color="#ffffff" />
     <SolidColorBrush x:Key="InputBackgroundHover" Color="#ffffff" />
@@ -37,31 +37,31 @@
     <SolidColorBrush x:Key="commonDisableTextBoxBackground" Color="#4C919191"></SolidColorBrush>
     <!--ResultLightView-->
     <SolidColorBrush x:Key="resultLightViewForeground" Color="#26000000"></SolidColorBrush>
-    <SolidColorBrush x:Key="DataGridForeground" Color="Black"></SolidColorBrush>
+    <SolidColorBrush x:Key="DataGridForeground" Color="White"></SolidColorBrush>
     <!--DataGridStyle-->
     <SolidColorBrush x:Key="datagridLinesBrush" Color="DimGray" />
     <SolidColorBrush x:Key="datagridColumnHeaderBackground" Color="#E9ECF6" />
-    <SolidColorBrush x:Key="datagridColumnHeaderForeground" Color="Black" />
+    <SolidColorBrush x:Key="datagridColumnHeaderForeground" Color="White" />
     <!--主页颜色-->
-    <SolidColorBrush Color="#CCD5F0" x:Key="titleColoBrushes"></SolidColorBrush>
-    <SolidColorBrush Color="#5D6B99" x:Key="mainTablePanelBrushes" ></SolidColorBrush>
+    <SolidColorBrush Color="#1F1F1F" x:Key="titleColoBrushes"></SolidColorBrush>
+    <SolidColorBrush Color="#1F1F1F" x:Key="mainTablePanelBrushes" ></SolidColorBrush>
     <SolidColorBrush x:Key="mainOperateButtonBrushes" Color="#7078A0"></SolidColorBrush>
-    <SolidColorBrush x:Key="menuForeground" Color="Black"></SolidColorBrush>
+    <SolidColorBrush x:Key="menuForeground" Color="White"></SolidColorBrush>
     <!--样式标题颜色-->
-    <SolidColorBrush x:Key="iconRadioButtonBackground" Color="#3B4F81"></SolidColorBrush>
+    <SolidColorBrush x:Key="iconRadioButtonBackground" Color="#2E2E2E"></SolidColorBrush>
     <SolidColorBrush x:Key="iconRadioButtonForeground" Color="White"></SolidColorBrush>
-    <SolidColorBrush x:Key="iconRadioButtonMouseOverBackground" Color="#BBC6F1"></SolidColorBrush>
-    <SolidColorBrush x:Key="iconRadioButtonCheckBackground" Color="#F5CC84"></SolidColorBrush>
-    <SolidColorBrush x:Key="iconRadioButtonCheckForeground" Color="Black"></SolidColorBrush>
+    <SolidColorBrush x:Key="iconRadioButtonMouseOverBackground" Color="#3D3D3D"></SolidColorBrush>
+    <SolidColorBrush x:Key="iconRadioButtonCheckBackground" Color="#3D3D3D"></SolidColorBrush>
+    <SolidColorBrush x:Key="iconRadioButtonCheckForeground" Color="White"></SolidColorBrush>
     <!--新建程序界面-->
-    <SolidColorBrush x:Key="projectNewCreateBackground" Color="White"></SolidColorBrush>
-    <SolidColorBrush x:Key="projectNewCreateForeground" Color="Black"></SolidColorBrush>
-    <SolidColorBrush x:Key="projectNewForeground" Color="Black"></SolidColorBrush>
+    <SolidColorBrush x:Key="projectNewCreateBackground" Color="#3D3D3D"></SolidColorBrush>
+    <SolidColorBrush x:Key="projectNewCreateForeground" Color="White"></SolidColorBrush>
+    <SolidColorBrush x:Key="projectNewForeground" Color="White"></SolidColorBrush>
     <SolidColorBrush x:Key="projectNewCreateIsMouseOver" Color="#E6E7EF"></SolidColorBrush>
     <!--下拉框颜色-->
     <SolidColorBrush x:Key="dropComboxArrowBackground" Color="#CCD5F0"></SolidColorBrush>
     <!--ShowWindow颜色-->
-    <SolidColorBrush x:Key="showWindowsBottonBackground" Color="#F0F0F0"></SolidColorBrush>
+    <SolidColorBrush x:Key="showWindowsBottonBackground" Color="#3D3D3D"></SolidColorBrush>
     <!--SettingControl-->
     <SolidColorBrush x:Key="settingControlBottonBackground" Color="#5D6B99"></SolidColorBrush>
     <!--插件鼠标移上颜色-->

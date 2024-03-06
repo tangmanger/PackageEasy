@@ -51,8 +51,8 @@
                                        Placement="Right" 
                                        x:Name="SubMenuPopup" 
                                        Focusable="false">
-                                <Border x:Name="SubMenuBorder"  BorderBrush="LightGray" BorderThickness="1,0,1,1" >
-                                    <Grid x:Name="SubMenu" Grid.IsSharedSizeScope="True" HorizontalAlignment="Stretch" Background="{StaticResource menuBackBrush}" >
+                                <Border x:Name="SubMenuBorder"  BorderBrush="{DynamicResource menuBorderBrush}" BorderThickness="1,0,1,1" >
+                                    <Grid x:Name="SubMenu" Grid.IsSharedSizeScope="True" HorizontalAlignment="Stretch" Background="{DynamicResource menuBackBrush}" >
                                         <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle"  HorizontalAlignment="Stretch" />
                                     </Grid>
                                 </Border>
@@ -105,7 +105,7 @@
                         </Trigger>
 
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Foreground" Value="LightGray"/>
+                            <Setter Property="Foreground" Value="{DynamicResource menuDisabledForground}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

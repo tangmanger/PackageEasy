@@ -7,8 +7,8 @@
              xmlns:controls="clr-namespace:PackageEasy.Controls.Controls;assembly=PackageEasy.Controls"
              xmlns:lang="clr-namespace:PackageEasy.Common.Data;assembly=PackageEasy.Common"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" >
-    <Grid>
+             d:DesignHeight="450" d:DesignWidth="800"  Background="Transparent">
+    <Grid Background="Transparent">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" MinWidth="100"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
@@ -16,19 +16,28 @@
 
         <Border BorderBrush="LightGray" BorderThickness="0,0,1,0">
             <StackPanel Orientation="Vertical" Margin="0,5,-1,0">
-                <RadioButton Style="{StaticResource SettingTableStyle }" IsChecked="True" x:Name="nsis" Content="NSIS设置" lang:LanguageManager.LangText="设置" Height="30"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></RadioButton>
+                <RadioButton Style="{StaticResource SettingTableStyle }"  Foreground="{DynamicResource mainForeground}"  IsChecked="True" x:Name="nsis" Content="NSIS设置" lang:LanguageManager.LangText="NSIS设置" Height="30"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></RadioButton>
+                <RadioButton Style="{StaticResource SettingTableStyle }"  Foreground="{DynamicResource mainForeground}"  x:Name="theme" Content="显示设置" lang:LanguageManager.LangText="显示设置" Height="30"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center"></RadioButton>
             </StackPanel>
         </Border>
-        <StackPanel Grid.Column="1" Margin="10,10,0,0" Visibility="{Binding IsChecked,ElementName=nsis,Converter={StaticResource BoolToVisibilityConverter}}">
+        <StackPanel  Background="Transparent" Grid.Column="1" Margin="10,10,0,0" Visibility="{Binding IsChecked,ElementName=nsis,Converter={StaticResource BoolToVisibilityConverter}}">
             <StackPanel Orientation="Horizontal"  >
-                <TextBlock Text="编译器路径:" lang:LanguageManager.LangText="编译器路径:" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Text="编译器路径:"  Foreground="{StaticResource mainForeground}"  lang:LanguageManager.LangText="编译器路径:" VerticalAlignment="Center"></TextBlock>
                 <TextBox Style="{StaticResource CommonTextBox}" Text="{Binding MakensisPath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" MinWidth="120" Margin="5,0,0,0"></TextBox>
                 <Button Width="30" Height="25" Style="{StaticResource CommonButtonStyle}" Content="..." Margin="5,0,0,0"></Button>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0" >
-                <TextBlock Text="帮助文档:" lang:LanguageManager.LangText="帮助文档:" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Text="帮助文档:"   Foreground="{StaticResource mainForeground}"  lang:LanguageManager.LangText="帮助文档:" VerticalAlignment="Center"></TextBlock>
                 <TextBox Style="{StaticResource CommonTextBox}" Text="{Binding NSISHelperPath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" MinWidth="120" Margin="5,0,0,0"></TextBox>
                 <Button Width="30" Height="25" Style="{StaticResource CommonButtonStyle}" Content="..." Margin="5,0,0,0"></Button>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Margin="10,10,0,0" d:Visibility="Visible" Visibility="{Binding IsChecked,ElementName=theme,Converter={StaticResource BoolToVisibilityConverter}}">
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="主题："  Foreground="{StaticResource mainForeground}"  lang:LanguageManager.LangText="主题：" VerticalAlignment="Center"></TextBlock>
+                    <ComboBox MinWidth="120" Height="25" VerticalContentAlignment="Center" ItemsSource="{Binding ThemeList}" SelectedItem="{Binding CurrentTheme}" DisplayMemberPath="ThemeDescription" Style="{StaticResource CommonComboBoxStyle}"></ComboBox>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
     </Grid>

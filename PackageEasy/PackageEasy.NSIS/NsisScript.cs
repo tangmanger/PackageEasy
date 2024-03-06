@@ -54,9 +54,13 @@ namespace PackageEasy.NSIS
                     //!define PRODUCT_STARTMENU_REGVAL "NSIS:StartMenuDir"
                     list.Add($"!define PRODUCT_NAME {baseInfo.ApplicationName}");
                     list.Add($"!define PRODUCT_VERSION {baseInfo.ApplicationVersion}");
+
+                    if (!string.IsNullOrWhiteSpace(projectInfoModel.BaseInfo.ProductVersion))
+                        list.Add($"!define PRODUCT_VERSION_A \"{projectInfoModel.BaseInfo.ProductVersion}\"");
                     list.Add($"!define PRODUCT_PUBLISHER $(CompanyName)");
                     list.Add($"!define PRODUCT_WEB_SITE {baseInfo.ApplicationUrl}");
                     list.Add($"!define PRODUCT_UNINST_ROOT_KEY \"HKLM\"");
+
                     bool isMorden = false;
                     if (projectInfoModel.BaseInfo.ComPressAlgo != null && projectInfoModel.BaseInfo.ComPressAlgo.Data != CompressionAlgoType.None && projectInfoModel.BaseInfo.ComPressAlgo.Data != CompressionAlgoType.Zlib)
                     {
@@ -74,11 +78,13 @@ namespace PackageEasy.NSIS
                         list.Add($"!define PRODUCT_STARTMENU_REGVAL \"NSIS:StartMenuDir\"");
                     list.Add("!include \"nsProcess.nsh\"");
                     list.Add("!include \"LogicLib.nsh\"");
+                    list.Add(" !include \"FileFunc.nsh\"");
                     if (isMorden)
                     {
                         list.Add("!include \"MUI.nsh\"");
                         list.Add("!define MUI_ABORTWARNING");
                     }
+                   
 
                     string iconPath = "${NSISDIR}\\Contrib\\Graphics\\Icons\\modern-install.ico";
                     if (!string.IsNullOrWhiteSpace(baseInfo.InstallIconPath))
@@ -235,7 +241,11 @@ namespace PackageEasy.NSIS
 
                     }
                     list.Add(";多语言结束");
-
+                    if (!string.IsNullOrWhiteSpace(projectInfoModel.BaseInfo.ProductVersion))
+                        list.Add(" VIProductVersion \"${PRODUCT_VERSION_A}\" ;");
+                    list.Add($" VIAddVersionKey  \"ProductName\" \"${{PRODUCT_NAME}}\"");
+                    list.Add($" VIAddVersionKey  \"FileVersion\" \"${{PRODUCT_VERSION}}\"");
+                    list.Add($" VIAddVersionKey  \"ProductVersion\" \"${{PRODUCT_VERSION}}\"");
                     list.Add("Name \"${PRODUCT_NAME} ${PRODUCT_VERSION}\"");
                     string outPath = Path.Combine(baseInfo.WorkSpace, "OutPut");
                     if (!Directory.Exists(outPath))
@@ -243,6 +253,10 @@ namespace PackageEasy.NSIS
                         Directory.CreateDirectory(outPath);
                     }
                     var filePath = Path.Combine(outPath, baseInfo.AppOutPath.Replace(".exe", "") + ".exe");
+                    if (projectInfoModel.FinishInfo.IsEnableProcess == true && projectInfoModel.BaseInfo.AppOutPath.Replace(".exe", "").ToLower() == projectInfoModel.FinishInfo.ProcessName.Replace(".exe", "").ToLower())
+                    {
+                        filePath = Path.Combine(outPath, baseInfo.AppOutPath.Replace(".exe", "") + " V" + baseInfo.ApplicationVersion + ".exe");
+                    }
                     OutPutFilePath = filePath;
                     list.Add($"OutFile \"{filePath}\"");
                     var path = baseInfo.UserDirPath;
@@ -265,7 +279,7 @@ namespace PackageEasy.NSIS
 
                 list.Add("Function .onInit");
                 list.Add("  !insertmacro MUI_LANGDLL_DISPLAY");
-             
+
                 //检测进程
                 if (projectInfoModel.FinishInfo != null && projectInfoModel.FinishInfo.IsEnableProcess)
                 {
@@ -333,6 +347,9 @@ namespace PackageEasy.NSIS
                             if (!hasSetIcon)
                             {
                                 hasSetIcon = true;
+                                list.Add(" ${GetSize} \"$INSTDIR\" \"/S=0K\" $0 $1 $2");
+                                list.Add(" IntFmt $0 \"0x%08X\" $0");
+                                list.Add("  WriteRegDWORD ${PRODUCT_UNINST_ROOT_KEY} \"${PRODUCT_UNINST_KEY}\" \"EstimatedSize\" \"$0\"");
                                 if (projectInfoModel.AppIcon != null)
                                 {
                                     string dirName = projectInfoModel?.BaseInfo?.ApplicationName;

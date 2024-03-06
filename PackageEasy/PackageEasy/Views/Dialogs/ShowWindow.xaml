@@ -9,7 +9,7 @@
         xmlns:lang="clr-namespace:PackageEasy.Common.Data;assembly=PackageEasy.Common"
         ShowInTaskbar="False"
        
-        AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize" Background="Transparent" Loaded="Window_Loaded" Height="400" Width="650"
+        AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize" Background="Transparent"  Foreground="{StaticResource mainForeground}" Loaded="Window_Loaded" Height="400" Width="650"
         WindowStartupLocation="CenterOwner" >
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Unload" >
@@ -48,7 +48,7 @@
                     </StackPanel>
                 </Grid>
             </Border>
-            <Border Grid.Row="1" Background="{DynamicResource InputBackground}">
+            <Border Grid.Row="1" Background="{DynamicResource MainWorkAreaBackgroud}">
                 <ContentControl Content="{Binding WorkView}"></ContentControl>
             </Border>
             <Border Grid.Row="2" Background="{DynamicResource showWindowsBottonBackground}">

@@ -83,6 +83,8 @@ namespace PackageEasy
             Log.Init();
             NSISHelper.Init();
             TViewsHelper.Init();
+            ThemeHelper.InitTheme();
+            
         }
     }
 }
