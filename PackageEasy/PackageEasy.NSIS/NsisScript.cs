@@ -637,7 +637,7 @@ namespace PackageEasy.NSIS
             string? str = t as string;
             if (!string.IsNullOrWhiteSpace(str))
             {
-                str = $"/INPUTCHARSET UTF8 {str}";
+                str = $"/INPUTCHARSET UTF8 \"{str}\"";
             }
             return str ?? "";
 
