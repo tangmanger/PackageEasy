@@ -101,6 +101,7 @@ namespace PackageEasy.ViewModels
         private bool isLicenseChecked;
         private string companyName;
         private string productVersion;
+        private bool isShowInUnInstall;
 
         /// <summary>
         /// 应用程序名称
@@ -403,6 +404,18 @@ namespace PackageEasy.ViewModels
                 OnPropertyChanged();
             }
         }
+        /// <summary>
+        /// 显示在控制面板卸载名称中
+        /// </summary>
+        public bool IsShowInUnInstall
+        {
+            get => isShowInUnInstall;
+            set
+            {
+                isShowInUnInstall = value;
+                OnPropertyChanged();
+            }
+        }
 
         #endregion
 
@@ -436,6 +449,7 @@ namespace PackageEasy.ViewModels
             baseInfoModel.IsLicenseChecked = IsLicenseChecked;
             baseInfoModel.CompanyName = CompanyName;
             baseInfoModel.ProductVersion = ProductVersion;
+            baseInfoModel.IsShowInUnInstall= IsShowInUnInstall;
             baseInfoModel.LanguageList = InstallList.FindAll(c => c.IsSelected);
             if (baseInfoModel.LanguageList == null || baseInfoModel.LanguageList.Count == 0)
             {
@@ -501,6 +515,7 @@ namespace PackageEasy.ViewModels
                         }
                     }
                 }
+                IsShowInUnInstall = ProjectInfo.BaseInfo.IsShowInUnInstall;
                 LanguagePath = ProjectInfo.BaseInfo.LanguagePath;
                 IsLicenseChecked = ProjectInfo.BaseInfo.IsLicenseChecked;
                 var str = WorkSpace + LanguagePath;
@@ -552,6 +567,7 @@ namespace PackageEasy.ViewModels
             baseInfoModel.IsLicenseChecked = IsLicenseChecked;
             baseInfoModel.CompanyName = CompanyName;
             baseInfoModel.ProductVersion = ProductVersion;
+            baseInfoModel.IsShowInUnInstall = IsShowInUnInstall;
             var str = WorkSpace + LanguagePath;
             if (!string.IsNullOrWhiteSpace(LanguagePath) && File.Exists(str))
             {

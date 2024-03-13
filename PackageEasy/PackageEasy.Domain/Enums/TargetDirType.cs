@@ -45,6 +45,7 @@ namespace PackageEasy.Domain.Enums
         RESOURCES_LOCALIZED,
         CDBURN_AREA,
         ICONS_GROUP,
-        
+        LOCALAPPDATA
+
     }
 }

@@ -173,5 +173,9 @@ namespace PackageEasy.Domain.Models
         /// 产品版本
         /// </summary>
         public string ProductVersion { get; set; }
+        /// <summary>
+        /// 在控制面板名称中显示版本
+        /// </summary>
+        public bool IsShowInUnInstall { get; set; }
     }
 }

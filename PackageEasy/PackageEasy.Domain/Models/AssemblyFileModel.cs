@@ -141,5 +141,6 @@ namespace PackageEasy.Domain.Models
                 RaisePropertyChanged();
             }
         }
+        public bool IsDirectory { get; set; }
     }
 }

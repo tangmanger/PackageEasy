@@ -21,5 +21,9 @@ namespace PackageEasy.Domain.Models
         /// 作为可选zujian
         /// </summary>
         public bool IsAsSelected { get; set; } = true;
+        /// <summary>
+        /// 注册进程名
+        /// </summary>
+        public string ProcessName { get; set; }
     }
 }

@@ -144,9 +144,59 @@ namespace PackageEasy.ViewModels
                 FileList = s.FileList;
         });
         /// <summary>
-        /// 添加文件夹
+        /// 添加目录
         /// </summary>
         public RelayCommand AddDirCommand => new RelayCommand(() =>
+        {
+            if (string.IsNullOrWhiteSpace(ProjectInfo.BaseInfo.WorkSpace))
+            {
+                Log.Write("工作目录为空!");
+                TMessageBox.ShowMsg("", "工作目录为空!");
+                return;
+            }
+            var currentAssembly = AssemblyList.Find(p => p.IsSelected == true);
+            if (currentAssembly == null)
+            {
+                TMessageBox.ShowMsg("", "请选择组!");
+                return;
+            }
+
+            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+            var result = folderBrowserDialog.ShowDialog();
+            if (result == DialogResult.OK || result == DialogResult.Yes)
+            {
+                if (!Directory.Exists(folderBrowserDialog.SelectedPath))
+                {
+                    return;
+                }
+                var dirs = GetDirs(folderBrowserDialog.SelectedPath);
+                List<AssemblyFileModel> assemblyFileModels = currentAssembly.FileList;
+                DirectoryInfo rootInfo = new DirectoryInfo(folderBrowserDialog.SelectedPath);
+                currentAssembly.SelectDir = rootInfo.Parent?.FullName;
+                foreach (var file in dirs)
+                {
+                    if (currentAssembly.SelectDir == file) { continue; }
+                    AssemblyFileModel assemblyFileModel = new AssemblyFileModel();
+                    assemblyFileModel.AssemblyId = currentAssembly.AssemblyId;
+                    DirectoryInfo fileInfo = new DirectoryInfo(file);
+                    assemblyFileModel.SubPath = fileInfo?.FullName?.Replace(currentAssembly.SelectDir, "") ?? "";
+                    assemblyFileModel.FilePath = assemblyFileModel.SubPath;
+                    assemblyFileModel.IsDirectory = true;
+                    assemblyFileModel.TargetPath = TargetDirList.FirstOrDefault() ?? new DescModel<TargetDirType>() { Data = TargetDirType.INSTDIR };
+                    var current = assemblyFileModels.Find(p => p.FilePath == assemblyFileModel.FilePath);
+                    if (current != null)
+                    {
+                        assemblyFileModels.Remove(current);
+                    }
+                    assemblyFileModels.Add(assemblyFileModel);
+                }
+            }
+            FileList = new List<AssemblyFileModel>(currentAssembly.FileList);
+        });
+        /// <summary>
+        /// 添加文件夹
+        /// </summary>
+        public RelayCommand AddFileByDirCommand => new RelayCommand(() =>
         {
             if (string.IsNullOrWhiteSpace(ProjectInfo.BaseInfo.WorkSpace))
             {
@@ -329,6 +379,26 @@ namespace PackageEasy.ViewModels
             }
             return filesList;
         }
+        /// <summary>
+        /// 获取目录
+        /// </summary>
+        /// <param name="dirPath"></param>
+        /// <returns></returns>
+        public List<string> GetDirs(string dirPath)
+        {
+            List<string> dirs = new List<string>();
+            dirs.Add(dirPath);
+            var childDir = Directory.GetDirectories(dirPath);
+            if (childDir != null)
+            {
+                foreach (var item in childDir)
+                {
+                    var ss = GetDirs(item);
+                    dirs.AddRange(ss);
+                }
+            }
+            return dirs;
+        }
         public override void RefreshData()
         {
             base.RefreshData();
@@ -381,7 +451,7 @@ namespace PackageEasy.ViewModels
                                 TMessageBox.ShowMsg("", str);
                                 return false;
                             }
-                            if (!File.Exists(path))
+                            if (file.IsDirectory == false && !File.Exists(path))
                             {
                                 string str = string.Format("无法在工作空间找到文件{0}!".GetLangText(), file.FilePath);
                                 TMessageBox.ShowMsg("", str);

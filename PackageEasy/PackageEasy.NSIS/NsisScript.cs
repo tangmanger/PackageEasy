@@ -53,7 +53,7 @@ namespace PackageEasy.NSIS
                     //!define PRODUCT_UNINST_ROOT_KEY "HKLM"
                     //!define PRODUCT_STARTMENU_REGVAL "NSIS:StartMenuDir"
                     list.Add($"!define PRODUCT_NAME \"{baseInfo.ApplicationName}\"");
-                    list.Add($"!define PRODUCT_VERSION {baseInfo.ApplicationVersion}");
+                    list.Add($"!define PRODUCT_VERSION \"{baseInfo.ApplicationVersion}\"");
 
                     if (!string.IsNullOrWhiteSpace(projectInfoModel.BaseInfo.ProductVersion))
                         list.Add($"!define PRODUCT_VERSION_A \"{projectInfoModel.BaseInfo.ProductVersion}\"");
@@ -70,9 +70,9 @@ namespace PackageEasy.NSIS
                     {
                         isMorden = true;
                     }
+                    var appNames = projectInfoModel?.FinishInfo?.ApplicationName.Split('\\');
 
-
-                    list.Add($"!define PRODUCT_DIR_REGKEY \"Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\{baseInfo.ApplicationName}.exe\"");
+                    list.Add($"!define PRODUCT_DIR_REGKEY \"Software\\Microsoft\\Windows\\CurrentVersion\\App Paths\\{appNames.LastOrDefault()}\"");
                     list.Add($"!define PRODUCT_UNINST_KEY \"Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\${{PRODUCT_NAME}}\"");
                     if (projectInfoModel.AppIcon.IsCanChangeStartMenuName)
                         list.Add($"!define PRODUCT_STARTMENU_REGVAL \"NSIS:StartMenuDir\"");
@@ -246,7 +246,14 @@ namespace PackageEasy.NSIS
                     list.Add($" VIAddVersionKey  \"ProductName\" \"${{PRODUCT_NAME}}\"");
                     list.Add($" VIAddVersionKey  \"FileVersion\" \"${{PRODUCT_VERSION}}\"");
                     list.Add($" VIAddVersionKey  \"ProductVersion\" \"${{PRODUCT_VERSION}}\"");
-                    list.Add("Name \"${PRODUCT_NAME} ${PRODUCT_VERSION}\"");
+                    if (!projectInfoModel.BaseInfo.IsShowInUnInstall)
+                    {
+                        list.Add("Name \"${PRODUCT_NAME}\"");
+                    }
+                    else
+                    {
+                        list.Add("Name \"${PRODUCT_NAME} ${PRODUCT_VERSION}\"");
+                    }
                     string outPath = Path.Combine(baseInfo.WorkSpace, "OutPut");
                     if (!Directory.Exists(outPath))
                     {
@@ -333,7 +340,10 @@ namespace PackageEasy.NSIS
                                     list.Add($"  SetOutPath \"{dirPath}\"");
                                 }
                                 var path = projectInfoModel?.BaseInfo?.WorkSpace + file.FilePath;
-                                list.Add($"  File \"{path}\"");
+                                if (!file.IsDirectory)
+                                    //    list.Add($"  CreateDirectory  \"{path}\"");
+                                    //else
+                                    list.Add($"  File \"{path}\"");
                                 FileInfo fileInfo = new FileInfo(path);
                                 if (file.IsNeedInstall)
                                 {
@@ -395,15 +405,14 @@ namespace PackageEasy.NSIS
                                                 if (!format.StartsWith('.'))
                                                     strFormat = "." + format;
                                                 var fileName = strFormat.Replace(".", "");
-                                                sections.Add(sec);
 
-                                            
+
                                                 list.Add($" WriteRegStr HKCR \"{strFormat}\" \"\" \"{fileName}File\"");
                                                 list.Add($" WriteRegStr HKCR \"{fileName}File\" \"\" \"{fileName}File data file\"");
-                                                list.Add($" WriteRegStr HKCR \"{fileName}File\\DefaultIcon\" \"\" \"$INSTDIR\\{projectInfoModel?.BaseInfo?.ApplicationName}.exe,0\"");
+                                                list.Add($" WriteRegStr HKCR \"{fileName}File\\DefaultIcon\" \"\" \"$INSTDIR\\{projectInfoModel?.Registry?.ProcessName},0\"");
                                                 list.Add($" WriteRegStr HKCR \"{fileName}File\\shell\" \"\" \"\"");
                                                 list.Add($" WriteRegStr HKCR \"{fileName}File\\shell\\open\" \"\" \"\"");
-                                                list.Add($" WriteRegStr HKCR \"{fileName}File\\shell\\open\\command\" \"\" '\"$INSTDIR\\{projectInfoModel?.BaseInfo?.ApplicationName}.exe\" -o \"%1\"'");
+                                                list.Add($" WriteRegStr HKCR \"{fileName}File\\shell\\open\\command\" \"\" '\"$INSTDIR\\{projectInfoModel?.Registry?.ProcessName}\" -o \"%1\"'");
                                                 list.Add("!include \"FileFunc.nsh\"");
                                                 list.Add("${RefreshShellIcons}");
                                             }
@@ -437,10 +446,10 @@ namespace PackageEasy.NSIS
                                 list.Add(strSection);
                                 list.Add($" WriteRegStr HKCR \"{str}\" \"\" \"{fileName}File\"");
                                 list.Add($" WriteRegStr HKCR \"{fileName}File\" \"\" \"{fileName}File data file\"");
-                                list.Add($" WriteRegStr HKCR \"{fileName}File\\DefaultIcon\" \"\" \"$INSTDIR\\{projectInfoModel?.BaseInfo?.ApplicationName}.exe,0\"");
+                                list.Add($" WriteRegStr HKCR \"{fileName}File\\DefaultIcon\" \"\" \"$INSTDIR\\{projectInfoModel?.Registry?.ProcessName},0\"");
                                 list.Add($" WriteRegStr HKCR \"{fileName}File\\shell\" \"\" \"\"");
                                 list.Add($" WriteRegStr HKCR \"{fileName}File\\shell\\open\" \"\" \"\"");
-                                list.Add($" WriteRegStr HKCR \"{fileName}File\\shell\\open\\command\" \"\" '\"$INSTDIR\\{projectInfoModel?.BaseInfo?.ApplicationName}.exe\" -o \"%1\"'");
+                                list.Add($" WriteRegStr HKCR \"{fileName}File\\shell\\open\\command\" \"\" '\"$INSTDIR\\{projectInfoModel?.Registry?.ProcessName}\" -o \"%1\"'");
                                 list.Add("!include \"FileFunc.nsh\"");
                                 list.Add("${RefreshShellIcons}");
                                 list.Add("SectionEnd");
@@ -472,10 +481,10 @@ namespace PackageEasy.NSIS
                 list.Add("SectionEnd");
                 list.Add("Section -Post");
                 list.Add($"  WriteUninstaller \"$INSTDIR\\uninst.exe\"");
-                list.Add($"  WriteRegStr HKLM \"${{PRODUCT_DIR_REGKEY}}\" \"\" \"$INSTDIR\\{projectInfoModel?.BaseInfo?.ApplicationName}.exe\"");
+                list.Add($"  WriteRegStr HKLM \"${{PRODUCT_DIR_REGKEY}}\" \"\" \"{projectInfoModel?.FinishInfo?.ApplicationName}\"");
                 list.Add("  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} \"${PRODUCT_UNINST_KEY}\" \"DisplayName\" \"$(^Name)\"");
                 list.Add("  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} \"${PRODUCT_UNINST_KEY}\" \"UninstallString\" \"$INSTDIR\\uninst.exe\"");
-                list.Add($"  WriteRegStr ${{PRODUCT_UNINST_ROOT_KEY}} \"${{PRODUCT_UNINST_KEY}}\" \"DisplayIcon\" \"$INSTDIR\\{projectInfoModel?.BaseInfo?.ApplicationName}.exe\"");
+                list.Add($"  WriteRegStr ${{PRODUCT_UNINST_ROOT_KEY}} \"${{PRODUCT_UNINST_KEY}}\" \"DisplayIcon\" \"{projectInfoModel?.FinishInfo?.ApplicationName}\"");
                 list.Add("  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} \"${PRODUCT_UNINST_KEY}\" \"DisplayVersion\" \"${PRODUCT_VERSION}\"");
                 list.Add("  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} \"${PRODUCT_UNINST_KEY}\" \"URLInfoAbout\" \"${PRODUCT_WEB_SITE}\"");
                 list.Add("  WriteRegStr ${PRODUCT_UNINST_ROOT_KEY} \"${PRODUCT_UNINST_KEY}\" \"Publisher\" \"${PRODUCT_PUBLISHER}\"");
@@ -592,12 +601,15 @@ namespace PackageEasy.NSIS
                                 var fileName = str.Replace(".", "");
                                 list.Add($" DeleteRegKey HKCR \"{str}\" \"\" \"{fileName}File\"");
                                 list.Add($" DeleteRegKey HKCR \"{fileName}File\" \"\" \"{fileName}File data file\"");
-                                list.Add($" DeleteRegKey HKCR \"{fileName}File\\DefaultIcon\" \"\" \"$INSTDIR\\{projectInfoModel?.BaseInfo?.ApplicationName}.exe,0\"");
+                                list.Add($" DeleteRegKey HKCR \"{fileName}File\\DefaultIcon\" \"\" \"$INSTDIR\\{projectInfoModel?.Registry?.ProcessName},0\"");
                                 list.Add($" DeleteRegKey HKCR \"{fileName}File\\shell\" \"\" \"\"");
                                 list.Add($" DeleteRegKey HKCR \"{fileName}File\\shell\\open\" \"\" \"\"");
-                                list.Add($" DeleteRegKey HKCR \"{fileName}File\\shell\\open\\command\" \"\" '\"$INSTDIR\\{projectInfoModel?.BaseInfo?.ApplicationName}.exe\" -o \"%1\"'");
-                                list.Add("!include \"FileFunc.nsh\"");
-                                list.Add("${RefreshShellIcons}");
+                                list.Add($" DeleteRegKey HKCR \"{fileName}File\\shell\\open\\command\" \"\" '\"$INSTDIR\\{projectInfoModel?.Registry?.ProcessName}\" -o \"%1\"'");
+                                if (projectInfoModel.Registry?.IsAsSelected == true)
+                                {
+                                    list.Add("!include \"FileFunc.nsh\"");
+                                    list.Add("${RefreshShellIcons}");
+                                }
                             }
                         }
                     }
@@ -605,6 +617,11 @@ namespace PackageEasy.NSIS
 
                 if (hasSetIcon)
                 {
+                    if (projectInfoModel != null && projectInfoModel.Registry != null && projectInfoModel.Registry?.IsAsSelected == false)
+                    {
+                        list.Add("!include \"FileFunc.nsh\"");
+                        list.Add("${RefreshShellIcons}");
+                    }
                     if (projectInfoModel != null && projectInfoModel.AppIcon != null)
                     {
                         if (projectInfoModel.AppIcon.AppIconInfoList != null)
@@ -634,7 +651,9 @@ namespace PackageEasy.NSIS
                 delDirs = delDirs.OrderByDescending(x => x.Length).ToList();
                 foreach (var item in delDirs)
                 {
-                    list.Add($" RMDir /r  \"{item}\"");
+                    string dir = $" RMDir /r  \"{item}\"";
+                    if (list.Exists(f => f == dir)) continue;
+                    list.Add(dir);
                 }
                 list.Add($" Delete \"$INSTDIR\\${{PRODUCT_NAME}}.url\"");//
                 list.Add($" Delete \"$INSTDIR\\uninst.exe\"");

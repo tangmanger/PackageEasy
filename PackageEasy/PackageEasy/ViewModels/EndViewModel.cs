@@ -258,9 +258,9 @@ namespace PackageEasy.ViewModels
 
         public override bool ValidateData()
         {
-            if (IsAutoRun && string.IsNullOrWhiteSpace(ApplicationName))
+            if ( string.IsNullOrWhiteSpace(ApplicationName))
             {
-                TMessageBox.ShowMsg("要运行的程序不能为空!");
+                TMessageBox.ShowMsg("结束页面：程序不能为空!");
                 return false;
             }
             if (IsEnableProcess)

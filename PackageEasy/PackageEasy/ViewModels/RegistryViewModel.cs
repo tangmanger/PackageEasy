@@ -1,4 +1,5 @@
-﻿using PackageEasy.Common.Helpers;
+﻿using PackageEasy.Common;
+using PackageEasy.Common.Helpers;
 using PackageEasy.Domain;
 using PackageEasy.Domain.Enums;
 using PackageEasy.Domain.Models;
@@ -26,6 +27,7 @@ namespace PackageEasy.ViewModels
 
         private string registryFormat;
         private bool isAsSelected = true;
+        private string processName;
 
         /// <summary>
         /// 文件格式
@@ -53,6 +55,19 @@ namespace PackageEasy.ViewModels
             }
         }
 
+        /// <summary>
+        /// 进程名
+        /// </summary>
+        public string ProcessName
+        {
+            get => processName;
+            set
+            {
+                processName = value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         #region 方法
@@ -62,6 +77,7 @@ namespace PackageEasy.ViewModels
             RegistryModel registryModel = new RegistryModel();
             registryModel.RegistryFormat = RegistryFormat;
             registryModel.IsAsSelected = IsAsSelected;
+            registryModel.ProcessName = ProcessName;
             var registryPath = Path.Combine(SavePath, "Registry.json");
             if (ProjectInfo == null)
                 ProjectInfo = new ProjectInfoModel();
@@ -75,7 +91,17 @@ namespace PackageEasy.ViewModels
             {
                 RegistryFormat = ProjectInfo.Registry.RegistryFormat;
                 IsAsSelected = ProjectInfo.Registry.IsAsSelected;
+                ProcessName = ProjectInfo.Registry.ProcessName;
             }
+        }
+        public override bool ValidateData()
+        {
+            if (!string.IsNullOrWhiteSpace(RegistryFormat) && string.IsNullOrWhiteSpace(ProcessName))
+            {
+                TMessageBox.ShowMsg("请填写关联的程序名称!");
+                return false;
+            }
+            return base.ValidateData();
         }
 
         #endregion
