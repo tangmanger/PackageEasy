@@ -25,6 +25,8 @@ namespace PackageEasy.ViewModels
         #region 属性
 
         private string registryFormat;
+        private bool isAsSelected = true;
+
         /// <summary>
         /// 文件格式
         /// </summary>
@@ -38,6 +40,19 @@ namespace PackageEasy.ViewModels
             }
         }
 
+        /// <summary>
+        /// 注册文件格式是否可以作为独立可选组件
+        /// </summary>
+        public bool IsAsSelected
+        {
+            get => isAsSelected;
+            set
+            {
+                isAsSelected = value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         #region 方法
@@ -46,6 +61,7 @@ namespace PackageEasy.ViewModels
         {
             RegistryModel registryModel = new RegistryModel();
             registryModel.RegistryFormat = RegistryFormat;
+            registryModel.IsAsSelected = IsAsSelected;
             var registryPath = Path.Combine(SavePath, "Registry.json");
             if (ProjectInfo == null)
                 ProjectInfo = new ProjectInfoModel();
@@ -58,6 +74,7 @@ namespace PackageEasy.ViewModels
             if (ProjectInfo != null && ProjectInfo.Registry != null)
             {
                 RegistryFormat = ProjectInfo.Registry.RegistryFormat;
+                IsAsSelected = ProjectInfo.Registry.IsAsSelected;
             }
         }
 

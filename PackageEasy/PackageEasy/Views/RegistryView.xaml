@@ -32,5 +32,6 @@
         </Grid.RowDefinitions>
         <TextBlock Text="注册文件格式:"  Margin="0,10,0,0" Grid.Row="0" lang:LanguageManager.LangText="注册文件格式:" VerticalAlignment="Center" HorizontalAlignment="Right" ></TextBlock>
         <controls:PlaceholderTextBox Grid.Column="1" PlaceHolderText="示例: .pge,.pgex" Text="{Binding RegistryFormat,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Grid.Row="0" Width="220" Height="30" Style="{StaticResource  PlaceholderTextBoxStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,10,0,0"></controls:PlaceholderTextBox>
+        <CheckBox Grid.Column="2" Content="可选组件" IsChecked="{Binding IsAsSelected}" Margin="5,10,0,0"  lang:LanguageManager.LangText="可选组件" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center"></CheckBox>
     </Grid>
 </UserControl>

@@ -17,5 +17,9 @@ namespace PackageEasy.Domain.Models
         /// 注册文件格式
         /// </summary>
         public string RegistryFormat { get; set; }
+        /// <summary>
+        /// 作为可选zujian
+        /// </summary>
+        public bool IsAsSelected { get; set; } = true;
     }
 }

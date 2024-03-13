@@ -52,7 +52,7 @@ namespace PackageEasy.NSIS
                     //!define PRODUCT_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
                     //!define PRODUCT_UNINST_ROOT_KEY "HKLM"
                     //!define PRODUCT_STARTMENU_REGVAL "NSIS:StartMenuDir"
-                    list.Add($"!define PRODUCT_NAME {baseInfo.ApplicationName}");
+                    list.Add($"!define PRODUCT_NAME \"{baseInfo.ApplicationName}\"");
                     list.Add($"!define PRODUCT_VERSION {baseInfo.ApplicationVersion}");
 
                     if (!string.IsNullOrWhiteSpace(projectInfoModel.BaseInfo.ProductVersion))
@@ -84,7 +84,7 @@ namespace PackageEasy.NSIS
                         list.Add("!include \"MUI.nsh\"");
                         list.Add("!define MUI_ABORTWARNING");
                     }
-                   
+
 
                     string iconPath = "${NSISDIR}\\Contrib\\Graphics\\Icons\\modern-install.ico";
                     if (!string.IsNullOrWhiteSpace(baseInfo.InstallIconPath))
@@ -380,6 +380,36 @@ namespace PackageEasy.NSIS
                                         list.Add($"  !insertmacro MUI_STARTMENU_WRITE_END");
                                     }
                                 }
+
+                                if (projectInfoModel?.Registry != null)
+                                {
+                                    if (!string.IsNullOrWhiteSpace(projectInfoModel.Registry?.RegistryFormat) && projectInfoModel.Registry?.IsAsSelected == false)
+                                    {
+                                        var allFormats = projectInfoModel.Registry?.RegistryFormat.Split(',').ToList();
+                                        if (allFormats != null && allFormats.Count > 0)
+                                        {
+                                            foreach (var format in allFormats)
+                                            {
+                                                index++;
+                                                var strFormat = format;
+                                                if (!format.StartsWith('.'))
+                                                    strFormat = "." + format;
+                                                var fileName = strFormat.Replace(".", "");
+                                                sections.Add(sec);
+
+                                            
+                                                list.Add($" WriteRegStr HKCR \"{strFormat}\" \"\" \"{fileName}File\"");
+                                                list.Add($" WriteRegStr HKCR \"{fileName}File\" \"\" \"{fileName}File data file\"");
+                                                list.Add($" WriteRegStr HKCR \"{fileName}File\\DefaultIcon\" \"\" \"$INSTDIR\\{projectInfoModel?.BaseInfo?.ApplicationName}.exe,0\"");
+                                                list.Add($" WriteRegStr HKCR \"{fileName}File\\shell\" \"\" \"\"");
+                                                list.Add($" WriteRegStr HKCR \"{fileName}File\\shell\\open\" \"\" \"\"");
+                                                list.Add($" WriteRegStr HKCR \"{fileName}File\\shell\\open\\command\" \"\" '\"$INSTDIR\\{projectInfoModel?.BaseInfo?.ApplicationName}.exe\" -o \"%1\"'");
+                                                list.Add("!include \"FileFunc.nsh\"");
+                                                list.Add("${RefreshShellIcons}");
+                                            }
+                                        }
+                                    }
+                                }
                             }
                             list.Add("SectionEnd");
                             index++;
@@ -388,7 +418,7 @@ namespace PackageEasy.NSIS
                 }
                 if (projectInfoModel?.Registry != null)
                 {
-                    if (!string.IsNullOrWhiteSpace(projectInfoModel.Registry?.RegistryFormat))
+                    if (!string.IsNullOrWhiteSpace(projectInfoModel.Registry?.RegistryFormat) && projectInfoModel.Registry?.IsAsSelected == true)
                     {
                         var allFormats = projectInfoModel.Registry?.RegistryFormat.Split(',').ToList();
                         if (allFormats != null && allFormats.Count > 0)
