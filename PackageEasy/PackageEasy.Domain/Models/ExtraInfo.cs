@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PackageEasy.Domain.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,7 @@ namespace PackageEasy.Domain.Models
         /// <summary>
         /// 文件路径
         /// </summary>
+        [SaveIgnore]
         public string FilePath { get; set; }
         /// <summary>
         /// 创建时间

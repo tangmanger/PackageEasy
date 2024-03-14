@@ -469,6 +469,10 @@ namespace PackageEasy.NSIS
                 {
                     list.Add($"  CreateDirectory \"$SMPROGRAMS\\{startMenuName ?? "a"}\"");
                 }
+                if(!string.IsNullOrEmpty(startMenuName))
+                {
+                    delDirs.Add(startMenuName);
+                }
                 list.Add("   WriteIniStr \"$INSTDIR\\${PRODUCT_NAME}.url\" \"InternetShortcut\" \"URL\" \"${PRODUCT_WEB_SITE}\"");
                 if (projectInfoModel?.AppIcon?.IsCreateWebUrl == true)
                     list.Add($"  CreateShortCut \"$SMPROGRAMS\\{startMenuName}\\Website.lnk\" \"$INSTDIR\\${{PRODUCT_NAME}}.url\"");

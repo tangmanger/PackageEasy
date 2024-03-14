@@ -75,7 +75,7 @@ namespace PackageEasy.Helpers
             else
             {
                 projectViewModel.ProjectInfo.ExtraInfo = File.ReadAllText(extraInfo).DeserializeObject<ExtraInfo>();
-
+                projectViewModel.ProjectInfo.ExtraInfo.FilePath = filePath;
 
             }
             var baseInfo = Path.Combine(path, "BaseInfo.json");
