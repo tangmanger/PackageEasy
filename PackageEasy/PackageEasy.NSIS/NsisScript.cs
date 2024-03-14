@@ -294,7 +294,28 @@ namespace PackageEasy.NSIS
                     list.Add("  Pop $R0");
                     list.Add("  IntCmp $R0 0 running no_running no_running");
                     list.Add("  running:");
-                    list.Add("  MessageBox MB_ICONQUESTION|MB_YESNO \"$(InstallProcessTips)\" IDYES dokill IDNO stopit");
+                    if (projectInfoModel.BaseInfo.LanguageList != null && projectInfoModel.BaseInfo.LanguageList.Count > 0)
+                    {
+                        bool isFirst = true;
+                        foreach (var lang in projectInfoModel.BaseInfo.LanguageList)
+                        {
+                            if (isFirst)
+                            {
+                                list.Add("  ${If} $LANGUAGE == " + lang.LanguageDisplayKey);
+
+                            }
+                            else
+                            {
+                                list.Add("  ${ElseIf} $LANGUAGE ==" + lang.LanguageDisplayKey);
+                            }
+                            list.Add($"  MessageBox MB_ICONQUESTION|MB_YESNO \"{GetLanguage(projectInfoModel.FinishInfo.InstallProcessTips, lang.LanguageType)}\" IDYES dokill IDNO stopit");
+                        }
+                        list.Add("  ${EndIf}");
+                    }
+                    else
+                    {
+                        list.Add("  MessageBox MB_ICONQUESTION|MB_YESNO \"$(InstallProcessTips)\" IDYES dokill IDNO stopit");
+                    }
                     list.Add("  no_running:");
                     list.Add("  GoTo endding");
                     list.Add("  dokill:");
@@ -413,9 +434,10 @@ namespace PackageEasy.NSIS
                                                 list.Add($" WriteRegStr HKCR \"{fileName}File\\shell\" \"\" \"\"");
                                                 list.Add($" WriteRegStr HKCR \"{fileName}File\\shell\\open\" \"\" \"\"");
                                                 list.Add($" WriteRegStr HKCR \"{fileName}File\\shell\\open\\command\" \"\" '\"$INSTDIR\\{projectInfoModel?.Registry?.ProcessName}\" -o \"%1\"'");
-                                                list.Add("!include \"FileFunc.nsh\"");
-                                                list.Add("${RefreshShellIcons}");
+
                                             }
+                                            list.Add("!include \"FileFunc.nsh\"");
+                                            list.Add("${RefreshShellIcons}");
                                         }
                                     }
                                 }
@@ -469,7 +491,7 @@ namespace PackageEasy.NSIS
                 {
                     list.Add($"  CreateDirectory \"$SMPROGRAMS\\{startMenuName ?? "a"}\"");
                 }
-                if(!string.IsNullOrEmpty(startMenuName))
+                if (!string.IsNullOrEmpty(startMenuName))
                 {
                     delDirs.Add(startMenuName);
                 }
@@ -541,7 +563,30 @@ namespace PackageEasy.NSIS
                 {
                     if (!string.IsNullOrWhiteSpace(projectInfoModel.FinishInfo.UninstallTip))
                     {
-                        list.Add($" MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 \"$(UninstallTip)\" IDYES +2");
+
+                        if (projectInfoModel.BaseInfo.LanguageList != null && projectInfoModel.BaseInfo.LanguageList.Count > 0)
+                        {
+                            bool isFirst = true;
+                            foreach (var lang in projectInfoModel.BaseInfo.LanguageList)
+                            {
+                                if (isFirst)
+                                {
+                                    list.Add("  ${If} $LANGUAGE == " + lang.LanguageDisplayKey);
+
+                                }
+                                else
+                                {
+                                    list.Add("  ${ElseIf} $LANGUAGE ==" + lang.LanguageDisplayKey);
+                                }
+                                list.Add($" MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 \"{GetLanguage(projectInfoModel.FinishInfo.UninstallTip, lang.LanguageType)}\" IDYES +2");
+                                //list.Add($"  MessageBox MB_ICONQUESTION|MB_YESNO \"{GetLanguage(projectInfoModel.FinishInfo.UninstallProcessTips, lang.LanguageType)}\" IDYES dokill IDNO stopit");
+                            }
+                            list.Add("  ${EndIf}");
+                        }
+                        else
+                        {
+                            list.Add($" MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 \"$(UninstallTip)\" IDYES +2");
+                        }
                         list.Add("  Abort");
                     }
                 }
@@ -551,7 +596,30 @@ namespace PackageEasy.NSIS
                     list.Add("  Pop $R0");
                     list.Add("  IntCmp $R0 0 running no_running no_running");
                     list.Add("  running:");
-                    list.Add("  MessageBox MB_ICONQUESTION|MB_YESNO \"$(UninstallProcessTips)\" IDYES dokill IDNO stopit");
+
+                    if (projectInfoModel.BaseInfo.LanguageList != null && projectInfoModel.BaseInfo.LanguageList.Count > 0)
+                    {
+                        bool isFirst = true;
+                        foreach (var lang in projectInfoModel.BaseInfo.LanguageList)
+                        {
+                            if (isFirst)
+                            {
+                                list.Add("  ${If} $LANGUAGE == " + lang.LanguageDisplayKey);
+
+                            }
+                            else
+                            {
+                                list.Add("  ${ElseIf} $LANGUAGE ==" + lang.LanguageDisplayKey);
+                            }
+                            list.Add($"  MessageBox MB_ICONQUESTION|MB_YESNO \"{GetLanguage(projectInfoModel.FinishInfo.UninstallProcessTips, lang.LanguageType)}\" IDYES dokill IDNO stopit");
+                        }
+                        list.Add("  ${EndIf}");
+                    }
+                    else
+                    {
+                        list.Add("  MessageBox MB_ICONQUESTION|MB_YESNO \"$(UninstallProcessTips)\" IDYES dokill IDNO stopit");
+                    }
+                    //list.Add("  MessageBox MB_ICONQUESTION|MB_YESNO \"$(UninstallProcessTips)\" IDYES dokill IDNO stopit");
                     list.Add("  no_running:");
                     list.Add("  GoTo endding");
                     list.Add("  dokill:");
