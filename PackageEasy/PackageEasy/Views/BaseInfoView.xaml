@@ -33,43 +33,43 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <TextBlock Text="应用程序名称:" lang:LanguageManager.LangText="应用程序名称:" VerticalAlignment="Center"  HorizontalAlignment="Right"></TextBlock>
-        <TextBox  Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource CommonTextBox}" Text="{Binding ApplicationName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="220" Height="25" VerticalContentAlignment="Center" Margin="5,10,0,10"></TextBox>
+        <TextBox  Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource CommonTextBox}" Text="{Binding ApplicationName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="220" Height="30" VerticalContentAlignment="Center" Margin="5,10,0,10"></TextBox>
 
         <TextBlock Grid.Row="1" Text="应用程序版本:" lang:LanguageManager.LangText="应用程序版本:" VerticalAlignment="Center"  HorizontalAlignment="Right"></TextBlock>
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
-            <TextBox   Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource CommonTextBox}" Text="{Binding ApplicationVersion,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Width="150" Height="25" VerticalContentAlignment="Center" Margin="5,10,0,10"></TextBox>
+            <TextBox   Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource CommonTextBox}" Text="{Binding ApplicationVersion,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Width="150" Height="30" VerticalContentAlignment="Center" Margin="5,10,0,10"></TextBox>
             <CheckBox Content="卸载时显示" lang:LanguageManager.LangText="卸载时显示" IsChecked="{Binding IsShowInUnInstall}" HorizontalContentAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0"></CheckBox>
         </StackPanel>
         <TextBlock Grid.Row="2" Text="文件版本:" lang:LanguageManager.LangText="文件版本:" VerticalAlignment="Center"  HorizontalAlignment="Right"></TextBlock>
         <!--<TextBox   Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource CommonTextBox}" Text="{Binding ApplicationVersion,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Width="150" Height="25" VerticalContentAlignment="Center" Margin="5,10,0,10"></TextBox>-->
-        <controls:PlaceholderTextBox Grid.Column="1" TipsTop="5"  Grid.Row="2" PlaceHolderText="例如:1.0.0.1"  HorizontalAlignment="Left"  Width="150" Height="25" Style="{StaticResource PlaceholderTextBoxStyle}"  Margin="5,10,0,10" TextWrapping="Wrap" Text="{Binding ProductVersion,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Center" ></controls:PlaceholderTextBox>
+        <controls:PlaceholderTextBox Grid.Column="1" TipsTop="5"  Grid.Row="2" PlaceHolderText="例如:1.0.0.1"  HorizontalAlignment="Left"  Width="150" Height="30" Style="{StaticResource PlaceholderTextBoxStyle}"  Margin="5,10,0,10" TextWrapping="Wrap" Text="{Binding ProductVersion,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Center" ></controls:PlaceholderTextBox>
 
         <TextBlock  Grid.Row="3" Text="公司名称:" lang:LanguageManager.LangText="公司名称:" VerticalAlignment="Center"  HorizontalAlignment="Right"></TextBlock>
-        <TextBox    Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource CommonTextBox}" Text="{Binding CompanyName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Width="150" Height="25" VerticalContentAlignment="Center" Margin="5,10,0,10"></TextBox>
+        <TextBox    Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource CommonTextBox}" Text="{Binding CompanyName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Width="150" Height="30" VerticalContentAlignment="Center" Margin="5,10,0,10"></TextBox>
 
         <TextBlock Grid.Row="4" Text="应用程序网站:" lang:LanguageManager.LangText="应用程序网站:" VerticalAlignment="Center"  HorizontalAlignment="Right"></TextBlock>
-        <TextBox   Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource CommonTextBox}" Width="220"  Text="{Binding ApplicationUrl,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Height="25" VerticalContentAlignment="Center" Margin="5,10,0,10"></TextBox>
+        <TextBox   Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource CommonTextBox}" Width="220"  Text="{Binding ApplicationUrl,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Height="30" VerticalContentAlignment="Center" Margin="5,10,0,10"></TextBox>
 
         <TextBlock Grid.Row="5" Text="应用程序图标:" lang:LanguageManager.LangText="应用程序图标:" VerticalAlignment="Center"  HorizontalAlignment="Right"></TextBlock>
         <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="1">
-            <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Text="{Binding AppIconPath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource CommonTextBox}" Width="150" Height="25" VerticalContentAlignment="Center" Margin="5,10,0,10"></TextBox>
-            <Button Width="50" Height="25" Content="..." Style="{StaticResource CommonButtonStyle}" Command="{Binding SelectIconCommand}" CommandParameter="1" Margin="5,0,0,0"></Button>
+            <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Text="{Binding AppIconPath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource CommonTextBox}" Width="150" Height="30" VerticalContentAlignment="Center" Margin="5,10,0,10"></TextBox>
+            <Button Width="50" Height="30" Content="..." Style="{StaticResource CommonButtonStyle}" Command="{Binding SelectIconCommand}" CommandParameter="1" Margin="5,0,0,0"></Button>
         </StackPanel>
 
         <TextBlock Grid.Row="6" Text="输出文件名称:" lang:LanguageManager.LangText="输出文件名称:" VerticalAlignment="Center"  HorizontalAlignment="Right"></TextBlock>
         <StackPanel Orientation="Horizontal" Grid.Row="6" Grid.Column="1">
-            <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Text="{Binding AppOutPath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource CommonTextBox}" Width="150" Height="25" VerticalContentAlignment="Center" Margin="5,10,0,10"></TextBox>
+            <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Text="{Binding AppOutPath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource CommonTextBox}" Width="150" Height="30" VerticalContentAlignment="Center" Margin="5,10,0,10"></TextBox>
             <!--<Button Width="50" Height="25" Content="..." Style="{StaticResource CommonButtonStyle}" Command="{Binding SelectOutPutCommand}" Margin="5,0,0,0"></Button>-->
         </StackPanel>
 
         <TextBlock Grid.Row="7" Text="用户图形界面:" lang:LanguageManager.LangText="用户图形界面:" VerticalAlignment="Center"  HorizontalAlignment="Right"></TextBlock>
-        <ComboBox Grid.Row="7" Grid.Column="1" ItemsSource="{Binding UserFaceList}" SelectedItem="{Binding UserFaceSelectItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="DisplayName" HorizontalAlignment="Left" MinWidth="220" Style="{StaticResource  CommonComboBoxStyle}" Height="25" VerticalContentAlignment="Center" Margin="5,10,0,10"></ComboBox>
+        <ComboBox Grid.Row="7" Grid.Column="1" ItemsSource="{Binding UserFaceList}" SelectedItem="{Binding UserFaceSelectItem,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="DisplayName" HorizontalAlignment="Left" MinWidth="220" Style="{StaticResource  CommonComboBoxStyle}" Height="30" VerticalContentAlignment="Center" Margin="5,10,0,10"></ComboBox>
 
         <TextBlock Grid.Row="8" Text="压缩算法:" lang:LanguageManager.LangText="压缩算法:" VerticalAlignment="Center"  HorizontalAlignment="Right"></TextBlock>
-        <ComboBox Grid.Row="8" Grid.Column="1"  HorizontalAlignment="Left" ItemsSource="{Binding CompressAlgoList}" SelectedItem="{Binding ComPressAlgo,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  DisplayMemberPath="DisplayName" Width="220" Style="{StaticResource  CommonComboBoxStyle}" Height="25" VerticalContentAlignment="Center" Margin="5,10,0,10"></ComboBox>
+        <ComboBox Grid.Row="8" Grid.Column="1"  HorizontalAlignment="Left" ItemsSource="{Binding CompressAlgoList}" SelectedItem="{Binding ComPressAlgo,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  DisplayMemberPath="DisplayName" Width="220" Style="{StaticResource  CommonComboBoxStyle}" Height="30" VerticalContentAlignment="Center" Margin="5,10,0,10"></ComboBox>
         <TextBlock Grid.Row="9" Text="应用程序出版人:" lang:LanguageManager.LangText="应用程序出版人:" VerticalAlignment="Center"  HorizontalAlignment="Right"></TextBlock>
         <StackPanel Orientation="Horizontal" Grid.Row="9" Grid.Column="1">
-            <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Text="{Binding ApplicationPublisher,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource CommonTextBox}" Width="150" Height="25" VerticalContentAlignment="Center" Margin="5,10,0,10"></TextBox>
+            <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Text="{Binding ApplicationPublisher,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource CommonTextBox}" Width="150" Height="30" VerticalContentAlignment="Center" Margin="5,10,0,10"></TextBox>
             <!--<Button Width="50" Height="25" Content="..." Style="{StaticResource CommonButtonStyle}" Command="{Binding SelectOutPutCommand}" Margin="5,0,0,0"></Button>-->
         </StackPanel>
 
@@ -88,26 +88,26 @@
         </ItemsControl>
         <TextBlock Grid.Row="10" Text="语言文件设置:" lang:LanguageManager.LangText="语言文件设置:" VerticalAlignment="Center"  HorizontalAlignment="Right"></TextBlock>
         <StackPanel Orientation="Horizontal" Grid.Row="10" Grid.Column="1">
-            <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Text="{Binding LanguagePath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource CommonTextBox}" Width="150" Height="25" VerticalContentAlignment="Center" Margin="5,10,0,10"></TextBox>
-            <Button Width="50" Height="25" Content="..." Style="{StaticResource CommonButtonStyle}" Command="{Binding SelectLanguageCommand}" CommandParameter="1" Margin="5,0,0,0"></Button>
+            <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Text="{Binding LanguagePath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource CommonTextBox}" Width="150" Height="30" VerticalContentAlignment="Center" Margin="5,10,0,10"></TextBox>
+            <Button Width="50" Height="30" Content="..." Style="{StaticResource CommonButtonStyle}" Command="{Binding SelectLanguageCommand}" CommandParameter="1" Margin="5,0,0,0"></Button>
         </StackPanel>
         <!--<ComboBox Grid.Row="8" Grid.Column="1"  HorizontalAlignment="Left" ItemsSource="{Binding CompressAlgoList}" SelectedItem="{Binding ComPressAlgo,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  DisplayMemberPath="DisplayName" Width="220" Style="{StaticResource  CommonComboBoxStyle}" Height="25" VerticalContentAlignment="Center" Margin="5,10,0,10"></ComboBox>-->
 
         <TextBlock Grid.Row="0" Grid.Column="2" Text="安装包图标:" lang:LanguageManager.LangText="安装包图标:" VerticalAlignment="Center"  HorizontalAlignment="Right"></TextBlock>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="3">
-            <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Text="{Binding InstallIconPath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource CommonTextBox}" Width="150" Height="25" VerticalContentAlignment="Center" Margin="5,10,0,10"></TextBox>
-            <Button Width="50" Height="25" Content="..." Style="{StaticResource CommonButtonStyle}" Command="{Binding SelectIconCommand}"  CommandParameter="2"  Margin="5,0,0,0"></Button>
+            <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Text="{Binding InstallIconPath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource CommonTextBox}" Width="150" Height="30" VerticalContentAlignment="Center" Margin="5,10,0,10"></TextBox>
+            <Button Width="50" Height="30" Content="..." Style="{StaticResource CommonButtonStyle}" Command="{Binding SelectIconCommand}"  CommandParameter="2"  Margin="5,0,0,0"></Button>
         </StackPanel>
         <TextBlock Grid.Row="1" Grid.Column="2" Text="卸载图标:" lang:LanguageManager.LangText="卸载图标:" VerticalAlignment="Center"  HorizontalAlignment="Right"></TextBlock>
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="3">
-            <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Text="{Binding UnInstallIconPath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource CommonTextBox}" Width="150" Height="25" VerticalContentAlignment="Center" Margin="5,10,0,10"></TextBox>
-            <Button Width="50" Height="25" Content="..." Style="{StaticResource CommonButtonStyle}" Command="{Binding SelectIconCommand}"  CommandParameter="3"  Margin="5,0,0,0"></Button>
+            <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Text="{Binding UnInstallIconPath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource CommonTextBox}" Width="150" Height="30" VerticalContentAlignment="Center" Margin="5,10,0,10"></TextBox>
+            <Button Width="50" Height="30" Content="..." Style="{StaticResource CommonButtonStyle}" Command="{Binding SelectIconCommand}"  CommandParameter="3"  Margin="5,0,0,0"></Button>
         </StackPanel>
 
         <TextBlock Grid.Row="2" Text="应用程序默认目录:" Grid.Column="2" lang:LanguageManager.LangText="应用程序默认目录:" VerticalAlignment="Center"  HorizontalAlignment="Right"></TextBlock>
         <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="3" >
             <StackPanel Orientation="Horizontal">
-                <ComboBox IsEditable="False" HorizontalAlignment="Left" MinWidth="150" Style="{StaticResource  CommonComboBoxStyle}" Height="25" VerticalContentAlignment="Center" SelectedItem="{Binding SystemDir}" ItemsSource="{Binding SystemDirList}" Margin="5,10,0,10"></ComboBox>
+                <ComboBox IsEditable="False" HorizontalAlignment="Left" MinWidth="150" Style="{StaticResource  CommonComboBoxStyle}" Height="30" VerticalContentAlignment="Center" SelectedItem="{Binding SystemDir}" ItemsSource="{Binding SystemDirList}" Margin="5,10,0,10"></ComboBox>
                 <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Text="{Binding UserDirPath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource CommonTextBox}" Width="100" Visibility="Collapsed"  VerticalContentAlignment="Center" Margin="5,10,0,10"></TextBox>
             </StackPanel>
             <CheckBox Content="允许更改目录" Margin="5,0,0,0" IsChecked="{Binding CanUserChangeDir,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" lang:LanguageManager.LangText="允许更改目录" VerticalContentAlignment="Center"></CheckBox>
@@ -115,8 +115,8 @@
 
         <TextBlock Grid.Row="3" Text="授权文件:" Grid.Column="2" lang:LanguageManager.LangText="授权文件:" VerticalAlignment="Center"  HorizontalAlignment="Right"></TextBlock>
         <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="3">
-            <TextBox Grid.Row="1" IsEnabled="{Binding Path=IsChecked,ElementName=licenseChecked}" Grid.Column="1" HorizontalAlignment="Left" Text="{Binding LicenseFilePath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource CommonTextBox}" Width="150" Height="25" VerticalContentAlignment="Center" Margin="5,10,0,10"></TextBox>
-            <Button Width="50"  IsEnabled="{Binding Path=IsChecked,ElementName=licenseChecked}"  Height="25" Content="..." Style="{StaticResource CommonButtonStyle}" Command="{Binding SelectedLicenseCommand}" Margin="5,0,0,0"></Button>
+            <TextBox Grid.Row="1" IsEnabled="{Binding Path=IsChecked,ElementName=licenseChecked}" Grid.Column="1" HorizontalAlignment="Left" Text="{Binding LicenseFilePath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource CommonTextBox}" Width="150" Height="30" VerticalContentAlignment="Center" Margin="5,10,0,10"></TextBox>
+            <Button Width="50"  IsEnabled="{Binding Path=IsChecked,ElementName=licenseChecked}"  Height="30" Content="..." Style="{StaticResource CommonButtonStyle}" Command="{Binding SelectedLicenseCommand}" Margin="5,0,0,0"></Button>
             <CheckBox Content="启用授权" lang:LanguageManager.LangText="启用授权" IsChecked="{Binding IsLicenseChecked,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" Margin="5,0,0,0" x:Name="licenseChecked"></CheckBox>
         </StackPanel>
 
@@ -129,8 +129,8 @@
 
         <TextBlock Grid.Row="5" Text="工作目录:"  Grid.Column="2" lang:LanguageManager.LangText="工作目录:" VerticalAlignment="Center"  HorizontalAlignment="Right"></TextBlock>
         <StackPanel Orientation="Horizontal"  Grid.Row="5" Grid.RowSpan="3" Grid.Column="3">
-            <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Text="{Binding WorkSpace,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Top" VerticalAlignment="Top" Style="{StaticResource CommonTextBox}" Width="150" MinHeight="25" TextWrapping="WrapWithOverflow"  Margin="5,10,0,10"></TextBox>
-            <Button Width="50" Height="25" Content="..." VerticalAlignment="Top" Command="{Binding SelectWorkSpaceCommand}" Style="{StaticResource CommonButtonStyle}" Margin="5,10,0,0"></Button>
+            <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Text="{Binding WorkSpace,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Top" VerticalAlignment="Top" Style="{StaticResource CommonTextBox}" Width="150" MinHeight="30" TextWrapping="WrapWithOverflow"  Margin="5,10,0,10"></TextBox>
+            <Button Width="50" Height="30" Content="..." VerticalAlignment="Top" Command="{Binding SelectWorkSpaceCommand}" Style="{StaticResource CommonButtonStyle}" Margin="5,10,0,0"></Button>
         </StackPanel>
 
 

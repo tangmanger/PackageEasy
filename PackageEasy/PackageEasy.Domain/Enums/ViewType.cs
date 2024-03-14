@@ -37,6 +37,10 @@ namespace PackageEasy.Domain.Enums
         /// <summary>
         /// 注册表界面
         /// </summary>
-        RegistryView = 6
+        RegistryView = 6,
+        /// <summary>
+        /// 多语言处理界面
+        /// </summary>
+        LanguageView = 7
     }
 }

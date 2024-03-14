@@ -123,6 +123,12 @@ namespace PackageEasy.ViewModels
             registryView.DataContext = registryViewModel;
             registryViewModel.ProjectInfo = ProjectInfo;
             ViewCaches.Add(ViewType.RegistryView, new ViewCaheModel() { BaseProjectViewModel = registryViewModel, ProjectView = registryView });
+
+            LanguageView languageView = new LanguageView();
+            LanguageViewModel languageViewModel = new LanguageViewModel(ViewType.LanguageView, Key);
+            languageView.DataContext = languageViewModel;
+            languageViewModel.ProjectInfo = ProjectInfo;
+            ViewCaches.Add(ViewType.LanguageView, new ViewCaheModel() { BaseProjectViewModel = languageViewModel, ProjectView = languageView });
         }
         public override void RefreshData()
         {
