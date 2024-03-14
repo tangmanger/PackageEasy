@@ -301,6 +301,7 @@ namespace PackageEasy.NSIS
                         {
                             if (isFirst)
                             {
+                                isFirst = false;
                                 list.Add("  ${If} $LANGUAGE == " + lang.LanguageDisplayKey);
 
                             }
@@ -571,6 +572,7 @@ namespace PackageEasy.NSIS
                             {
                                 if (isFirst)
                                 {
+                                    isFirst = false;
                                     list.Add("  ${If} $LANGUAGE == " + lang.LanguageDisplayKey);
 
                                 }
@@ -604,6 +606,7 @@ namespace PackageEasy.NSIS
                         {
                             if (isFirst)
                             {
+                                isFirst = false;
                                 list.Add("  ${If} $LANGUAGE == " + lang.LanguageDisplayKey);
 
                             }
