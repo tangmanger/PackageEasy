@@ -307,7 +307,7 @@ namespace PackageEasy.NSIS
                             }
                             else
                             {
-                                list.Add("  ${ElseIf} $LANGUAGE ==" + lang.LanguageDisplayKey);
+                                list.Add("  ${ElseIf} $LANGUAGE == " + lang.LanguageDisplayKey);
                             }
                             list.Add($"  MessageBox MB_ICONQUESTION|MB_YESNO \"{GetLanguage(projectInfoModel.FinishInfo.InstallProcessTips, lang.LanguageType)}\" IDYES dokill IDNO stopit");
                         }
@@ -578,7 +578,7 @@ namespace PackageEasy.NSIS
                                 }
                                 else
                                 {
-                                    list.Add("  ${ElseIf} $LANGUAGE ==" + lang.LanguageDisplayKey);
+                                    list.Add("  ${ElseIf} $LANGUAGE == " + lang.LanguageDisplayKey);
                                 }
                                 list.Add($" MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 \"{GetLanguage(projectInfoModel.FinishInfo.UninstallTip, lang.LanguageType)}\" IDYES +2");
                                 //list.Add($"  MessageBox MB_ICONQUESTION|MB_YESNO \"{GetLanguage(projectInfoModel.FinishInfo.UninstallProcessTips, lang.LanguageType)}\" IDYES dokill IDNO stopit");
@@ -589,7 +589,7 @@ namespace PackageEasy.NSIS
                         {
                             list.Add($" MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 \"$(UninstallTip)\" IDYES +2");
                         }
-                        list.Add("  Abort");
+                        list.Add("  closesd:");
                     }
                 }
                 if (projectInfoModel.FinishInfo != null && projectInfoModel.FinishInfo.IsEnableProcess)
@@ -612,7 +612,7 @@ namespace PackageEasy.NSIS
                             }
                             else
                             {
-                                list.Add("  ${ElseIf} $LANGUAGE ==" + lang.LanguageDisplayKey);
+                                list.Add("  ${ElseIf} $LANGUAGE == " + lang.LanguageDisplayKey);
                             }
                             list.Add($"  MessageBox MB_ICONQUESTION|MB_YESNO \"{GetLanguage(projectInfoModel.FinishInfo.UninstallProcessTips, lang.LanguageType)}\" IDYES dokill IDNO stopit");
                         }
