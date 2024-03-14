@@ -580,14 +580,14 @@ namespace PackageEasy.NSIS
                                 {
                                     list.Add("  ${ElseIf} $LANGUAGE == " + lang.LanguageDisplayKey);
                                 }
-                                list.Add($" MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 \"{GetLanguage(projectInfoModel.FinishInfo.UninstallTip, lang.LanguageType)}\" IDYES +2");
+                                list.Add($" MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 \"{GetLanguage(projectInfoModel.FinishInfo.UninstallTip, lang.LanguageType)}\" IDYES closesd IDNO stopit");
                                 //list.Add($"  MessageBox MB_ICONQUESTION|MB_YESNO \"{GetLanguage(projectInfoModel.FinishInfo.UninstallProcessTips, lang.LanguageType)}\" IDYES dokill IDNO stopit");
                             }
                             list.Add("  ${EndIf}");
                         }
                         else
                         {
-                            list.Add($" MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 \"$(UninstallTip)\" IDYES +2");
+                            list.Add($" MessageBox MB_ICONQUESTION|MB_YESNO|MB_DEFBUTTON2 \"$(UninstallTip)\" IDYES closesd IDNO stopit");
                         }
                         list.Add("  closesd:");
                     }
