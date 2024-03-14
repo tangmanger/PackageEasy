@@ -113,6 +113,16 @@ namespace PackageEasy.Helpers
             {
                 projectViewModel.ProjectInfo.AppIcon = File.ReadAllText(iconPath).DeserializeObject<AppIconModel>();
             }
+
+            var multiFilePath = Path.Combine(path, "MultiFiles.json");
+            if (!File.Exists(multiFilePath))
+            {
+                Log.Write($"文件{multiFilePath}不存在!");
+            }
+            else
+            {
+                projectViewModel.ProjectInfo.MultiFiles = File.ReadAllText(multiFilePath).DeserializeObject<List<MultiFileModel>>();
+            }
             var registryPath = Path.Combine(path, "Registry.json");
             if (!File.Exists(registryPath))
             {

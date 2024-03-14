@@ -40,8 +40,14 @@ namespace PackageEasy.Domain
         /// </summary>
         public RegistryModel Registry { get; set; }
         /// <summary>
+        /// 多文件信息
+        /// </summary>
+        public List<MultiFileModel> MultiFiles { get; set; }
+        /// <summary>
         /// 结束页
         /// </summary>
         public FinishModel FinishInfo { get; set; }
+
+   
     }
 }

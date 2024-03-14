@@ -355,6 +355,26 @@ namespace PackageEasy.NSIS
                                 string dirPath = file.TargetPath.DisplayName;
                                 if (!string.IsNullOrWhiteSpace(file.SubPath))
                                     dirPath += file.SubPath;
+
+                                if (projectInfoModel != null && projectInfoModel.MultiFiles != null)
+                                {
+                                    var multiFile = projectInfoModel.MultiFiles.Find(c => c.AssemblyFile.FilePath == file.FilePath && c.AssemblyFile.AssemblyId == file.AssemblyId);
+                                    if (multiFile != null)
+                                    {
+                                        dirPath = multiFile.TargetPath.DisplayName;
+                                        dirPath += multiFile.TargetDir.FilePath;
+                                        delDirs.Add(dirPath);
+                                        currentDirectory = dirPath;
+                                        list.Add($"  SetOutPath \"{dirPath}\"");
+
+                                        list.Add("  ${If} $LANGUAGE == " + multiFile.Lang.LanguageDisplayKey);
+                                        var filePath = projectInfoModel?.BaseInfo?.WorkSpace + multiFile.AssemblyFile.FilePath;
+                                        list.Add($"  File \"{filePath}\"");
+                                        list.Add("  ${EndIf}");
+                                        continue;
+                                    }
+                                }
+
                                 if (currentDirectory != dirPath)
                                 {
                                     delDirs.Add(dirPath);

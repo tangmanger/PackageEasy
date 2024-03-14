@@ -5,17 +5,39 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PackageEasy.Views"
              xmlns:lang="clr-namespace:PackageEasy.Common.Data;assembly=PackageEasy.Common"
+             xmlns:other="clr-namespace:PackageEasy.Views.OtherViews"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-
-    <Grid>
+    <UserControl.Resources>
+        <ControlTemplate x:Key="menu" TargetType="RadioButton">
+            <Border Background="Transparent" BorderThickness="1,0,0,0" BorderBrush="Transparent" x:Name="border">
+                <TextBlock x:Name="text" Text="{TemplateBinding Content}" Margin="5,0,5,0" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"></TextBlock>
+            </Border>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Foreground" TargetName="text" Value="{DynamicResource settingControlBottonBackground}"></Setter>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource settingControlBottonBackground}"></Setter>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </UserControl.Resources>
+    <Grid Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="0"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal">
-            <RadioButton Content="语言编辑"></RadioButton>
-            <RadioButton Content="语言编辑"></RadioButton>
-        </StackPanel>
+        <Border BorderThickness="0,0,0,0.5">
+            <StackPanel Orientation="Horizontal">
+                <RadioButton Content="语言编辑" x:Name="langModify"  lang:LanguageManager.LangText="语言编辑" FontSize="16" MinWidth="80" Template="{StaticResource menu}" HorizontalContentAlignment="Center"></RadioButton>
+                <RadioButton Content="文件设置" IsChecked="True" lang:LanguageManager.LangText="文件设置" FontSize="16" MinWidth="80"  Template="{StaticResource menu}"  Margin="5,0,0,0"></RadioButton>
+            </StackPanel>
+        </Border>
+        <!--暂时先这么写后期抽成独立界面-->
+        <Grid Grid.Row="1" Visibility="{Binding Path=IsChecked,ElementName=langModify,Converter={StaticResource BoolToVisibilityConverter}}">
+            <!--<other:LanguageEditView ></other:LanguageEditView>-->
+        </Grid>
+        <Grid Grid.Row="1">
+            <other:LanguageFileView></other:LanguageFileView>
+        </Grid>
     </Grid>
 </UserControl>

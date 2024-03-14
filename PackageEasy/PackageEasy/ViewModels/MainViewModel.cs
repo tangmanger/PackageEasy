@@ -206,6 +206,11 @@ namespace PackageEasy.ViewModels
                             {
                                 table.ProjectName = projectViewModel.ProjectName;
                             }
+                            else
+                            {
+                                TMessageBox.ShowMsg("保存失败!");
+                                return;
+                            }
                             if (!projectViewModel.ValidateData())
                             {
                                 return;

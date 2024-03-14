@@ -1,0 +1,92 @@
+﻿<UserControl x:Class="PackageEasy.Views.OtherViews.LanguageFileView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PackageEasy.Views.OtherViews"
+             xmlns:lang="clr-namespace:PackageEasy.Common.Data;assembly=PackageEasy.Common"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <DataGrid Grid.Column="1" ItemsSource="{Binding MultiFileList}" Margin="5,0,5,0" Style="{StaticResource DataGridStyle}" MinRowHeight="40" ColumnHeaderHeight="40" AutoGenerateColumns="False" CanUserAddRows="False">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Width="100">
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="选择"  lang:LanguageManager.LangText="选择" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></CheckBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Width="*">
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="语言"  lang:LanguageManager.LangText="语言" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ComboBox SelectedItem="{Binding Lang,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" DisplayMemberPath="LanguageName" ItemsSource="{Binding DataContext.InstallLangList,RelativeSource={RelativeSource AncestorType=DataGrid}}" Style="{StaticResource CommonComboBoxStyle}"></ComboBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Width="*">
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="目标文件"  lang:LanguageManager.LangText="目标文件" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ComboBox Style="{StaticResource CommonComboBoxStyle}" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" SelectedItem="{Binding AssemblyFile,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="FilePath" ItemsSource="{Binding DataContext.FileList,RelativeSource={RelativeSource AncestorType=DataGrid}}"></ComboBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn   MinWidth="100">
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="目标根目录" Foreground="{DynamicResource DataGridForeground}" lang:LanguageManager.LangText="目标根目录" FontSize="14"></TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ComboBox Style="{StaticResource CommonComboBoxStyle}" 
+                      DisplayMemberPath="DisplayName"
+                      VerticalContentAlignment="Center"
+                      SelectedItem="{Binding TargetPath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                      ItemsSource="{Binding DataContext.TargetDirList,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"></ComboBox>
+                                <!--<TextBox Style="{StaticResource CommonTextBox}"  IsReadOnly="True" Text="{Binding TargetPath}"  Margin="5,0,5,0"></TextBox>-->
+                                <!--<TextBlock Text="{Binding PlateName}" Foreground="{DynamicResource DataGridForeground}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>-->
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Width="*">
+                        <DataGridTemplateColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="目标目录"  lang:LanguageManager.LangText="目标目录" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.HeaderTemplate>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ComboBox Style="{StaticResource CommonComboBoxStyle}" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" SelectedItem="{Binding TargetDir,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="FilePath" ItemsSource="{Binding DataContext.DirList,RelativeSource={RelativeSource AncestorType=DataGrid}}"></ComboBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <WrapPanel Grid.Row="1" Margin="5,5,5,10">
+                <Button Content="添加" Style="{StaticResource CommonButtonStyle}" Command="{Binding AddCommand}" MinWidth="80" Height="30"></Button>
+                <Button Content="删除" Style="{StaticResource CommonButtonStyle}" Command="{Binding DelCommand}" Margin="5,0,0,0" MinWidth="80" Height="30"></Button>
+            </WrapPanel>
+        </Grid>
+    </Grid>
+</UserControl>
