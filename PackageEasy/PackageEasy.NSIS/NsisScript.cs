@@ -350,7 +350,8 @@ namespace PackageEasy.NSIS
                             sections.Add(sec);
                             if (!string.IsNullOrWhiteSpace(item.AssemblyDescription))
                                 sectionDic.Add(sec, item.AssemblyDescription);
-                            foreach (var file in item.FileList)
+                            var files = item.FileList.OrderBy(p => p.IsNeedInstall).OrderBy(p => p.IsNeedQuietInstall).ToList();
+                            foreach (var file in files)
                             {
                                 string dirPath = file.TargetPath.DisplayName;
                                 if (!string.IsNullOrWhiteSpace(file.SubPath))
@@ -389,11 +390,11 @@ namespace PackageEasy.NSIS
                                 FileInfo fileInfo = new FileInfo(path);
                                 if (file.IsNeedInstall)
                                 {
-                                    list.Add($"  ExecWait '\"$INSTDIR\\{fileInfo.Name}\"'");
+                                    list.Add($"  ExecWait '\"{dirPath}\\{fileInfo.Name}\"'");
                                 }
                                 if (file.IsNeedQuietInstall)
                                 {
-                                    list.Add($"  ExecWait '\"$INSTDIR\\{fileInfo.Name}\" /q'");
+                                    list.Add($"  ExecWait '\"{dirPath}\\{fileInfo.Name}\" /q' $R1");
                                 }
                             }
                             if (!hasSetIcon)
