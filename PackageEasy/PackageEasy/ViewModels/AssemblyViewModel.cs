@@ -192,6 +192,8 @@ namespace PackageEasy.ViewModels
                     assemblyFileModels.Add(assemblyFileModel);
                 }
             }
+            if (currentAssembly.FileList == null)
+                currentAssembly.FileList = new List<AssemblyFileModel>();
             FileList = new List<AssemblyFileModel>(currentAssembly.FileList);
         });
         /// <summary>
@@ -259,7 +261,8 @@ namespace PackageEasy.ViewModels
                 }
 
 
-
+                if (currentAssembly.FileList == null)
+                    currentAssembly.FileList = new List<AssemblyFileModel>();
                 FileList = new List<AssemblyFileModel>(currentAssembly.FileList);
             }
         });
@@ -313,6 +316,8 @@ namespace PackageEasy.ViewModels
                 assemblyFileModel.SubPath = fileInfo?.DirectoryName?.Replace(fileInfo.Directory.FullName, "") ?? "";
                 assemblyFileModel.TargetPath = TargetDirList.FirstOrDefault() ?? new DescModel<TargetDirType>() { Data = TargetDirType.INSTDIR };
                 currentAssembly.FileList.Add(assemblyFileModel);
+                if (currentAssembly.FileList == null)
+                    currentAssembly.FileList = new List<AssemblyFileModel>();
                 FileList = new List<AssemblyFileModel>(currentAssembly.FileList);
 
             }
