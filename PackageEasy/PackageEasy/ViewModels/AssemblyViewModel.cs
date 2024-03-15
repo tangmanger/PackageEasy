@@ -186,6 +186,7 @@ namespace PackageEasy.ViewModels
                     var current = assemblyFileModels.Find(p => p.FilePath == assemblyFileModel.FilePath);
                     if (current != null)
                     {
+                        continue;
                         assemblyFileModels.Remove(current);
                     }
                     assemblyFileModels.Add(assemblyFileModel);
@@ -251,6 +252,7 @@ namespace PackageEasy.ViewModels
                     var current = assemblyFileModels.Find(p => p.FilePath == assemblyFileModel.FilePath);
                     if (current != null)
                     {
+                        continue;
                         assemblyFileModels.Remove(current);
                     }
                     assemblyFileModels.Add(assemblyFileModel);
