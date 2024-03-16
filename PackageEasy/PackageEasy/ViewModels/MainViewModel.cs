@@ -179,6 +179,127 @@ namespace PackageEasy.ViewModels
             }
         });
         /// <summary>
+        /// 导入脚本
+        /// </summary>
+        public RelayCommand ImportScriptCommand => new RelayCommand(() =>
+        {
+
+            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog();
+            openFileDialog.DefaultExt = ".pgescript"; // Default file extension
+            openFileDialog.Filter = "pgescript documents|*.pgescript"; // Filter files by extension
+            var result = openFileDialog.ShowDialog();
+            ///用户点了关闭按钮,未选择路径
+            if (result != true)
+            {
+                return;
+            }
+            var dirPath = openFileDialog.FileName;
+            if (File.Exists(dirPath))
+            {
+                ScriptControl scriptControl = new ScriptControl(dirPath);
+                ShowWindow showWindow = new ShowWindow(scriptControl);
+                showWindow.ShowDialog();
+            }
+
+        });
+        /// <summary>
+        /// 导出脚本
+        /// </summary>
+        public RelayCommand ExportScriptCommand => new RelayCommand(async () =>
+        {
+            var table = TableList.Find(p => p.IsActive);
+            if (table != null)
+            {
+                if (CacheDataHelper.ProjectCahes.ContainsKey(table.ProjectKey))
+                {
+                    var messageResult = TMessageBox.ShowMsg("是否转换成相对路径?", MessageLevel.YesNoCancel);
+                    if (messageResult == TMessageBoxResult.Close) return;
+                    var service = ServiceHelper.GetService(table.ProjectKey);
+                    if (service != null)
+                    {
+                        service.OnPreCompile();
+                    }
+                    var viewCaheModel = CacheDataHelper.ProjectCahes[table.ProjectKey];
+                    if (viewCaheModel != null)
+                    {
+                        string dirPath = "";
+                        ProjectViewModel? projectViewModel = viewCaheModel.BaseProjectViewModel as ProjectViewModel;
+                        if (projectViewModel != null)
+                        {
+                            Microsoft.Win32.SaveFileDialog openFileDialog = new Microsoft.Win32.SaveFileDialog();
+                            openFileDialog.FileName = $"{projectViewModel.ProjectName.Replace("*", "")}.pgescript"; // Default file name
+                            openFileDialog.DefaultExt = ".pgescript"; // Default file extension
+                            openFileDialog.Filter = "script documents|*.pgescript"; // Filter files by extension
+                            ///用户点了关闭按钮,未选择路径
+                            if (openFileDialog.ShowDialog() == false)
+                            {
+                                return;
+                            }
+                            dirPath = openFileDialog.FileName;
+                            var result = FileHelper.Save(projectViewModel);
+                            if (result)
+                            {
+                                table.ProjectName = projectViewModel.ProjectName;
+                            }
+                            else
+                            {
+                                TMessageBox.ShowMsg("保存失败!");
+                                return;
+                            }
+                            if (!projectViewModel.ValidateData())
+                            {
+                                return;
+                            }
+                        }
+                        List<string> errorMsg = new List<string>();
+                        Wating wating = new Wating();
+                        wating.Show();
+                        NSISScript nSISScript = new NSISScript();
+                        try
+                        {
+                            List<string> list = new List<string>();
+                            await Task.Run(() =>
+                             {
+                                 list = nSISScript.Build(viewCaheModel.BaseProjectViewModel.ProjectInfo);
+                                 if (messageResult == TMessageBoxResult.OK)
+                                 {
+                                     var workSpace = viewCaheModel.BaseProjectViewModel.ProjectInfo.BaseInfo.WorkSpace + "\\";
+                                     List<string> lists = new List<string>();
+                                     foreach (var item in list)
+                                     {
+                                         lists.Add(item.Replace(workSpace, string.Empty));
+                                     }
+                                     list = lists;
+                                 }
+                             });
+                            wating.Close();
+                            if (list != null && list.Count > 0)
+                            {
+                                File.WriteAllLines(dirPath, list, Encoding.Default);
+                                if (File.Exists(dirPath))
+                                {
+
+                                    TMessageBox.MainShowMsg("", "导出脚本成功!", MessageLevel.Information);
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            wating.Close();
+
+                            TMessageBox.MainShowMsg("", "导出脚本失败!", MessageLevel.Information);
+                            Log.Write("导出脚本失败!", ex);
+                        }
+                        finally
+                        {
+
+                        }
+                    }
+                }
+            }
+
+        });
+        /// <summary>
         /// 编译
         /// </summary>
         public RelayCommand CompileCommand => new RelayCommand(() =>

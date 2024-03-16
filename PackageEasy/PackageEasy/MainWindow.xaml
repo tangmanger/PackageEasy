@@ -24,6 +24,8 @@
         <KeyBinding Modifiers="Control" Key="S" Command="{Binding SaveCommand}" />
         <KeyBinding Modifiers="Control" Key="O" Command="{Binding OpenFileCommand}" />
         <KeyBinding Modifiers="Control" Key="W" Command="{Binding CloseTableCommand}"/>
+        <KeyBinding Modifiers="Control" Key="E" Command="{Binding ExportScriptCommand}"/>
+        <KeyBinding Modifiers="Control" Key="I" Command="{Binding ImportScriptCommand}"/>
     </Window.InputBindings>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -52,6 +54,9 @@
                                 <MenuItem Header="保存" IsEnabled="{Binding IsMenuCanEdit}"   lang:LanguageManager.LangText="保存" InputGestureText="Ctrl+S" Command="{Binding SaveCommand}"></MenuItem>
                                 <!--<MenuItem Header="另存为.." IsEnabled="{Binding IsMenuCanEdit,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"   lang:LanguageManager.LangText="另存为.."  Command="{Binding SaveAsCommand}" Width="auto" InputGestureText="    ">
                                 </MenuItem>-->
+                                <Separator Style="{StaticResource sep}"/>
+                                <MenuItem Header="导出脚本"  IsEnabled="{Binding IsMenuCanEdit}"    lang:LanguageManager.LangText="导出脚本" Command="{Binding ExportScriptCommand}" InputGestureText="Ctrl+E"></MenuItem>
+                                <MenuItem Header="打开脚本"      lang:LanguageManager.LangText="打开脚本" Command="{Binding ImportScriptCommand}" InputGestureText="Ctrl+I"></MenuItem>
                                 <Separator Style="{StaticResource sep}"/>
                                 <MenuItem Header="退出"  lang:LanguageManager.LangText="退出" Command="{Binding ExitCommand}" Width="auto" InputGestureText="    "/>
                             </MenuItem>
