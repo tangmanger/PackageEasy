@@ -73,7 +73,12 @@ namespace PackageEasy.ViewModels
         {
             Key = Guid.NewGuid().ToString();
             ProjectInfo = new ProjectInfoModel();
-            ProjectInfo.ExtraInfo = new Domain.Models.ExtraInfo() { CreateTime = DateTime.Now };
+            ProjectInfo.ExtraInfo = new Domain.Models.ExtraInfo()
+            {
+                CreateTime = DateTime.Now,
+                InternalVersion = CacheDataHelper.InternalVersion,
+                Version = CacheDataHelper.Version
+            };
             if (!CacheDataHelper.ProjectDic.ContainsKey(Key))
             {
                 CacheDataHelper.ProjectDic.Add(Key, ProjectInfo);
@@ -163,6 +168,6 @@ namespace PackageEasy.ViewModels
             var filePath = ProjectInfo.BaseInfo.WorkSpace + path;
             return File.Exists(filePath);
         }
-      
+
     }
 }

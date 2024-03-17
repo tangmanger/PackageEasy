@@ -50,11 +50,11 @@ namespace PackageEasy.Helpers
         /// </summary>
         public static List<string> PluginList = new List<string>();
 
-        public static int Version
+        public static string Version
         {
             get
             {
-                return 1;
+                return "1.0.3";
             }
         }
 
@@ -62,7 +62,7 @@ namespace PackageEasy.Helpers
         {
             get
             {
-                return "2024年1月29日 11:38:13";
+                return "2024年3月18日 00:33:15";
             }
         }
         /// <summary>
