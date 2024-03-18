@@ -19,6 +19,7 @@
 * 修复静默安装脚本，以及安装不正确
 * 新增导出脚本，打开脚本
 * 新增内部版本记录到文件，可以溯源
+* [使用介绍方法](https://mp.weixin.qq.com/s?__biz=MzA5ODY4MDkzOA==&mid=2447903959&idx=1&sn=7ecb538442d049d320706601ece30371&chksm=849145d2b3e6ccc4d256d83a95f6b350858affd0e5cb29c26a8066588b4d1f66c0fc91d1d7a9&token=886432174&lang=zh_CN#rd)
 ### V1.2
 * 日志格式设置成utf8
 * 新增编译进度动画
