@@ -36,10 +36,15 @@
     <None Remove="Resources\Images\NewProject.png" />
     <None Remove="Resources\Images\tools.png" />
     <None Remove="Resources\Images\Triangle.png" />
+    <None Remove="Resources\Images\wx.jpg" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Resources\icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\wx.jpg" />
   </ItemGroup>
 
   <ItemGroup>
