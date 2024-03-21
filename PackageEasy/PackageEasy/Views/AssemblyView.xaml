@@ -8,7 +8,7 @@
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:lang="clr-namespace:PackageEasy.Common.Data;assembly=PackageEasy.Common"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="850">
+             d:DesignHeight="450" d:DesignWidth="850" >
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -20,8 +20,10 @@
             <RowDefinition Height="100"></RowDefinition>
         </Grid.RowDefinitions>
         <!--<Border Grid.Column="1" BorderBrush="{DynamicResource borderBrush}" BorderThickness="0.5,0,0,0"></Border>-->
-
-        <DataGrid Style="{StaticResource DataGridStyle}"   BorderBrush="{DynamicResource borderBrush}" ItemsSource="{Binding AssemblyList}" Margin="0,10,0,0" CanUserAddRows="False"  AutoGenerateColumns="False" ColumnHeaderHeight="35" RowHeight="35">
+        <Popup AllowsTransparency="True" x:Name="pop"  PopupAnimation="Slide" Placement="AbsolutePoint">
+            <Border Width="200" Height="200"></Border>
+        </Popup>
+        <DataGrid Style="{StaticResource DataGridStyle}" RowDetailsVisibilityMode="VisibleWhenSelected" x:Name="datagrid" BorderBrush="{DynamicResource borderBrush}" ItemsSource="{Binding AssemblyList}" Margin="0,10,0,0" CanUserAddRows="False"  AutoGenerateColumns="False" ColumnHeaderHeight="35" RowHeight="35">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <i:InvokeCommandAction Command="{Binding AssemblySelectedCommand}" ></i:InvokeCommandAction>
@@ -51,7 +53,9 @@
                     </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBox Style="{StaticResource CommonTextBox}" FocusVisualStyle="{x:Null}" BorderBrush="Transparent" Background="Transparent" Text="{Binding AssemblyName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="2"></TextBox>
+                            <TextBox Style="{StaticResource CommonTextBox}" FocusVisualStyle="{x:Null}" BorderBrush="Transparent" Background="Transparent" Text="{Binding AssemblyName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="2">
+
+                            </TextBox>
                             <!--<TextBlock Text="{Binding PlateName}" Foreground="{DynamicResource DataGridForeground}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>-->
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -64,12 +68,14 @@
                     </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBox Style="{StaticResource CommonTextBox}"   FocusVisualStyle="{x:Null}" BorderBrush="Transparent" Background="Transparent" Text="{Binding AssemblyDescription,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="2"></TextBox>
+                            <TextBox   Style="{StaticResource CommonTextBox}"   FocusVisualStyle="{x:Null}" BorderBrush="Transparent" Background="Transparent" Text="{Binding AssemblyDescription,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="2">
+
+                            </TextBox>
                             <!--<TextBlock Text="{Binding PlateName}" Foreground="{DynamicResource DataGridForeground}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>-->
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn  Width="60">
+                <DataGridTemplateColumn  Width="60" Visibility="Collapsed">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
                             <TextBlock Text="默认勾选" Foreground="{DynamicResource DataGridForeground}" lang:LanguageManager.LangText="默认勾选" FontSize="14"></TextBlock>
@@ -84,7 +90,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn  Width="90">
+                <DataGridTemplateColumn  Width="90" Visibility="Visible">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
                             <TextBlock Text="操作" Foreground="{DynamicResource DataGridForeground}" lang:LanguageManager.LangText="操作" FontSize="14"></TextBlock>
@@ -100,9 +106,27 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <CheckBox Content="默认勾选" lang:LanguageManager.LangText="默认勾选" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsAutoSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></CheckBox>
+                        <!--<Button Style="{StaticResource CommonButtonStyle}" Width="80" Height="30" Content="删除" lang:LanguageManager.LangText="删除" CommandParameter="{Binding }" Command="{Binding DataContext.DelGroupCommand,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"></Button>-->
+                    </StackPanel>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow" BasedOn="{StaticResource DefaultDataGridRowStyle}">
                     <Setter Property="IsSelected" Value="{Binding IsSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></Setter>
+                    <!--<Setter Property = "ContextMenu" >
+                        <Setter.Value>
+                            <ContextMenu>
+                                <Menu>
+                                    <MenuItem Header="A"></MenuItem>
+                                    <MenuItem Header="b"></MenuItem>
+                                </Menu>
+                            </ContextMenu>
+                        </Setter.Value>
+                    </Setter>-->
                     <Style.Triggers>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Background" Value="#D9E6F6"/>
@@ -111,6 +135,7 @@
                 </Style>
             </DataGrid.RowStyle>
         </DataGrid>
+
         <Border Grid.Row="1" BorderBrush="{DynamicResource borderBrush}"  Margin="0,5,0,5" BorderThickness="0,0.5,0.5,0.5">
             <StackPanel Orientation="Vertical" Margin="10,5,0,5">
                 <CheckBox Content="允许用户选择要安装的组" IsChecked="{Binding IsAllowChoose,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" lang:LanguageManager.LangText="允许用户选择要安装的组" Margin="0,5,0,5"></CheckBox>
@@ -120,7 +145,7 @@
                 </StackPanel>
             </StackPanel>
         </Border>
-        <DataGrid Grid.Column="1" Margin="10,10,10,0" SelectionMode="Single" HorizontalScrollBarVisibility="Auto" Style="{StaticResource DataGridStyle}"  ItemsSource="{Binding FileList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" BorderBrush="{DynamicResource borderBrush}"  CanUserAddRows="False"  AutoGenerateColumns="False" ColumnHeaderHeight="35" MinRowHeight="35">
+        <DataGrid Grid.Column="1" Margin="10,10,10,0" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionMode="Single" HorizontalScrollBarVisibility="Auto" Style="{StaticResource DataGridStyle}"  ItemsSource="{Binding FileList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" BorderBrush="{DynamicResource borderBrush}"  CanUserAddRows="False"  AutoGenerateColumns="False" ColumnHeaderHeight="35" MinRowHeight="35">
 
             <DataGrid.Columns>
                 <DataGridTemplateColumn  Width="72">
@@ -187,7 +212,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>-->
-                <DataGridTemplateColumn  MinWidth="80">
+                <DataGridTemplateColumn  MinWidth="80" Visibility="Collapsed">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
                             <TextBlock Text="操作" Foreground="{DynamicResource DataGridForeground}" lang:LanguageManager.LangText="操作" FontSize="14"></TextBlock>
@@ -227,6 +252,21 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>-->
             </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <StackPanel Orientation="Horizontal">
+
+                            <StackPanel IsEnabled="{Binding IsExe,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,0,0">
+                                <CheckBox IsChecked="{Binding IsNeedInstall,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Margin="5,0,0,0" Content="安装" lang:LanguageManager.LangText="安装"></CheckBox>
+                                <CheckBox IsChecked="{Binding IsNeedQuietInstall,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"  Content="静默安装" lang:LanguageManager.LangText="静默安装"></CheckBox>
+                            </StackPanel>
+                            <CheckBox  Margin="5,0,0,0" IsChecked="{Binding IsNoNeedCopy,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="不复制" lang:LanguageManager.LangText="不复制"></CheckBox>
+
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
         </DataGrid>
         <Border Grid.Row="1" Grid.Column="1" BorderBrush="{DynamicResource borderBrush}"  Margin="10,5,10,5" BorderThickness="0.5,0.5,0.5,0.5">
             <StackPanel Orientation="Vertical" Margin="10,5,0,5">

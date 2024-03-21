@@ -19,7 +19,7 @@ namespace PackageEasy.Domain.Models
         private string assemblyDescription;
         private bool isSelected;
         private List<AssemblyFileModel> fileList;
-        private bool isAutoSelected;
+        private bool isAutoSelected = true;
 
         /// <summary>
         /// 选择

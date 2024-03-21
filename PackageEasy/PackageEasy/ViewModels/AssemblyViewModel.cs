@@ -56,6 +56,7 @@ namespace PackageEasy.ViewModels
         private List<AssemblyModel> assemblyList;
         private List<AssemblyFileModel> fileList;
         private bool isAllowChoose;
+        private bool isShow;
 
         /// <summary>
         /// 组件信息
@@ -106,10 +107,26 @@ namespace PackageEasy.ViewModels
             }
         }
 
+        public bool IsShow
+        {
+            get => isShow;
+            set
+            {
+                isShow = value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         #region 命令
 
+
+        public RelayCommand AssemblyMenuCommand => new RelayCommand(() =>
+        {
+            IsShow = !IsShow;
+
+        });
         /// <summary>
         /// 添加group
         /// </summary>
