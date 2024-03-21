@@ -19,6 +19,7 @@ namespace PackageEasy.Domain.Models
         private string assemblyDescription;
         private bool isSelected;
         private List<AssemblyFileModel> fileList;
+        private bool isAutoSelected;
 
         /// <summary>
         /// 选择
@@ -31,6 +32,18 @@ namespace PackageEasy.Domain.Models
             set
             {
                 isSelected = value;
+                RaisePropertyChanged();
+            }
+        }
+        /// <summary>
+        /// 默认选中
+        /// </summary>
+        public bool IsAutoSelected
+        {
+            get => isAutoSelected;
+            set
+            {
+                isAutoSelected = value;
                 RaisePropertyChanged();
             }
         }

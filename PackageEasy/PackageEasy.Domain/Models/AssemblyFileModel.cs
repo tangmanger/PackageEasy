@@ -22,6 +22,7 @@ namespace PackageEasy.Domain.Models
         private bool isNeedQuietInstall;
         private bool isNeedInstall;
         private bool isExe;
+        private bool isNoNeedCopy;
 
         /// <summary>
         /// 选择
@@ -141,6 +142,22 @@ namespace PackageEasy.Domain.Models
                 RaisePropertyChanged();
             }
         }
+
+        /// <summary>
+        /// 是否需要复制到指定目录
+        /// </summary>
+        public bool IsNoNeedCopy
+        {
+            get => isNoNeedCopy;
+            set
+            {
+                isNoNeedCopy = value;
+                RaisePropertyChanged();
+            }
+        }
+        /// <summary>
+        /// 是否是目录
+        /// </summary>
         public bool IsDirectory { get; set; }
     }
 }

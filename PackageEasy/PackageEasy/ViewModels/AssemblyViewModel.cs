@@ -120,7 +120,7 @@ namespace PackageEasy.ViewModels
             {
                 id = AssemblyList.Max(c => c.AssemblyId) + 1;
             }
-            AssemblyList.Add(new AssemblyModel() { AssemblyId = id, AssemblyName = "新建组".GetLangText() });
+            AssemblyList.Add(new AssemblyModel() { AssemblyId = id, IsAutoSelected = true, AssemblyName = "新建组".GetLangText() });
             AssemblyList = new List<AssemblyModel>(AssemblyList);
         });
 

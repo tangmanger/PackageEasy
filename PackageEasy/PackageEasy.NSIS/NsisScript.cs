@@ -284,53 +284,10 @@ namespace PackageEasy.NSIS
 
                 }
 
-                list.Add("Function .onInit");
-                list.Add("  !insertmacro MUI_LANGDLL_DISPLAY");
 
-                //检测进程
-                if (projectInfoModel.FinishInfo != null && projectInfoModel.FinishInfo.IsEnableProcess)
-                {
-                    list.Add($"  nsProcess::_FindProcess \"{projectInfoModel.FinishInfo.ProcessName}\"");
-                    list.Add("  Pop $R0");
-                    list.Add("  IntCmp $R0 0 running no_running no_running");
-                    list.Add("  running:");
-                    if (projectInfoModel.BaseInfo.LanguageList != null && projectInfoModel.BaseInfo.LanguageList.Count > 0)
-                    {
-                        bool isFirst = true;
-                        foreach (var lang in projectInfoModel.BaseInfo.LanguageList)
-                        {
-                            if (isFirst)
-                            {
-                                isFirst = false;
-                                list.Add("  ${If} $LANGUAGE == " + lang.LanguageDisplayKey);
-
-                            }
-                            else
-                            {
-                                list.Add("  ${ElseIf} $LANGUAGE == " + lang.LanguageDisplayKey);
-                            }
-                            list.Add($"  MessageBox MB_ICONQUESTION|MB_YESNO \"{GetLanguage(projectInfoModel.FinishInfo.InstallProcessTips, lang.LanguageType)}\" IDYES dokill IDNO stopit");
-                        }
-                        list.Add("  ${EndIf}");
-                    }
-                    else
-                    {
-                        list.Add("  MessageBox MB_ICONQUESTION|MB_YESNO \"$(InstallProcessTips)\" IDYES dokill IDNO stopit");
-                    }
-                    list.Add("  no_running:");
-                    list.Add("  GoTo endding");
-                    list.Add("  dokill:");
-                    list.Add($"  nsProcess::_CloseProcess \"{projectInfoModel.FinishInfo.ProcessName}\"");
-                    list.Add("  Pop $R0");
-                    list.Add("  GoTo endding");
-                    list.Add("  stopit:");
-                    list.Add("  Abort");
-                    list.Add("  endding:");
-                    list.Add("  nsProcess::_Unload");
-                }
-                list.Add("FunctionEnd");
                 List<string> sections = new List<string>();
                 Dictionary<string, string> sectionDic = new Dictionary<string, string>();
+                Dictionary<string, bool> sectionCheckDic = new Dictionary<string, bool>();
                 List<string> delDirs = new List<string>();
                 string currentDirectory = "";
                 bool hasSetIcon = false;
@@ -350,9 +307,11 @@ namespace PackageEasy.NSIS
                             sections.Add(sec);
                             if (!string.IsNullOrWhiteSpace(item.AssemblyDescription))
                                 sectionDic.Add(sec, item.AssemblyDescription);
+                            sectionCheckDic.Add(sec, item.IsAutoSelected);
                             var files = item.FileList.OrderBy(p => p.IsNeedInstall).OrderBy(p => p.IsNeedQuietInstall).ToList();
                             foreach (var file in files)
                             {
+                                if (file.IsNoNeedCopy) continue;
                                 string dirPath = file.TargetPath.DisplayName;
                                 if (!string.IsNullOrWhiteSpace(file.SubPath))
                                     dirPath += file.SubPath;
@@ -501,6 +460,65 @@ namespace PackageEasy.NSIS
                         }
                     }
                 }
+
+
+                list.Add("Function .onInit");
+                list.Add("  !insertmacro MUI_LANGDLL_DISPLAY");
+
+                //检测进程
+                if (projectInfoModel.FinishInfo != null && projectInfoModel.FinishInfo.IsEnableProcess)
+                {
+                    list.Add($"  nsProcess::_FindProcess \"{projectInfoModel.FinishInfo.ProcessName}\"");
+                    list.Add("  Pop $R0");
+                    list.Add("  IntCmp $R0 0 running no_running no_running");
+                    list.Add("  running:");
+                    if (projectInfoModel.BaseInfo.LanguageList != null && projectInfoModel.BaseInfo.LanguageList.Count > 0)
+                    {
+                        bool isFirst = true;
+                        foreach (var lang in projectInfoModel.BaseInfo.LanguageList)
+                        {
+                            if (isFirst)
+                            {
+                                isFirst = false;
+                                list.Add("  ${If} $LANGUAGE == " + lang.LanguageDisplayKey);
+
+                            }
+                            else
+                            {
+                                list.Add("  ${ElseIf} $LANGUAGE == " + lang.LanguageDisplayKey);
+                            }
+                            list.Add($"  MessageBox MB_ICONQUESTION|MB_YESNO \"{GetLanguage(projectInfoModel.FinishInfo.InstallProcessTips, lang.LanguageType)}\" IDYES dokill IDNO stopit");
+                        }
+                        list.Add("  ${EndIf}");
+                    }
+                    else
+                    {
+                        list.Add("  MessageBox MB_ICONQUESTION|MB_YESNO \"$(InstallProcessTips)\" IDYES dokill IDNO stopit");
+                    }
+                    list.Add("  no_running:");
+                    list.Add("  GoTo endding");
+                    list.Add("  dokill:");
+                    list.Add($"  nsProcess::_CloseProcess \"{projectInfoModel.FinishInfo.ProcessName}\"");
+                    list.Add("  Pop $R0");
+                    list.Add("  GoTo endding");
+                    list.Add("  stopit:");
+                    list.Add("  Abort");
+                    list.Add("  endding:");
+                    list.Add("  nsProcess::_Unload");
+                }
+
+                foreach (var item in sections)
+                {
+
+                    string desc = sectionDic.ContainsKey(item) ? sectionDic[item] : "";
+                    if (sectionCheckDic.ContainsKey(item))
+                    {
+                        var isAutoCheck = sectionCheckDic[item];
+                        if (!isAutoCheck)
+                            list.Add("  SectionSetFlags ${" + item + "} " + (isAutoCheck ? "1" : "0"));
+                    }
+                }
+                list.Add("FunctionEnd");
                 list.Add(";添加卸载图标");
                 list.Add("Section -AdditionalIcons");
                 string startMenuName = projectInfoModel?.AppIcon?.StartMenuName;
@@ -561,8 +579,10 @@ namespace PackageEasy.NSIS
                     }
                 }
                 list.Add("!insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN");
+
                 foreach (var item in sections)
                 {
+
                     string desc = sectionDic.ContainsKey(item) ? sectionDic[item] : "";
                     list.Add($"  !insertmacro MUI_DESCRIPTION_TEXT ${{{item}}} \"$({item})\"");
                 }
