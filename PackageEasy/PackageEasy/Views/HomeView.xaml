@@ -65,7 +65,7 @@
                     <Button Command="{Binding DataContext.OpenRecentlyCommand,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}}" CommandParameter="{Binding }">
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
-                                <Border Margin="5" RenderTransformOrigin="0.5,0.5" x:Name="border" Width="242" Height="188" BorderThickness="1" BorderBrush="{DynamicResource borderBrush}" CornerRadius="4" Background="{DynamicResource projectNewCreateBackground}">
+                                <Border Margin="5" RenderTransformOrigin="0.5,0.5" x:Name="border" Width="262" Height="198" BorderThickness="1" BorderBrush="{DynamicResource borderBrush}" CornerRadius="4" Background="{DynamicResource projectNewCreateBackground}">
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition></RowDefinition>

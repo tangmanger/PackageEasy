@@ -26,6 +26,7 @@
         <KeyBinding Modifiers="Control" Key="W" Command="{Binding CloseTableCommand}"/>
         <KeyBinding Modifiers="Control" Key="E" Command="{Binding ExportScriptCommand}"/>
         <KeyBinding Modifiers="Control" Key="I" Command="{Binding ImportScriptCommand}"/>
+        <KeyBinding Modifiers="Control" Key="B" Command="{Binding CompileCommand}"/>
     </Window.InputBindings>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -61,7 +62,7 @@
                                 <MenuItem Header="退出"  lang:LanguageManager.LangText="退出" Command="{Binding ExitCommand}" Width="auto" InputGestureText="    "/>
                             </MenuItem>
                             <MenuItem   MinWidth="50" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="14" HorizontalContentAlignment="Center" Header="生成" lang:LanguageManager.LangText="生成">
-                                <MenuItem Header="编译" IsEnabled="{Binding IsMenuCanEdit}"   lang:LanguageManager.LangText="编译" Command="{Binding CompileCommand}" InputGestureText=""  >
+                                <MenuItem Header="编译" IsEnabled="{Binding IsMenuCanEdit}"   lang:LanguageManager.LangText="编译" Command="{Binding CompileCommand}" InputGestureText="Ctrl+B"  >
                                     <MenuItem.Icon>
                                         <TextBlock Style="{StaticResource IconFontStyle}" FontSize="12" Text="&#xe613;"></TextBlock>
                                     </MenuItem.Icon>

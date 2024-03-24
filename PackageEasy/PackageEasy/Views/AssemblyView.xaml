@@ -45,7 +45,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>-->
-                <DataGridTemplateColumn  Width="*">
+                <DataGridTemplateColumn SortMemberPath="AssemblyName" Width="*">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
                             <TextBlock Text="组件名称" Foreground="{DynamicResource DataGridForeground}" lang:LanguageManager.LangText="组件名称" FontSize="14"></TextBlock>
@@ -161,7 +161,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn  Width="*">
+                <DataGridTemplateColumn  Width="*" SortMemberPath="FilePath">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
                             <TextBlock Text="文件目录" Foreground="{DynamicResource DataGridForeground}" lang:LanguageManager.LangText="文件目录" FontSize="14"></TextBlock>
@@ -225,7 +225,7 @@
 
                                     <StackPanel IsEnabled="{Binding IsExe,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,0,0">
                                         <CheckBox IsChecked="{Binding IsNeedInstall,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  VerticalContentAlignment="Center" HorizontalContentAlignment="Left"  Content="安装" lang:LanguageManager.LangText="安装"></CheckBox>
-                                        <CheckBox IsChecked="{Binding IsNeedQuietInstall,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"  Content="静默安装" lang:LanguageManager.LangText="静默安装"></CheckBox>
+                                        <CheckBox IsChecked="{Binding IsNeedQuietInstall,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"  Margin="10,0,0,0" Content="静默安装" lang:LanguageManager.LangText="静默安装"></CheckBox>
                                     </StackPanel>
                                     <CheckBox  Margin="5,0,0,0" IsChecked="{Binding IsNoNeedCopy,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="不复制" lang:LanguageManager.LangText="不复制"></CheckBox>
 
@@ -259,7 +259,7 @@
 
                             <StackPanel IsEnabled="{Binding IsExe,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,0,0">
                                 <CheckBox IsChecked="{Binding IsNeedInstall,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Margin="5,0,0,0" Content="安装" lang:LanguageManager.LangText="安装"></CheckBox>
-                                <CheckBox IsChecked="{Binding IsNeedQuietInstall,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"  Content="静默安装" lang:LanguageManager.LangText="静默安装"></CheckBox>
+                                <CheckBox IsChecked="{Binding IsNeedQuietInstall,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5,0,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"  Content="静默安装" lang:LanguageManager.LangText="静默安装"></CheckBox>
                             </StackPanel>
                             <CheckBox  Margin="5,0,0,0" IsChecked="{Binding IsNoNeedCopy,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="不复制" lang:LanguageManager.LangText="不复制"></CheckBox>
 

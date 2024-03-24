@@ -86,8 +86,7 @@ namespace PackageEasy.ViewModels
                 CacheDataHelper.OpenPath = string.Empty;
             }
             RecentlyList = CacheDataHelper.RecentlyList.OrderByDescending(s => s.UpdateTime).ToList();
-
-
+         
         });
 
         public RelayCommand<RecentlyModel> OpenRecentlyCommand => new RelayCommand<RecentlyModel>((s) =>
