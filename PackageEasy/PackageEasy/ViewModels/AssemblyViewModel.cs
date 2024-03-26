@@ -160,10 +160,11 @@ namespace PackageEasy.ViewModels
             if (s != null)
                 FileList = s.FileList;
         });
+
         /// <summary>
         /// 添加目录
         /// </summary>
-        public RelayCommand AddDirCommand => new RelayCommand(() =>
+        public RelayCommand AddDirCommand1 => new RelayCommand(() =>
         {
             if (string.IsNullOrWhiteSpace(ProjectInfo.BaseInfo.WorkSpace))
             {
@@ -199,6 +200,100 @@ namespace PackageEasy.ViewModels
                     assemblyFileModel.SubPath = fileInfo?.FullName?.Replace(currentAssembly.SelectDir, "") ?? "";
                     assemblyFileModel.FilePath = assemblyFileModel.SubPath;
                     assemblyFileModel.IsDirectory = true;
+                    assemblyFileModel.TargetPath = TargetDirList.FirstOrDefault() ?? new DescModel<TargetDirType>() { Data = TargetDirType.INSTDIR };
+                    var current = assemblyFileModels.Find(p => p.FilePath == assemblyFileModel.FilePath);
+                    if (current != null)
+                    {
+                        continue;
+                        assemblyFileModels.Remove(current);
+                    }
+                    assemblyFileModels.Add(assemblyFileModel);
+                }
+            }
+            if (currentAssembly.FileList == null)
+                currentAssembly.FileList = new List<AssemblyFileModel>();
+            FileList = new List<AssemblyFileModel>(currentAssembly.FileList);
+        });
+
+        /// <summary>
+        /// 添加目录
+        /// </summary>
+        public RelayCommand AddDirCommand => new RelayCommand(() =>
+        {
+            if (string.IsNullOrWhiteSpace(ProjectInfo.BaseInfo.WorkSpace))
+            {
+                Log.Write("工作目录为空!");
+                TMessageBox.ShowMsg("", "工作目录为空!");
+                return;
+            }
+            var currentAssembly = AssemblyList.Find(p => p.IsSelected == true);
+            if (currentAssembly == null)
+            {
+                TMessageBox.ShowMsg("", "请选择组!");
+                return;
+            }
+
+            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+            var result = folderBrowserDialog.ShowDialog();
+            if (result == DialogResult.OK || result == DialogResult.Yes)
+            {
+                
+                if (!Directory.Exists(folderBrowserDialog.SelectedPath))
+                {
+                    return;
+                }
+                if (currentAssembly.FileList == null)
+                    currentAssembly.FileList = new List<AssemblyFileModel>();
+                //获取目录
+                var dirs = GetDirs(folderBrowserDialog.SelectedPath);
+                List<AssemblyFileModel> assemblyFileModels = currentAssembly.FileList;
+                DirectoryInfo rootInfo = new DirectoryInfo(folderBrowserDialog.SelectedPath);
+                currentAssembly.SelectDir = rootInfo.Parent?.FullName;
+                foreach (var file in dirs)
+                {
+                    if (currentAssembly.SelectDir == file) { continue; }
+                    AssemblyFileModel assemblyFileModel = new AssemblyFileModel();
+                    assemblyFileModel.AssemblyId = currentAssembly.AssemblyId;
+                    DirectoryInfo fileInfo = new DirectoryInfo(file);
+                    assemblyFileModel.SubPath = fileInfo?.FullName?.Replace(currentAssembly.SelectDir, "") ?? "";
+                    assemblyFileModel.FilePath = assemblyFileModel.SubPath;
+                    assemblyFileModel.IsDirectory = true;
+                    assemblyFileModel.TargetPath = TargetDirList.FirstOrDefault() ?? new DescModel<TargetDirType>() { Data = TargetDirType.INSTDIR };
+                    var current = assemblyFileModels.Find(p => p.FilePath == assemblyFileModel.FilePath);
+                    if (current != null)
+                    {
+                        continue;
+                        assemblyFileModels.Remove(current);
+                    }
+                    assemblyFileModels.Add(assemblyFileModel);
+                }
+
+                var files = GetFiles(folderBrowserDialog.SelectedPath);
+                currentAssembly.SelectDir = folderBrowserDialog.SelectedPath;
+                foreach (var file in files)
+                {
+
+
+                    AssemblyFileModel assemblyFileModel = new AssemblyFileModel();
+                    assemblyFileModel.AssemblyId = currentAssembly.AssemblyId;
+                    if (currentAssembly.SelectDir != ProjectInfo.BaseInfo.WorkSpace)
+                    {
+                        var path = file.Replace(currentAssembly.SelectDir, ProjectInfo.BaseInfo.WorkSpace);
+                        FileInfo info = new FileInfo(path);
+                        if (!Directory.Exists(info.DirectoryName))
+                        {
+                            if (info.DirectoryName != null)
+                                Directory.CreateDirectory(info.DirectoryName);
+                        }
+                        File.Copy(file, path, true);
+                        assemblyFileModel.FilePath = path.Replace(ProjectInfo.BaseInfo.WorkSpace, "");
+                    }
+                    else
+                    {
+                        assemblyFileModel.FilePath = file.Replace(currentAssembly.SelectDir, "");
+                    }
+                    FileInfo fileInfo = new FileInfo(file);
+                    assemblyFileModel.SubPath = fileInfo?.DirectoryName?.Replace(currentAssembly.SelectDir, "") ?? "";
                     assemblyFileModel.TargetPath = TargetDirList.FirstOrDefault() ?? new DescModel<TargetDirType>() { Data = TargetDirType.INSTDIR };
                     var current = assemblyFileModels.Find(p => p.FilePath == assemblyFileModel.FilePath);
                     if (current != null)

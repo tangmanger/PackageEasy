@@ -108,10 +108,10 @@
             </DataGrid.Columns>
             <DataGrid.RowDetailsTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal" Margin="5">
-                        <CheckBox Content="默认勾选" lang:LanguageManager.LangText="默认勾选" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsAutoSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></CheckBox>
+                    <Border BorderBrush="{DynamicResource datagridLinesBrush}" Height="35"  BorderThickness="0,0,1,0">
+                        <CheckBox HorizontalAlignment="Left" Margin="5,0,0,0" Content="默认勾选" lang:LanguageManager.LangText="默认勾选" VerticalAlignment="Center"  IsChecked="{Binding IsAutoSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></CheckBox>
                         <!--<Button Style="{StaticResource CommonButtonStyle}" Width="80" Height="30" Content="删除" lang:LanguageManager.LangText="删除" CommandParameter="{Binding }" Command="{Binding DataContext.DelGroupCommand,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"></Button>-->
-                    </StackPanel>
+                    </Border>
                 </DataTemplate>
             </DataGrid.RowDetailsTemplate>
             <DataGrid.RowStyle>
@@ -254,17 +254,17 @@
             </DataGrid.Columns>
             <DataGrid.RowDetailsTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal" Margin="5">
-                        <StackPanel Orientation="Horizontal">
+                    <Border BorderBrush="{DynamicResource datagridLinesBrush}" BorderThickness="0,0,1,0" Height="35">
+                        <StackPanel Orientation="Horizontal" Margin="5">
 
                             <StackPanel IsEnabled="{Binding IsExe,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,0,0">
                                 <CheckBox IsChecked="{Binding IsNeedInstall,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Margin="5,0,0,0" Content="安装" lang:LanguageManager.LangText="安装"></CheckBox>
                                 <CheckBox IsChecked="{Binding IsNeedQuietInstall,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5,0,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"  Content="静默安装" lang:LanguageManager.LangText="静默安装"></CheckBox>
                             </StackPanel>
-                            <CheckBox  Margin="5,0,0,0" IsChecked="{Binding IsNoNeedCopy,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="不复制" lang:LanguageManager.LangText="不复制"></CheckBox>
+                            <CheckBox  Margin="5,0,0,0" IsChecked="{Binding IsNoNeedCopy,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" Content="不复制" lang:LanguageManager.LangText="不复制"></CheckBox>
 
                         </StackPanel>
-                    </StackPanel>
+                    </Border>
                 </DataTemplate>
             </DataGrid.RowDetailsTemplate>
         </DataGrid>
