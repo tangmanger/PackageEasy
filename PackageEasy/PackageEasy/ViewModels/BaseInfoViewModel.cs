@@ -68,6 +68,11 @@ namespace PackageEasy.ViewModels
                 new InstallLanguageModel(){ LanguageType=LanguageType.Zh_CN,LanguageName="简体中文".GetLangText(),Code="SimpChinese",LanguageDisplayKey="${LANG_SimpChinese}"},
             };
             Service.PreCompile += Service_PreCompile;
+            if (ProjectInfo == null)
+                ProjectInfo = new ProjectInfoModel();
+            BaseInfoModel baseInfoModel = ProjectInfo.BaseInfo;
+            if (baseInfoModel == null)
+                baseInfoModel = new BaseInfoModel();
         }
 
 

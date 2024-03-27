@@ -254,7 +254,8 @@ namespace PackageEasy.NSIS
                     {
                         list.Add("Name \"${PRODUCT_NAME} ${PRODUCT_VERSION}\"");
                     }
-                    string outPath = Path.Combine(baseInfo.WorkSpace, "OutPut");
+                    DirectoryInfo directoryInfo = new DirectoryInfo(baseInfo.WorkSpace);
+                    string outPath = Path.Combine(directoryInfo.Parent.FullName, "OutPut");
                     if (!Directory.Exists(outPath))
                     {
                         Directory.CreateDirectory(outPath);

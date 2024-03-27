@@ -248,7 +248,7 @@ namespace PackageEasy.ViewModels
                 var dirs = GetDirs(folderBrowserDialog.SelectedPath);
                 List<AssemblyFileModel> assemblyFileModels = currentAssembly.FileList;
                 DirectoryInfo rootInfo = new DirectoryInfo(folderBrowserDialog.SelectedPath);
-                currentAssembly.SelectDir = rootInfo.Parent?.FullName;
+                currentAssembly.SelectDir = folderBrowserDialog.SelectedPath;
                 foreach (var file in dirs)
                 {
                     if (currentAssembly.SelectDir == file) { continue; }

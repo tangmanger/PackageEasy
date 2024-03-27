@@ -348,7 +348,8 @@ namespace PackageEasy.ViewModels
                             var list = nSISScript.Build(viewCaheModel.BaseProjectViewModel.ProjectInfo);
                             if (!string.IsNullOrWhiteSpace(viewCaheModel.BaseProjectViewModel.ProjectInfo.BaseInfo.WorkSpace))
                             {
-                                var path = Path.Combine(viewCaheModel.BaseProjectViewModel.ProjectInfo.BaseInfo.WorkSpace, $"{viewCaheModel.BaseProjectViewModel.ProjectInfo.BaseInfo.ApplicationName}.pgescript");
+                                DirectoryInfo directoryInfo = new DirectoryInfo(viewCaheModel.BaseProjectViewModel.ProjectInfo.BaseInfo.WorkSpace);
+                                var path = Path.Combine(directoryInfo.Parent.FullName, $"{viewCaheModel.BaseProjectViewModel.ProjectInfo.BaseInfo.ApplicationName}.pgescript");
                                 File.WriteAllLines(path, list, Encoding.Default);
                                 if (File.Exists(path))
                                 {
