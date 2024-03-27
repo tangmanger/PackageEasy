@@ -28,6 +28,8 @@ namespace PackageEasy.ViewModels
         private string registryFormat;
         private bool isAsSelected = true;
         private string processName;
+        private string password;
+        private bool isUsePassword;
 
         /// <summary>
         /// 文件格式
@@ -67,6 +69,31 @@ namespace PackageEasy.ViewModels
                 OnPropertyChanged();
             }
         }
+        /// <summary>
+        /// 密码
+        /// </summary>
+        public string Password
+        {
+            get => password;
+            set
+            {
+                password = value;
+                OnPropertyChanged();
+            }
+        }
+        /// <summary>
+        /// 是否使用密码
+        /// </summary>
+
+        public bool IsUsePassword
+        {
+            get => isUsePassword;
+            set
+            {
+                isUsePassword = value;
+                OnPropertyChanged();
+            }
+        }
 
         #endregion
 
@@ -78,6 +105,8 @@ namespace PackageEasy.ViewModels
             registryModel.RegistryFormat = RegistryFormat;
             registryModel.IsAsSelected = IsAsSelected;
             registryModel.ProcessName = ProcessName;
+            registryModel.Password = Password;
+            registryModel.IsUsePassword = IsUsePassword;
             var registryPath = Path.Combine(SavePath, "Registry.json");
             if (ProjectInfo == null)
                 ProjectInfo = new ProjectInfoModel();
@@ -92,6 +121,8 @@ namespace PackageEasy.ViewModels
                 RegistryFormat = ProjectInfo.Registry.RegistryFormat;
                 IsAsSelected = ProjectInfo.Registry.IsAsSelected;
                 ProcessName = ProjectInfo.Registry.ProcessName;
+                Password = ProjectInfo.Registry.Password;
+                IsUsePassword = ProjectInfo.Registry.IsUsePassword;
             }
         }
         public override bool ValidateData()
@@ -99,6 +130,11 @@ namespace PackageEasy.ViewModels
             if (!string.IsNullOrWhiteSpace(RegistryFormat) && string.IsNullOrWhiteSpace(ProcessName))
             {
                 TMessageBox.ShowMsg("请填写关联的程序名称!");
+                return false;
+            }
+            if (IsUsePassword && string.IsNullOrWhiteSpace(Password))
+            {
+                TMessageBox.ShowMsg("注册界面:请填写密码!");
                 return false;
             }
             return base.ValidateData();

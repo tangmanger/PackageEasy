@@ -53,8 +53,8 @@
                                 </MenuItem>
                                 <Separator Style="{StaticResource sep}"/>
                                 <MenuItem Header="保存" IsEnabled="{Binding IsMenuCanEdit}"   lang:LanguageManager.LangText="保存" InputGestureText="Ctrl+S" Command="{Binding SaveCommand}"></MenuItem>
-                                <!--<MenuItem Header="另存为.." IsEnabled="{Binding IsMenuCanEdit,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"   lang:LanguageManager.LangText="另存为.."  Command="{Binding SaveAsCommand}" Width="auto" InputGestureText="    ">
-                                </MenuItem>-->
+                                <MenuItem Header="另存为.." IsEnabled="{Binding IsMenuCanEdit,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"   lang:LanguageManager.LangText="另存为.."  Command="{Binding SaveAsCommand}" Width="auto" InputGestureText="    ">
+                                </MenuItem>
                                 <Separator Style="{StaticResource sep}"/>
                                 <MenuItem Header="导出脚本"  IsEnabled="{Binding IsMenuCanEdit}"    lang:LanguageManager.LangText="导出脚本" Command="{Binding ExportScriptCommand}" InputGestureText="Ctrl+E"></MenuItem>
                                 <MenuItem Header="打开脚本"      lang:LanguageManager.LangText="打开脚本" Command="{Binding ImportScriptCommand}" InputGestureText="Ctrl+I"></MenuItem>

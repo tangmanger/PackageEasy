@@ -25,5 +25,13 @@ namespace PackageEasy.Domain.Models
         /// 注册进程名
         /// </summary>
         public string ProcessName { get; set; }
+        /// <summary>
+        /// 是否启用密码
+        /// </summary>
+        public bool IsUsePassword { get; set; }
+        /// <summary>
+        /// 密码
+        /// </summary>
+        public string Password { get; set; }
     }
 }

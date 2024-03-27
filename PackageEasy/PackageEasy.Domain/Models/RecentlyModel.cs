@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PackageEasy.Domain.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,8 +7,11 @@ using System.Threading.Tasks;
 
 namespace PackageEasy.Domain.Models
 {
-    public class RecentlyModel
+    public class RecentlyModel : BaseModel
     {
+        private bool isLock;
+        private string filePath;
+
         /// <summary>
         /// 名称
         /// </summary>
@@ -27,6 +31,24 @@ namespace PackageEasy.Domain.Models
         /// <summary>
         /// 文件路径
         /// </summary>
-        public string FilePath { get; set; }
+        public string FilePath
+        {
+            get => filePath;
+            set
+            {
+                filePath = value;
+                IsLock = value.EndsWith(StaticStringHelper.PGE);
+            }
+        }
+
+        public bool IsLock
+        {
+            get => isLock;
+            set
+            {
+                isLock = value;
+                RaisePropertyChanged();
+            }
+        }
     }
 }

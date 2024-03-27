@@ -2,9 +2,11 @@
 using PackageEasy.Common.Helpers;
 using PackageEasy.Common.Logs;
 using PackageEasy.Domain;
+using PackageEasy.Domain.Helpers;
 using PackageEasy.Domain.Models;
 using PackageEasy.Domain.Models.SaveModel;
 using PackageEasy.ViewModels;
+using PackageEasy.Views.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -25,8 +27,8 @@ namespace PackageEasy.Helpers
         public static Tuple<bool, string> OpenFile(ProjectViewModel projectViewModel)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.DefaultExt = ".pge"; // Default file extension
-            openFileDialog.Filter = "pge documents|*.pge"; // Filter files by extension
+            openFileDialog.DefaultExt = StaticStringHelper.PGE; // Default file extension
+            openFileDialog.Filter = $"pge documents|*{StaticStringHelper.PGE};*{StaticStringHelper.PKY}|pky documents|*{StaticStringHelper.PKY};*{StaticStringHelper.PGE}"; // Filter files by extension
             var result = openFileDialog.ShowDialog();
             if (result == true)
             {
@@ -45,11 +47,11 @@ namespace PackageEasy.Helpers
         /// <param name="filePath">原路径</param>
         /// <param name="targetPath">目标路径</param>
         /// <returns>原因</returns>
-        static Tuple<bool, string> UnZip(string filePath, string targetPath)
+        static Tuple<bool, string> UnZip(string filePath, string targetPath, string password = "")
         {
-            var flage = ZipHelper.UnZipFile(filePath, "", targetPath);
+            var flage = ZipHelper.UnZipFile(filePath, password, targetPath);
             if (flage.Item1 == false && Directory.Exists(targetPath))
-                Directory.Delete(targetPath);
+                Directory.Delete(targetPath, true);
             return flage;
         }
         /// <summary>
@@ -63,7 +65,19 @@ namespace PackageEasy.Helpers
             var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Temp", Guid.NewGuid().ToString().Replace("-", ""));
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
-            var result = UnZip(filePath, path);
+            FileInfo info = new FileInfo(filePath);
+            string password = "";
+            if (info.Extension.ToLower() == StaticStringHelper.PKY.ToLower())
+            {
+                PasswordDialog passwordDialog = new PasswordDialog();
+                passwordDialog.ShowDialog();
+                if (!passwordDialog.IsSuccess)
+                {
+                    return new Tuple<bool, string>(false, "请输入密码！");
+                }
+                password = passwordDialog.Password;
+            }
+            var result = UnZip(filePath, path, password);
             if (result.Item1 == false) return result;
             if (projectViewModel.ProjectInfo == null)
                 projectViewModel.ProjectInfo = new ProjectInfoModel();
@@ -188,12 +202,23 @@ namespace PackageEasy.Helpers
         public static bool Save(ProjectViewModel projectViewModel)
         {
             string filePath = projectViewModel.ProjectInfo.ExtraInfo.FilePath;
+            projectViewModel.Save();
+            string oldFilePath = "";
             if (!File.Exists(filePath))
             {
                 SaveFileDialog openFileDialog = new SaveFileDialog();
-                openFileDialog.FileName = $"{projectViewModel.ProjectName.Replace("*", "")}.pge"; // Default file name
-                openFileDialog.DefaultExt = ".pge"; // Default file extension
-                openFileDialog.Filter = "pge documents|*.pge"; // Filter files by extension
+                if (projectViewModel.ProjectInfo.Registry != null && projectViewModel.ProjectInfo.Registry.IsUsePassword)
+                {
+                    openFileDialog.FileName = $"{projectViewModel.ProjectName.Replace("*", "")}{StaticStringHelper.PKY}"; // Default file name
+                    openFileDialog.DefaultExt = StaticStringHelper.PKY; // Default file extension
+                    openFileDialog.Filter = $"pky documents|*{StaticStringHelper.PKY}"; // Filter files by extension
+                }
+                else
+                {
+                    openFileDialog.FileName = $"{projectViewModel.ProjectName.Replace("*", "")}{StaticStringHelper.PGE}"; // Default file name
+                    openFileDialog.DefaultExt = StaticStringHelper.PGE; // Default file extension
+                    openFileDialog.Filter = $"pge documents|*{StaticStringHelper.PGE}"; // Filter files by extension
+                }
                 ///用户点了关闭按钮,未选择路径
                 if (openFileDialog.ShowDialog() == false)
                 {
@@ -202,17 +227,39 @@ namespace PackageEasy.Helpers
                 filePath = openFileDialog.FileName;
                 projectViewModel.ProjectInfo.ExtraInfo.FilePath = filePath;
             }
+            else
+            {
+                oldFilePath=filePath;
+                if (projectViewModel.ProjectInfo.Registry != null && projectViewModel.ProjectInfo.Registry.IsUsePassword)
+                {
+                    filePath = filePath.Replace(StaticStringHelper.PGE, StaticStringHelper.PKY);
+                }
+                else
+                {
+                    filePath = filePath.Replace(StaticStringHelper.PKY, StaticStringHelper.PGE);
+                }
+            }
             FileInfo fileInfo = new FileInfo(filePath);
             projectViewModel.ProjectName = fileInfo.Name.Replace(fileInfo.Extension, "");
-            projectViewModel.Save();
+            projectViewModel.ProjectInfo.ExtraInfo.FilePath = filePath;
+
             if (!CacheDataHelper.OldProjectDic.ContainsKey(projectViewModel.Key))
                 CacheDataHelper.OldProjectDic.Add(projectViewModel.Key, projectViewModel.ProjectInfo.Clone<ProjectInfoModel>());
             else
             {
                 CacheDataHelper.OldProjectDic[projectViewModel.Key] = projectViewModel.ProjectInfo.Clone<ProjectInfoModel>();
             }
-            var success = ZipHelper.Compress(projectViewModel.SavePath, filePath);
+            string password = "";
+            if (projectViewModel.ProjectInfo.Registry.IsUsePassword)
+            {
+                password = projectViewModel.ProjectInfo.Registry.Password;
+            }
+            var success = ZipHelper.Compress(projectViewModel.SavePath, filePath, password);
             Directory.Delete(projectViewModel.SavePath, true);
+            if(oldFilePath!=filePath)
+            {
+                File.Delete(oldFilePath);
+            }
             return success == true;
         }
     }

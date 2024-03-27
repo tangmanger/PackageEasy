@@ -41,6 +41,10 @@ namespace PackageEasy.Domain.Enums
         /// <summary>
         /// 多语言处理界面
         /// </summary>
-        LanguageView = 7
+        LanguageView = 7,
+        /// <summary>
+        /// 安全界面
+        /// </summary>
+        SecurityView = 8
     }
 }

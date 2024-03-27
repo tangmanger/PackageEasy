@@ -7,6 +7,7 @@
              xmlns:local="clr-namespace:PackageEasy.Views"
              xmlns:lang="clr-namespace:PackageEasy.Common.Data;assembly=PackageEasy.Common"
              xmlns:controls="https://dicgo.com/controls"
+             xmlns:helpers="clr-namespace:PackageEasy.Common.Helpers;assembly=PackageEasy.Common"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
@@ -31,9 +32,13 @@
             <RowDefinition Height="*" ></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Text="注册文件格式:"  Margin="0,10,0,0" Grid.Row="0" lang:LanguageManager.LangText="注册文件格式:" VerticalAlignment="Center" HorizontalAlignment="Right" ></TextBlock>
-        <controls:PlaceholderTextBox Grid.Column="1" PlaceHolderText="示例: .pge,.pgex" Text="{Binding RegistryFormat,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Grid.Row="0" Width="220" Height="30" Style="{StaticResource  PlaceholderTextBoxStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,10,0,0"></controls:PlaceholderTextBox>
+        <controls:PlaceholderTextBox Grid.Column="1" PlaceHolderText="示例: .pge,.pky" Text="{Binding RegistryFormat,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Grid.Row="0" Width="220" Height="30" Style="{StaticResource  PlaceholderTextBoxStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,10,0,0"></controls:PlaceholderTextBox>
         <CheckBox Grid.Column="2" Content="可选组件" IsChecked="{Binding IsAsSelected}" Margin="5,10,0,0"  lang:LanguageManager.LangText="可选组件" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center"></CheckBox>
         <TextBlock Text="注册进程:" Margin="0,10,0,0" Grid.Row="6" lang:LanguageManager.LangText="注册进程:" VerticalAlignment="Center" HorizontalAlignment="Right" ></TextBlock>
         <controls:PlaceholderTextBox Grid.Column="1" PlaceHolderText="例如:PackageEasy.exe"  Grid.Row="6" Width="220" MinHeight="30" Style="{StaticResource PlaceholderTextBoxStyle}"   TextWrapping="Wrap" Text="{Binding ProcessName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,10,0,0"></controls:PlaceholderTextBox>
+
+        <TextBlock Text="密码:" Margin="0,10,0,0" Grid.Row="7" lang:LanguageManager.LangText="密码:" VerticalAlignment="Center" HorizontalAlignment="Right" ></TextBlock>
+        <PasswordBox Grid.Column="1" Grid.Row="7" Width="220" IsEnabled="{Binding IsUsePassword}" MinHeight="30" Style="{StaticResource CommonPasswordBox}" helpers:PasswordHelper.Attach="True" helpers:PasswordHelper.Password="{Binding Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalContentAlignment="Center" Margin="5,10,0,0"></PasswordBox>
+        <CheckBox Content="启用密码" IsChecked="{Binding IsUsePassword,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" VerticalContentAlignment="Center" VerticalAlignment="Center" Grid.Row="7" lang:LanguageManager.LangText="启用密码" Margin="5,10,0,0"></CheckBox>
     </Grid>
 </UserControl>

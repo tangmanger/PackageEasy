@@ -473,6 +473,46 @@ namespace PackageEasy.ViewModels
         {
             Environment.Exit(0);
         });
+
+        /// <summary>
+        /// 另存为
+        /// </summary>
+        public RelayCommand SaveAsCommand => new RelayCommand(() =>
+        {
+            var table = TableList.Find(p => p.IsActive);
+            if (table != null)
+            {
+                if (CacheDataHelper.ProjectCahes.ContainsKey(table.ProjectKey))
+                {
+                    var viewCaheModel = CacheDataHelper.ProjectCahes[table.ProjectKey];
+                    if (viewCaheModel != null)
+                    {
+                        ProjectViewModel? projectViewModel = viewCaheModel.BaseProjectViewModel as ProjectViewModel;
+                        if (projectViewModel != null)
+                        {
+                            if (projectViewModel.ProjectInfo != null && projectViewModel.ProjectInfo.BaseInfo != null)
+                                projectViewModel.ProjectInfo.ExtraInfo.FilePath = "";
+                            if (!projectViewModel.ValidateData())
+                            {
+                                return;
+                            }
+                            var result = FileHelper.Save(projectViewModel);
+                            if (result)
+                            {
+                                table.ProjectName = projectViewModel.ProjectName;
+                                TMessageBox.ShowMsg("保存成功!");
+                                SaveRecently(projectViewModel);
+                            }
+                            else
+                            {
+                                TMessageBox.ShowMsg("保存失败!");
+                            }
+                        }
+                    }
+                }
+            }
+
+        });
         /// <summary>
         /// 保存数据
         /// </summary>
@@ -489,6 +529,10 @@ namespace PackageEasy.ViewModels
                         ProjectViewModel? projectViewModel = viewCaheModel.BaseProjectViewModel as ProjectViewModel;
                         if (projectViewModel != null)
                         {
+                            if (!projectViewModel.ValidateData())
+                            {
+                                return;
+                            }
                             var result = FileHelper.Save(projectViewModel);
                             if (result)
                             {

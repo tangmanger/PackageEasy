@@ -129,6 +129,12 @@ namespace PackageEasy.ViewModels
             languageView.DataContext = languageViewModel;
             languageViewModel.ProjectInfo = ProjectInfo;
             ViewCaches.Add(ViewType.LanguageView, new ViewCaheModel() { BaseProjectViewModel = languageViewModel, ProjectView = languageView });
+            //暂时放到注册表界面去
+            //SecurityView securityView = new SecurityView();
+            //SecurityViewModel securityViewModel = new SecurityViewModel(ViewType.SecurityView, Key);
+            //securityView.DataContext = securityViewModel;
+            //securityViewModel.ProjectInfo = ProjectInfo;
+            //ViewCaches.Add(ViewType.SecurityView, new ViewCaheModel() { BaseProjectViewModel = securityViewModel, ProjectView = securityView });
         }
         public override void RefreshData()
         {

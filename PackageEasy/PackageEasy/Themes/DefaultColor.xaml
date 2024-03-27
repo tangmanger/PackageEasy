@@ -66,4 +66,7 @@
     <SolidColorBrush x:Key="settingControlBottonBackground" Color="#5D6B99"></SolidColorBrush>
     <!--插件鼠标移上颜色-->
     <SolidColorBrush x:Key="pluginMouseOverBackground" Color="#E6E7EF" ></SolidColorBrush>
+    <!--PasswordStyle-->
+    <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
+    <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
 </ResourceDictionary>

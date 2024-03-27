@@ -35,7 +35,7 @@ namespace PackageEasy.Views.Tools
             InitializeComponent();
             DataContext = this;
         }
-        public override string Description => "工具设置".GetLangText();
+        public override string Description => "设置".GetLangText();
         public override void Load()
         {
             MakensisPath = ConfigHelper.Config.NSISMakePath ?? "";

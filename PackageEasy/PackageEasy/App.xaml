@@ -21,6 +21,7 @@
                 <ResourceDictionary Source="/Styles/DataGrid.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/Styles/Menu.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/Styles/Converters.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="/Styles/PasswordBoxStyle.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

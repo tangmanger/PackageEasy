@@ -71,6 +71,7 @@
                                             <RowDefinition></RowDefinition>
                                             <RowDefinition Height="auto"></RowDefinition>
                                         </Grid.RowDefinitions>
+                                        <TextBlock HorizontalAlignment="Right"  Style="{StaticResource IconFontStyle}" Visibility="Collapsed" x:Name="locker" Text="&#xe618;" VerticalAlignment="Top" Margin="0,5,5,0"></TextBlock>
                                         <Image Source="{Binding Icon,Converter={StaticResource Base64ToImageConverter},UpdateSourceTrigger=PropertyChanged}" Height="50" Width="50"></Image>
                                         <Grid Grid.Row="1" Margin="5,0,5,5">
                                             <Grid.ColumnDefinitions>
@@ -85,6 +86,9 @@
 
                                 </Border>
                                 <ControlTemplate.Triggers>
+                                    <DataTrigger Binding="{Binding IsLock}" Value="true">
+                                        <Setter Property="Visibility" Value="Visible" TargetName="locker"></Setter>
+                                    </DataTrigger>
                                     <Trigger Property="IsPressed" Value="true">
                                         <Setter Property="RenderTransform" TargetName="border" Value="{StaticResource buttonScale}"></Setter>
                                     </Trigger>
