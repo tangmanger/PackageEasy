@@ -102,7 +102,7 @@ namespace PackageEasy.Helpers
             else
             {
                 projectViewModel.ProjectInfo.BaseInfo = File.ReadAllText(baseInfo).DeserializeObject<BaseInfoModel>();
-                projectViewModel.ProjectInfo.BaseInfo.Key = projectViewModel.Key;
+                //projectViewModel.ProjectInfo.BaseInfo.Key = projectViewModel.Key;
                 projectViewModel.ProjectName = fileInfo.Name.Replace(fileInfo.Extension, "");
 
             }

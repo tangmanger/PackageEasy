@@ -20,6 +20,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -275,7 +276,7 @@ namespace PackageEasy.ViewModels
                             wating.Close();
                             if (list != null && list.Count > 0)
                             {
-                                File.WriteAllLines(dirPath, list, Encoding.Default);
+                                File.WriteAllLines(dirPath, list, Encoding.UTF8);
                                 if (File.Exists(dirPath))
                                 {
 
@@ -496,9 +497,13 @@ namespace PackageEasy.ViewModels
                             {
                                 return;
                             }
+                            if (projectViewModel.ProjectInfo != null && projectViewModel.ProjectInfo.BaseInfo != null)
+                                projectViewModel.ProjectInfo.BaseInfo.Key = Guid.NewGuid().ToString();
                             var result = FileHelper.Save(projectViewModel);
                             if (result)
                             {
+                                if (CacheDataHelper.FileOpenDic.ContainsKey(projectViewModel.Key) && projectViewModel.ProjectInfo != null)
+                                    CacheDataHelper.FileOpenDic[projectViewModel.Key] = projectViewModel.ProjectInfo.ExtraInfo.FilePath;
                                 table.ProjectName = projectViewModel.ProjectName;
                                 TMessageBox.ShowMsg("保存成功!");
                                 SaveRecently(projectViewModel);
@@ -633,6 +638,7 @@ namespace PackageEasy.ViewModels
 
             CacheDataHelper.UpdateRecently(new RecentlyModel()
             {
+                Key = projectViewModel.ProjectInfo.BaseInfo.Key,
                 RecentlyName = projectViewModel.ProjectName,
                 CreateTime = projectViewModel.ProjectInfo.ExtraInfo.CreateTime,
                 Icon = base64Image ?? null,

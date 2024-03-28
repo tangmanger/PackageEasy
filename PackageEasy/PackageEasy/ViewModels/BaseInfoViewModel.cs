@@ -433,7 +433,10 @@ namespace PackageEasy.ViewModels
             if (ProjectInfo.BaseInfo == null)
                 ProjectInfo.BaseInfo = new BaseInfoModel();
             BaseInfoModel baseInfoModel = ProjectInfo.BaseInfo;
-            baseInfoModel.Key = ParentKey;
+            if (string.IsNullOrWhiteSpace(baseInfoModel.Key))
+            {
+                baseInfoModel.Key = ParentKey;
+            }
             baseInfoModel.ApplicationName = ApplicationName;
             baseInfoModel.ApplicationVersion = ApplicationVersion;
             baseInfoModel.ApplicationUrl = ApplicationUrl;
@@ -552,7 +555,10 @@ namespace PackageEasy.ViewModels
             BaseInfoModel baseInfoModel = ProjectInfo.BaseInfo;
             if (baseInfoModel == null)
                 baseInfoModel = new BaseInfoModel();
-            baseInfoModel.Key = ParentKey;
+            if (string.IsNullOrWhiteSpace(baseInfoModel.Key))
+            {
+                baseInfoModel.Key = ParentKey;
+            }
             baseInfoModel.ApplicationName = ApplicationName;
             baseInfoModel.ApplicationVersion = ApplicationVersion;
             baseInfoModel.ApplicationUrl = ApplicationUrl;

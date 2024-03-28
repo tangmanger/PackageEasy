@@ -71,10 +71,18 @@ namespace PackageEasy.Helpers
         /// <param name="recently"></param>
         public static void UpdateRecently(RecentlyModel recently)
         {
-            var current = RecentlyList.Find(p => p.RecentlyName == recently.RecentlyName);
+            var current = RecentlyList.Find(p => p.Key == recently.Key);
             if (current != null)
             {
                 RecentlyList.Remove(current);
+            }
+            else
+            {
+                current = RecentlyList.Find(p => p.RecentlyName == recently.RecentlyName);
+                if (current != null)
+                {
+                    RecentlyList.Remove(current);
+                }
             }
             recently.UpdateTime = DateTime.Now;
             RecentlyList.Add(recently);

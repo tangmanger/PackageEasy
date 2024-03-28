@@ -9,6 +9,7 @@ namespace PackageEasy.Domain.Models
 {
     public class RecentlyModel : BaseModel
     {
+        public string Key { get; set; }
         private bool isLock;
         private string filePath;
 
