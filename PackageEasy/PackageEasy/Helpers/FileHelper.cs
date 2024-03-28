@@ -225,6 +225,7 @@ namespace PackageEasy.Helpers
                     return false;
                 }
                 filePath = openFileDialog.FileName;
+                oldFilePath = filePath;
                 projectViewModel.ProjectInfo.ExtraInfo.FilePath = filePath;
             }
             else
