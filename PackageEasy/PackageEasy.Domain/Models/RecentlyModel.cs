@@ -37,7 +37,7 @@ namespace PackageEasy.Domain.Models
             set
             {
                 filePath = value;
-                IsLock = value.EndsWith(StaticStringHelper.PGE);
+                IsLock = value.EndsWith(StaticStringHelper.PKY);
             }
         }
 
