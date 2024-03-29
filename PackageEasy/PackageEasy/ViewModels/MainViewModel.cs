@@ -264,7 +264,7 @@ namespace PackageEasy.ViewModels
                                  list = nSISScript.Build(viewCaheModel.BaseProjectViewModel.ProjectInfo);
                                  if (messageResult == TMessageBoxResult.OK)
                                  {
-                                     var workSpace = viewCaheModel.BaseProjectViewModel.ProjectInfo.BaseInfo.WorkSpace + "\\";
+                                     var workSpace = viewCaheModel.BaseProjectViewModel.ProjectInfo.GetWorkSpace() + "\\";
                                      List<string> lists = new List<string>();
                                      foreach (var item in list)
                                      {
@@ -347,9 +347,9 @@ namespace PackageEasy.ViewModels
 
 
                             var list = nSISScript.Build(viewCaheModel.BaseProjectViewModel.ProjectInfo);
-                            if (!string.IsNullOrWhiteSpace(viewCaheModel.BaseProjectViewModel.ProjectInfo.BaseInfo.WorkSpace))
+                            if (!string.IsNullOrWhiteSpace(viewCaheModel.BaseProjectViewModel.ProjectInfo.GetWorkSpace()))
                             {
-                                DirectoryInfo directoryInfo = new DirectoryInfo(viewCaheModel.BaseProjectViewModel.ProjectInfo.BaseInfo.WorkSpace);
+                                DirectoryInfo directoryInfo = new DirectoryInfo(viewCaheModel.BaseProjectViewModel.ProjectInfo.GetWorkSpace());
                                 var path = Path.Combine(directoryInfo.Parent.FullName, $"{viewCaheModel.BaseProjectViewModel.ProjectInfo.BaseInfo.ApplicationName}.pgescript");
                                 File.WriteAllLines(path, list, Encoding.Default);
                                 if (File.Exists(path))
@@ -493,10 +493,10 @@ namespace PackageEasy.ViewModels
                         {
                             if (projectViewModel.ProjectInfo != null && projectViewModel.ProjectInfo.BaseInfo != null)
                                 projectViewModel.ProjectInfo.ExtraInfo.FilePath = "";
-                            if (!projectViewModel.ValidateData())
-                            {
-                                return;
-                            }
+                            //if (!projectViewModel.ValidateData())
+                            //{
+                            //    return;
+                            //}
                             if (projectViewModel.ProjectInfo != null && projectViewModel.ProjectInfo.BaseInfo != null)
                                 projectViewModel.ProjectInfo.BaseInfo.Key = Guid.NewGuid().ToString();
                             var result = FileHelper.Save(projectViewModel);
@@ -534,10 +534,10 @@ namespace PackageEasy.ViewModels
                         ProjectViewModel? projectViewModel = viewCaheModel.BaseProjectViewModel as ProjectViewModel;
                         if (projectViewModel != null)
                         {
-                            if (!projectViewModel.ValidateData())
-                            {
-                                return;
-                            }
+                            //if (!projectViewModel.ValidateData())
+                            //{
+                            //    return;
+                            //}
                             var result = FileHelper.Save(projectViewModel);
                             if (result)
                             {
@@ -613,7 +613,7 @@ namespace PackageEasy.ViewModels
         private void SaveRecently(ProjectViewModel projectViewModel)
         {
             string? base64Image = "";
-            var iconPath = projectViewModel.ProjectInfo.BaseInfo.WorkSpace + projectViewModel.ProjectInfo.BaseInfo.InstallIconPath;
+            var iconPath = projectViewModel.ProjectInfo.GetWorkSpace() + projectViewModel.ProjectInfo.BaseInfo.InstallIconPath;
             if (!File.Exists(iconPath))
             {
                 var info = Application.GetResourceStream(new Uri("/Resources/Images/tools.png", UriKind.Relative));

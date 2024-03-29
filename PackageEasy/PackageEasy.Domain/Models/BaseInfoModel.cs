@@ -177,5 +177,9 @@ namespace PackageEasy.Domain.Models
         /// 在控制面板名称中显示版本
         /// </summary>
         public bool IsShowInUnInstall { get; set; }
+        /// <summary>
+        /// 使用相对路径
+        /// </summary>
+        public bool IsUseRelativePath { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using PackageEasy.Common.Helpers;
 using PackageEasy.Domain;
 using PackageEasy.Domain.Enums;
 using PackageEasy.Domain.Interfaces;
@@ -165,7 +166,7 @@ namespace PackageEasy.ViewModels
         /// <returns></returns>
         public bool CheckFileExist(string path)
         {
-            var filePath = ProjectInfo.BaseInfo.WorkSpace + path;
+            var filePath =  ProjectInfo.GetWorkSpace() + path;
             return File.Exists(filePath);
         }
 

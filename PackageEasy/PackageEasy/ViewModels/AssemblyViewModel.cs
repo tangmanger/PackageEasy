@@ -166,7 +166,7 @@ namespace PackageEasy.ViewModels
         /// </summary>
         public RelayCommand AddDirCommand1 => new RelayCommand(() =>
         {
-            if (string.IsNullOrWhiteSpace(ProjectInfo.BaseInfo.WorkSpace))
+            if (string.IsNullOrWhiteSpace(ProjectInfo.GetWorkSpace()))
             {
                 Log.Write("工作目录为空!");
                 TMessageBox.ShowMsg("", "工作目录为空!");
@@ -220,7 +220,7 @@ namespace PackageEasy.ViewModels
         /// </summary>
         public RelayCommand AddDirCommand => new RelayCommand(() =>
         {
-            if (string.IsNullOrWhiteSpace(ProjectInfo.BaseInfo.WorkSpace))
+            if (string.IsNullOrWhiteSpace(ProjectInfo.GetWorkSpace()))
             {
                 Log.Write("工作目录为空!");
                 TMessageBox.ShowMsg("", "工作目录为空!");
@@ -276,9 +276,9 @@ namespace PackageEasy.ViewModels
 
                     AssemblyFileModel assemblyFileModel = new AssemblyFileModel();
                     assemblyFileModel.AssemblyId = currentAssembly.AssemblyId;
-                    if (currentAssembly.SelectDir != ProjectInfo.BaseInfo.WorkSpace)
+                    if (currentAssembly.SelectDir != ProjectInfo.GetWorkSpace())
                     {
-                        var path = file.Replace(currentAssembly.SelectDir, ProjectInfo.BaseInfo.WorkSpace);
+                        var path = file.Replace(currentAssembly.SelectDir, ProjectInfo.GetWorkSpace());
                         FileInfo info = new FileInfo(path);
                         if (!Directory.Exists(info.DirectoryName))
                         {
@@ -286,7 +286,7 @@ namespace PackageEasy.ViewModels
                                 Directory.CreateDirectory(info.DirectoryName);
                         }
                         File.Copy(file, path, true);
-                        assemblyFileModel.FilePath = path.Replace(ProjectInfo.BaseInfo.WorkSpace, "");
+                        assemblyFileModel.FilePath = path.Replace(ProjectInfo.GetWorkSpace(), "");
                     }
                     else
                     {
@@ -313,7 +313,7 @@ namespace PackageEasy.ViewModels
         /// </summary>
         public RelayCommand AddFileByDirCommand => new RelayCommand(() =>
         {
-            if (string.IsNullOrWhiteSpace(ProjectInfo.BaseInfo.WorkSpace))
+            if (string.IsNullOrWhiteSpace(ProjectInfo.GetWorkSpace()))
             {
                 Log.Write("工作目录为空!");
                 TMessageBox.ShowMsg("", "工作目录为空!");
@@ -344,9 +344,9 @@ namespace PackageEasy.ViewModels
 
                     AssemblyFileModel assemblyFileModel = new AssemblyFileModel();
                     assemblyFileModel.AssemblyId = currentAssembly.AssemblyId;
-                    if (currentAssembly.SelectDir != ProjectInfo.BaseInfo.WorkSpace)
+                    if (currentAssembly.SelectDir != ProjectInfo.GetWorkSpace())
                     {
-                        var path = file.Replace(currentAssembly.SelectDir, ProjectInfo.BaseInfo.WorkSpace);
+                        var path = file.Replace(currentAssembly.SelectDir, ProjectInfo.GetWorkSpace());
                         FileInfo info = new FileInfo(path);
                         if (!Directory.Exists(info.DirectoryName))
                         {
@@ -354,7 +354,7 @@ namespace PackageEasy.ViewModels
                                 Directory.CreateDirectory(info.DirectoryName);
                         }
                         File.Copy(file, path, true);
-                        assemblyFileModel.FilePath = path.Replace(ProjectInfo.BaseInfo.WorkSpace, "");
+                        assemblyFileModel.FilePath = path.Replace(ProjectInfo.GetWorkSpace(), "");
                     }
                     else
                     {
@@ -384,7 +384,7 @@ namespace PackageEasy.ViewModels
         public RelayCommand AddFileCommand => new RelayCommand(() =>
         {
 
-            if (string.IsNullOrWhiteSpace(ProjectInfo.BaseInfo.WorkSpace))
+            if (string.IsNullOrWhiteSpace(ProjectInfo.GetWorkSpace()))
             {
                 Log.Write("工作目录为空!");
                 TMessageBox.ShowMsg("", "工作目录为空!");
@@ -407,9 +407,9 @@ namespace PackageEasy.ViewModels
                 AssemblyFileModel assemblyFileModel = new AssemblyFileModel();
 
                 assemblyFileModel.AssemblyId = currentAssembly.AssemblyId;
-                if (fileInfo.Directory.FullName != ProjectInfo.BaseInfo.WorkSpace)
+                if (fileInfo.Directory.FullName != ProjectInfo.GetWorkSpace())
                 {
-                    var path = fileInfo.FullName.Replace(fileInfo.Directory.FullName, ProjectInfo.BaseInfo.WorkSpace);
+                    var path = fileInfo.FullName.Replace(fileInfo.Directory.FullName, ProjectInfo.GetWorkSpace());
                     FileInfo info = new FileInfo(path);
                     if (!Directory.Exists(info.DirectoryName))
                     {
@@ -418,12 +418,12 @@ namespace PackageEasy.ViewModels
                     }
                     File.Copy(fileInfo.FullName, path, true);
 
-                    assemblyFileModel.FilePath = path.Replace(ProjectInfo.BaseInfo.WorkSpace, "");
+                    assemblyFileModel.FilePath = path.Replace(ProjectInfo.GetWorkSpace(), "");
 
                 }
                 else
                 {
-                    assemblyFileModel.FilePath = fileInfo.FullName.Replace(ProjectInfo.BaseInfo.WorkSpace, "");
+                    assemblyFileModel.FilePath = fileInfo.FullName.Replace(ProjectInfo.GetWorkSpace(), "");
                 }
                 assemblyFileModel.SubPath = fileInfo?.DirectoryName?.Replace(fileInfo.Directory.FullName, "") ?? "";
                 assemblyFileModel.TargetPath = TargetDirList.FirstOrDefault() ?? new DescModel<TargetDirType>() { Data = TargetDirType.INSTDIR };
@@ -563,7 +563,7 @@ namespace PackageEasy.ViewModels
                     {
                         foreach (var file in assembly.FileList)
                         {
-                            var path = ProjectInfo?.BaseInfo?.WorkSpace + file.FilePath;
+                            var path = ProjectInfo.GetWorkSpace() + file.FilePath;
                             if (string.IsNullOrWhiteSpace(path))
                             {
                                 string str = string.Format("当前文件{0}为空!".GetLangText(), file.FilePath);

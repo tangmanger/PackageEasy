@@ -19,6 +19,13 @@ namespace PackageEasy.NSIS
         {
             throw new NotImplementedException();
         }
+        public  string GetWorkSpace( ProjectInfoModel projectInfo)
+        {
+            if (!projectInfo.BaseInfo.IsUseRelativePath) return projectInfo.BaseInfo.WorkSpace;
+
+            FileInfo fileInfo = new FileInfo(projectInfo.ExtraInfo.FilePath);
+            return Path.Combine(fileInfo.Directory.FullName, projectInfo.BaseInfo.WorkSpace);
+        }
         List<LanguageModel> Languages { get; set; }
         string? GetLanguage(string? languageText, LanguageType languageType)
         {
@@ -88,11 +95,11 @@ namespace PackageEasy.NSIS
 
                     string iconPath = "${NSISDIR}\\Contrib\\Graphics\\Icons\\modern-install.ico";
                     if (!string.IsNullOrWhiteSpace(baseInfo.InstallIconPath))
-                        iconPath = baseInfo.WorkSpace + baseInfo.InstallIconPath;
+                        iconPath = GetWorkSpace(projectInfoModel) + baseInfo.InstallIconPath;
                     list.Add($"!define MUI_ICON \"{iconPath}\"");
                     string unInstallKet = "${NSISDIR}\\Contrib\\Graphics\\Icons\\modern-uninstall.ico";
                     if (!string.IsNullOrWhiteSpace(baseInfo.UnInstallIconPath))
-                        unInstallKet = baseInfo.WorkSpace + baseInfo.UnInstallIconPath;
+                        unInstallKet = GetWorkSpace(projectInfoModel) + baseInfo.UnInstallIconPath;
                     list.Add($"!define MUI_UNICON \"{unInstallKet}\"");
                     list.Add($"!define MUI_LANGDLL_REGISTRY_ROOT \"${{PRODUCT_UNINST_ROOT_KEY}}\"");
                     list.Add($"!define MUI_LANGDLL_REGISTRY_KEY \"${{PRODUCT_UNINST_KEY}}\"");
@@ -254,7 +261,7 @@ namespace PackageEasy.NSIS
                     {
                         list.Add("Name \"${PRODUCT_NAME} ${PRODUCT_VERSION}\"");
                     }
-                    DirectoryInfo directoryInfo = new DirectoryInfo(baseInfo.WorkSpace);
+                    DirectoryInfo directoryInfo = new DirectoryInfo(GetWorkSpace(projectInfoModel));
                     string outPath = Path.Combine(directoryInfo.Parent.FullName, "OutPut");
                     if (!Directory.Exists(outPath))
                     {
@@ -329,7 +336,7 @@ namespace PackageEasy.NSIS
                                         list.Add($"  SetOutPath \"{dirPath}\"");
 
                                         list.Add("  ${If} $LANGUAGE == " + multiFile.Lang.LanguageDisplayKey);
-                                        var filePath = projectInfoModel?.BaseInfo?.WorkSpace + multiFile.AssemblyFile.FilePath;
+                                        var filePath = GetWorkSpace(projectInfoModel) + multiFile.AssemblyFile.FilePath;
                                         list.Add($"  File \"{filePath}\"");
                                         list.Add("  ${EndIf}");
                                         continue;
@@ -342,7 +349,7 @@ namespace PackageEasy.NSIS
                                     currentDirectory = dirPath;
                                     list.Add($"  SetOutPath \"{dirPath}\"");
                                 }
-                                var path = projectInfoModel?.BaseInfo?.WorkSpace + file.FilePath;
+                                var path = GetWorkSpace(projectInfoModel) + file.FilePath;
                                 if (!file.IsDirectory)
                                     //    list.Add($"  CreateDirectory  \"{path}\"");
                                     //else

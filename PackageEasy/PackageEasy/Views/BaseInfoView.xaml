@@ -129,8 +129,11 @@
 
         <TextBlock Grid.Row="5" Text="工作目录:"  Grid.Column="2" lang:LanguageManager.LangText="工作目录:" VerticalAlignment="Center"  HorizontalAlignment="Right"></TextBlock>
         <StackPanel Orientation="Horizontal"  Grid.Row="5" Grid.RowSpan="3" Grid.Column="3">
-            <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Text="{Binding WorkSpace,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" VerticalAlignment="Top" Style="{StaticResource CommonTextBox}" Width="150" MinHeight="30" TextWrapping="WrapWithOverflow"  Margin="5,10,0,10"></TextBox>
-            <Button Width="50" Height="30" Content="..." VerticalAlignment="Top" Command="{Binding SelectWorkSpaceCommand}" Style="{StaticResource CommonButtonStyle}" Margin="5,10,0,0"></Button>
+            <StackPanel IsEnabled="{Binding IsUseRelativePath,Converter={StaticResource BoolRevolveConverter}, ConverterParameter=1}" Orientation="Horizontal">
+                <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Text="{Binding WorkSpace,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" VerticalAlignment="Top" Style="{StaticResource CommonTextBox}" Width="150" MinHeight="30" TextWrapping="WrapWithOverflow"  Margin="5,10,0,10"></TextBox>
+                <Button Width="50" Height="30" Content="..." VerticalAlignment="Top" Command="{Binding SelectWorkSpaceCommand}" Style="{StaticResource CommonButtonStyle}" Margin="5,10,0,0"></Button>
+            </StackPanel>
+            <CheckBox IsChecked="{Binding IsUseRelativePath}" Command="{Binding UseRelativeCommand}" Content="使用相对路径" lang:LanguageManager.LangText="使用相对路径" Margin="5,18,0,0"  VerticalContentAlignment="Top"></CheckBox>
         </StackPanel>
 
 

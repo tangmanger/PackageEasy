@@ -3,6 +3,7 @@ using PackageEasy.Domain;
 using PackageEasy.Domain.Attributes;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -116,6 +117,18 @@ namespace PackageEasy.Common.Helpers
                 if (it.IsGenericType && typeof(IEnumerable<>) == it.GetGenericTypeDefinition())
                     return true;
             return false;
+        }
+        /// <summary>
+        /// 获取相对目录
+        /// </summary>
+        /// <param name="projectInfo"></param>
+        /// <returns></returns>
+        public static string GetWorkSpace(this ProjectInfoModel projectInfo)
+        {
+            if (!projectInfo.BaseInfo.IsUseRelativePath) return projectInfo.BaseInfo.WorkSpace;
+
+            FileInfo fileInfo = new FileInfo(projectInfo.ExtraInfo.FilePath);
+            return Path.Combine(fileInfo.Directory.FullName, projectInfo.BaseInfo.WorkSpace);
         }
     }
 }

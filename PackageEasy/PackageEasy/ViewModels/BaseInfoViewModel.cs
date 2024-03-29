@@ -107,6 +107,7 @@ namespace PackageEasy.ViewModels
         private string companyName;
         private string productVersion;
         private bool isShowInUnInstall;
+        private bool isUseRelativePath;
 
         /// <summary>
         /// 应用程序名称
@@ -421,6 +422,18 @@ namespace PackageEasy.ViewModels
                 OnPropertyChanged();
             }
         }
+        /// <summary>
+        /// 使用相对路径
+        /// </summary>
+        public bool IsUseRelativePath
+        {
+            get => isUseRelativePath;
+            set
+            {
+                isUseRelativePath = value;
+                OnPropertyChanged();
+            }
+        }
 
         #endregion
 
@@ -457,7 +470,8 @@ namespace PackageEasy.ViewModels
             baseInfoModel.IsLicenseChecked = IsLicenseChecked;
             baseInfoModel.CompanyName = CompanyName;
             baseInfoModel.ProductVersion = ProductVersion;
-            baseInfoModel.IsShowInUnInstall= IsShowInUnInstall;
+            baseInfoModel.IsShowInUnInstall = IsShowInUnInstall;
+            baseInfoModel.IsUseRelativePath = IsUseRelativePath;
             baseInfoModel.LanguageList = InstallList.FindAll(c => c.IsSelected);
             if (baseInfoModel.LanguageList == null || baseInfoModel.LanguageList.Count == 0)
             {
@@ -509,6 +523,7 @@ namespace PackageEasy.ViewModels
                     WorkSpace = ConfigHelper.Config.WorkSpace;
                 InstallIconPath = ProjectInfo.BaseInfo.InstallIconPath;
                 UnInstallIconPath = ProjectInfo.BaseInfo.UnInstallIconPath;
+                IsUseRelativePath = ProjectInfo.BaseInfo.IsUseRelativePath;
                 if (ProjectInfo.BaseInfo.LanguageList != null && ProjectInfo.BaseInfo.LanguageList.Count > 0)
                 {
                     foreach (var item in InstallList)
@@ -579,6 +594,7 @@ namespace PackageEasy.ViewModels
             baseInfoModel.CompanyName = CompanyName;
             baseInfoModel.ProductVersion = ProductVersion;
             baseInfoModel.IsShowInUnInstall = IsShowInUnInstall;
+            baseInfoModel.IsUseRelativePath = IsUseRelativePath;
             var str = WorkSpace + LanguagePath;
             if (!string.IsNullOrWhiteSpace(LanguagePath) && File.Exists(str))
             {
@@ -673,8 +689,8 @@ namespace PackageEasy.ViewModels
         /// </summary>
         public RelayCommand SelectLanguageCommand => new RelayCommand(() =>
         {
-
-            if (string.IsNullOrWhiteSpace(WorkSpace))
+            string workPath = ProjectInfo.GetWorkSpace();
+            if (string.IsNullOrWhiteSpace(workPath))
             {
                 Log.Write("工作目录为空!");
                 TMessageBox.ShowMsg("", "工作目录为空!");
@@ -684,12 +700,12 @@ namespace PackageEasy.ViewModels
             if (!string.IsNullOrWhiteSpace(str))
             {
                 FileInfo fileInfo = new FileInfo(str);
-                var copyPath = Path.Combine(WorkSpace, fileInfo.Name);
+                var copyPath = Path.Combine(workPath, fileInfo.Name);
                 if (!File.Exists(copyPath))
                 {
                     File.Copy(str, copyPath, true);
                 }
-                LanguagePath = copyPath.Replace(WorkSpace, "");
+                LanguagePath = copyPath.Replace(workPath, "");
                 List<LanguageModel> list = File.ReadAllText(str).DeserializeObject<List<LanguageModel>>();
                 if (list == null || list.Count == 0)
                 {
@@ -792,6 +808,41 @@ namespace PackageEasy.ViewModels
                 WorkSpace = folderBrowserDialog.SelectedPath;
             }
         });
+
+        public RelayCommand UseRelativeCommand => new RelayCommand(() =>
+        {
+            if (IsUseRelativePath)
+            {
+                if (string.IsNullOrWhiteSpace(WorkSpace))
+                {
+                    if (string.IsNullOrWhiteSpace(WorkSpace))
+                    {
+                        Log.Write("工作目录为空!");
+                        TMessageBox.ShowMsg("", "工作目录为空!");
+                        IsUseRelativePath = false;
+                        return;
+                    }
+                }
+                if (!File.Exists(ProjectInfo.ExtraInfo.FilePath))
+                {
+                    TMessageBox.ShowMsg("", "请先进行保存!");
+                    IsUseRelativePath = false;
+                    return;
+                }
+                FileInfo fileInfo = new FileInfo(ProjectInfo.ExtraInfo.FilePath);
+                WorkSpace = Path.GetRelativePath(fileInfo.Directory.FullName, WorkSpace);
+                //WorkSpace = Path.Combine(fileInfo.Directory.FullName, Path.GetRelativePath(fileInfo.Directory.FullName, WorkSpace));
+            }
+            else
+            {
+                WorkSpace = "";
+            }
+            if (ProjectInfo.BaseInfo == null)
+                ProjectInfo.BaseInfo = new BaseInfoModel();
+            ProjectInfo.BaseInfo.IsUseRelativePath = IsUseRelativePath;
+
+        });
+
 
         #endregion
     }
