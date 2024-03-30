@@ -61,7 +61,7 @@ namespace PackageEasy.Common.Helpers
                 {
                     object value = property.GetValue(model, null);
                     object oldValue = property.GetValue(old, null);
-                    if (value != null)
+                    if (value != null && oldValue != null)
                     {
                         Type objType = value.GetType();
                         Type oldType = oldValue.GetType();
