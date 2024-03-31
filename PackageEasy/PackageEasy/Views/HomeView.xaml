@@ -16,7 +16,7 @@
     </i:Interaction.Triggers>
     <UserControl.Resources>
         <ControlTemplate x:Key="AddNewProject" TargetType="Button">
-            <Border CornerRadius="8" Background="{DynamicResource projectNewCreateBackground}" x:Name="border" RenderTransformOrigin="0.599,0.647" BorderThickness="1" BorderBrush="#26000000">
+            <Border CornerRadius="8" Background="{DynamicResource projectNewCreateBackground}" x:Name="border" RenderTransformOrigin="0.599,0.647" BorderThickness="1"  BorderBrush="{DynamicResource borderBrush}" >
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Image Source="/Resources/Images/NewProject.png" Height="28" Width="28"></Image>
                     <TextBlock Text="新建工程" Foreground="{DynamicResource projectNewCreateForeground}" lang:LanguageManager.LangText="新建工程" FontSize="16" Margin="0,5,0,0"></TextBlock>
@@ -44,7 +44,7 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Vertical">
-            <TextBlock Text="新建工程" lang:LanguageManager.LangText="新建工程" Margin="20,16.5,0,0" FontSize="16"></TextBlock>
+            <TextBlock Text="新建工程"  Foreground="{DynamicResource projectNewCreateForeground}"  lang:LanguageManager.LangText="新建工程" Margin="20,16.5,0,0" FontSize="16"></TextBlock>
             <Button Width="242" Height="188" HorizontalAlignment="Left"  Margin="20,16.5,0,0" VerticalAlignment="Top" Command="{Binding CreateCommand}" Template="{StaticResource AddNewProject}"></Button>
         </StackPanel>
         <ItemsControl Grid.Row="1" ItemsSource="{Binding RecentlyList}" Margin="15">
@@ -71,7 +71,7 @@
                                             <RowDefinition></RowDefinition>
                                             <RowDefinition Height="auto"></RowDefinition>
                                         </Grid.RowDefinitions>
-                                        <TextBlock HorizontalAlignment="Right"  Style="{StaticResource IconFontStyle}" Visibility="Collapsed" x:Name="locker" Text="&#xe618;" VerticalAlignment="Top" Margin="0,5,5,0"></TextBlock>
+                                        <TextBlock HorizontalAlignment="Right"  Style="{StaticResource IconFontStyle}"  Foreground="{DynamicResource projectNewCreateForeground}"  Visibility="Collapsed" x:Name="locker" Text="&#xe618;" VerticalAlignment="Top" Margin="0,5,5,0"></TextBlock>
                                         <Image Source="{Binding Icon,Converter={StaticResource Base64ToImageConverter},UpdateSourceTrigger=PropertyChanged}" Height="50" Width="50"></Image>
                                         <Grid Grid.Row="1" Margin="5,0,5,5">
                                             <Grid.ColumnDefinitions>
@@ -79,8 +79,8 @@
                                                 <ColumnDefinition Width="auto"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
 
-                                            <TextBlock Text="{Binding RecentlyName}"></TextBlock>
-                                            <TextBlock Text="{Binding UpdateTime,StringFormat='yyyy/MM/dd HH:mm:ss'}" HorizontalAlignment="Right" Grid.Column="1"></TextBlock>
+                                            <TextBlock  Foreground="{DynamicResource projectNewCreateForeground}"  Text="{Binding RecentlyName}"></TextBlock>
+                                            <TextBlock  Foreground="{DynamicResource projectNewCreateForeground}"  Text="{Binding UpdateTime,StringFormat='yyyy/MM/dd HH:mm:ss'}" HorizontalAlignment="Right" Grid.Column="1"></TextBlock>
                                         </Grid>
                                     </Grid>
 

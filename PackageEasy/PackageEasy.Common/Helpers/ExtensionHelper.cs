@@ -125,6 +125,7 @@ namespace PackageEasy.Common.Helpers
         /// <returns></returns>
         public static string GetWorkSpace(this ProjectInfoModel projectInfo)
         {
+            if (projectInfo.BaseInfo == null) return null;
             if (!projectInfo.BaseInfo.IsUseRelativePath) return projectInfo.BaseInfo.WorkSpace;
 
             FileInfo fileInfo = new FileInfo(projectInfo.ExtraInfo.FilePath);

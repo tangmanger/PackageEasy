@@ -15,6 +15,7 @@
     <!--button-->
     <SolidColorBrush x:Key="CommonButtonBackgroundBrush" Color="White"></SolidColorBrush>
     <SolidColorBrush x:Key="CommonButtonBorderBrush" Color="LightGray"></SolidColorBrush>
+    <SolidColorBrush x:Key="CommonButtonForeground" Color="Black"></SolidColorBrush>
     <!--SelecetRadioButtonStyle-->
     <SolidColorBrush x:Key="selecetRadioIsCheckedForeground" Color="#5E70A7" />
     <SolidColorBrush x:Key="selecetRadioIsCheckedBackground" Color="#D9E6F6" />
@@ -69,4 +70,6 @@
     <!--PasswordStyle-->
     <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
     <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
+    <!--基础页面颜色-->
+    <SolidColorBrush x:Key="baseInfoForeground" Color="Black"></SolidColorBrush>
 </ResourceDictionary>
