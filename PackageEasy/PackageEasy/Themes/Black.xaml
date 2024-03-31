@@ -36,6 +36,7 @@
     <SolidColorBrush x:Key="commonTextBoxBackground" Color="#3D3D3D" />
     <SolidColorBrush x:Key="commonTextBoxBorderBrush" Color="#26FFFFFF" />
     <SolidColorBrush x:Key="commonDisableTextBoxBackground" Color="#4C919191"></SolidColorBrush>
+    <SolidColorBrush x:Key="commonTextBoxForeground" Color="White"></SolidColorBrush>
     <!--ResultLightView-->
     <SolidColorBrush x:Key="resultLightViewForeground" Color="#26000000"></SolidColorBrush>
     <SolidColorBrush x:Key="DataGridForeground" Color="White"></SolidColorBrush>

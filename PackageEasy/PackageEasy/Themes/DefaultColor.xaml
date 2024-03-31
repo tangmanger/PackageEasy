@@ -16,6 +16,7 @@
     <SolidColorBrush x:Key="CommonButtonBackgroundBrush" Color="White"></SolidColorBrush>
     <SolidColorBrush x:Key="CommonButtonBorderBrush" Color="LightGray"></SolidColorBrush>
     <SolidColorBrush x:Key="CommonButtonForeground" Color="Black"></SolidColorBrush>
+    
     <!--SelecetRadioButtonStyle-->
     <SolidColorBrush x:Key="selecetRadioIsCheckedForeground" Color="#5E70A7" />
     <SolidColorBrush x:Key="selecetRadioIsCheckedBackground" Color="#D9E6F6" />
@@ -36,6 +37,7 @@
     <SolidColorBrush x:Key="commonTextBoxBackground" Color="#FFFFFF" />
     <SolidColorBrush x:Key="commonTextBoxBorderBrush" Color="#26000000" />
     <SolidColorBrush x:Key="commonDisableTextBoxBackground" Color="#4C919191"></SolidColorBrush>
+    <SolidColorBrush x:Key="commonTextBoxForeground" Color="Black"></SolidColorBrush>
     <!--ResultLightView-->
     <SolidColorBrush x:Key="resultLightViewForeground" Color="#26000000"></SolidColorBrush>
     <SolidColorBrush x:Key="DataGridForeground" Color="Black"></SolidColorBrush>

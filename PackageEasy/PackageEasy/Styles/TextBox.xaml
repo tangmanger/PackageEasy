@@ -5,6 +5,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
         <Setter Property="Background" Value="{DynamicResource commonTextBoxBackground}"></Setter>
         <Setter Property="BorderBrush" Value="{DynamicResource commonTextBoxBorderBrush}"></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource commonTextBoxForeground}"></Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TextBox">
