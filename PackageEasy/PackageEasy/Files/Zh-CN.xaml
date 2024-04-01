@@ -1,0 +1,63 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <!--主界面-->
+    <sys:String x:Key="MainFile">文件</sys:String>
+    <sys:String x:Key="MainNewFile">新建</sys:String>
+    <sys:String x:Key="MainOpen">打开..</sys:String>
+    <sys:String x:Key="MainClose">关闭</sys:String>
+    <sys:String x:Key="MainSave">保存</sys:String>
+    <sys:String x:Key="MainSaveAs">另存为..</sys:String>
+    <sys:String x:Key="MainExportScript">导出脚本</sys:String>
+    <sys:String x:Key="MainImportScript">打开脚本</sys:String>
+    <sys:String x:Key="MainExit">退出</sys:String>
+
+    <sys:String x:Key="MainBulid">生成</sys:String>
+    <sys:String x:Key="MainCompile">编译</sys:String>
+    <sys:String x:Key="MainTools">工具</sys:String>
+    <sys:String x:Key="MainSetting">设置</sys:String>
+    <sys:String x:Key="MainExtension">扩展</sys:String>
+    <sys:String x:Key="MainManageExtension">管理扩展</sys:String>
+    <sys:String x:Key="MainHelp">帮助</sys:String>
+    <sys:String x:Key="MainAbout">关于PackageEasy</sys:String>
+    <sys:String x:Key="MainHome">首页</sys:String>
+
+    <!--主页界面-->
+    <sys:String x:Key="HomeNewProject">新建工程</sys:String>
+
+    <!--工程界面-->
+    <sys:String x:Key="ProjectBaseInfo">基础信息</sys:String>
+    <sys:String x:Key="ProjectAssemblyInfo">组件信息</sys:String>
+    <sys:String x:Key="ProjectAppIcon">应用程序图标</sys:String>
+    <sys:String x:Key="ProjectRegistry">注册表</sys:String>
+    <sys:String x:Key="ProjectLanguage">多语言</sys:String>
+    <sys:String x:Key="ProjectEnd">结束界面</sys:String>
+    <!--基础信息-->
+    <sys:String x:Key="BaseInfoAppName">应用程序名称：</sys:String>
+    <sys:String x:Key="BaseInfoAppVersion">应用程序版本：</sys:String>
+    <sys:String x:Key="BaseInfoDisplayUninstall">卸载时显示</sys:String>
+    <sys:String x:Key="BaseInfoFileVersion">文件版本：</sys:String>
+    <sys:String x:Key="BaseInfoFileVersionTips">例如:1.0.0.1</sys:String>
+    <sys:String x:Key="BaseInfoCompany">公司名称：</sys:String>
+    <sys:String x:Key="BaseInfoAppWeb">应用程序网站：</sys:String>
+    <sys:String x:Key="BaseInfoAppIcon">应用程序图标：</sys:String>
+    <sys:String x:Key="BaseInfoOutPut">输出文件名称：</sys:String>
+    <sys:String x:Key="BaseInfoUserInterFace">用户图形界面：</sys:String>
+    <sys:String x:Key="BaseInfoCompressAlgo">压缩算法：</sys:String>
+    <sys:String x:Key="BaseInfoPublisher">应用程序出版人：</sys:String>
+    <sys:String x:Key="BaseInfoLanuageChoose">语言选择：</sys:String>
+    <sys:String x:Key="BaseInfoLanuageFile">语言文件设置：</sys:String>
+    <sys:String x:Key="BaseInfoInstallIcon">安装包图标：</sys:String>
+    <sys:String x:Key="BaseInfoUnInstallIcon">卸载图标：</sys:String>
+    <sys:String x:Key="BaseInfoDefaultDir">应用程序默认目录：</sys:String>
+    <sys:String x:Key="BaseInfoCanChooseDir">允许更改目录</sys:String>
+    <sys:String x:Key="BaseInfoLiscense">授权文件：</sys:String>
+    <sys:String x:Key="BaseInfoLiscenseCheck">启用授权</sys:String>
+    <sys:String x:Key="BaseInfoButtonType">按钮类型：</sys:String>
+    <sys:String x:Key="BaseInfoButtonTypeClassic">古典按钮</sys:String>
+    <sys:String x:Key="BaseInfoButtonTypeCheck">勾选框</sys:String>
+    <sys:String x:Key="BaseInfoButtonTypeCircle">圆形单选框</sys:String>
+    <sys:String x:Key="BaseInfoWorkSapce">工作目录：</sys:String>
+    <sys:String x:Key="BaseInfoUseRelative">使用相对路径</sys:String>
+    
+</ResourceDictionary>

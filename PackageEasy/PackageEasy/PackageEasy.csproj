@@ -94,10 +94,6 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Flies\" />
-  </ItemGroup>
-
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
     <Exec Command="xcopy $(ProjectDir)Themes\*.*  $(TargetDir)Data\Themes\ /s /y&#xD;&#xA;xcopy $(ProjectDir)Plugin\*.*  $(TargetDir)Data\Plugin\ /s /y" />
   </Target>

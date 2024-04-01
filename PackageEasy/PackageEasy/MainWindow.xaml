@@ -6,7 +6,6 @@
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:local="clr-namespace:PackageEasy"
         xmlns:PackageControls="clr-namespace:PackageEasy.Common.Controls;assembly=PackageEasy.Common"
-        xmlns:lang="clr-namespace:PackageEasy.Common.Data;assembly=PackageEasy.Common"
         mc:Ignorable="d"
         Title="Package Easy Bate v1.0"   AllowsTransparency="True" Background="Transparent" WindowStyle="None" Height="750" Width="1200" WindowStartupLocation="CenterScreen" DataContext="{Binding Main,Source={StaticResource locator}}">
 
@@ -45,45 +44,45 @@
                     <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" >
                         <Image Height="18" Width="18" VerticalAlignment="Center" Margin="15,0,0,0" Source="/Resources/Images/tools.png"></Image>
                         <Menu FontSize="14" Background="Transparent" Margin="10,0,0,0" Foreground="{DynamicResource menuForeground}">
-                            <MenuItem   MinWidth="50" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="14" HorizontalContentAlignment="Center" Header="文件" lang:LanguageManager.LangText="文件">
-                                <MenuItem Header="新建" lang:LanguageManager.LangText="新建" Command="{Binding NewProjectCommand}" InputGestureText="    ">
+                            <MenuItem   MinWidth="50" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="14" HorizontalContentAlignment="Center" d:Header="文件" Header="{DynamicResource MainFile}">
+                                <MenuItem Language="" d:Header="新建" Header="{DynamicResource MainNewFile}" Command="{Binding NewProjectCommand}" InputGestureText="    ">
                                 </MenuItem>
-                                <MenuItem Header="打开.."  lang:LanguageManager.LangText="打开.." Command="{Binding OpenFileCommand}" InputGestureText="Ctrl+O"></MenuItem>
-                                <MenuItem Header="关闭" IsEnabled="{Binding IsMenuCanEdit}" Command="{Binding CloseTableCommand}"   InputGestureText="Ctrl+W" lang:LanguageManager.LangText="关闭" Width="auto" >
-                                </MenuItem>
-                                <Separator Style="{StaticResource sep}"/>
-                                <MenuItem Header="保存" IsEnabled="{Binding IsMenuCanEdit}"   lang:LanguageManager.LangText="保存" InputGestureText="Ctrl+S" Command="{Binding SaveCommand}"></MenuItem>
-                                <MenuItem Header="另存为.." IsEnabled="{Binding IsMenuCanEdit,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"   lang:LanguageManager.LangText="另存为.."  Command="{Binding SaveAsCommand}" Width="auto" InputGestureText="    ">
+                                <MenuItem d:Header="打开.." Header="{DynamicResource MainOpen}"  Command="{Binding OpenFileCommand}" InputGestureText="Ctrl+O"></MenuItem>
+                                <MenuItem d:Header="关闭" Header="{DynamicResource MainClose}" IsEnabled="{Binding IsMenuCanEdit}" Command="{Binding CloseTableCommand}"   InputGestureText="Ctrl+W"  Width="auto" >
                                 </MenuItem>
                                 <Separator Style="{StaticResource sep}"/>
-                                <MenuItem Header="导出脚本"  IsEnabled="{Binding IsMenuCanEdit}"    lang:LanguageManager.LangText="导出脚本" Command="{Binding ExportScriptCommand}" InputGestureText="Ctrl+E"></MenuItem>
-                                <MenuItem Header="打开脚本"      lang:LanguageManager.LangText="打开脚本" Command="{Binding ImportScriptCommand}" InputGestureText="Ctrl+I"></MenuItem>
+                                <MenuItem d:Header="保存" Header="{DynamicResource MainSave}" IsEnabled="{Binding IsMenuCanEdit}"    InputGestureText="Ctrl+S" Command="{Binding SaveCommand}"></MenuItem>
+                                <MenuItem d:Header="另存为.." Header="{DynamicResource MainSaveAs}" IsEnabled="{Binding IsMenuCanEdit,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"     Command="{Binding SaveAsCommand}" Width="auto" InputGestureText="    ">
+                                </MenuItem>
                                 <Separator Style="{StaticResource sep}"/>
-                                <MenuItem Header="退出"  lang:LanguageManager.LangText="退出" Command="{Binding ExitCommand}" Width="auto" InputGestureText="    "/>
+                                <MenuItem d:Header="导出脚本" Header="{DynamicResource MainExportScript}"  IsEnabled="{Binding IsMenuCanEdit}"    Command="{Binding ExportScriptCommand}" InputGestureText="Ctrl+E"></MenuItem>
+                                <MenuItem d:Header="打开脚本"   Header="{DynamicResource MainImportScript}" Command="{Binding ImportScriptCommand}" InputGestureText="Ctrl+I"></MenuItem>
+                                <Separator Style="{StaticResource sep}"/>
+                                <MenuItem d:Header="退出" Header="{DynamicResource MainExit}" Command="{Binding ExitCommand}" Width="auto" InputGestureText="    "/>
                             </MenuItem>
-                            <MenuItem   MinWidth="50" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="14" HorizontalContentAlignment="Center" Header="生成" lang:LanguageManager.LangText="生成">
-                                <MenuItem Header="编译" IsEnabled="{Binding IsMenuCanEdit}"   lang:LanguageManager.LangText="编译" Command="{Binding CompileCommand}" InputGestureText="Ctrl+B"  >
+                            <MenuItem   MinWidth="50" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="14" HorizontalContentAlignment="Center" d:Header="生成" Header="{DynamicResource MainBulid}">
+                                <MenuItem d:Header="编译" IsEnabled="{Binding IsMenuCanEdit}"  Header="{DynamicResource MainCompile}"  Command="{Binding CompileCommand}" InputGestureText="Ctrl+B"  >
                                     <MenuItem.Icon>
                                         <TextBlock Style="{StaticResource IconFontStyle}" FontSize="12" Text="&#xe613;"></TextBlock>
                                     </MenuItem.Icon>
                                 </MenuItem>
                             </MenuItem>
-                            <MenuItem MinWidth="50" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="14" HorizontalContentAlignment="Center"  Header="工具" lang:LanguageManager.LangText="工具">
-                                <MenuItem Header="设置" lang:LanguageManager.LangText="设置" Command="{Binding SettingCommand}" InputGestureText=""  >
+                            <MenuItem MinWidth="50" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="14" HorizontalContentAlignment="Center"  d:Header="工具" Header="{DynamicResource MainTools}">
+                                <MenuItem d:Header="设置" Header="{DynamicResource MainSetting}" Command="{Binding SettingCommand}" InputGestureText=""  >
                                     <MenuItem.Icon>
                                         <TextBlock Style="{StaticResource IconFontStyle}" FontSize="14" Text="&#xe68f;"></TextBlock>
                                     </MenuItem.Icon>
                                 </MenuItem>
                             </MenuItem>
-                            <MenuItem MinWidth="50" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="14" HorizontalContentAlignment="Center"  Header="扩展" lang:LanguageManager.LangText="扩展">
-                                <MenuItem Header="管理扩展" lang:LanguageManager.LangText="管理扩展" Command="{Binding PlugInManagerCommand}" InputGestureText=""  >
+                            <MenuItem MinWidth="50" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="14" HorizontalContentAlignment="Center"  d:Header="扩展" Header="{DynamicResource MainExtension}">
+                                <MenuItem d:Header="管理扩展" Header="{StaticResource MainManageExtension}" Command="{Binding PlugInManagerCommand}" InputGestureText=""  >
                                     <MenuItem.Icon>
                                         <TextBlock Style="{StaticResource IconFontStyle}" FontSize="14" Text="&#xe634;"></TextBlock>
                                     </MenuItem.Icon>
                                 </MenuItem>
                             </MenuItem>
-                            <MenuItem MinWidth="50" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="14" HorizontalContentAlignment="Center"  Header="帮助" lang:LanguageManager.LangText="帮助">
-                                <MenuItem Header="关于PackageEasy" lang:LanguageManager.LangText="关于PackageEasy" Command="{Binding AboutCommand}" InputGestureText=""  >
+                            <MenuItem MinWidth="50" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="14" HorizontalContentAlignment="Center"  d:Header="帮助" Header="{DynamicResource MainHelp}">
+                                <MenuItem d:Header="关于PackageEasy" Header="{DynamicResource MainAbout}" Command="{Binding AboutCommand}" InputGestureText=""  >
                                 </MenuItem>
                             </MenuItem>
                         </Menu>
@@ -103,7 +102,7 @@
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <PackageControls:IconRadioButton ClickMode="Press" Width="139" Margin="0,0,0,0"  VerticalAlignment="Bottom" GroupName="title" FontSize="14" IsShowClose="False" Content="首页" lang:LanguageManager.LangText="首页" Command="{Binding BackToHomeCommand}"  IsChecked="{Binding IsActived,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Icon="&#xe8ff;"   Style="{StaticResource IconRadioButtonStyle}">
+                    <PackageControls:IconRadioButton ClickMode="Press" Width="139" Margin="0,0,0,0"  VerticalAlignment="Bottom" GroupName="title" FontSize="14" IsShowClose="False" d:Content="首页" Content="{DynamicResource MainHome}" Command="{Binding BackToHomeCommand}"  IsChecked="{Binding IsActived,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Icon="&#xe8ff;"   Style="{StaticResource IconRadioButtonStyle}">
                     </PackageControls:IconRadioButton>
                     <!--  Navigation frame  -->
                     <!--<Frame x:Name="NavigationFrame" Navigated="NavigationFrame_OnNavigated" />-->

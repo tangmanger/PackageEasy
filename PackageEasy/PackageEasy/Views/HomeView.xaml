@@ -5,7 +5,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PackageEasy.Views"
-             xmlns:lang="clr-namespace:PackageEasy.Common.Data;assembly=PackageEasy.Common"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" DataContext="{Binding Home,Source={StaticResource locator}}">
@@ -19,7 +18,7 @@
             <Border CornerRadius="8" Background="{DynamicResource projectNewCreateBackground}" x:Name="border" RenderTransformOrigin="0.599,0.647" BorderThickness="1"  BorderBrush="{DynamicResource borderBrush}" >
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                     <Image Source="/Resources/Images/NewProject.png" Height="28" Width="28"></Image>
-                    <TextBlock Text="新建工程" Foreground="{DynamicResource projectNewCreateForeground}" lang:LanguageManager.LangText="新建工程" FontSize="16" Margin="0,5,0,0"></TextBlock>
+                    <TextBlock d:Text="新建工程" Foreground="{DynamicResource projectNewCreateForeground}" Text="{DynamicResource HomeNewProject}" FontSize="16" Margin="0,5,0,0"></TextBlock>
                 </StackPanel>
             </Border>
             <ControlTemplate.Triggers>
@@ -44,7 +43,7 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Vertical">
-            <TextBlock Text="新建工程"  Foreground="{DynamicResource projectNewCreateForeground}"  lang:LanguageManager.LangText="新建工程" Margin="20,16.5,0,0" FontSize="16"></TextBlock>
+            <TextBlock d:Text="新建工程" Text="{DynamicResource HomeNewProject}"  Foreground="{DynamicResource projectNewCreateForeground}"   Margin="20,16.5,0,0" FontSize="16"></TextBlock>
             <Button Width="242" Height="188" HorizontalAlignment="Left"  Margin="20,16.5,0,0" VerticalAlignment="Top" Command="{Binding CreateCommand}" Template="{StaticResource AddNewProject}"></Button>
         </StackPanel>
         <ItemsControl Grid.Row="1" ItemsSource="{Binding RecentlyList}" Margin="15">

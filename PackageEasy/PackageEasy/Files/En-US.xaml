@@ -1,0 +1,62 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <!--Main interface-->
+    <sys:String x:Key="MainFile">File</sys:String>
+    <sys:String x:Key="MainNewFile">New</sys:String>
+    <sys:String x:Key="MainOpen">Open..</sys:String>
+    <sys:String x:Key="MainClose">Close</sys:String>
+    <sys:String x:Key="MainSave">Save</sys:String>
+    <sys:String x:Key="MainSaveAs">Save as..</sys:String>
+    <sys:String x:Key="MainExportScript">Export Script</sys:String>
+    <sys:String x:Key="MainImportScript">Open script</sys:String>
+    <sys:String x:Key="MainExit">Exit</sys:String>
+
+    <sys:String x:Key="MainBulid">Generate</sys:String>
+    <sys:String x:Key="MainCompile">Compile</sys:String>
+    <sys:String x:Key="MainTools">Tools</sys:String>
+    <sys:String x:Key="MainSetting">Settings</sys:String>
+    <sys:String x:Key="MainExtension">Extension</sys:String>
+    <sys:String x:Key="MainManageExtension">Manage Extension</sys:String>
+    <sys:String x:Key="MainHelp">Help</sys:String>
+    <sys:String x:Key="MainAbout">About PackageEasy</sys:String>
+    <sys:String x:Key="MainHome">Home</sys:String>
+
+    <!--Home page interface-->
+    <sys:String x:Key="HomeNewProject">New project</sys:String>
+
+    <!--Project interface-->
+    <sys:String x:Key="ProjectBaseInfo">Basic information</sys:String>
+    <sys:String x:Key="ProjectAssemblyInfo">Component information</sys:String>
+    <sys:String x:Key="ProjectAppIcon">Application icon</sys:String>
+    <sys:String x:Key="ProjectRegistry">Registry</sys:String>
+    <sys:String x:Key="ProjectLanguage">Multi-language</sys:String>
+    <sys:String x:Key="ProjectEnd">End interface</sys:String>
+    <!--Basic information-->
+    <sys:String x:Key="BaseInfoAppName">Application name:</sys:String>
+    <sys:String x:Key="BaseInfoAppVersion">Application version:</sys:String>
+    <sys:String x:Key="BaseInfoDisplayUninstall">Displayed during uninstall</sys:String>
+    <sys:String x:Key="BaseInfoFileVersion">File version:</sys:String>
+    <sys:String x:Key="BaseInfoFileVersionTips">For example: 1.0.0.1</sys:String>
+    <sys:String x:Key="BaseInfoCompany">Company name:</sys:String>
+    <sys:String x:Key="BaseInfoAppWeb">Application website:</sys:String>
+    <sys:String x:Key="BaseInfoAppIcon">Application icon:</sys:String>
+    <sys:String x:Key="BaseInfoOutPut">Output file name:</sys:String>
+    <sys:String x:Key="BaseInfoUserInterFace">GUI:</sys:String>
+    <sys:String x:Key="BaseInfoCompressAlgo">Compression algorithm:</sys:String>
+    <sys:String x:Key="BaseInfoPublisher">Application Publisher:</sys:String>
+    <sys:String x:Key="BaseInfoLanuageChoose">Language selection:</sys:String>
+    <sys:String x:Key="BaseInfoLanuageFile">Language file settings:</sys:String>
+    <sys:String x:Key="BaseInfoInstallIcon">Installation package icon:</sys:String>
+    <sys:String x:Key="BaseInfoUnInstallIcon">Uninstall icon:</sys:String>
+    <sys:String x:Key="BaseInfoDefaultDir">Application default directory:</sys:String>
+    <sys:String x:Key="BaseInfoCanChooseDir">Allow directory changes</sys:String>
+    <sys:String x:Key="BaseInfoLiscense">Authorization file:</sys:String>
+    <sys:String x:Key="BaseInfoLiscenseCheck">Enable authorization</sys:String>
+    <sys:String x:Key="BaseInfoButtonType">Button type:</sys:String>
+    <sys:String x:Key="BaseInfoButtonTypeClassic">Classic Button</sys:String>
+    <sys:String x:Key="BaseInfoButtonTypeCheck">Check box</sys:String>
+    <sys:String x:Key="BaseInfoButtonTypeCircle">Circular radio button</sys:String>
+    <sys:String x:Key="BaseInfoWorkSapce">Working directory:</sys:String>
+    <sys:String x:Key="BaseInfoUseRelative">Use relative path</sys:String>
+</ResourceDictionary>
