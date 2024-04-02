@@ -59,5 +59,23 @@
     <sys:String x:Key="BaseInfoButtonTypeCircle">圆形单选框</sys:String>
     <sys:String x:Key="BaseInfoWorkSapce">工作目录：</sys:String>
     <sys:String x:Key="BaseInfoUseRelative">使用相对路径</sys:String>
-    
+
+    <!--组件信息-->
+    <sys:String x:Key="AssemblyName">组件名称</sys:String>
+    <sys:String x:Key="AssemblyDescription">描述</sys:String>
+    <sys:String x:Key="AssemblyDefaultCheck">默认勾选</sys:String>
+    <sys:String x:Key="AssemblyOperate">操作</sys:String>
+    <sys:String x:Key="AssemblyDelete">删除</sys:String>
+    <sys:String x:Key="AssemblyCanUseChoose">允许用户选择要安装的组</sys:String>
+    <sys:String x:Key="AssemblyAddGroup">添加组</sys:String>
+    <sys:String x:Key="AssemblyDelGroup">删除组</sys:String>
+    <sys:String x:Key="AssemblyChoose">选择</sys:String>
+    <sys:String x:Key="AssemblyDir">文件目录</sys:String>
+    <sys:String x:Key="AssemblyTargetDir">目标目录</sys:String>
+    <sys:String x:Key="AssemblyInstall">安装</sys:String>
+    <sys:String x:Key="AssemblyQuietInstall">静默安装</sys:String>
+    <sys:String x:Key="AssemblUnCopy">不复制</sys:String>
+    <sys:String x:Key="AssemblAddFile">添加单个文件</sys:String>
+    <sys:String x:Key="AssemblAddMultiFile">添加多个文件</sys:String>
+    <sys:String x:Key="AssemblAddDir">添加文件夹</sys:String>
 </ResourceDictionary>

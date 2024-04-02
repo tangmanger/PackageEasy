@@ -59,4 +59,23 @@
     <sys:String x:Key="BaseInfoButtonTypeCircle">Circular radio button</sys:String>
     <sys:String x:Key="BaseInfoWorkSapce">Working directory:</sys:String>
     <sys:String x:Key="BaseInfoUseRelative">Use relative path</sys:String>
+
+    <!--Component information-->
+    <sys:String x:Key="AssemblyName">Component name</sys:String>
+    <sys:String x:Key="AssemblyDescription">Description</sys:String>
+    <sys:String x:Key="AssemblyDefaultCheck">Default checked</sys:String>
+    <sys:String x:Key="AssemblyOperate">Operation</sys:String>
+    <sys:String x:Key="AssemblyDelete">Delete</sys:String>
+    <sys:String x:Key="AssemblyCanUseChoose">Allow users to choose which assembly to install</sys:String>
+    <sys:String x:Key="AssemblyAddGroup">Add group</sys:String>
+    <sys:String x:Key="AssemblyDelGroup">Delete group</sys:String>
+    <sys:String x:Key="AssemblyChoose">Choose</sys:String>
+    <sys:String x:Key="AssemblyDir">File Directory</sys:String>
+    <sys:String x:Key="AssemblyTargetDir">Target directory</sys:String>
+    <sys:String x:Key="AssemblyInstall">Installation</sys:String>
+    <sys:String x:Key="AssemblyQuietInstall">Silent installation</sys:String>
+    <sys:String x:Key="AssemblUnCopy">Do not copy</sys:String>
+    <sys:String x:Key="AssemblAddFile">Add a single file</sys:String>
+    <sys:String x:Key="AssemblAddMultiFile">Add multiple files</sys:String>
+    <sys:String x:Key="AssemblAddDir">Add folder</sys:String>
 </ResourceDictionary>

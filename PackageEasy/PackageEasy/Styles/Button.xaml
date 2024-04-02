@@ -27,7 +27,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border x:Name="border" CornerRadius="3" RenderTransformOrigin="0.5,0.5" Background="{DynamicResource CommonButtonBackgroundBrush}" BorderBrush="{DynamicResource CommonButtonBorderBrush}" BorderThickness="1">
-                        <TextBlock Text="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"></TextBlock>
+                        <TextBlock Text="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" Margin="5,0,5,0" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"></TextBlock>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsPressed" Value="True">
