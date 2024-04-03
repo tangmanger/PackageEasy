@@ -151,7 +151,7 @@
                 <DataGridTemplateColumn  MinWidth="72">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock  d:Text="选择" Text="{DynamicResource AssemblyChoose}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></TextBlock>
+                            <CheckBox Command="{Binding DataContext.FileAllCheckCommand,RelativeSource={RelativeSource AncestorType=DataGrid}}" IsChecked="{Binding DataContext.IsAllChecked,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" d:Content="选择" Content="{DynamicResource AssemblyChoose}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></CheckBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>

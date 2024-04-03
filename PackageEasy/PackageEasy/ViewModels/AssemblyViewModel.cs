@@ -57,6 +57,7 @@ namespace PackageEasy.ViewModels
         private List<AssemblyFileModel> fileList;
         private bool isAllowChoose;
         private bool isShow;
+        private bool isAllChecked;
 
         /// <summary>
         /// 组件信息
@@ -79,6 +80,10 @@ namespace PackageEasy.ViewModels
             set
             {
                 fileList = value;
+                if (value != null)
+                {
+                    IsAllChecked = !value.Exists(f => f.IsSelected == false);
+                }
                 OnPropertyChanged();
             }
         }
@@ -117,10 +122,34 @@ namespace PackageEasy.ViewModels
             }
         }
 
+        /// <summary>
+        /// 全选
+        /// </summary>
+        public bool IsAllChecked
+        {
+            get => isAllChecked;
+            set
+            {
+                isAllChecked = value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         #region 命令
 
+        public RelayCommand FileAllCheckCommand => new RelayCommand(() =>
+        {
+            if (FileList != null)
+            {
+                foreach (var file in FileList)
+                {
+                    file.IsSelected = IsAllChecked ;
+                }
+            }
+
+        });
 
         public RelayCommand AssemblyMenuCommand => new RelayCommand(() =>
         {
@@ -237,7 +266,7 @@ namespace PackageEasy.ViewModels
             var result = folderBrowserDialog.ShowDialog();
             if (result == DialogResult.OK || result == DialogResult.Yes)
             {
-                
+
                 if (!Directory.Exists(folderBrowserDialog.SelectedPath))
                 {
                     return;
