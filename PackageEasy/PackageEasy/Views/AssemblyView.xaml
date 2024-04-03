@@ -156,7 +156,7 @@
                     </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <CheckBox HorizontalAlignment="Center" IsChecked="{Binding IsSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"></CheckBox>
+                            <CheckBox HorizontalAlignment="Center" Command="{Binding DataContext.FileCheckCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}"  IsChecked="{Binding IsSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"></CheckBox>
                             <!--<TextBlock Text="{Binding PlateName}" Foreground="{DynamicResource DataGridForeground}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>-->
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -164,7 +164,7 @@
                 <DataGridTemplateColumn  Width="*" SortMemberPath="FilePath">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock d:Text="文件目录" Text="{DynamicResource AssemblyDir}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></TextBlock>
+                            <TextBlock  d:Text="文件目录" Text="{DynamicResource AssemblyDir}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>

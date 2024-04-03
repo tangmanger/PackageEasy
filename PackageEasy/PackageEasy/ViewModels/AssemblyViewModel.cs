@@ -139,16 +139,32 @@ namespace PackageEasy.ViewModels
 
         #region 命令
 
+        /// <summary>
+        /// 全选
+        /// </summary>
+
         public RelayCommand FileAllCheckCommand => new RelayCommand(() =>
         {
             if (FileList != null)
             {
                 foreach (var file in FileList)
                 {
-                    file.IsSelected = IsAllChecked ;
+                    file.IsSelected = IsAllChecked;
                 }
             }
 
+        });
+
+        /// <summary>
+        /// 单个文件选择
+        /// </summary>
+        public RelayCommand FileCheckCommand => new RelayCommand(() =>
+        {
+
+            if (FileList != null)
+            {
+                IsAllChecked = !FileList.Exists(c => c.IsSelected == false);
+            }
         });
 
         public RelayCommand AssemblyMenuCommand => new RelayCommand(() =>
