@@ -17,13 +17,13 @@
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,30,0,0" Orientation="Horizontal">
-            <TextBlock Text="应用程序&quot;开始菜单&quot;文件夹名称:" VerticalAlignment="Center" lang:LanguageManager.LangText="应用程序&quot;开始菜单&quot;文件夹名称:"></TextBlock>
+            <TextBlock d:Text="应用程序&quot;开始菜单&quot;文件夹名称:" Text="{DynamicResource AppIconMenuName}" VerticalAlignment="Center" ></TextBlock>
             <TextBox Width="220"  HorizontalAlignment="Left" Height="30" Text="{Binding StartMenuName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5,0,0,0" Style="{StaticResource CommonTextBox}"></TextBox>
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Row="1"  Margin="10,10,0,0" >
-            <CheckBox Content="允许用户更改&quot;开始菜单文&quot;件夹名称" IsChecked="{Binding IsCanChangeStartMenuName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" lang:LanguageManager.LangText="允许用户更改&quot;开始菜单文&quot;件夹名称"></CheckBox>
-            <CheckBox Content="在&quot;开始菜单&quot;文件夹创建互联网快捷方式" Margin="0,10,0,0" IsChecked="{Binding IsCreateWebUrl,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" lang:LanguageManager.LangText="在&quot;开始菜单&quot;文件夹创建互联网快捷方式"></CheckBox>
-            <CheckBox Content="在&quot;开始菜单&quot;创建解除安装图标" Margin="0,10,0,0" IsChecked="{Binding IsCreateUnInstall,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" lang:LanguageManager.LangText="在&quot;开始菜单&quot;创建解除安装图标"></CheckBox>
+            <CheckBox d:Content="允许用户更改&quot;开始菜单文&quot;件夹名称" Content="{DynamicResource AppIconAllowChangeMenuName}" IsChecked="{Binding IsCanChangeStartMenuName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" ></CheckBox>
+            <CheckBox d:Content="在&quot;开始菜单&quot;文件夹创建互联网快捷方式" Content="{DynamicResource AppIconStartShortCuts}" Margin="0,10,0,0" IsChecked="{Binding IsCreateWebUrl,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" ></CheckBox>
+            <CheckBox d:Content="在&quot;开始菜单&quot;创建解除安装图标" Content="{DynamicResource AppIconStartUninstallShortCuts}" Margin="0,10,0,0" IsChecked="{Binding IsCreateUnInstall,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" ></CheckBox>
         </StackPanel>
         <DataGrid Grid.Row="2" Margin="10,10,10,0" Style="{StaticResource DataGridStyle}"
                   BorderBrush="{DynamicResource borderBrush}" 
@@ -34,7 +34,7 @@
                 <DataGridTemplateColumn  Width="72">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock Text="选择" Foreground="{DynamicResource DataGridForeground}" lang:LanguageManager.LangText="选择" FontSize="14"></TextBlock>
+                            <TextBlock d:Text="选择" Text="{DynamicResource AppIconChoose}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
@@ -47,7 +47,7 @@
                 <DataGridTemplateColumn  Width="*">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock Text="目标文件夹" Foreground="{DynamicResource DataGridForeground}" lang:LanguageManager.LangText="目标文件夹" FontSize="14"></TextBlock>
+                            <TextBlock d:Text="目标文件夹" Foreground="{DynamicResource DataGridForeground}" Text="{DynamicResource AppIconTargetDirPath}" FontSize="14"></TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
@@ -61,7 +61,7 @@
                 <DataGridTemplateColumn  Width="*">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock Text="快捷方式名称" Foreground="{DynamicResource DataGridForeground}" lang:LanguageManager.LangText="快捷方式名称" FontSize="14"></TextBlock>
+                            <TextBlock d:Text="快捷方式名称" Text="{DynamicResource AppIconShortCutName}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
@@ -74,7 +74,7 @@
                 <DataGridTemplateColumn   Width="*">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock Text="目的文件" Foreground="{DynamicResource DataGridForeground}" lang:LanguageManager.LangText="目的文件" FontSize="14"></TextBlock>
+                            <TextBlock d:Text="目的文件" Text="{DynamicResource AppIconTargetFilePath}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
@@ -88,7 +88,7 @@
                 <DataGridTemplateColumn  Width="100">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock Text="操作" Foreground="{DynamicResource DataGridForeground}" lang:LanguageManager.LangText="操作" FontSize="14"></TextBlock>
+                            <TextBlock d:Text="操作" Text="{DynamicResource AppIconOperate}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
@@ -103,9 +103,9 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="10,5,0,10">
-            <Button Width="80" Height="30" Content="添加" Margin="0,0,5,0" lang:LanguageManager.LangText="添加" Command="{Binding AddCommand}" Style="{StaticResource CommonButtonStyle}"></Button>
-            <Button Width="80"  Height="30" Content="编辑" Visibility="Collapsed" Margin="5,0,5,0" lang:LanguageManager.LangText="编辑" Style="{StaticResource CommonButtonStyle}"></Button>
-            <Button Width="80"  Height="30" IsEnabled="{Binding IsCanDeleted,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Command="{Binding DelSelectCommand}" Content="删除选中"  Margin="5,0,5,0" lang:LanguageManager.LangText="删除选中" Style="{StaticResource CommonButtonStyle}"></Button>
+            <Button Width="80" Height="30" d:Content="添加" Content="{DynamicResource AppIconAdd}" Margin="0,0,5,0"  Command="{Binding AddCommand}" Style="{StaticResource CommonButtonStyle}"></Button>
+            <Button Width="80"  Height="30" d:Content="编辑" Content="{DynamicResource AppIconEdit}" Visibility="Collapsed" Margin="5,0,5,0"  Style="{StaticResource CommonButtonStyle}"></Button>
+            <Button Width="80"  Height="30" IsEnabled="{Binding IsCanDeleted,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Command="{Binding DelSelectCommand}" d:Content="删除选中" Content="{DynamicResource AppIconDelSelected}"  Margin="5,0,5,0"  Style="{StaticResource CommonButtonStyle}"></Button>
         </StackPanel>
     </Grid>
 </UserControl>

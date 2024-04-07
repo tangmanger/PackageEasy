@@ -37,7 +37,7 @@
     <sys:String x:Key="BaseInfoAppVersion">应用程序版本：</sys:String>
     <sys:String x:Key="BaseInfoDisplayUninstall">卸载时显示</sys:String>
     <sys:String x:Key="BaseInfoFileVersion">文件版本：</sys:String>
-    <sys:String x:Key="BaseInfoFileVersionTips">例如:1.0.0.1</sys:String>
+    <sys:String x:Key="BaseInfoFileVersionTips">例如：1.0.0.1</sys:String>
     <sys:String x:Key="BaseInfoCompany">公司名称：</sys:String>
     <sys:String x:Key="BaseInfoAppWeb">应用程序网站：</sys:String>
     <sys:String x:Key="BaseInfoAppIcon">应用程序图标：</sys:String>
@@ -78,4 +78,50 @@
     <sys:String x:Key="AssemblAddFile">添加单个文件</sys:String>
     <sys:String x:Key="AssemblAddMultiFile">添加多个文件</sys:String>
     <sys:String x:Key="AssemblAddDir">添加文件夹</sys:String>
+
+    <!--应用程序图标-->
+    <sys:String x:Key="AppIconMenuName">应用程序&quot;开始菜单&quot;文件夹名称:</sys:String>
+    <sys:String x:Key="AppIconAllowChangeMenuName">允许用户更改&quot;开始菜单文&quot;件夹名称</sys:String>
+    <sys:String x:Key="AppIconStartShortCuts">在&quot;开始菜单&quot;文件夹创建互联网快捷方式</sys:String>
+    <sys:String x:Key="AppIconStartUninstallShortCuts">在&quot;开始菜单&quot;创建解除安装图标</sys:String>
+    <sys:String x:Key="AppIconChoose">选择</sys:String>
+    <sys:String x:Key="AppIconTargetDirPath">目标文件夹</sys:String>
+    <sys:String x:Key="AppIconShortCutName">快捷方式名称</sys:String>
+    <sys:String x:Key="AppIconTargetFilePath">目的文件</sys:String>
+    <sys:String x:Key="AppIconOperate">操作</sys:String>
+    <sys:String x:Key="AppIconAdd">添加</sys:String>
+    <sys:String x:Key="AppIconEdit">编辑</sys:String>
+    <sys:String x:Key="AppIconDelSelected">删除选中</sys:String>
+
+    <!--注册界面-->
+    <sys:String x:Key="RegistryFormat">注册文件格式：</sys:String>
+    <sys:String x:Key="RegistryExample">示例： .pge,.pky</sys:String>
+    <sys:String x:Key="RegistryCanChooseSection">可选组件</sys:String>
+    <sys:String x:Key="RegistryProcessName">注册进程：</sys:String>
+    <sys:String x:Key="RegistryProcessExample">例如：PackageEasy.exe</sys:String>
+    <sys:String x:Key="RegistryPassword">密码：</sys:String>
+    <sys:String x:Key="RegistryEnablePassword">启用密码</sys:String>
+
+    <!--多语言-->
+    <sys:String x:Key="MultiLanguageChoose">选择</sys:String>
+    <sys:String x:Key="MultiLanguage">语言</sys:String>
+    <sys:String x:Key="MultiLanguageAdd">添加</sys:String>
+    <sys:String x:Key="MultiLanguageDel">删除</sys:String>
+    <sys:String x:Key="MultiLanguageTargetFile">目标文件</sys:String>
+    <sys:String x:Key="MultiLanguageTargetRootDir">目标根目录</sys:String>
+    <sys:String x:Key="MultiLanguageTargetDir">目标目录</sys:String>
+
+    <!--结束界面-->
+    <sys:String x:Key="EndProcess">程序：</sys:String>
+    <sys:String x:Key="EndStartProcess">安装完成后启动</sys:String>
+    <sys:String x:Key="EndParams">参数：</sys:String>
+    <sys:String x:Key="EndReadmeName">自述：</sys:String>
+    <!--<sys:String x:Key="EndUseUnInstall">解除安装提示：</sys:String>-->
+    <sys:String x:Key="EndUnInstallTips">解除安装提示：</sys:String>
+    <sys:String x:Key="EndUnInstallMsg">解除安装消息：</sys:String>
+    <sys:String x:Key="EndChcekProcessName">检测的进程名：</sys:String>
+    <sys:String x:Key="EndChcekProcessExample">例如：PackageEasy.exe</sys:String>
+    <sys:String x:Key="EndInstallContent">安装提示：</sys:String>
+    <sys:String x:Key="EndUnInstallContent">卸载提示：</sys:String>
+    <sys:String x:Key="EndUseCheckProcess">启用进程检测</sys:String>
 </ResourceDictionary>

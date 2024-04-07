@@ -78,4 +78,50 @@
     <sys:String x:Key="AssemblAddFile">Add a single file</sys:String>
     <sys:String x:Key="AssemblAddMultiFile">Add multiple files</sys:String>
     <sys:String x:Key="AssemblAddDir">Add folder</sys:String>
+
+    <!--Application icon-->
+    <sys:String x:Key="AppIconMenuName">Application&quot;Start Menu&quot;Folder name:</sys:String>
+    <sys:String x:Key="AppIconAllowChangeMenuName">Allows users to change the "Start Menu" folder name</sys:String>
+    <sys:String x:Key="AppIconStartShortCuts">Create Internet shortcuts in the "Start Menu" folder</sys:String>
+    <sys:String x:Key="AppIconStartUninstallShortCuts">Create an uninstall icon in the "Start Menu"</sys:String>
+    <sys:String x:Key="AppIconChoose">Choose</sys:String>
+    <sys:String x:Key="AppIconTargetDirPath">Target folder</sys:String>
+    <sys:String x:Key="AppIconShortCutName">Shortcut name</sys:String>
+    <sys:String x:Key="AppIconTargetFilePath">Target file</sys:String>
+    <sys:String x:Key="AppIconOperate">Operation</sys:String>
+    <sys:String x:Key="AppIconAdd">Add</sys:String>
+    <sys:String x:Key="AppIconEdit">Edit</sys:String>
+    <sys:String x:Key="AppIconDelSelected">Delete selected</sys:String>
+
+    <!--Registration interface-->
+    <sys:String x:Key="RegistryFormat">Registration file format:</sys:String>
+    <sys:String x:Key="RegistryExample">Example: .pge,.pky</sys:String>
+    <sys:String x:Key="RegistryCanChooseSection">Optional component</sys:String>
+    <sys:String x:Key="RegistryProcessName">Registration process:</sys:String>
+    <sys:String x:Key="RegistryProcessExample">For example: PackageEasy.exe</sys:String>
+    <sys:String x:Key="RegistryPassword">Password:</sys:String>
+    <sys:String x:Key="RegistryEnablePassword">Enable Password</sys:String>
+
+    <!--Multi-language-->
+    <sys:String x:Key="MultiLanguageChoose">Choose</sys:String>
+    <sys:String x:Key="MultiLanguage">Language</sys:String>
+    <sys:String x:Key="MultiLanguageAdd">Add</sys:String>
+    <sys:String x:Key="MultiLanguageDel">Delete</sys:String>
+    <sys:String x:Key="MultiLanguageTargetFile">Target file</sys:String>
+    <sys:String x:Key="MultiLanguageTargetRootDir">Target root directory</sys:String>
+    <sys:String x:Key="MultiLanguageTargetDir">Target directory</sys:String>
+
+    <!--End interface-->
+    <sys:String x:Key="EndProcess">Program:</sys:String>
+    <sys:String x:Key="EndStartProcess">Start after installation is complete</sys:String>
+    <sys:String x:Key="EndParams">Parameters:</sys:String>
+    <sys:String x:Key="EndReadmeName">Readme:</sys:String>
+    <!--<sys:String x:Key="EndUseUnInstall">Uninstall prompt:</sys:String>-->
+    <sys:String x:Key="EndUnInstallTips">Uninstall tips:</sys:String>
+    <sys:String x:Key="EndUnInstallMsg">Uninstall message:</sys:String>
+    <sys:String x:Key="EndChcekProcessName">Detected process name:</sys:String>
+    <sys:String x:Key="EndChcekProcessExample">For example: PackageEasy.exe</sys:String>
+    <sys:String x:Key="EndInstallContent">Installation tips:</sys:String>
+    <sys:String x:Key="EndUnInstallContent">Uninstallation prompt:</sys:String>
+    <sys:String x:Key="EndUseCheckProcess">Enable process detection</sys:String>
 </ResourceDictionary>
