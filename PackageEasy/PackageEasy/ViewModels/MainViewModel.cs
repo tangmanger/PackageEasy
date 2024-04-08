@@ -213,7 +213,7 @@ namespace PackageEasy.ViewModels
             {
                 if (CacheDataHelper.ProjectCahes.ContainsKey(table.ProjectKey))
                 {
-                    var messageResult = TMessageBox.ShowMsg("是否转换成相对路径?", MessageLevel.YesNoCancel);
+                    var messageResult = TMessageBox.ShowMsg(CommonSettings.MainExportScriptTips, MessageLevel.YesNoCancel);
                     if (messageResult == TMessageBoxResult.Close) return;
                     var service = ServiceHelper.GetService(table.ProjectKey);
                     if (service != null)
@@ -244,7 +244,7 @@ namespace PackageEasy.ViewModels
                             }
                             else
                             {
-                                TMessageBox.ShowMsg("保存失败!");
+                                TMessageBox.ShowMsg(CommonSettings.MainSaveFailTips);
                                 return;
                             }
                             if (!projectViewModel.ValidateData())
@@ -280,7 +280,7 @@ namespace PackageEasy.ViewModels
                                 if (File.Exists(dirPath))
                                 {
 
-                                    TMessageBox.MainShowMsg("", "导出脚本成功!", MessageLevel.Information);
+                                    TMessageBox.MainShowMsg("", CommonSettings.MainExportSuccessTips, MessageLevel.Information);
                                 }
                             }
                         }
@@ -288,7 +288,7 @@ namespace PackageEasy.ViewModels
                         {
                             wating.Close();
 
-                            TMessageBox.MainShowMsg("", "导出脚本失败!", MessageLevel.Information);
+                            TMessageBox.MainShowMsg("", CommonSettings.MainExportFailTips, MessageLevel.Information);
                             Log.Write("导出脚本失败!", ex);
                         }
                         finally
@@ -330,7 +330,7 @@ namespace PackageEasy.ViewModels
                             }
                             else
                             {
-                                TMessageBox.ShowMsg("保存失败!");
+                                TMessageBox.ShowMsg(CommonSettings.MainSaveFailTips);
                                 return;
                             }
                             if (!projectViewModel.ValidateData())
@@ -383,7 +383,7 @@ namespace PackageEasy.ViewModels
 
                                                 wating.Close();
                                             });
-                                            TMessageBox.MainShowMsg("", "编译成功!", MessageLevel.Information);
+                                            TMessageBox.MainShowMsg("", CommonSettings.MainCompileSuccessTips, MessageLevel.Information);
 
                                             if (File.Exists(nSISScript.OutPutFilePath))
                                             {
@@ -422,7 +422,7 @@ namespace PackageEasy.ViewModels
 
                                                     wating.Close();
                                                 });
-                                                string format = string.Format("编译失败!{0}".GetLangText(), $"\r{string.Join("\r", errorMsg)}");
+                                                string format = string.Format(CommonSettings.MainCompileFailExtTips.GetLangText(), $"\r{string.Join("\r", errorMsg)}");
                                                 TMessageBox.MainShowMsg("", format, MessageLevel.Information);
                                                 Log.Write(format);
                                             }
@@ -453,7 +453,7 @@ namespace PackageEasy.ViewModels
                         {
                             wating.Close();
 
-                            TMessageBox.MainShowMsg("", "编译失败!", MessageLevel.Information);
+                            TMessageBox.MainShowMsg("", CommonSettings.MainCompileFailTips, MessageLevel.Information);
                             Log.Write("编译失败!", ex);
                         }
                         finally

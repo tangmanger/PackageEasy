@@ -38,7 +38,7 @@
         <TextBlock Grid.Row="1" d:Text="应用程序版本:" Text="{DynamicResource BaseInfoAppVersion}" VerticalAlignment="Center"  HorizontalAlignment="Right"></TextBlock>
         <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="1">
             <TextBox   Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource CommonTextBox}" Text="{Binding ApplicationVersion,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Width="150" Height="30" VerticalContentAlignment="Center" Margin="5,10,0,10"></TextBox>
-            <CheckBox d:Content="卸载时显示" Content="{DynamicResource BaseInfoDisplayUninstall}" Foreground="{DynamicResource baseInfoForeground}"  IsChecked="{Binding IsShowInUnInstall}" HorizontalContentAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0"></CheckBox>
+            <CheckBox d:Content="卸载时显示"  Content="{DynamicResource BaseInfoDisplayUninstall}" Foreground="{DynamicResource baseInfoForeground}"  IsChecked="{Binding IsShowInUnInstall}" HorizontalContentAlignment="Left" VerticalAlignment="Center" Margin="5,0,0,0"></CheckBox>
         </StackPanel>
         <TextBlock Grid.Row="2" d:Text="文件版本:" Text="{DynamicResource BaseInfoFileVersion}" VerticalAlignment="Center"  HorizontalAlignment="Right"></TextBlock>
         <!--<TextBox   Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource CommonTextBox}" Text="{Binding ApplicationVersion,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Width="150" Height="25" VerticalContentAlignment="Center" Margin="5,10,0,10"></TextBox>-->

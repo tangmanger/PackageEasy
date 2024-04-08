@@ -124,4 +124,47 @@
     <sys:String x:Key="EndInstallContent">Installation tips:</sys:String>
     <sys:String x:Key="EndUnInstallContent">Uninstallation prompt:</sys:String>
     <sys:String x:Key="EndUseCheckProcess">Enable process detection</sys:String>
+
+    <!--About the interface-->
+    <sys:String x:Key="AboutSoftWare">About software</sys:String>
+    <sys:String x:Key="AboutSoftWareName">Software name:</sys:String>
+    <sys:String x:Key="AboutSoftWareVersion">Product version:</sys:String>
+    <sys:String x:Key="AboutSoftWareDescription">Product description:</sys:String>
+    <sys:String x:Key="AboutSoftWareDescriptionInfo">Because the NSIS packaging script learning curve is steep, HM NIS Edit is more troublesome to visually adjust after generating the script, so I made this tool to facilitate everyone. If you are not good at it, please ask Forgive me, power generation for love!</sys:String>
+    <sys:String x:Key="AboutSoftWareConnectMe">Contact me:</sys:String>
+    <sys:String x:Key="AboutSoftWareCopyRight">Copyright ©2021-2036 PackageEasy All Rights Reserved</sys:String>
+
+
+    <!--Setting interface-->
+    <sys:String x:Key="SettingNSIS">NSIS Settings</sys:String>
+    <sys:String x:Key="SettingDisplay">Display settings</sys:String>
+    <sys:String x:Key="SettingCompilePath">Compiler path:</sys:String>
+    <sys:String x:Key="SettingNsisHelper">Help documentation:</sys:String>
+    <sys:String x:Key="SettingTheme">Theme:</sys:String>
+
+    <!--cs interface-->
+    <!--Main interface cs-->
+    <sys:String x:Key="MainExportScriptTips">Convert to relative path?</sys:String>
+    <sys:String x:Key="MainSaveFailTips">Save failed!</sys:String>
+    <sys:String x:Key="MainExportSuccessTips">Export script successful!</sys:String>
+    <sys:String x:Key="MainExportFailTips">Export script failed!</sys:String>
+    <sys:String x:Key="MainCompileSuccessTips">Compilation successful!</sys:String>
+    <sys:String x:Key="MainCompileFailTips">Compilation failed!</sys:String>
+    <sys:String x:Key="MainCompileFailExtTips">Compilation failed! {0}</sys:String>
+
+    <!--Home page interface-->
+    <sys:String x:Key="HomeFileHasOpened">The current file is open!</sys:String>
+    <sys:String x:Key="HomeFileNoExist">The current file {0} does not exist. Do you want to remove it from recently opened?</sys:String>
+
+
+    <!--Basic information interface cs-->
+    <sys:String x:Key="BaseInfoEnglish">English</sys:String>
+    <sys:String x:Key="BaseInfoChinese">Chinese</sys:String>
+    <sys:String x:Key="BaseInfoAppNameNotEmpty">The application name cannot be empty!</sys:String>
+    <sys:String x:Key="BaseInfoFileVersionFormat">The file version format must be X.X.X.X (X is a number)!</sys:String>
+    <sys:String x:Key="BaseInfoOutPutFileName">The output file name cannot be empty!</sys:String>
+    <sys:String x:Key="BaseInfoLicenseFileNotExist">Authorization does not exist!</sys:String>
+    <sys:String x:Key="BaseInfoAppIconNotExist">The application icon does not exist!</sys:String>
+    <sys:String x:Key="BaseInfoUnInstallAppIconNotExist">The uninstall icon does not exist!</sys:String>
+    <sys:String x:Key="BaseInfoInstallAppIconNotExist">The installation package icon does not exist!</sys:String>
 </ResourceDictionary>

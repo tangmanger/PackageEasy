@@ -78,7 +78,7 @@ namespace PackageEasy.ViewModels
                 var vm = Ioc.Default.GetService<MainViewModel>();
                 if (CacheDataHelper.FileOpenDic.ContainsValue(CacheDataHelper.OpenPath))
                 {
-                    TMessageBox.ShowMsg("", "当前文件已打开");
+                    TMessageBox.ShowMsg("", CommonSettings.HomeFileHasOpened);
                     CacheDataHelper.OpenPath = string.Empty;
                     return;
                 }
@@ -93,7 +93,7 @@ namespace PackageEasy.ViewModels
         {
             if (s == null || !File.Exists(s.FilePath))
             {
-                string str = string.Format("当前文件{0}不存在,是否从最近打开移除?", s.RecentlyName);
+                string str = string.Format(CommonSettings.HomeFileNoExist, s.RecentlyName);
                 var result = TMessageBox.ShowMsg("", str, Enums.MessageLevel.Question);
                 if(result==Enums.TMessageBoxResult.OK)
                 {
@@ -104,7 +104,7 @@ namespace PackageEasy.ViewModels
             }
             if (CacheDataHelper.FileOpenDic.ContainsValue(s.FilePath))
             {
-                TMessageBox.ShowMsg("", "当前文件已打开");
+                TMessageBox.ShowMsg("", CommonSettings.HomeFileHasOpened);
                 return;
             }
             var vm = Ioc.Default.GetService<MainViewModel>();

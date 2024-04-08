@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace PackageEasy.Common.Data
 {
@@ -129,6 +130,16 @@ namespace PackageEasy.Common.Data
         /// <returns></returns>
         public static string GetLangText(this string key)
         {
+            var data = Application.Current.TryFindResource(key);
+            if (data != null && data is string)
+            {
+                string value = data as string;
+                return value;
+            }
+            else
+            {
+                return key;
+            }
             if (CurrentLanguageType == LanguageType.Zh_CN) return key;
             if (!LanguageDic.ContainsKey(CurrentLanguageType)) return key;
             var langList = LanguageDic[CurrentLanguageType];
@@ -149,7 +160,7 @@ namespace PackageEasy.Common.Data
             }
             return other.LanguageText;
 
-            
+
         }
 
 

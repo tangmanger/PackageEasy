@@ -93,6 +93,7 @@
     <sys:String x:Key="AppIconEdit">编辑</sys:String>
     <sys:String x:Key="AppIconDelSelected">删除选中</sys:String>
 
+
     <!--注册界面-->
     <sys:String x:Key="RegistryFormat">注册文件格式：</sys:String>
     <sys:String x:Key="RegistryExample">示例： .pge,.pky</sys:String>
@@ -124,4 +125,48 @@
     <sys:String x:Key="EndInstallContent">安装提示：</sys:String>
     <sys:String x:Key="EndUnInstallContent">卸载提示：</sys:String>
     <sys:String x:Key="EndUseCheckProcess">启用进程检测</sys:String>
+
+    <!--关于界面-->
+    <sys:String x:Key="AboutSoftWare">关于软件</sys:String>
+    <sys:String x:Key="AboutSoftWareName">软件名：</sys:String>
+    <sys:String x:Key="AboutSoftWareVersion">产品版本：</sys:String>
+    <sys:String x:Key="AboutSoftWareDescription">产品说明：</sys:String>
+    <sys:String x:Key="AboutSoftWareDescriptionInfo">因为NSIS的打包脚本学习曲线陡峭，HM NIS Edit 在生成脚本后，可视化调整比较麻烦，所以在做了这个工具来方便大家,做的不好的请见谅，为爱发电！</sys:String>
+    <sys:String x:Key="AboutSoftWareConnectMe">联系我：</sys:String>
+    <sys:String x:Key="AboutSoftWareCopyRight">版权所有 ©2021-2036 PackageEasy 保留所有权利</sys:String>
+
+
+    <!--设置界面-->
+    <sys:String x:Key="SettingNSIS">NSIS设置</sys:String>
+    <sys:String x:Key="SettingDisplay">显示设置</sys:String>
+    <sys:String x:Key="SettingCompilePath">编译器路径：</sys:String>
+    <sys:String x:Key="SettingNsisHelper">帮助文档：</sys:String>
+    <sys:String x:Key="SettingTheme">主题：</sys:String>
+
+    <!--cs界面-->
+    <!--主界面cs-->
+    <sys:String x:Key="MainExportScriptTips">是否转换成相对路径？</sys:String>
+    <sys:String x:Key="MainSaveFailTips">保存失败！</sys:String>
+    <sys:String x:Key="MainExportSuccessTips">导出脚本成功！</sys:String>
+    <sys:String x:Key="MainExportFailTips">导出脚本失败！</sys:String>
+    <sys:String x:Key="MainCompileSuccessTips">编译成功！</sys:String>
+    <sys:String x:Key="MainCompileFailTips">编译失败！</sys:String>
+    <sys:String x:Key="MainCompileFailExtTips">编译失败！{0}</sys:String>
+
+    <!--主页界面-->
+    <sys:String x:Key="HomeFileHasOpened">当前文件已打开！</sys:String>
+    <sys:String x:Key="HomeFileNoExist">当前文件{0}不存在,是否从最近打开移除？</sys:String>
+    
+
+    <!--基础信息界面cs-->
+    <sys:String x:Key="BaseInfoEnglish">英文</sys:String>
+    <sys:String x:Key="BaseInfoChinese">中文</sys:String>
+    <sys:String x:Key="BaseInfoAppNameNotEmpty">应用程序名不能为空！</sys:String>
+    <sys:String x:Key="BaseInfoFileVersionFormat">文件版本格式必须为X.X.X.X (X为数字)！</sys:String>
+    <sys:String x:Key="BaseInfoOutPutFileName">输出文件名称不能为空！</sys:String>
+    <sys:String x:Key="BaseInfoLicenseFileNotExist">授权不存在！</sys:String>
+    <sys:String x:Key="BaseInfoAppIconNotExist">应用程序图标不存在！</sys:String>
+    <sys:String x:Key="BaseInfoUnInstallAppIconNotExist">卸载图标不存在！</sys:String>
+    <sys:String x:Key="BaseInfoInstallAppIconNotExist">安装包图标不存在！</sys:String>
+
 </ResourceDictionary>

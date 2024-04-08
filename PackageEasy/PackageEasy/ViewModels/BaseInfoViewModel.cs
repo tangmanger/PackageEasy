@@ -64,8 +64,8 @@ namespace PackageEasy.ViewModels
             ButtonType = ButtonType.Classical;
             InstallList = new List<InstallLanguageModel>()
             {
-                new InstallLanguageModel(){ LanguageType=LanguageType.En_SH,LanguageName="英文".GetLangText(),Code="English",LanguageDisplayKey="${LANG_ENGLISH}"},
-                new InstallLanguageModel(){ LanguageType=LanguageType.Zh_CN,LanguageName="简体中文".GetLangText(),Code="SimpChinese",LanguageDisplayKey="${LANG_SimpChinese}"},
+                new InstallLanguageModel(){ LanguageType=LanguageType.En_SH,LanguageName=CommonSettings.BaseInfoEnglish.GetLangText(),Code="English",LanguageDisplayKey="${LANG_ENGLISH}"},
+                new InstallLanguageModel(){ LanguageType=LanguageType.Zh_CN,LanguageName=CommonSettings.BaseInfoChinese.GetLangText(),Code="SimpChinese",LanguageDisplayKey="${LANG_SimpChinese}"},
             };
             Service.PreCompile += Service_PreCompile;
             if (ProjectInfo == null)
@@ -630,7 +630,7 @@ namespace PackageEasy.ViewModels
         {
             if (string.IsNullOrWhiteSpace(ApplicationName))
             {
-                TMessageBox.ShowMsg("", "应用程序名不能为空!");
+                TMessageBox.ShowMsg("", CommonSettings.BaseInfoAppNameNotEmpty);
                 return false;
             }
             if (!string.IsNullOrWhiteSpace(ProductVersion))
@@ -638,34 +638,34 @@ namespace PackageEasy.ViewModels
                 var data = ProductVersion.Split('.').ToList();
                 if (data.Count != 4)
                 {
-                    TMessageBox.ShowMsg("", "文件版本格式必须为X.X.X.X (X为数字)!");
+                    TMessageBox.ShowMsg("", CommonSettings.BaseInfoFileVersionFormat);
                     return false;
                 }
                 int d = 0;
                 if (data.Exists(C => int.TryParse(C, out d) == false))
                 {
-                    TMessageBox.ShowMsg("", "文件版本格式必须为X.X.X.X (X为数字)!");
+                    TMessageBox.ShowMsg("", CommonSettings.BaseInfoFileVersionFormat);
                     return false;
                 }
             }
             if (string.IsNullOrWhiteSpace(AppOutPath))
             {
-                TMessageBox.ShowMsg("", "输出文件名称不能为空!");
+                TMessageBox.ShowMsg("", CommonSettings.BaseInfoOutPutFileName);
                 return false;
             }
             if (IsLicenseChecked && (string.IsNullOrWhiteSpace(ProjectInfo.BaseInfo.LicenseFilePath) || !File.Exists(ProjectInfo.BaseInfo.LicenseFilePath)))
             {
-                TMessageBox.ShowMsg("", "授权不存在!");
+                TMessageBox.ShowMsg("", CommonSettings.BaseInfoLicenseFileNotExist);
                 return false;
             }
             if (!string.IsNullOrWhiteSpace(AppIconPath) && !CheckFileExist(AppIconPath))
             {
-                TMessageBox.ShowMsg("", "应用程序图标不存在!");
+                TMessageBox.ShowMsg("",CommonSettings.BaseInfoAppIconNotExist);
                 return false;
             }
             if (!string.IsNullOrWhiteSpace(UnInstallIconPath) && !CheckFileExist(UnInstallIconPath))
             {
-                TMessageBox.ShowMsg("", "卸载图标不存在!");
+                TMessageBox.ShowMsg("", CommonSettings.BaseInfoUnInstallAppIconNotExist);
                 return false;
             }
             if (!string.IsNullOrWhiteSpace(InstallIconPath) && !CheckFileExist(InstallIconPath))
