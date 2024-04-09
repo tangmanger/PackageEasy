@@ -159,7 +159,7 @@
 
     <!--Basic information interface cs-->
     <sys:String x:Key="BaseInfoEnglish">English</sys:String>
-    <sys:String x:Key="BaseInfoChinese">Chinese</sys:String>
+    <sys:String x:Key="BaseInfoChinese">中文</sys:String>
     <sys:String x:Key="BaseInfoAppNameNotEmpty">The application name cannot be empty!</sys:String>
     <sys:String x:Key="BaseInfoFileVersionFormat">The file version format must be X.X.X.X (X is a number)!</sys:String>
     <sys:String x:Key="BaseInfoOutPutFileName">The output file name cannot be empty!</sys:String>
@@ -167,4 +167,73 @@
     <sys:String x:Key="BaseInfoAppIconNotExist">The application icon does not exist!</sys:String>
     <sys:String x:Key="BaseInfoUnInstallAppIconNotExist">The uninstall icon does not exist!</sys:String>
     <sys:String x:Key="BaseInfoInstallAppIconNotExist">The installation package icon does not exist!</sys:String>
+    <sys:String x:Key="BaseInfoFaceTypeNo">None</sys:String>
+    <sys:String x:Key="BaseInfoFaceTypeMorden">Modern</sys:String>
+    <sys:String x:Key="BaseInfoFaceTypeClassic">Classic</sys:String>
+    <sys:String x:Key="BaseInfoLangFormatError">The current language file format is incorrect, please refer to the example!</sys:String>
+    <sys:String x:Key="BaseInfoSaveBefore">Please save first!</sys:String>
+
+    <!--Basic interface-->
+    <sys:String x:Key="BaseViewNewProject">New Project*</sys:String>
+
+    <!--Application icon information-->
+    <sys:String x:Key="AppIconStartMenuNameTips">Application\"Start Menu\" folder name cannot be empty!</sys:String>
+    <sys:String x:Key="AppIconTargetDirNotNull">The target folder name cannot be empty!</sys:String>
+    <sys:String x:Key="AppIconShortcutNotNull">The shortcut name cannot be empty!</sys:String>
+    <sys:String x:Key="AppIconTargetFileNotNull">The destination file cannot be empty!</sys:String>
+    <sys:String x:Key="AppIconSelectDelItem">Please select the item to delete!</sys:String>
+
+    <!--Component information interface-->
+    <sys:String x:Key="AssemblyNewSection">New group</sys:String>
+    <sys:String x:Key="AssemblyWorkSpaceNotNull">The working directory is empty!</sys:String>
+    <sys:String x:Key="AssemblyChooseSection">Please choose a group!</sys:String>
+    <sys:String x:Key="AssemblyNullFileList">There is currently no file list!</sys:String>
+    <sys:String x:Key="AssemblyFileIsNull">The current file {0} is empty!</sys:String>
+    <sys:String x:Key="AssemblyFileNotExist">Cannot find file {0} in workspace!</sys:String>
+
+    <!--End interface-->
+    <sys:String x:Key="EndUninstallTip">Are you sure you want to completely remove $(^Name) and all its components?</sys:String>
+    <sys:String x:Key="EndUninstallMsg">$(^Name) was successfully removed from your computer.</sys:String>
+    <sys:String x:Key="EndUninstallProcessTips">The uninstaller has detected that ${PRODUCT_NAME} is running. Do you want to force close it and continue uninstalling?</sys:String>
+    <sys:String x:Key="EndInstallProcessTips">The installation program detects that ${PRODUCT_NAME} is running. Do you want to force close and continue the installation?</sys:String>
+    <sys:String x:Key="EndApplicationNameIsNotNull">End page: The program cannot be empty!</sys:String>
+    <sys:String x:Key="EndProcessNameIsNotNull">End page: The detected process name cannot be empty!</sys:String>
+    <sys:String x:Key="EndUninstallProcessTipsIsNotNull">End page: Uninstall tips cannot be empty!</sys:String>
+    <sys:String x:Key="EndInstallProcessTipsIsNotNull">End page: The program cannot be empty!</sys:String>
+    <sys:String x:Key="EndReadMeNameIsNotNull">End page: Readme file cannot be empty!</sys:String>
+
+    <!--Multi-language interface-->
+    <sys:String x:Key="LangIsNotNull">Multi-language: The language cannot be empty!</sys:String>
+    <sys:String x:Key="LangAssemblyFileIsNotNull">Multi-language: The target file cannot be empty!</sys:String>
+    <sys:String x:Key="LangTargetPathIsNotNull">Multi-language: The target root directory cannot be empty!</sys:String>
+    <sys:String x:Key="LangTargetDirIsNotNull">Multi-language: The target directory cannot be empty!</sys:String>
+
+    <!--Registration interface-->
+    <sys:String x:Key="RegistryRegistryFormatIsNotNull">Registration interface: Please fill in the associated program name!</sys:String>
+    <sys:String x:Key="RegistryPasswordIsNotNull">Registration interface: Please fill in the password!</sys:String>
+
+    <!--Tools-->
+    <sys:String x:Key="ToolAbout">About PackageEasy</sys:String>
+    <sys:String x:Key="ToolPlugInManager">Plug-in settings</sys:String>
+    <sys:String x:Key="ToolScriptControl">Script preview</sys:String>
+    <sys:String x:Key="ToolSettingControl">Settings</sys:String>
+    <sys:String x:Key="ThemeDefault">Default theme</sys:String>
+    <sys:String x:Key="ThemeBlack">Black theme</sys:String>
+    <sys:String x:Key="SaveSuccess">Save successfully!</sys:String>
+    <sys:String x:Key="SaveFail">Save failed!</sys:String>
+    <sys:String x:Key="OpenFileError">An error occurred while opening the file!</sys:String>
+    <sys:String x:Key="TableNotSave">The current label {0} is not saved, do you want to save it?</sys:String>
+    <sys:String x:Key="Yes">OK</sys:String>
+    <sys:String x:Key="No">No</sys:String>
+    <sys:String x:Key="Cancel">Cancel</sys:String>
+    <sys:String x:Key="Close">Close</sys:String>
+    <sys:String x:Key="PasswordBox">Password:</sys:String>
+    <sys:String x:Key="WatingTips">Please wait...</sys:String>
+    <sys:String x:Key="Null">None</sys:String>
+    <sys:String x:Key="SampleChinese">Simplified Chinese</sys:String>
+    <sys:String x:Key="English">English</sys:String>
+    <sys:String x:Key="ProcessCheck">Process Check</sys:String>
+    <sys:String x:Key="FileNoExist">File does not exist!</sys:String>
+    <sys:String x:Key="InstallSuccess">Installation successful!</sys:String>
+    
 </ResourceDictionary>

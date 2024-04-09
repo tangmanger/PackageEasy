@@ -6,7 +6,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PackageEasy.Views"
              mc:Ignorable="d" 
-             xmlns:lang="clr-namespace:PackageEasy.Common.Data;assembly=PackageEasy.Common"
              d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid>
@@ -94,7 +93,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button Style="{StaticResource CommonButtonStyle}" Width="80" Height="30" Command="{Binding Path=DataContext.DelCommand,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}" CommandParameter="{Binding }" Content="删除" lang:LanguageManager.LangText="删除"></Button>
+                                <Button Style="{StaticResource CommonButtonStyle}" Width="80" Height="30" Command="{Binding Path=DataContext.DelCommand,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}" CommandParameter="{Binding }" d:Content="删除" Content="{DynamicResource AssemblyDelete}"></Button>
                             </StackPanel>
                             <!--<TextBlock Text="{Binding PlateName}" Foreground="{DynamicResource DataGridForeground}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>-->
                         </DataTemplate>

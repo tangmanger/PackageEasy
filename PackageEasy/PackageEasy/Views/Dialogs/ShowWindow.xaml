@@ -53,8 +53,8 @@
             </Border>
             <Border Grid.Row="2" Background="{DynamicResource showWindowsBottonBackground}">
                 <StackPanel Grid.Row="2" HorizontalAlignment="Right" Orientation="Horizontal">
-                    <Button Style="{StaticResource CommonButtonStyle}" Visibility="{Binding ShowSureVisibility}" Click="Button_Click" Height="25" MinWidth="80" Content="确认" lang:LanguageManager.LangText="确认"></Button>
-                    <Button Style="{StaticResource CommonButtonStyle}" Margin="10,0,10,0" Height="25"  Click="Button_Click" MinWidth="80" Content="取消" lang:LanguageManager.LangText="取消" ></Button>
+                    <Button Style="{StaticResource CommonButtonStyle}" Visibility="{Binding ShowSureVisibility}" Click="Button_Click" Height="25" MinWidth="80" d:Content="确认" Content="{DynamicResource Yes}"></Button>
+                    <Button Style="{StaticResource CommonButtonStyle}" Margin="10,0,10,0" Height="25"  Click="Button_Click" MinWidth="80" d:Content="取消" Content="{DynamicResource Cancel}" ></Button>
                 </StackPanel>
             </Border>
         </Grid>

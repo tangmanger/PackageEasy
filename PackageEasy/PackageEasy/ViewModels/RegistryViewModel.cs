@@ -1,6 +1,7 @@
 ﻿using PackageEasy.Common;
 using PackageEasy.Common.Helpers;
 using PackageEasy.Domain;
+using PackageEasy.Domain.Common;
 using PackageEasy.Domain.Enums;
 using PackageEasy.Domain.Models;
 using System;
@@ -129,12 +130,12 @@ namespace PackageEasy.ViewModels
         {
             if (!string.IsNullOrWhiteSpace(RegistryFormat) && string.IsNullOrWhiteSpace(ProcessName))
             {
-                TMessageBox.ShowMsg("请填写关联的程序名称!");
+                TMessageBox.ShowMsg(CommonSettings.RegistryRegistryFormatIsNotNull);
                 return false;
             }
             if (IsUsePassword && string.IsNullOrWhiteSpace(Password))
             {
-                TMessageBox.ShowMsg("注册界面:请填写密码!");
+                TMessageBox.ShowMsg(CommonSettings.RegistryPasswordIsNotNull);
                 return false;
             }
             return base.ValidateData();

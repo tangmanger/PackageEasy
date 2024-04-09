@@ -11,7 +11,7 @@
                     <vm:ViewModelLocator x:Key="locator"></vm:ViewModelLocator>
                 </ResourceDictionary>
                 <ResourceDictionary Source="/Themes/DefaultColor.xaml"></ResourceDictionary>
-                <ResourceDictionary Source="/Files/en-us.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="/Files/zh-cn.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/Styles/ProcessStyle.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/Styles/TextBlock.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/Styles/Button.xaml"></ResourceDictionary>

@@ -2,6 +2,7 @@
 using PackageEasy.Common;
 using PackageEasy.Common.Data;
 using PackageEasy.Controls.Controls;
+using PackageEasy.Domain.Common;
 using PackageEasy.Domain.Interfaces;
 using PackageEasy.Domain.Models;
 using PackageEasy.Helpers;
@@ -51,7 +52,7 @@ namespace PackageEasy.Views.Tools
                 PlugIns = new List<PlugInModel>(PlugIns);
             });
         }
-        public override string Description => "插件设置".GetLangText();
+        public override string Description => CommonSettings.ToolPlugInManager.GetLangText();
 
 
         /// <summary>

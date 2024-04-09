@@ -4,6 +4,7 @@ using PackageEasy.Common.Data;
 using PackageEasy.Common.Helpers;
 using PackageEasy.Common.Logs;
 using PackageEasy.Domain;
+using PackageEasy.Domain.Common;
 using PackageEasy.Domain.Enums;
 using PackageEasy.Domain.Interfaces;
 using PackageEasy.Domain.Models;
@@ -670,7 +671,7 @@ namespace PackageEasy.ViewModels
             }
             if (!string.IsNullOrWhiteSpace(InstallIconPath) && !CheckFileExist(InstallIconPath))
             {
-                TMessageBox.ShowMsg("", "安装包图标不存在!");
+                TMessageBox.ShowMsg("", CommonSettings.BaseInfoInstallAppIconNotExist);
                 return false;
             }
 
@@ -693,7 +694,7 @@ namespace PackageEasy.ViewModels
             if (string.IsNullOrWhiteSpace(workPath))
             {
                 Log.Write("工作目录为空!");
-                TMessageBox.ShowMsg("", "工作目录为空!");
+                TMessageBox.ShowMsg("", CommonSettings.AssemblyWorkSpaceNotNull);
                 return;
             }
             var str = FileHelper.SeletcedFilePath("json");
@@ -709,7 +710,7 @@ namespace PackageEasy.ViewModels
                 List<LanguageModel> list = File.ReadAllText(str).DeserializeObject<List<LanguageModel>>();
                 if (list == null || list.Count == 0)
                 {
-                    TMessageBox.ShowMsg("", "当前语言文件格式不正确,请参考示例!");
+                    TMessageBox.ShowMsg("", CommonSettings.BaseInfoLangFormatError);
                     return;
                 }
                 ProjectInfo.BaseInfo.DisplayLanguageList = list;
@@ -725,7 +726,7 @@ namespace PackageEasy.ViewModels
             if (string.IsNullOrWhiteSpace(WorkSpace))
             {
                 Log.Write("工作目录为空!");
-                TMessageBox.ShowMsg("", "工作目录为空!");
+                TMessageBox.ShowMsg("", CommonSettings.AssemblyWorkSpaceNotNull);
                 return;
             }
             var str = FileHelper.SeletcedFilePath("ico");
@@ -818,14 +819,14 @@ namespace PackageEasy.ViewModels
                     if (string.IsNullOrWhiteSpace(WorkSpace))
                     {
                         Log.Write("工作目录为空!");
-                        TMessageBox.ShowMsg("", "工作目录为空!");
+                        TMessageBox.ShowMsg("", CommonSettings.AssemblyWorkSpaceNotNull);
                         IsUseRelativePath = false;
                         return;
                     }
                 }
                 if (!File.Exists(ProjectInfo.ExtraInfo.FilePath))
                 {
-                    TMessageBox.ShowMsg("", "请先进行保存!");
+                    TMessageBox.ShowMsg("", CommonSettings.BaseInfoSaveBefore);
                     IsUseRelativePath = false;
                     return;
                 }

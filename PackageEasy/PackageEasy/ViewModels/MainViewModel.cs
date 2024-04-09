@@ -5,6 +5,7 @@ using PackageEasy.Common;
 using PackageEasy.Common.Data;
 using PackageEasy.Common.Helpers;
 using PackageEasy.Common.Logs;
+using PackageEasy.Domain.Common;
 using PackageEasy.Domain.Enums;
 using PackageEasy.Domain.Interfaces;
 using PackageEasy.Domain.Models;
@@ -505,12 +506,12 @@ namespace PackageEasy.ViewModels
                                 if (CacheDataHelper.FileOpenDic.ContainsKey(projectViewModel.Key) && projectViewModel.ProjectInfo != null)
                                     CacheDataHelper.FileOpenDic[projectViewModel.Key] = projectViewModel.ProjectInfo.ExtraInfo.FilePath;
                                 table.ProjectName = projectViewModel.ProjectName;
-                                TMessageBox.ShowMsg("保存成功!");
+                                TMessageBox.ShowMsg(CommonSettings.SaveSuccess);
                                 SaveRecently(projectViewModel);
                             }
                             else
                             {
-                                TMessageBox.ShowMsg("保存失败!");
+                                TMessageBox.ShowMsg(CommonSettings.SaveFail);
                             }
                         }
                     }
@@ -542,12 +543,12 @@ namespace PackageEasy.ViewModels
                             if (result)
                             {
                                 table.ProjectName = projectViewModel.ProjectName;
-                                TMessageBox.ShowMsg("保存成功!");
+                                TMessageBox.ShowMsg(CommonSettings.SaveSuccess);
                                 SaveRecently(projectViewModel);
                             }
                             else
                             {
-                                TMessageBox.ShowMsg("保存失败!");
+                                TMessageBox.ShowMsg(CommonSettings.SaveFail);
                             }
                         }
                     }
@@ -752,7 +753,7 @@ namespace PackageEasy.ViewModels
             }
             else
             {
-                TMessageBox.ShowMsg("", "打开文件发生错误");
+                TMessageBox.ShowMsg("", CommonSettings.OpenFileError);
             }
         }
 
@@ -818,7 +819,7 @@ namespace PackageEasy.ViewModels
                         }
                         if (flage)
                         {
-                            var result = TMessageBox.ShowMsg(string.Format("当前标签 {0} 未保存,是否保存?", t.ProjectName), MessageLevel.YesNoCancel);
+                            var result = TMessageBox.ShowMsg(string.Format(CommonSettings.TableNotSave, t.ProjectName), MessageLevel.YesNoCancel);
                             if (result != TMessageBoxResult.Cancel && result != TMessageBoxResult.OK)
                             {
                                 return false;

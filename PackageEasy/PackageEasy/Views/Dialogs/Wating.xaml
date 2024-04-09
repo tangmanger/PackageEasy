@@ -13,7 +13,7 @@
         <Border Background="{DynamicResource watingBackground}" BorderBrush="{DynamicResource progressColoBrush}" BorderThickness="1"  Width="150" Height="80">
             <StackPanel Orientation="Horizontal">
                 <controls:TProgressRing Style="{StaticResource CircleProgressRingStyle}" Margin="5,0,0,0" HorizontalAlignment="Left" Width="60" Height="60"  IsActive="True"></controls:TProgressRing>
-                <TextBlock Margin="5,0,0,0" Text="请稍等..." VerticalAlignment="Center" HorizontalAlignment="Center" ></TextBlock>
+                <TextBlock Margin="5,0,0,0" d:Text="请稍等..." Text="{DynamicResource WatingTips}" VerticalAlignment="Center" HorizontalAlignment="Center" ></TextBlock>
             </StackPanel>
         </Border>
     </Grid>

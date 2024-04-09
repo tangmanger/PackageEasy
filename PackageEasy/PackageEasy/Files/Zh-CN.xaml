@@ -156,7 +156,7 @@
     <!--主页界面-->
     <sys:String x:Key="HomeFileHasOpened">当前文件已打开！</sys:String>
     <sys:String x:Key="HomeFileNoExist">当前文件{0}不存在,是否从最近打开移除？</sys:String>
-    
+
 
     <!--基础信息界面cs-->
     <sys:String x:Key="BaseInfoEnglish">英文</sys:String>
@@ -168,5 +168,73 @@
     <sys:String x:Key="BaseInfoAppIconNotExist">应用程序图标不存在！</sys:String>
     <sys:String x:Key="BaseInfoUnInstallAppIconNotExist">卸载图标不存在！</sys:String>
     <sys:String x:Key="BaseInfoInstallAppIconNotExist">安装包图标不存在！</sys:String>
+    <sys:String x:Key="BaseInfoFaceTypeNo">无</sys:String>
+    <sys:String x:Key="BaseInfoFaceTypeMorden">现代</sys:String>
+    <sys:String x:Key="BaseInfoFaceTypeClassic">古典</sys:String>
+    <sys:String x:Key="BaseInfoLangFormatError">当前语言文件格式不正确,请参考示例！</sys:String>
+    <sys:String x:Key="BaseInfoSaveBefore">请先进行保存！</sys:String>
 
+    <!--基础界面-->
+    <sys:String x:Key="BaseViewNewProject">新工程*</sys:String>
+
+    <!--应用图标信息-->
+    <sys:String x:Key="AppIconStartMenuNameTips">应用程序\"开始菜单\"文件夹名称不能为空！</sys:String>
+    <sys:String x:Key="AppIconTargetDirNotNull">目标文件夹名称不能为空！</sys:String>
+    <sys:String x:Key="AppIconShortcutNotNull">快捷方式名称不能为空！</sys:String>
+    <sys:String x:Key="AppIconTargetFileNotNull">目的文件不能为空！</sys:String>
+    <sys:String x:Key="AppIconSelectDelItem">请选择要删除的项！</sys:String>
+
+    <!--组件信息界面-->
+    <sys:String x:Key="AssemblyNewSection">新建组</sys:String>
+    <sys:String x:Key="AssemblyWorkSpaceNotNull">工作目录为空！</sys:String>
+    <sys:String x:Key="AssemblyChooseSection">请选择组！</sys:String>
+    <sys:String x:Key="AssemblyNullFileList">当前没有文件列表！</sys:String>
+    <sys:String x:Key="AssemblyFileIsNull">当前文件{0}为空！</sys:String>
+    <sys:String x:Key="AssemblyFileNotExist">无法在工作空间找到文件{0}！</sys:String>
+
+    <!--结束界面-->
+    <sys:String x:Key="EndUninstallTip">你确实要完全移除 $(^Name) ，其及所有的组件？</sys:String>
+    <sys:String x:Key="EndUninstallMsg">$(^Name) 已成功地从你的计算机移除。</sys:String>
+    <sys:String x:Key="EndUninstallProcessTips">卸载程序检测到 ${PRODUCT_NAME} 正在运行，是否强行关闭并继续卸载？</sys:String>
+    <sys:String x:Key="EndInstallProcessTips">安装程序检测到 ${PRODUCT_NAME} 正在运行，是否强行关闭并继续安装？</sys:String>
+    <sys:String x:Key="EndApplicationNameIsNotNull">结束页面：程序不能为空！</sys:String>
+    <sys:String x:Key="EndProcessNameIsNotNull">结束页面：检测的进程名不能空！</sys:String>
+    <sys:String x:Key="EndUninstallProcessTipsIsNotNull">结束页面：卸载提示不能为空！</sys:String>
+    <sys:String x:Key="EndInstallProcessTipsIsNotNull">结束页面：程序不能为空！</sys:String>
+    <sys:String x:Key="EndReadMeNameIsNotNull">结束页面：自述文件不能为空！</sys:String>
+
+    <!--多语言界面-->
+    <sys:String x:Key="LangIsNotNull">多语言：所属语言不能为空！</sys:String>
+    <sys:String x:Key="LangAssemblyFileIsNotNull">多语言：目标文件不能为空！</sys:String>
+    <sys:String x:Key="LangTargetPathIsNotNull">多语言：目标根目录不能为空！</sys:String>
+    <sys:String x:Key="LangTargetDirIsNotNull">多语言：目标目录不能为空！</sys:String>
+
+    <!--注册界面-->
+    <sys:String x:Key="RegistryRegistryFormatIsNotNull">注册界面：请填写关联的程序名称！</sys:String>
+    <sys:String x:Key="RegistryPasswordIsNotNull">注册界面：请填写密码！</sys:String>
+
+    <!--工具-->
+    <sys:String x:Key="ToolAbout">关于PackageEasy</sys:String>
+    <sys:String x:Key="ToolPlugInManager">插件设置</sys:String>
+    <sys:String x:Key="ToolScriptControl">脚本预览</sys:String>
+    <sys:String x:Key="ToolSettingControl">设置</sys:String>
+    <sys:String x:Key="ThemeDefault">默认主题</sys:String>
+    <sys:String x:Key="ThemeBlack">黑色主题</sys:String>
+    <sys:String x:Key="SaveSuccess">保存成功！</sys:String>
+    <sys:String x:Key="SaveFail">保存失败！</sys:String>
+    <sys:String x:Key="OpenFileError">打开文件发生错误！</sys:String>
+    <sys:String x:Key="TableNotSave">当前标签 {0} 未保存,是否保存？</sys:String>
+    <sys:String x:Key="Yes">确定</sys:String>
+    <sys:String x:Key="No">否</sys:String>
+    <sys:String x:Key="Cancel">取消</sys:String>
+    <sys:String x:Key="Close">关闭</sys:String>
+    <sys:String x:Key="PasswordBox">密码：</sys:String>
+    <sys:String x:Key="WatingTips">请稍等...</sys:String>
+    <sys:String x:Key="Null">无</sys:String>
+    <sys:String x:Key="SampleChinese">简体中文</sys:String>
+    <sys:String x:Key="English">英文</sys:String>
+    <sys:String x:Key="ProcessCheck">进程检测</sys:String>
+    <sys:String x:Key="FileNoExist">文件不存在！</sys:String>
+    <sys:String x:Key="InstallSuccess">安装成功！</sys:String>
+    
 </ResourceDictionary>

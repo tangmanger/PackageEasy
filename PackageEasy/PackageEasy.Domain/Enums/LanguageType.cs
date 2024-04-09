@@ -1,4 +1,5 @@
 ﻿using PackageEasy.Domain.Attributes;
+using PackageEasy.Domain.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,17 +15,17 @@ namespace PackageEasy.Domain.Enums
     /// </summary>
     public enum LanguageType
     {
-        [Description("无")]
+        [Description(CommonSettings.Null)]
         None = 0,
         /// <summary>
         /// 简体中文
         /// </summary>
-        [Description("简体中文")]
+        [Description(CommonSettings.SampleChinese)]
         Zh_CN = 1,
         /// <summary>
         /// 英文
         /// </summary>
-        [Description("English")]
+        [Description(CommonSettings.English)]
         En_SH = 2,
 
     }

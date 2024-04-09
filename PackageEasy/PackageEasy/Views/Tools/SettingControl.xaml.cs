@@ -1,6 +1,7 @@
 ﻿using PackageEasy.Common.Data;
 using PackageEasy.Common.Helpers;
 using PackageEasy.Controls.Controls;
+using PackageEasy.Domain.Common;
 using PackageEasy.Domain.Models;
 using PackageEasy.Helpers;
 using System;
@@ -35,7 +36,7 @@ namespace PackageEasy.Views.Tools
             InitializeComponent();
             DataContext = this;
         }
-        public override string Description => "设置".GetLangText();
+        public override string Description => CommonSettings.ToolSettingControl.GetLangText();
         public override void Load()
         {
             MakensisPath = ConfigHelper.Config.NSISMakePath ?? "";

@@ -25,6 +25,7 @@ using System.IO;
 using CommunityToolkit.Mvvm.DependencyInjection;
 using System.ComponentModel;
 using PackageEasy.Domain.Models;
+using PackageEasy.Domain.Common;
 
 namespace PackageEasy
 {
@@ -133,7 +134,7 @@ namespace PackageEasy
                         if (CacheDataHelper.FileOpenDic.ContainsValue(CacheDataHelper.OpenPath))
                         {
 
-                            TMessageBox.ShowMsg("", "当前文件已打开!");
+                            TMessageBox.ShowMsg("", CommonSettings.HomeFileHasOpened);
                             CacheDataHelper.OpenPath = string.Empty;
                             return IntPtr.Zero;
                         }

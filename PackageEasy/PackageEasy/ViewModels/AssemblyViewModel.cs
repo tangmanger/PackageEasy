@@ -4,6 +4,7 @@ using PackageEasy.Common.Data;
 using PackageEasy.Common.Helpers;
 using PackageEasy.Common.Logs;
 using PackageEasy.Domain;
+using PackageEasy.Domain.Common;
 using PackageEasy.Domain.Enums;
 using PackageEasy.Domain.Interfaces;
 using PackageEasy.Domain.Models;
@@ -49,6 +50,7 @@ namespace PackageEasy.ViewModels
 
 
         #region 属性
+
         AssemblyInfoModel assemblyInfoModel = new AssemblyInfoModel();
 
         List<AssemblyFileModel> allFileList = new List<AssemblyFileModel>();
@@ -182,7 +184,7 @@ namespace PackageEasy.ViewModels
             {
                 id = AssemblyList.Max(c => c.AssemblyId) + 1;
             }
-            AssemblyList.Add(new AssemblyModel() { AssemblyId = id, IsAutoSelected = true, AssemblyName = "新建组".GetLangText() });
+            AssemblyList.Add(new AssemblyModel() { AssemblyId = id, IsAutoSelected = true, AssemblyName = CommonSettings.AssemblyNewSection.GetLangText() });
             AssemblyList = new List<AssemblyModel>(AssemblyList);
         });
 
@@ -214,13 +216,13 @@ namespace PackageEasy.ViewModels
             if (string.IsNullOrWhiteSpace(ProjectInfo.GetWorkSpace()))
             {
                 Log.Write("工作目录为空!");
-                TMessageBox.ShowMsg("", "工作目录为空!");
+                TMessageBox.ShowMsg("", CommonSettings.AssemblyWorkSpaceNotNull);
                 return;
             }
             var currentAssembly = AssemblyList.Find(p => p.IsSelected == true);
             if (currentAssembly == null)
             {
-                TMessageBox.ShowMsg("", "请选择组!");
+                TMessageBox.ShowMsg("", CommonSettings.AssemblyChooseSection);
                 return;
             }
 
@@ -268,13 +270,13 @@ namespace PackageEasy.ViewModels
             if (string.IsNullOrWhiteSpace(ProjectInfo.GetWorkSpace()))
             {
                 Log.Write("工作目录为空!");
-                TMessageBox.ShowMsg("", "工作目录为空!");
+                TMessageBox.ShowMsg("", CommonSettings.AssemblyWorkSpaceNotNull);
                 return;
             }
             var currentAssembly = AssemblyList.Find(p => p.IsSelected == true);
             if (currentAssembly == null)
             {
-                TMessageBox.ShowMsg("", "请选择组!");
+                TMessageBox.ShowMsg("", CommonSettings.AssemblyChooseSection);
                 return;
             }
 
@@ -361,13 +363,13 @@ namespace PackageEasy.ViewModels
             if (string.IsNullOrWhiteSpace(ProjectInfo.GetWorkSpace()))
             {
                 Log.Write("工作目录为空!");
-                TMessageBox.ShowMsg("", "工作目录为空!");
+                TMessageBox.ShowMsg("", CommonSettings.AssemblyWorkSpaceNotNull);
                 return;
             }
             var currentAssembly = AssemblyList.Find(p => p.IsSelected == true);
             if (currentAssembly == null)
             {
-                TMessageBox.ShowMsg("", "请选择组!");
+                TMessageBox.ShowMsg("", CommonSettings.AssemblyChooseSection);
                 return;
             }
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
@@ -432,13 +434,13 @@ namespace PackageEasy.ViewModels
             if (string.IsNullOrWhiteSpace(ProjectInfo.GetWorkSpace()))
             {
                 Log.Write("工作目录为空!");
-                TMessageBox.ShowMsg("", "工作目录为空!");
+                TMessageBox.ShowMsg("", CommonSettings.AssemblyWorkSpaceNotNull);
                 return;
             }
             var currentAssembly = AssemblyList.Find(p => p.IsSelected == true);
             if (currentAssembly == null)
             {
-                TMessageBox.ShowMsg("", "请选择组!");
+                TMessageBox.ShowMsg("", CommonSettings.AssemblyChooseSection);
                 return;
             }
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -487,7 +489,7 @@ namespace PackageEasy.ViewModels
         {
             if (FileList == null || FileList.Count == 0)
             {
-                TMessageBox.ShowMsg("当前没有文件列表!");
+                TMessageBox.ShowMsg(CommonSettings.AssemblyNullFileList);
                 return;
             }
             List<AssemblyFileModel> files = new List<AssemblyFileModel>();
@@ -611,13 +613,13 @@ namespace PackageEasy.ViewModels
                             var path = ProjectInfo.GetWorkSpace() + file.FilePath;
                             if (string.IsNullOrWhiteSpace(path))
                             {
-                                string str = string.Format("当前文件{0}为空!".GetLangText(), file.FilePath);
+                                string str = string.Format(CommonSettings.AssemblyFileIsNull.GetLangText(), file.FilePath);
                                 TMessageBox.ShowMsg("", str);
                                 return false;
                             }
                             if (file.IsDirectory == false && !File.Exists(path))
                             {
-                                string str = string.Format("无法在工作空间找到文件{0}!".GetLangText(), file.FilePath);
+                                string str = string.Format(CommonSettings.AssemblyFileNotExist.GetLangText(), file.FilePath);
                                 TMessageBox.ShowMsg("", str);
                                 return false;
                             }
