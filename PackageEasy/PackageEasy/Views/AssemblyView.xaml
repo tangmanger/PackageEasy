@@ -260,7 +260,9 @@
                                 <CheckBox IsChecked="{Binding IsNeedInstall,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Margin="5,0,0,0" d:Content="安装" Content="{DynamicResource AssemblyInstall}"></CheckBox>
                                 <CheckBox IsChecked="{Binding IsNeedQuietInstall,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5,0,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"  d:Content="静默安装" Content="{DynamicResource AssemblyQuietInstall}"></CheckBox>
                             </StackPanel>
+                            <CheckBox  Margin="5,0,0,0" IsChecked="{Binding IsExistNoNeedCopy,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" d:Content="如果存在不复制" Content="{DynamicResource AssemblExistUnCopy}"></CheckBox>
                             <CheckBox  Margin="5,0,0,0" IsChecked="{Binding IsNoNeedCopy,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" d:Content="不复制" Content="{DynamicResource AssemblUnCopy}"></CheckBox>
+                            <CheckBox  Margin="5,0,0,0" IsChecked="{Binding IsNoNeedDelete,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" d:Content="不删除" Content="{DynamicResource AssemblUnDelete}"></CheckBox>
 
                         </StackPanel>
                     </Border>

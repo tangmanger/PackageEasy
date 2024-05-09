@@ -78,6 +78,8 @@
     <sys:String x:Key="AssemblAddFile">添加单个文件</sys:String>
     <sys:String x:Key="AssemblAddMultiFile">添加多个文件</sys:String>
     <sys:String x:Key="AssemblAddDir">添加文件夹</sys:String>
+    <sys:String x:Key="AssemblExistUnCopy">如果存在不复制</sys:String>
+    <sys:String x:Key="AssemblUnDelete">不删除</sys:String>
 
     <!--应用程序图标-->
     <sys:String x:Key="AppIconMenuName">应用程序&quot;开始菜单&quot;文件夹名称:</sys:String>
@@ -236,5 +238,5 @@
     <sys:String x:Key="ProcessCheck">进程检测</sys:String>
     <sys:String x:Key="FileNoExist">文件不存在！</sys:String>
     <sys:String x:Key="InstallSuccess">安装成功！</sys:String>
-    
+
 </ResourceDictionary>

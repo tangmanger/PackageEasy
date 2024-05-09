@@ -19,7 +19,7 @@ namespace PackageEasy.NSIS
         {
             throw new NotImplementedException();
         }
-        public  string GetWorkSpace( ProjectInfoModel projectInfo)
+        public string GetWorkSpace(ProjectInfoModel projectInfo)
         {
             if (!projectInfo.BaseInfo.IsUseRelativePath) return projectInfo.BaseInfo.WorkSpace;
 
@@ -345,15 +345,29 @@ namespace PackageEasy.NSIS
 
                                 if (currentDirectory != dirPath)
                                 {
-                                    delDirs.Add(dirPath);
+                                    if (!file.IsNoNeedDelete)
+                                        delDirs.Add(dirPath);
                                     currentDirectory = dirPath;
                                     list.Add($"  SetOutPath \"{dirPath}\"");
                                 }
                                 var path = GetWorkSpace(projectInfoModel) + file.FilePath;
                                 if (!file.IsDirectory)
-                                    //    list.Add($"  CreateDirectory  \"{path}\"");
-                                    //else
-                                    list.Add($"  File \"{path}\"");
+                                {
+
+                                    if (file.IsExistNoNeedCopy)
+                                    {
+                                        list.Add($"  StrCpy $0 {path}");
+                                        list.Add("  IfFileExists $0 0 file_not_found");
+                                        list.Add("  Goto done");
+                                        list.Add("  file_not_found:");
+                                        list.Add($"  File \"{path}\"");
+                                        list.Add("  done:");
+                                    }
+                                    else
+                                    {
+                                        list.Add($"  File \"{path}\"");
+                                    }
+                                }
                                 FileInfo fileInfo = new FileInfo(path);
                                 if (file.IsNeedInstall)
                                 {
@@ -701,8 +715,8 @@ namespace PackageEasy.NSIS
 
                             foreach (var file in item.FileList)
                             {
-
-                                list.Add($" Delete \"{file.TargetPath.DisplayName}{file.FilePath}\"");
+                                if (!file.IsNoNeedDelete)
+                                    list.Add($" Delete \"{file.TargetPath.DisplayName}{file.FilePath}\"");
 
                             }
                             count++;
