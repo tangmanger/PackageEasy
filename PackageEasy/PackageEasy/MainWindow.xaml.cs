@@ -64,7 +64,7 @@ namespace PackageEasy
             CommandBindings.Add(new CommandBinding(SystemCommands.MinimizeWindowCommand, MinimizeExecute));
             NavigationHelper.GoTo(ViewType.Home);
             var currentTheme = ThemeHelper.Themes.Find(p => p.ThemeId == ConfigHelper.Config.ThemeId);
-            ThemeHelper.UpdateTheme(currentTheme ?? new ThemeModel());
+            ThemeHelper.UpdateTheme(currentTheme ?? new ThemeModel() { ThemeId = "default", ThemeName = "DefaultColor.xaml" });
 
 
         }

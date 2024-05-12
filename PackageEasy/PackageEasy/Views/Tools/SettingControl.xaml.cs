@@ -1,4 +1,6 @@
-﻿using PackageEasy.Common.Data;
+﻿using CommunityToolkit.Mvvm.Input;
+using Microsoft.Win32;
+using PackageEasy.Common.Data;
 using PackageEasy.Common.Helpers;
 using PackageEasy.Controls.Controls;
 using PackageEasy.Domain.Common;
@@ -6,6 +8,7 @@ using PackageEasy.Domain.Models;
 using PackageEasy.Helpers;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -111,6 +114,50 @@ namespace PackageEasy.Views.Tools
                 RaisePropertyChanged();
             }
         }
+
+        #endregion
+
+
+        #region 命令
+
+        /// <summary>
+        /// 设置路径
+        /// </summary>
+        public RelayCommand SetNisiCommand => new RelayCommand(() =>
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            var result = openFileDialog.ShowDialog();
+            if (result == true)
+            {
+                var filePath = openFileDialog.FileName;
+                if (File.Exists(filePath))
+                {
+                    ConfigHelper.Config.NSISMakePath = filePath;
+                    ConfigHelper.Save(true);
+                    MakensisPath = ConfigHelper.Config.NSISMakePath ?? "";
+                }
+            }
+        });
+
+        /// <summary>
+        /// 编译路径
+        /// </summary>
+        public RelayCommand HelperCommand => new RelayCommand(() =>
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            var result = openFileDialog.ShowDialog();
+            if (result == true)
+            {
+                var filePath = openFileDialog.FileName;
+                if (File.Exists(filePath))
+                {
+                    ConfigHelper.Config.NSISHelperPath = filePath;
+                    ConfigHelper.Save(true);
+                    NSISHelperPath = ConfigHelper.Config.NSISHelperPath ?? "";
+                }
+            }
+        });
+
 
         #endregion
 
