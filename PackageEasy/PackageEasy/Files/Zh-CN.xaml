@@ -1,6 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <sys:String x:Key="Format_Colon">：</sys:String>
+    <sys:String x:Key="None">无</sys:String>
     <!--主界面-->
     <sys:String x:Key="MainFile">文件</sys:String>
     <sys:String x:Key="MainNewFile">新建</sys:String>
@@ -80,6 +82,9 @@
     <sys:String x:Key="AssemblAddDir">添加文件夹</sys:String>
     <sys:String x:Key="AssemblExistUnCopy">如果存在不复制</sys:String>
     <sys:String x:Key="AssemblUnDelete">不删除</sys:String>
+    <sys:String x:Key="AssemblNeedCopy">是否复制</sys:String>
+    <sys:String x:Key="AssemblInstallType">安装方式</sys:String>
+    <sys:String x:Key="AssemblIgnore">忽略</sys:String>
 
     <!--应用程序图标-->
     <sys:String x:Key="AppIconMenuName">应用程序&quot;开始菜单&quot;文件夹名称:</sys:String>

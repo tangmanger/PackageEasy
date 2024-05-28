@@ -32,11 +32,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\AssemblyView1.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Resources\Icons\iconfont.ttf" />
     <None Remove="Resources\Images\NewProject.png" />
     <None Remove="Resources\Images\tools.png" />
     <None Remove="Resources\Images\Triangle.png" />
     <None Remove="Resources\Images\wx.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="Views\AssemblyView1.xaml" />
   </ItemGroup>
 
   <ItemGroup>

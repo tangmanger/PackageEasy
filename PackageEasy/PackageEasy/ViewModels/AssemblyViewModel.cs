@@ -10,6 +10,8 @@ using PackageEasy.Domain.Interfaces;
 using PackageEasy.Domain.Models;
 using PackageEasy.Domain.Models.SaveModel;
 using PackageEasy.Enums;
+using PackageEasy.ViewModels.Dialogs;
+using PackageEasy.Views.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -60,6 +62,12 @@ namespace PackageEasy.ViewModels
         private bool isAllowChoose;
         private bool isShow;
         private bool isAllChecked;
+        private bool isExe;
+        private bool install;
+        private bool quietInstall;
+        private bool isExistNoNeedCopy;
+        private bool isNoNeedCopy;
+        private bool isNoNeedDelete;
 
         /// <summary>
         /// 组件信息
@@ -137,6 +145,84 @@ namespace PackageEasy.ViewModels
             }
         }
 
+        /// <summary>
+        /// 是否是exe
+        /// </summary>
+        public bool IsExe
+        {
+            get => isExe;
+            set
+            {
+                isExe = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// 安装
+        /// </summary>
+        public bool Install
+        {
+            get => install;
+            set
+            {
+                install = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// 静默安装
+        /// </summary>
+        public bool QuietInstall
+        {
+            get => quietInstall;
+            set
+            {
+                quietInstall = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// 存在则不复制
+        /// </summary>
+        public bool IsExistNoNeedCopy
+        {
+            get => isExistNoNeedCopy;
+            set
+            {
+                isExistNoNeedCopy = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// 不复制
+        /// </summary>
+        public bool IsNoNeedCopy
+        {
+            get => isNoNeedCopy;
+            set
+            {
+                isNoNeedCopy = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// 卸载后不删除
+        /// </summary>
+        public bool IsNoNeedDelete
+        {
+            get => isNoNeedDelete;
+            set
+            {
+                isNoNeedDelete = value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         #region 命令
@@ -206,6 +292,16 @@ namespace PackageEasy.ViewModels
             var s = AssemblyList.Find(p => p.IsSelected);
             if (s != null)
                 FileList = s.FileList;
+        });
+
+
+        public RelayCommand<AssemblyModel> ShowDetailCommand => new RelayCommand<AssemblyModel>((s) =>
+        {
+            AssemblyFilesDialog assemblyFiles = new AssemblyFilesDialog();
+            AssemblyFilesViewModel assemblyFileModel = new AssemblyFilesViewModel(s.FileList, TargetDirList);
+            assemblyFiles.DataContext = assemblyFileModel;
+            assemblyFiles.ShowDialog();
+
         });
 
         /// <summary>
@@ -512,6 +608,61 @@ namespace PackageEasy.ViewModels
                 s.FileList = FileList;
             }
         });
+
+        /// <summary>
+        /// 打开菜单
+        /// </summary>
+        public RelayCommand OpenMenuCommand => new RelayCommand(() =>
+        {
+            if (FileList != null)
+            {
+                var selected = FileList.FindAll(f => f.IsSelected);
+                if (selected != null && selected.Count > 0)
+                {
+                    IsExe = !selected.Exists(c => c.IsExe == false);
+                    Install = !selected.Exists(c => c.IsNeedInstall == false);
+                    QuietInstall = !selected.Exists(c => c.IsNeedQuietInstall == false);
+                    IsExistNoNeedCopy = !selected.Exists(c => c.IsExistNoNeedCopy == false);
+                    IsNoNeedCopy = !selected.Exists(c => c.IsNoNeedCopy == false);
+                    IsNoNeedDelete = !selected.Exists(c => c.IsNoNeedDelete == false);
+                    return;
+                }
+
+            }
+            IsExe = false;
+            Install = false;
+            QuietInstall = false;
+            IsExistNoNeedCopy = false;
+            IsNoNeedDelete = false;
+            IsNoNeedCopy = false;
+        });
+
+        /// <summary>
+        /// 设置安装方式
+        /// </summary>
+        public RelayCommand<string> SetMenuCommand => new RelayCommand<string>((s) =>
+        {
+            if (FileList != null)
+            {
+                var selected = FileList.FindAll(f => f.IsSelected);
+                if (selected == null || selected.Count == 0) return;
+
+                foreach (var item in selected)
+                {
+                    if (s == "0")
+                    {
+                        item.IsNeedInstall = true;
+                        item.IsNeedQuietInstall = false;
+                    }
+                    else if (s == "1")
+                    {
+                        item.IsNeedInstall = false;
+                        item.IsNeedQuietInstall = true;
+                    }
+                }
+            }
+        });
+
 
         #endregion
 

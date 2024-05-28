@@ -819,7 +819,8 @@ namespace PackageEasy.ViewModels
                         }
                         if (flage)
                         {
-                            var result = TMessageBox.ShowMsg(string.Format(CommonSettings.TableNotSave, t.ProjectName), MessageLevel.YesNoCancel);
+                            var data = string.Format(CommonSettings.TableNotSave.GetLangText(), t.ProjectName);
+                            var result = TMessageBox.ShowMsg(data, MessageLevel.YesNoCancel);
                             if (result != TMessageBoxResult.Cancel && result != TMessageBoxResult.OK)
                             {
                                 return false;
