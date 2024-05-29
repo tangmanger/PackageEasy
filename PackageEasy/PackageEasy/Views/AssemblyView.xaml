@@ -359,7 +359,7 @@
                     <MenuItem  Style="{StaticResource menuContextStyle}" IsChecked="{Binding IsNoNeedCopy}"  Command="{Binding SetMenuCommand}" CommandParameter="{x:Static enmus:FileMenuOperateType.IsNoNeedCopy}"  d:Header="不复制" Header="{DynamicResource AssemblUnCopy}"  ></MenuItem>
                     <MenuItem  Style="{StaticResource menuContextStyle}" IsChecked="{Binding IsNoNeedDelete}"  Command="{Binding SetMenuCommand}" CommandParameter="{x:Static enmus:FileMenuOperateType.IsNoNeedDelete}"  d:Header="不删除" Header="{DynamicResource AssemblUnDelete}"  ></MenuItem>
                     <Separator Style="{StaticResource sep}"/>
-                    <MenuItem  Style="{StaticResource menuContextStyle}" d:Header="忽略" Header="{DynamicResource AssemblIgnore}"  ></MenuItem>
+                    <MenuItem  Style="{StaticResource menuContextStyle}" d:Header="忽略" Command="{Binding SetMenuCommand}" CommandParameter="{x:Static enmus:FileMenuOperateType.Ignore}"  Header="{DynamicResource AssemblIgnore}"  ></MenuItem>
 
                 </ContextMenu>
             </DataGrid.ContextMenu>
