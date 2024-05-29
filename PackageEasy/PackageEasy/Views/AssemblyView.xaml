@@ -6,8 +6,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PackageEasy.Views"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:enmus="clr-namespace:PackageEasy.Domain.Enums;assembly=PackageEasy.Domain"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="850" >
+    <UserControl.Resources>
+        <ContentControl x:Key="proxyElement" DataContext="{Binding }"></ContentControl>
+    </UserControl.Resources>
+
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -18,11 +23,13 @@
             <RowDefinition></RowDefinition>
             <RowDefinition Height="100"></RowDefinition>
         </Grid.RowDefinitions>
+        <ContentControl Content="{StaticResource proxyElement}" Visibility="Collapsed"></ContentControl>
         <!--<Border Grid.Column="1" BorderBrush="{DynamicResource borderBrush}" BorderThickness="0.5,0,0,0"></Border>-->
         <Popup AllowsTransparency="True" x:Name="pop"  PopupAnimation="Slide" Placement="AbsolutePoint">
             <Border Width="200" Height="200"></Border>
         </Popup>
-        <DataGrid Style="{StaticResource DataGridStyle}" RowDetailsVisibilityMode="VisibleWhenSelected" x:Name="datagrid" BorderBrush="{DynamicResource borderBrush}" ItemsSource="{Binding AssemblyList}" Margin="0,10,0,0" CanUserAddRows="False"  AutoGenerateColumns="False" ColumnHeaderHeight="35" RowHeight="35">
+        <DataGrid Style="{StaticResource DataGridStyle}" RowDetailsVisibilityMode="VisibleWhenSelected"  x:Name="datagrid" BorderBrush="{DynamicResource borderBrush}" ItemsSource="{Binding AssemblyList}" Margin="0,10,0,0" CanUserAddRows="False"  AutoGenerateColumns="False" ColumnHeaderHeight="35" RowHeight="35">
+
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="SelectionChanged">
                     <i:InvokeCommandAction Command="{Binding AssemblySelectedCommand}" ></i:InvokeCommandAction>
@@ -52,7 +59,7 @@
                     </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBox Style="{StaticResource CommonTextBox}" FocusVisualStyle="{x:Null}" BorderBrush="Transparent" Background="Transparent" Text="{Binding AssemblyName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="2">
+                            <TextBox ContextMenu="{x:Null}" Style="{StaticResource CommonTextBox}"  FocusVisualStyle="{x:Null}" BorderBrush="Transparent" Background="Transparent" Text="{Binding AssemblyName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="2">
 
                             </TextBox>
                             <!--<TextBlock Text="{Binding PlateName}" Foreground="{DynamicResource DataGridForeground}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>-->
@@ -74,17 +81,27 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn  Width="60" Visibility="Collapsed">
+                <DataGridTemplateColumn  Width="60" >
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock d:Text="默认勾选" Text="{DynamicResource AssemblyDefaultCheck}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></TextBlock>
+                            <TextBlock d:Text="默认选中" Text="{DynamicResource AssemblyDefaultCheck}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <CheckBox VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsAutoSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></CheckBox>
-                            </StackPanel>
+                            <TextBox Style="{StaticResource CommonTextBox}" HorizontalContentAlignment="Center" BorderBrush="Transparent" Foreground="{DynamicResource DataGridForeground}" Text="{DynamicResource No}"  Background="Transparent" IsReadOnly="True" x:Name="txt" Margin="2">
+                                <TextBox.ContextMenu>
+                                    <ContextMenu >
+                                        <MenuItem IsChecked="{Binding IsAutoSelected}" Command="{Binding Path=DataContext.SetAssemblyMenuCommand,Source={StaticResource proxyElement}}" CommandParameter="{Binding }"   Style="{StaticResource menuContextStyle}" d:Header="默认选中" Header="{DynamicResource AssemblyDefaultCheck}"  ></MenuItem>
+                                    </ContextMenu>
+                                </TextBox.ContextMenu>
+                            </TextBox>
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding IsAutoSelected}" Value="true">
+                                    <Setter Property="Text" TargetName="txt" Value="{DynamicResource Sure}"></Setter>
+                                </DataTrigger>
+
+                            </DataTemplate.Triggers>
                             <!--<TextBlock Text="{Binding PlateName}" Foreground="{DynamicResource DataGridForeground}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>-->
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -105,14 +122,16 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
-            <DataGrid.RowDetailsTemplate>
+            <!--<DataGrid.RowDetailsTemplate>
                 <DataTemplate>
                     <Border BorderBrush="{DynamicResource datagridLinesBrush}" Height="35"  BorderThickness="0,0,1,0">
                         <CheckBox HorizontalAlignment="Left" Margin="5,0,0,0" d:Content="默认勾选" Content="{DynamicResource AssemblyDefaultCheck}" VerticalAlignment="Center"  IsChecked="{Binding IsAutoSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></CheckBox>
-                        <!--<Button Style="{StaticResource CommonButtonStyle}" Width="80" Height="30" Content="删除" lang:LanguageManager.LangText="删除" CommandParameter="{Binding }" Command="{Binding DataContext.DelGroupCommand,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"></Button>-->
+                        -->
+            <!--<Button Style="{StaticResource CommonButtonStyle}" Width="80" Height="30" Content="删除" lang:LanguageManager.LangText="删除" CommandParameter="{Binding }" Command="{Binding DataContext.DelGroupCommand,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"></Button>-->
+            <!--
                     </Border>
                 </DataTemplate>
-            </DataGrid.RowDetailsTemplate>
+            </DataGrid.RowDetailsTemplate>-->
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow" BasedOn="{StaticResource DefaultDataGridRowStyle}">
                     <Setter Property="IsSelected" Value="{Binding IsSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></Setter>
@@ -144,10 +163,11 @@
                 </StackPanel>
             </StackPanel>
         </Border>
-        <DataGrid Grid.Column="1" Margin="10,10,10,0" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionMode="Extended" HorizontalScrollBarVisibility="Auto" Style="{StaticResource DataGridStyle}"  ItemsSource="{Binding FileList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" BorderBrush="{DynamicResource borderBrush}"  CanUserAddRows="False"  AutoGenerateColumns="False" ColumnHeaderHeight="35" MinRowHeight="35">
+        <DataGrid Grid.Column="1" Margin="10,10,10,0" x:Name="fileDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionMode="Extended" HorizontalScrollBarVisibility="Auto" Style="{StaticResource DataGridStyle}"  ItemsSource="{Binding FileList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" BorderBrush="{DynamicResource borderBrush}"  CanUserAddRows="False"  AutoGenerateColumns="False" ColumnHeaderHeight="35" MinRowHeight="35">
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow" BasedOn="{StaticResource DefaultDataGridRowStyle}">
                     <Setter Property="IsSelected" Value="{Binding IsSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></Setter>
+                    <EventSetter Event="PreviewMouseRightButtonDown" Handler="DataGridRow_PreviewMouseDown"></EventSetter>
                     <Style.Triggers>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Background" Value="#D9E6F6"/>
@@ -157,7 +177,7 @@
                 </Style>
             </DataGrid.RowStyle>
             <i:Interaction.Triggers>
-                <i:EventTrigger EventName="PreviewMouseRightButtonDown" >
+                <i:EventTrigger EventName="PreviewMouseRightButtonUp" >
                     <i:InvokeCommandAction Command="{Binding OpenMenuCommand}"></i:InvokeCommandAction>
                 </i:EventTrigger>
             </i:Interaction.Triggers>
@@ -332,12 +352,12 @@
             </DataGrid.RowDetailsTemplate>-->
             <DataGrid.ContextMenu>
                 <ContextMenu >
-                    <MenuItem IsEnabled="{Binding IsExe}" IsChecked="{Binding Install}" Command="{Binding SetMenuCommand}" CommandParameter="0"  Style="{StaticResource menuContextStyle}" d:Header="安装" Header="{DynamicResource AssemblyInstall}"  ></MenuItem>
-                    <MenuItem  IsEnabled="{Binding IsExe}" IsChecked="{Binding QuietInstall}"  Command="{Binding SetMenuCommand}" CommandParameter="1"   Style="{StaticResource menuContextStyle}" d:Header="静默安装" Header="{DynamicResource AssemblyQuietInstall}"  ></MenuItem>
+                    <MenuItem IsEnabled="{Binding IsExe}" IsChecked="{Binding Install}" Command="{Binding SetMenuCommand}" CommandParameter="{x:Static enmus:FileMenuOperateType.Install}"   Style="{StaticResource menuContextStyle}" d:Header="安装" Header="{DynamicResource AssemblyInstall}"  ></MenuItem>
+                    <MenuItem  IsEnabled="{Binding IsExe}" IsChecked="{Binding QuietInstall}"  Command="{Binding SetMenuCommand}" CommandParameter="{x:Static enmus:FileMenuOperateType.QuietInstall}"   Style="{StaticResource menuContextStyle}" d:Header="静默安装" Header="{DynamicResource AssemblyQuietInstall}"  ></MenuItem>
                     <Separator Style="{StaticResource sep}"/>
-                    <MenuItem  Style="{StaticResource menuContextStyle}" IsChecked="{Binding IsExistNoNeedCopy}" d:Header="如果存在不复制" Header="{DynamicResource AssemblExistUnCopy}"  ></MenuItem>
-                    <MenuItem  Style="{StaticResource menuContextStyle}" IsChecked="{Binding IsNoNeedCopy}" d:Header="不复制" Header="{DynamicResource AssemblUnCopy}"  ></MenuItem>
-                    <MenuItem  Style="{StaticResource menuContextStyle}" IsChecked="{Binding IsNoNeedDelete}" d:Header="不删除" Header="{DynamicResource AssemblUnDelete}"  ></MenuItem>
+                    <MenuItem  Style="{StaticResource menuContextStyle}" IsChecked="{Binding IsExistNoNeedCopy}"  Command="{Binding SetMenuCommand}" CommandParameter="{x:Static enmus:FileMenuOperateType.IsExistNoNeedCopy}"  d:Header="如果存在不复制" Header="{DynamicResource AssemblExistUnCopy}"  ></MenuItem>
+                    <MenuItem  Style="{StaticResource menuContextStyle}" IsChecked="{Binding IsNoNeedCopy}"  Command="{Binding SetMenuCommand}" CommandParameter="{x:Static enmus:FileMenuOperateType.IsNoNeedCopy}"  d:Header="不复制" Header="{DynamicResource AssemblUnCopy}"  ></MenuItem>
+                    <MenuItem  Style="{StaticResource menuContextStyle}" IsChecked="{Binding IsNoNeedDelete}"  Command="{Binding SetMenuCommand}" CommandParameter="{x:Static enmus:FileMenuOperateType.IsNoNeedDelete}"  d:Header="不删除" Header="{DynamicResource AssemblUnDelete}"  ></MenuItem>
                     <Separator Style="{StaticResource sep}"/>
                     <MenuItem  Style="{StaticResource menuContextStyle}" d:Header="忽略" Header="{DynamicResource AssemblIgnore}"  ></MenuItem>
 

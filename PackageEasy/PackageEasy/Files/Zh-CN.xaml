@@ -3,6 +3,8 @@
                      xmlns:sys="clr-namespace:System;assembly=mscorlib">
     <sys:String x:Key="Format_Colon">：</sys:String>
     <sys:String x:Key="None">无</sys:String>
+    <sys:String x:Key="Sure">是</sys:String>
+    
     <!--主界面-->
     <sys:String x:Key="MainFile">文件</sys:String>
     <sys:String x:Key="MainNewFile">新建</sys:String>
@@ -65,7 +67,7 @@
     <!--组件信息-->
     <sys:String x:Key="AssemblyName">组件名称</sys:String>
     <sys:String x:Key="AssemblyDescription">描述</sys:String>
-    <sys:String x:Key="AssemblyDefaultCheck">默认勾选</sys:String>
+    <sys:String x:Key="AssemblyDefaultCheck">默认选中</sys:String>
     <sys:String x:Key="AssemblyOperate">操作</sys:String>
     <sys:String x:Key="AssemblyDelete">删除</sys:String>
     <sys:String x:Key="AssemblyCanUseChoose">允许用户选择要安装的组</sys:String>

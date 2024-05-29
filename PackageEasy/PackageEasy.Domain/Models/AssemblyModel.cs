@@ -93,6 +93,10 @@ namespace PackageEasy.Domain.Models
             }
         }
         /// <summary>
+        /// 忽略文件
+        /// </summary>
+        public List<AssemblyFileModel> IgnoreFileList { get; set; }
+        /// <summary>
         /// 中间变量
         /// </summary>
         [SaveIgnore]

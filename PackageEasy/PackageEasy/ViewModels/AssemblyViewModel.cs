@@ -478,6 +478,8 @@ namespace PackageEasy.ViewModels
                 }
                 if (currentAssembly.FileList == null)
                     currentAssembly.FileList = new List<AssemblyFileModel>();
+                if(currentAssembly.IgnoreFileList==null)
+                    currentAssembly.IgnoreFileList = new List<AssemblyFileModel>();
                 var files = GetFiles(folderBrowserDialog.SelectedPath);
                 List<AssemblyFileModel> assemblyFileModels = currentAssembly.FileList;
                 currentAssembly.SelectDir = folderBrowserDialog.SelectedPath;
@@ -512,6 +514,8 @@ namespace PackageEasy.ViewModels
                         continue;
                         assemblyFileModels.Remove(current);
                     }
+                    if (assemblyFileModels.Exists(c => c.FilePath == assemblyFileModel.FilePath))
+                        continue;
                     assemblyFileModels.Add(assemblyFileModel);
                 }
 
@@ -640,29 +644,66 @@ namespace PackageEasy.ViewModels
         /// <summary>
         /// 设置安装方式
         /// </summary>
-        public RelayCommand<string> SetMenuCommand => new RelayCommand<string>((s) =>
+        public RelayCommand<FileMenuOperateType> SetMenuCommand => new RelayCommand<FileMenuOperateType>((s) =>
         {
             if (FileList != null)
             {
                 var selected = FileList.FindAll(f => f.IsSelected);
                 if (selected == null || selected.Count == 0) return;
-
+                if (s == FileMenuOperateType.Ignore)
+                {
+                    var currentAssembly = AssemblyList.Find(p => p.IsSelected == true);
+                    if (currentAssembly == null) return;
+                    if (currentAssembly.IgnoreFileList == null)
+                        currentAssembly.IgnoreFileList = new List<AssemblyFileModel>();
+                    foreach (var item in selected)
+                    {
+                        if (currentAssembly.IgnoreFileList.Exists(c => c.FilePath == item.FilePath))
+                        {
+                            continue;
+                        }
+                        currentAssembly.IgnoreFileList.Add(item);
+                    }
+                }
                 foreach (var item in selected)
                 {
-                    if (s == "0")
+                    switch (s)
                     {
-                        item.IsNeedInstall = true;
-                        item.IsNeedQuietInstall = false;
+                        case FileMenuOperateType.Install:
+                            item.IsNeedInstall = !item.IsNeedInstall;
+                            item.IsNeedQuietInstall = false;
+                            break;
+                        case FileMenuOperateType.QuietInstall:
+                            item.IsNeedInstall = false;
+                            item.IsNeedQuietInstall = !item.IsNeedQuietInstall;
+                            break;
+                        case FileMenuOperateType.IsExistNoNeedCopy:
+                            item.IsExistNoNeedCopy = !item.IsExistNoNeedCopy;
+                            item.IsNoNeedCopy = false;
+
+                            break;
+                        case FileMenuOperateType.IsNoNeedCopy:
+                            item.IsExistNoNeedCopy = false;
+                            item.IsNoNeedCopy = !item.IsNoNeedCopy;
+                            break;
+                        case FileMenuOperateType.IsNoNeedDelete:
+                            item.IsNoNeedDelete = !item.IsNoNeedDelete;
+                            break;
+                        default:
+                            break;
                     }
-                    else if (s == "1")
-                    {
-                        item.IsNeedInstall = false;
-                        item.IsNeedQuietInstall = true;
-                    }
+
                 }
             }
         });
 
+        /// <summary>
+        /// 设置选中
+        /// </summary>
+        public RelayCommand<AssemblyModel> SetAssemblyMenuCommand => new RelayCommand<AssemblyModel>((a) =>
+        {
+            a.IsAutoSelected = !a.IsAutoSelected;
+        });
 
         #endregion
 

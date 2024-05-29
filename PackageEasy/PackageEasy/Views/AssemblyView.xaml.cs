@@ -29,5 +29,18 @@ namespace PackageEasy.Views
             InitializeComponent();
         }
 
+        private void DataGridRow_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DataGridRow dataGridRow = sender as DataGridRow;
+            if (dataGridRow != null)
+            {
+                dataGridRow.IsSelected = true;
+            }
+        }
+
+        private void datagrid_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }
