@@ -190,7 +190,7 @@
                     </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <CheckBox HorizontalAlignment="Center" Command="{Binding DataContext.FileCheckCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}"  IsChecked="{Binding IsSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"></CheckBox>
+                            <CheckBox HorizontalAlignment="Center" IsEnabled="False" Command="{Binding DataContext.FileCheckCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}"  IsChecked="{Binding IsSelected}" VerticalAlignment="Center"></CheckBox>
                             <!--<TextBlock Text="{Binding PlateName}" Foreground="{DynamicResource DataGridForeground}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>-->
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

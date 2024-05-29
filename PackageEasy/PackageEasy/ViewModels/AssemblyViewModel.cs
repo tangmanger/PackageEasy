@@ -350,6 +350,8 @@ namespace PackageEasy.ViewModels
                         continue;
                         assemblyFileModels.Remove(current);
                     }
+                    if (currentAssembly.IgnoreFileList.Exists(c => c.FilePath == assemblyFileModel.FilePath))
+                        continue;
                     assemblyFileModels.Add(assemblyFileModel);
                 }
             }
@@ -444,6 +446,8 @@ namespace PackageEasy.ViewModels
                         continue;
                         assemblyFileModels.Remove(current);
                     }
+                    if (currentAssembly.IgnoreFileList.Exists(c => c.FilePath == assemblyFileModel.FilePath))
+                        continue;
                     assemblyFileModels.Add(assemblyFileModel);
                 }
             }
@@ -514,7 +518,7 @@ namespace PackageEasy.ViewModels
                         continue;
                         assemblyFileModels.Remove(current);
                     }
-                    if (assemblyFileModels.Exists(c => c.FilePath == assemblyFileModel.FilePath))
+                    if (currentAssembly.IgnoreFileList.Exists(c => c.FilePath == assemblyFileModel.FilePath))
                         continue;
                     assemblyFileModels.Add(assemblyFileModel);
                 }
