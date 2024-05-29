@@ -321,7 +321,8 @@ namespace PackageEasy.ViewModels
                 TMessageBox.ShowMsg("", CommonSettings.AssemblyChooseSection);
                 return;
             }
-
+            if (currentAssembly.IgnoreFileList == null)
+                currentAssembly.IgnoreFileList = new List<AssemblyFileModel>();
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
             var result = folderBrowserDialog.ShowDialog();
             if (result == DialogResult.OK || result == DialogResult.Yes)
@@ -377,7 +378,8 @@ namespace PackageEasy.ViewModels
                 TMessageBox.ShowMsg("", CommonSettings.AssemblyChooseSection);
                 return;
             }
-
+            if (currentAssembly.IgnoreFileList == null)
+                currentAssembly.IgnoreFileList = new List<AssemblyFileModel>();
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
             var result = folderBrowserDialog.ShowDialog();
             if (result == DialogResult.OK || result == DialogResult.Yes)
@@ -472,6 +474,8 @@ namespace PackageEasy.ViewModels
                 TMessageBox.ShowMsg("", CommonSettings.AssemblyChooseSection);
                 return;
             }
+            if (currentAssembly.IgnoreFileList == null)
+                currentAssembly.IgnoreFileList = new List<AssemblyFileModel>();
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
             var result = folderBrowserDialog.ShowDialog();
             if (result == DialogResult.OK || result == DialogResult.Yes)
