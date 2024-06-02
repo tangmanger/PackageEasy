@@ -691,9 +691,9 @@ namespace PackageEasy.ViewModels
                     }
                     foreach (var item in selected)
                     {
-                        FileList.Remove(item);
+                        currentAssembly.FileList.Remove(item);
                     }
-                    FileList = new List<AssemblyFileModel>(FileList);
+                    FileList = new List<AssemblyFileModel>(currentAssembly.FileList);
                     IgnoreFileList = new List<AssemblyFileModel>(currentAssembly.IgnoreFileList);
                     TMessageBox.ShowMsg(CommonSettings.AssemblyIgnoreSuccess);
                     return;
@@ -821,6 +821,13 @@ namespace PackageEasy.ViewModels
                 if (assitem.FileList != null)
                 {
                     foreach (var file in assitem.FileList)
+                    {
+                        file.TargetPath = TargetDirList.Find(p => p.Data == file.TargetPath.Data);
+                    }
+                }
+                if (assitem.IgnoreFileList != null)
+                {
+                    foreach (var file in assitem.IgnoreFileList)
                     {
                         file.TargetPath = TargetDirList.Find(p => p.Data == file.TargetPath.Data);
                     }
