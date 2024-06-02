@@ -23,6 +23,7 @@
                 <ResourceDictionary Source="/Styles/Menu.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/Styles/Converters.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/Styles/PasswordBoxStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="/Styles/TableItemStyle.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

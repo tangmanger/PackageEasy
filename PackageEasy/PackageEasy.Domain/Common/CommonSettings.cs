@@ -335,6 +335,15 @@ namespace PackageEasy.Domain.Common
         /// 安装成功！
         /// </summary>
         public const string InstallSuccess = "InstallSuccess";
+        /// <summary>
+        /// 设置忽略成功！
+        /// </summary>
+        public const string AssemblyIgnoreSuccess = "AssemblyIgnoreSuccess";
+        /// <summary>
+        /// 取消忽略成功！
+        /// </summary>
+
+        public const string AssemblyUnIgnoreSuccess = "AssemblyUnIgnoreSuccess";
 
         #endregion
 

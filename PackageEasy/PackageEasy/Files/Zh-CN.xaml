@@ -200,7 +200,12 @@
     <sys:String x:Key="AssemblyNullFileList">当前没有文件列表！</sys:String>
     <sys:String x:Key="AssemblyFileIsNull">当前文件{0}为空！</sys:String>
     <sys:String x:Key="AssemblyFileNotExist">无法在工作空间找到文件{0}！</sys:String>
-
+    <sys:String x:Key="AssemblyIgnoreSuccess">忽略成功！</sys:String>
+    <sys:String x:Key="AssemblyUnIgnoreSuccess">取消忽略成功！</sys:String>
+    <sys:String x:Key="AssemblyFileList">文件列表</sys:String>
+    <sys:String x:Key="AssemblyIgnoreFileList">忽略文件列表</sys:String>
+    <sys:String x:Key="AssemblyUnIgnore">移除忽略</sys:String>
+    
     <!--结束界面-->
     <sys:String x:Key="EndUninstallTip">你确实要完全移除 $(^Name) ，其及所有的组件？</sys:String>
     <sys:String x:Key="EndUninstallMsg">$(^Name) 已成功地从你的计算机移除。</sys:String>

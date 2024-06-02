@@ -94,7 +94,7 @@ namespace PackageEasy.ViewModels
         {
             if (s == null || !File.Exists(s.FilePath))
             {
-                string str = string.Format(CommonSettings.HomeFileNoExist, s.RecentlyName);
+                string str = string.Format(CommonSettings.HomeFileNoExist.GetLangText(), s.RecentlyName);
                 var result = TMessageBox.ShowMsg("", str, Enums.MessageLevel.Question);
                 if(result==Enums.TMessageBoxResult.OK)
                 {

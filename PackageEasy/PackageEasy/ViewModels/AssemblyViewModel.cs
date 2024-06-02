@@ -68,6 +68,7 @@ namespace PackageEasy.ViewModels
         private bool isExistNoNeedCopy;
         private bool isNoNeedCopy;
         private bool isNoNeedDelete;
+        private List<AssemblyFileModel> ignoreFileList;
 
         /// <summary>
         /// 组件信息
@@ -223,6 +224,19 @@ namespace PackageEasy.ViewModels
             }
         }
 
+        /// <summary>
+        /// 忽略文件列表
+        /// </summary>
+        public List<AssemblyFileModel> IgnoreFileList
+        {
+            get => ignoreFileList;
+            set
+            {
+                ignoreFileList = value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         #region 命令
@@ -291,7 +305,10 @@ namespace PackageEasy.ViewModels
         {
             var s = AssemblyList.Find(p => p.IsSelected);
             if (s != null)
+            {
                 FileList = s.FileList;
+                IgnoreFileList = s.IgnoreFileList;
+            }
         });
 
 
@@ -486,7 +503,7 @@ namespace PackageEasy.ViewModels
                 }
                 if (currentAssembly.FileList == null)
                     currentAssembly.FileList = new List<AssemblyFileModel>();
-                if(currentAssembly.IgnoreFileList==null)
+                if (currentAssembly.IgnoreFileList == null)
                     currentAssembly.IgnoreFileList = new List<AssemblyFileModel>();
                 var files = GetFiles(folderBrowserDialog.SelectedPath);
                 List<AssemblyFileModel> assemblyFileModels = currentAssembly.FileList;
@@ -672,6 +689,14 @@ namespace PackageEasy.ViewModels
                         }
                         currentAssembly.IgnoreFileList.Add(item);
                     }
+                    foreach (var item in selected)
+                    {
+                        FileList.Remove(item);
+                    }
+                    FileList = new List<AssemblyFileModel>(FileList);
+                    IgnoreFileList = new List<AssemblyFileModel>(currentAssembly.IgnoreFileList);
+                    TMessageBox.ShowMsg(CommonSettings.AssemblyIgnoreSuccess);
+                    return;
                 }
                 foreach (var item in selected)
                 {
@@ -712,6 +737,24 @@ namespace PackageEasy.ViewModels
         {
             a.IsAutoSelected = !a.IsAutoSelected;
         });
+
+        /// <summary>
+        /// 设置忽略
+        /// </summary>
+        public RelayCommand<AssemblyFileModel> SetUnIgnoreCommand => new RelayCommand<AssemblyFileModel>((s) =>
+        {
+            var currentAssembly = AssemblyList.Find(p => p.IsSelected == true);
+            if (currentAssembly == null) return;
+            if (currentAssembly.IgnoreFileList == null)
+                currentAssembly.IgnoreFileList = new List<AssemblyFileModel>();
+            currentAssembly.IgnoreFileList.Remove(s);
+            currentAssembly.FileList.Add(s);
+
+            FileList = new List<AssemblyFileModel>(currentAssembly.FileList);
+            IgnoreFileList = new List<AssemblyFileModel>(currentAssembly.IgnoreFileList);
+            TMessageBox.ShowMsg(CommonSettings.AssemblyIgnoreSuccess);
+        });
+
 
         #endregion
 
@@ -783,6 +826,7 @@ namespace PackageEasy.ViewModels
                     }
                 }
             }
+
             var first = AssemblyList.FirstOrDefault();
             if (first != null)
             {
