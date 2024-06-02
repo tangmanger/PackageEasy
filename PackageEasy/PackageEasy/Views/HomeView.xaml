@@ -44,7 +44,7 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Vertical">
             <TextBlock d:Text="新建工程" Text="{DynamicResource HomeNewProject}"  Foreground="{DynamicResource projectNewCreateForeground}"   Margin="20,16.5,0,0" FontSize="16"></TextBlock>
-            <Button Width="242" Height="188" HorizontalAlignment="Left"  Margin="20,16.5,0,0" VerticalAlignment="Top" Command="{Binding CreateCommand}" Template="{StaticResource AddNewProject}"></Button>
+            <Button Width="262" Height="198" HorizontalAlignment="Left"  Margin="20,16.5,0,0" VerticalAlignment="Top" Command="{Binding CreateCommand}" Template="{StaticResource AddNewProject}"></Button>
         </StackPanel>
         <ItemsControl Grid.Row="1" ItemsSource="{Binding RecentlyList}" Margin="15">
             <ItemsControl.ItemsPanel>
