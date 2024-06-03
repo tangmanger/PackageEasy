@@ -754,7 +754,39 @@ namespace PackageEasy.ViewModels
             IgnoreFileList = new List<AssemblyFileModel>(currentAssembly.IgnoreFileList);
             TMessageBox.ShowMsg(CommonSettings.AssemblyIgnoreSuccess);
         });
+        bool isChanging;
+        /// <summary>
+        /// 变更目标目录
+        /// </summary>
+        public RelayCommand<DescModel<TargetDirType>> TargetPathChangedCommand => new RelayCommand<DescModel<TargetDirType>>((s) =>
+        {
+            if (isChanging) return;
+            isChanging = true;
+            try
+            {
+                var result = TMessageBox.ShowMsg(CommonSettings.MultiTargetDirPathChanged, MessageLevel.Question);
+                if (result != TMessageBoxResult.OK) return;
+                var selected = FileList.FindAll(c => c.IsSelected == true);
+                if (selected == null) return;
+                foreach (var item in selected)
+                {
+                    if (item.TargetPath.Data != s.Data)
+                    {
+                        item.TargetPath = s;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
 
+            }
+            finally
+            {
+                isChanging = false;
+            }
+
+
+        });
 
         #endregion
 

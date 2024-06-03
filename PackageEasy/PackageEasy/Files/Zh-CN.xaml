@@ -4,7 +4,7 @@
     <sys:String x:Key="Format_Colon">：</sys:String>
     <sys:String x:Key="None">无</sys:String>
     <sys:String x:Key="Sure">是</sys:String>
-    
+
     <!--主界面-->
     <sys:String x:Key="MainFile">文件</sys:String>
     <sys:String x:Key="MainNewFile">新建</sys:String>
@@ -87,6 +87,8 @@
     <sys:String x:Key="AssemblNeedCopy">是否复制</sys:String>
     <sys:String x:Key="AssemblInstallType">安装方式</sys:String>
     <sys:String x:Key="AssemblIgnore">忽略</sys:String>
+    <sys:String x:Key="MultiTargetDirPathChanged">当前选择有多个，是否更新所有目标目录！</sys:String>
+
 
     <!--应用程序图标-->
     <sys:String x:Key="AppIconMenuName">应用程序&quot;开始菜单&quot;文件夹名称:</sys:String>
@@ -205,7 +207,7 @@
     <sys:String x:Key="AssemblyFileList">文件列表</sys:String>
     <sys:String x:Key="AssemblyIgnoreFileList">忽略文件列表</sys:String>
     <sys:String x:Key="AssemblyUnIgnore">移除忽略</sys:String>
-    
+
     <!--结束界面-->
     <sys:String x:Key="EndUninstallTip">你确实要完全移除 $(^Name) ，其及所有的组件？</sys:String>
     <sys:String x:Key="EndUninstallMsg">$(^Name) 已成功地从你的计算机移除。</sys:String>

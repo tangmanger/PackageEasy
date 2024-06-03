@@ -697,6 +697,13 @@ namespace PackageEasy.NSIS
                     list.Add("  endding:");
                     list.Add("  nsProcess::_Unload");
                 }
+                else
+                {
+                    list.Add("  GoTo endding");
+                    list.Add("  stopit:");
+                    list.Add("  Abort");
+                    list.Add("  endding:");
+                }
                 list.Add("FunctionEnd");
                 list.Add(";卸载开始");
                 list.Add("Section Uninstall");

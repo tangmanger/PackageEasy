@@ -734,12 +734,12 @@ namespace PackageEasy.ViewModels
             {
                 var icon = (IconType)int.Parse(i);
                 FileInfo fileInfo = new FileInfo(str);
-                var copyPath = Path.Combine(WorkSpace, fileInfo.Name);
+                var copyPath = Path.Combine(ProjectInfo.GetWorkSpace(), fileInfo.Name);
                 if (!File.Exists(copyPath))
                 {
                     File.Copy(str, copyPath, true);
                 }
-                str = copyPath.Replace(WorkSpace, "");
+                str = copyPath.Replace(ProjectInfo.GetWorkSpace(), "");
                 switch (icon)
                 {
                     case IconType.None:

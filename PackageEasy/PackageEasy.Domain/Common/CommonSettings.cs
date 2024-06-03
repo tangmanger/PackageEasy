@@ -344,6 +344,10 @@ namespace PackageEasy.Domain.Common
         /// </summary>
 
         public const string AssemblyUnIgnoreSuccess = "AssemblyUnIgnoreSuccess";
+        /// <summary>
+        /// 多个路径变更
+        /// </summary>
+        public const string MultiTargetDirPathChanged= "MultiTargetDirPathChanged";
 
         #endregion
 

@@ -68,7 +68,7 @@ namespace PackageEasy.Domain.Models
             set
             {
                 filePath = value;
-                if (!string.IsNullOrEmpty(value) && value.ToLower().EndsWith(".exe"))
+                if (!string.IsNullOrEmpty(value) && (value.ToLower().EndsWith(".exe")|| value.ToLower().EndsWith(".bat")))
                 {
                     IsExe = true;
                 }

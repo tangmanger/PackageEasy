@@ -220,10 +220,17 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <ComboBox Style="{StaticResource CommonComboBoxStyle}" 
-                                      DisplayMemberPath="DisplayName"
-                                      VerticalContentAlignment="Center"
+                                      DisplayMemberPath="DisplayName" 
+                                      VerticalContentAlignment="Center" 
                                       SelectedItem="{Binding TargetPath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
-                                      ItemsSource="{Binding DataContext.TargetDirList,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"></ComboBox>
+                                      ItemsSource="{Binding DataContext.TargetDirList,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="SelectionChanged" >
+                                                <i:InvokeCommandAction Command="{Binding DataContext.TargetPathChangedCommand,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}" CommandParameter="{Binding Path=SelectedItem,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ComboBox}}"></i:InvokeCommandAction>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>  
+                                        
+                                    </ComboBox>
                                     <!--<TextBox Style="{StaticResource CommonTextBox}"  IsReadOnly="True" Text="{Binding TargetPath}"  Margin="5,0,5,0"></TextBox>-->
                                     <!--<TextBlock Text="{Binding PlateName}" Foreground="{DynamicResource DataGridForeground}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>-->
                                 </DataTemplate>
