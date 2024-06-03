@@ -317,6 +317,7 @@ namespace PackageEasy.NSIS
                                 sectionDic.Add(sec, item.AssemblyDescription);
                             sectionCheckDic.Add(sec, item.IsAutoSelected);
                             var files = item.FileList.OrderBy(p => p.IsNeedInstall).OrderBy(p => p.IsNeedQuietInstall).ToList();
+                            int fileIndex = 0;
                             foreach (var file in files)
                             {
                                 if (file.IsNoNeedCopy) continue;
@@ -353,20 +354,22 @@ namespace PackageEasy.NSIS
                                 var path = GetWorkSpace(projectInfoModel) + file.FilePath;
                                 if (!file.IsDirectory)
                                 {
-
+                                    string uid = $"fileExist{fileIndex}";
+                                    string done = $"done{fileIndex}";
                                     if (file.IsExistNoNeedCopy)
                                     {
                                         list.Add($"  StrCpy $0 {path}");
-                                        list.Add("  IfFileExists $0 0 file_not_found");
-                                        list.Add("  Goto done");
-                                        list.Add("  file_not_found:");
+                                        list.Add("  IfFileExists $0 0 " + uid);
+                                        list.Add($"  Goto {done}");
+                                        list.Add($"  {uid}:");
                                         list.Add($"  File \"{path}\"");
-                                        list.Add("  done:");
+                                        list.Add($"  {done}:");
                                     }
                                     else
                                     {
                                         list.Add($"  File \"{path}\"");
                                     }
+                                    fileIndex++;
                                 }
                                 FileInfo fileInfo = new FileInfo(path);
                                 if (file.IsNeedInstall)
