@@ -153,7 +153,8 @@
     <sys:String x:Key="SettingCompilePath">编译器路径：</sys:String>
     <sys:String x:Key="SettingNsisHelper">帮助文档：</sys:String>
     <sys:String x:Key="SettingTheme">主题：</sys:String>
-
+    <sys:String x:Key="SettingLanguage">语言：</sys:String>
+    
     <!--cs界面-->
     <!--主界面cs-->
     <sys:String x:Key="MainExportScriptTips">是否转换成相对路径？</sys:String>

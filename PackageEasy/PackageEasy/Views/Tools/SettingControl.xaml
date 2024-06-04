@@ -37,6 +37,10 @@
                     <TextBlock d:Text="主题："  Foreground="{StaticResource mainForeground}"  Text="{DynamicResource SettingTheme}" VerticalAlignment="Center"></TextBlock>
                     <ComboBox MinWidth="120" Height="25" VerticalContentAlignment="Center" ItemsSource="{Binding ThemeList}" SelectedItem="{Binding CurrentTheme}" DisplayMemberPath="ThemeDescription" Style="{StaticResource CommonComboBoxStyle}"></ComboBox>
                 </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <TextBlock d:Text="语言："  Foreground="{StaticResource mainForeground}"  Text="{DynamicResource SettingLanguage}" VerticalAlignment="Center"></TextBlock>
+                    <ComboBox MinWidth="120" Height="25" VerticalContentAlignment="Center" ItemsSource="{Binding LanguageTypes}" SelectedItem="{Binding SelectedLanguageType}" DisplayMemberPath="DisplayName" Style="{StaticResource CommonComboBoxStyle}"></ComboBox>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
     </Grid>

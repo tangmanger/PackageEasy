@@ -1,0 +1,12 @@
+[
+  {
+    "Id": 0,
+    "DisPlayName": "SampleChinese",
+    "FilePath": "Zh-CN.xaml"
+  },
+  {
+    "Id": 1,
+    "DisPlayName": "English",
+    "FilePath": "En-US.xaml"
+  }
+]

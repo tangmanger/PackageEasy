@@ -84,7 +84,7 @@ namespace PackageEasy
             NSISHelper.Init();
             TViewsHelper.Init();
             ThemeHelper.InitTheme();
-            
+            LanguageHelper.InitLang();
         }
     }
 }

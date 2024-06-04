@@ -33,13 +33,6 @@ namespace PackageEasy.ViewModels
         public BaseInfoViewModel(ViewType viewType, string key) : base(viewType, key)
         {
             //WorkSpace = ConfigHelper.Config.WorkSpace;
-            UserFaceList = new List<DescModel<UserFaceType>>
-            {
-                new DescModel<UserFaceType>() { Data = UserFaceType.None, DisplayName = UserFaceType.None.GetDescription() },
-                new DescModel<UserFaceType>() { Data = UserFaceType.Morden, DisplayName = UserFaceType.Morden.GetDescription() },
-                new DescModel<UserFaceType>() { Data = UserFaceType.Classic, DisplayName = UserFaceType.Classic.GetDescription() }
-            };
-            UserFaceSelectItem = UserFaceList.Find(P => P.Data == UserFaceType.Morden) ?? new DescModel<UserFaceType>() { Data = UserFaceType.Morden, DisplayName = UserFaceType.Morden.GetDescription() };
             CompressAlgoList = new List<DescModel<CompressionAlgoType>>()
             {
                 new DescModel<CompressionAlgoType>(){ Data=CompressionAlgoType.None,DisplayName=CompressionAlgoType.None.GetDescription() },
@@ -48,18 +41,7 @@ namespace PackageEasy.ViewModels
                 new DescModel<CompressionAlgoType>(){ Data=CompressionAlgoType.LZMA,DisplayName=CompressionAlgoType.LZMA.GetDescription() }
             };
             ComPressAlgo = CompressAlgoList.Find(p => p.Data == CompressionAlgoType.Zlib) ?? new DescModel<CompressionAlgoType>() { Data = CompressionAlgoType.Zlib, DisplayName = CompressionAlgoType.Zlib.GetDescription() };
-            SystemDirList = new List<string>()
-            {
-                "$PROGRAMFILES",
-                "TEMP",
-                "$DESKTOP",
-                "$SYSDIR",
-                "$EXEDIR",
-                "$WINDIR",
-                "$STARTMENU",
-                "$SMPROGRAMS",
-                "$QUICKLAUNCH"
-            };
+            Init();
             if (SystemDirList != null)
                 SystemDir = SystemDirList.FirstOrDefault();
             ButtonType = ButtonType.Classical;
@@ -75,6 +57,34 @@ namespace PackageEasy.ViewModels
             if (baseInfoModel == null)
                 baseInfoModel = new BaseInfoModel();
         }
+
+        private void Init()
+        {
+            var list = new List<DescModel<UserFaceType>>
+            {
+                new DescModel<UserFaceType>() { Data = UserFaceType.None, DisplayName = UserFaceType.None.GetDescription() },
+                new DescModel<UserFaceType>() { Data = UserFaceType.Morden, DisplayName = UserFaceType.Morden.GetDescription() },
+                new DescModel<UserFaceType>() { Data = UserFaceType.Classic, DisplayName = UserFaceType.Classic.GetDescription() }
+            };
+            if (UserFaceSelectItem == null)
+                UserFaceSelectItem = list.Find(P => P.Data == UserFaceType.Morden) ?? new DescModel<UserFaceType>() { Data = UserFaceType.Morden, DisplayName = UserFaceType.Morden.GetDescription() };
+            else
+                UserFaceSelectItem = list.Find(p => p.Data == UserFaceSelectItem.Data);
+            UserFaceList = list;
+            SystemDirList = new List<string>()
+            {
+                "$PROGRAMFILES",
+                "TEMP",
+                "$DESKTOP",
+                "$SYSDIR",
+                "$EXEDIR",
+                "$WINDIR",
+                "$STARTMENU",
+                "$SMPROGRAMS",
+                "$QUICKLAUNCH"
+            };
+        }
+
 
 
 
@@ -440,6 +450,16 @@ namespace PackageEasy.ViewModels
 
         #region 方法
 
+        public override void LanguageChanged()
+        {
+            Init();
+            InstallList = new List<InstallLanguageModel>()
+            {
+                new InstallLanguageModel(){ LanguageType=LanguageType.En_SH,LanguageName=CommonSettings.BaseInfoEnglish.GetLangText(),Code="English",LanguageDisplayKey="${LANG_ENGLISH}"},
+                new InstallLanguageModel(){ LanguageType=LanguageType.Zh_CN,LanguageName=CommonSettings.BaseInfoChinese.GetLangText(),Code="SimpChinese",LanguageDisplayKey="${LANG_SimpChinese}"},
+            };
+        }
+
         public override void Save()
         {
             if (ProjectInfo == null)
@@ -661,7 +681,7 @@ namespace PackageEasy.ViewModels
             }
             if (!string.IsNullOrWhiteSpace(AppIconPath) && !CheckFileExist(AppIconPath))
             {
-                TMessageBox.ShowMsg("",CommonSettings.BaseInfoAppIconNotExist);
+                TMessageBox.ShowMsg("", CommonSettings.BaseInfoAppIconNotExist);
                 return false;
             }
             if (!string.IsNullOrWhiteSpace(UnInstallIconPath) && !CheckFileExist(UnInstallIconPath))

@@ -29,6 +29,7 @@ using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Forms;
 using Application = System.Windows.Application;
+using LanguageHelper = PackageEasy.Helpers.LanguageHelper;
 
 namespace PackageEasy.ViewModels
 {
@@ -44,8 +45,10 @@ namespace PackageEasy.ViewModels
         {
             Service = service;
             Service.CreateProject += Service_CreateProject;
+            LanguageHelper.LanguageChanged += LanguageHelper_LanguageChanged;
         }
 
+      
 
         #region 属性
 
@@ -665,6 +668,20 @@ namespace PackageEasy.ViewModels
         #endregion
 
         #region 方法
+
+
+        private void LanguageHelper_LanguageChanged()
+        {
+            var services = ServiceHelper.GetDataServices();
+            if (services != null)
+            {
+                foreach (var service in services)
+                {
+                    service.OnLanguageChanged();
+                }
+            }
+        }
+
 
         public void Loaded()
         {

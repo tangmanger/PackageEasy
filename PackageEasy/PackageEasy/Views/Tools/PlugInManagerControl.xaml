@@ -24,7 +24,7 @@
             </ItemsControl.Template>
             <ItemsControl.ItemTemplate>
                 <DataTemplate >
-                    <controls:PlugInButton Width="75" Height="50" PlugInState="{Binding InstallState,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,0" Command="{Binding DataContext.ExecuteCommand,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}}" CommandParameter="{Binding }">
+                    <controls:PlugInButton MinWidth="75" Height="50" PlugInState="{Binding InstallState,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,0" Command="{Binding DataContext.ExecuteCommand,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}}" CommandParameter="{Binding }">
                         <controls:PlugInButton.Template>
                             <ControlTemplate TargetType="controls:PlugInButton">
                                 <Grid x:Name="grid" RenderTransformOrigin="0.5,0.5">

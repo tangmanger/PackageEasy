@@ -65,7 +65,8 @@ namespace PackageEasy
             NavigationHelper.GoTo(ViewType.Home);
             var currentTheme = ThemeHelper.Themes.Find(p => p.ThemeId == ConfigHelper.Config.ThemeId);
             ThemeHelper.UpdateTheme(currentTheme ?? new ThemeModel() { ThemeId = "default", ThemeName = "DefaultColor.xaml" });
-
+            var currentLang = LanguageHelper.LanguageTypes.Find(p => p.Id == ConfigHelper.Config.Lang);
+            LanguageHelper.SetLangType(currentLang??new LanguageTypeModel() { Id = 0, DisplayName = CommonSettings.SampleChinese, FilePath = "Zh-CN.xaml" });
 
         }
 

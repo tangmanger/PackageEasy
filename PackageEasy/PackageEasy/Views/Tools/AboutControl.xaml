@@ -20,7 +20,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Visibility="Visible" >
                 <TextBlock d:Text="产品说明:" Text="{DynamicResource AboutSoftWareDescription}" FontSize="14"></TextBlock>
-                <TextBlock  TextWrapping="WrapWithOverflow" Margin="6,0,0,0" MaxWidth="529"  d:Text="因为NSIS的打包脚本学习曲线陡峭，HM NIS Edit 在生成脚本后，可视化调整比较麻烦，所以在做了这个工具来方便大家,做的不好的请见谅，为爱发电！"
+                <TextBlock  TextWrapping="WrapWithOverflow" Margin="6,0,0,0" MaxWidth="450"  d:Text="因为NSIS的打包脚本学习曲线陡峭，HM NIS Edit 在生成脚本后，可视化调整比较麻烦，所以在做了这个工具来方便大家,做的不好的请见谅，为爱发电！"
                          Text="{DynamicResource AboutSoftWareDescriptionInfo}" FontSize="14"></TextBlock>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">

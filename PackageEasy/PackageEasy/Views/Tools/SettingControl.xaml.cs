@@ -4,6 +4,7 @@ using PackageEasy.Common.Data;
 using PackageEasy.Common.Helpers;
 using PackageEasy.Controls.Controls;
 using PackageEasy.Domain.Common;
+using PackageEasy.Domain.Enums;
 using PackageEasy.Domain.Models;
 using PackageEasy.Helpers;
 using System;
@@ -21,6 +22,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using LanguageHelper = PackageEasy.Helpers.LanguageHelper;
 
 namespace PackageEasy.Views.Tools
 {
@@ -33,6 +35,8 @@ namespace PackageEasy.Views.Tools
         private string nSISHelperPath;
         private List<ThemeModel> themeList;
         private ThemeModel currentTheme;
+        private List<LanguageTypeModel> languageTypes;
+        private LanguageTypeModel selectedLanguageType;
 
         public SettingControl()
         {
@@ -42,17 +46,48 @@ namespace PackageEasy.Views.Tools
         public override string Description => CommonSettings.ToolSettingControl.GetLangText();
         public override void Load()
         {
+            LanguageHelper.LanguageChanged += LanguageHelper_LanguageChanged;
             MakensisPath = ConfigHelper.Config.NSISMakePath ?? "";
             NSISHelperPath = ConfigHelper.Config.NSISHelperPath ?? "";
-            ThemeList = ThemeHelper.Themes;
-            CurrentTheme = ThemeList.Find(p => p.ThemeId == ConfigHelper.Config.ThemeId) ?? ThemeList.FirstOrDefault() ?? new ThemeModel();
+            LanguageHelper_LanguageChanged();
         }
+
+        private void LanguageHelper_LanguageChanged()
+        {
+            ThemeList = new List<ThemeModel>();
+            foreach (var item in ThemeHelper.Themes)
+            {
+                ThemeList.Add(new ThemeModel()
+                {
+                    ThemeDescription = item.ThemeDescription.GetLangText(),
+                    ThemeId = item.ThemeId,
+                    ThemeName = item.ThemeName,
+                });
+            }
+
+            CurrentTheme = ThemeList.Find(p => p.ThemeId == ConfigHelper.Config.ThemeId) ?? ThemeList.FirstOrDefault() ?? new ThemeModel();
+            LanguageTypes = new List<LanguageTypeModel>();
+            foreach (var item in LanguageHelper.LanguageTypes)
+            {
+                LanguageTypes.Add(new LanguageTypeModel()
+                {
+                    DisplayName = item.DisplayName.GetLangText(),
+                    FilePath = item.FilePath,
+                    Id = item.Id,
+                });
+            }
+            LanguageTypes = new List<LanguageTypeModel>(LanguageTypes);
+            SelectedLanguageType = LanguageTypes.Find(p => p.Id == ConfigHelper.Config.Lang);
+        }
+
+
         public override void Save()
         {
 
         }
         public override void Unload()
         {
+            LanguageHelper.LanguageChanged -= LanguageHelper_LanguageChanged;
         }
 
         #region 属性
@@ -110,6 +145,37 @@ namespace PackageEasy.Views.Tools
                     ConfigHelper.Config.ThemeId = value.ThemeId;
                     ConfigHelper.Save(true);
                     ThemeHelper.UpdateTheme(value);
+                }
+                RaisePropertyChanged();
+            }
+        }
+        /// <summary>
+        /// 多语言列表
+        /// </summary>
+
+        public List<LanguageTypeModel> LanguageTypes
+        {
+            get => languageTypes;
+            set
+            {
+                languageTypes = value;
+                RaisePropertyChanged();
+
+            }
+        }
+
+        /// <summary>
+        /// 选择类型
+        /// </summary>
+        public LanguageTypeModel SelectedLanguageType
+        {
+            get => selectedLanguageType;
+            set
+            {
+                selectedLanguageType = value;
+                if (value != null && ConfigHelper.Config.Lang != value.Id)
+                {
+                    LanguageHelper.SetLangType(value);
                 }
                 RaisePropertyChanged();
             }

@@ -85,7 +85,11 @@ namespace PackageEasy.ViewModels
                 CacheDataHelper.ProjectDic.Add(Key, ProjectInfo);
             }
             Service = ServiceHelper.GetService(Key);
+            Service.LanguageChanged += LanguageChanged;
+
         }
+
+       
         public BaseProjectViewModel(ViewType viewType, string key)
         {
             Key = Guid.NewGuid().ToString();
@@ -96,6 +100,8 @@ namespace PackageEasy.ViewModels
                 ProjectInfo = CacheDataHelper.ProjectDic[ParentKey];
             }
             Service = ServiceHelper.GetService(ParentKey);
+            Service.LanguageChanged += LanguageChanged;
+
         }
         public List<string> RefreshFileList()
         {
@@ -128,11 +134,16 @@ namespace PackageEasy.ViewModels
         {
 
         }
+        public virtual void LanguageChanged()
+        {
+        }
+
         /// <summary>
         /// 释放
         /// </summary>
         public virtual void Dispose()
         {
+            Service.LanguageChanged -= LanguageChanged;
         }
         /// <summary>
         /// 保存数据

@@ -103,7 +103,7 @@
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="xcopy $(ProjectDir)Themes\*.*  $(TargetDir)Data\Themes\ /s /y&#xD;&#xA;xcopy $(ProjectDir)Plugin\*.*  $(TargetDir)Data\Plugin\ /s /y" />
+    <Exec Command="xcopy $(ProjectDir)Themes\*.*  $(TargetDir)Data\Themes\ /s /y&#xD;&#xA;xcopy $(ProjectDir)Plugin\*.*  $(TargetDir)Data\Plugin\ /s /y&#xD;&#xA;xcopy $(ProjectDir)Files\Language\*.*  $(TargetDir)Data\Language\ /s /y" />
   </Target>
 
 </Project>

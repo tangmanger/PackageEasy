@@ -75,7 +75,7 @@
                                 </MenuItem>
                             </MenuItem>
                             <MenuItem MinWidth="50" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="14" HorizontalContentAlignment="Center"  d:Header="扩展" Header="{DynamicResource MainExtension}">
-                                <MenuItem d:Header="管理扩展" Header="{StaticResource MainManageExtension}" Command="{Binding PlugInManagerCommand}" InputGestureText=""  >
+                                <MenuItem d:Header="管理扩展" Header="{DynamicResource MainManageExtension}" Command="{Binding PlugInManagerCommand}" InputGestureText=""  >
                                     <MenuItem.Icon>
                                         <TextBlock Style="{StaticResource IconFontStyle}" FontSize="14" Text="&#xe634;"></TextBlock>
                                     </MenuItem.Icon>

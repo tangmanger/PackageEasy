@@ -28,4 +28,5 @@ namespace PackageEasy.Domain.Models
         public LanguageType LanguageType { get; set; }
 
     }
+
 }
