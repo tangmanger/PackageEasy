@@ -13,7 +13,7 @@
 * 解决在结束页面不设置监视进程时无法编译通过的问题
 * 新增批量删除，批量选择，批量变更目录
 * 新增忽略列表，解决反复添加不需要文件问题
-* [更新说明]([https://mp.weixin.qq.com/s/8c4ONmWgJ8Uw-Q9E6EYt-A])
+* [更新说明](https://mp.weixin.qq.com/s/8c4ONmWgJ8Uw-Q9E6EYt-A)
   
 ### V1.0.4
 * 生成脚本名有空格时候编译有问题
