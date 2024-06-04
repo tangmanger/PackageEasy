@@ -2,6 +2,7 @@
 using PackageEasy.Common.Helpers;
 using PackageEasy.Common.Logs;
 using PackageEasy.Domain;
+using PackageEasy.Domain.Common;
 using PackageEasy.Domain.Helpers;
 using PackageEasy.Domain.Models;
 using PackageEasy.Domain.Models.SaveModel;
@@ -34,7 +35,7 @@ namespace PackageEasy.Helpers
             {
                 if (CacheDataHelper.FileOpenDic.ContainsValue(openFileDialog.FileName))
                 {
-                    return new Tuple<bool, string>(false, "当前文件已打开");
+                    return new Tuple<bool, string>(false,CommonSettings.HomeFileHasOpened);
                 }
 
                 return Open(openFileDialog.FileName, projectViewModel);

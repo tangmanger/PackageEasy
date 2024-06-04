@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using PackageEasy.Common;
 using PackageEasy.Common.Helpers;
+using PackageEasy.Domain.Common;
 using PackageEasy.Domain.Enums;
 using PackageEasy.Domain.Interfaces;
 using PackageEasy.Domain.Models;
@@ -169,22 +170,22 @@ namespace PackageEasy.ViewModels
             {
                 if (item.Lang == null)
                 {
-                    TMessageBox.ShowMsg("多语言：所属语言不能为空！");
+                    TMessageBox.ShowMsg(CommonSettings.LangIsNotNull);
                     return false;
                 }
                 if (item.AssemblyFile == null)
                 {
-                    TMessageBox.ShowMsg("多语言：目标文件不能为空！");
+                    TMessageBox.ShowMsg(CommonSettings.LangAssemblyFileIsNotNull);
                     return false;
                 }
                 if (item.TargetPath == null)
                 {
-                    TMessageBox.ShowMsg("多语言：目标根目录不能为空！");
+                    TMessageBox.ShowMsg(CommonSettings.LangTargetPathIsNotNull);
                     return false;
                 }
                 if (item.TargetDir == null)
                 {
-                    TMessageBox.ShowMsg("多语言：目标目录不能为空！");
+                    TMessageBox.ShowMsg(CommonSettings.LangTargetDirIsNotNull);
                     return false;
                 }
             }
@@ -221,7 +222,7 @@ namespace PackageEasy.ViewModels
         {
             if (MultiFileList == null || !MultiFileList.Exists(f => f.IsSelected))
             {
-                TMessageBox.ShowMsg("请选择要删除的条目");
+                TMessageBox.ShowMsg(CommonSettings.AppIconSelectDelItem);
                 return;
             }
             var allSelected = MultiFileList.FindAll(c => c.IsSelected);

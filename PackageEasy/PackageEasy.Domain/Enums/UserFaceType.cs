@@ -1,4 +1,5 @@
 ﻿using PackageEasy.Domain.Attributes;
+using PackageEasy.Domain.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,17 +18,17 @@ namespace PackageEasy.Domain.Enums
         /// <summary>
         /// 无
         /// </summary>
-        [Description("无")]
+        [Description(CommonSettings.BaseInfoFaceTypeNo)]
         None = 0,
         /// <summary>
         ///    现代
         /// </summary>
-        [Description("现代")]
+        [Description(CommonSettings.BaseInfoFaceTypeMorden)]
         Morden = 1,
         /// <summary>
         /// 古典
         /// </summary>
-        [Description("古典")]
+        [Description(CommonSettings.BaseInfoFaceTypeClassic)]
         Classic = 2
     }
 }

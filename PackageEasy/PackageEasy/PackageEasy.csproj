@@ -32,11 +32,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\AssemblyView1.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Resources\Icons\iconfont.ttf" />
     <None Remove="Resources\Images\NewProject.png" />
     <None Remove="Resources\Images\tools.png" />
     <None Remove="Resources\Images\Triangle.png" />
     <None Remove="Resources\Images\wx.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="Views\AssemblyView1.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -94,12 +102,8 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Flies\" />
-  </ItemGroup>
-
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="xcopy $(ProjectDir)Themes\*.*  $(TargetDir)Data\Themes\ /s /y&#xD;&#xA;xcopy $(ProjectDir)Plugin\*.*  $(TargetDir)Data\Plugin\ /s /y" />
+    <Exec Command="xcopy $(ProjectDir)Themes\*.*  $(TargetDir)Data\Themes\ /s /y&#xD;&#xA;xcopy $(ProjectDir)Plugin\*.*  $(TargetDir)Data\Plugin\ /s /y&#xD;&#xA;xcopy $(ProjectDir)Files\Language\*.*  $(TargetDir)Data\Language\ /s /y" />
   </Target>
 
 </Project>

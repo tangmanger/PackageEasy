@@ -1,12 +1,12 @@
 [
   {
     "ThemeName": "DefaultColor.xaml",
-    "ThemeDescription": "默认主题",
+    "ThemeDescription": "ThemeDefault",
     "ThemeId": "default"
   },
- {
+  {
     "ThemeName": "Black.xaml",
-    "ThemeDescription": "黑色主题",
+    "ThemeDescription": "ThemeBlack",
     "ThemeId": "black"
   }
 ]

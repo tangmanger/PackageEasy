@@ -1,0 +1,337 @@
+﻿<!--作者：TT 时间:2023-03-12 22:49:08 描述：PackageEasy.Views.AssemblyView界面 TANGMANGER-->
+<UserControl x:Class="PackageEasy.Views.AssemblyView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PackageEasy.Views"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="850" >
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
+        </Grid.RowDefinitions>
+        <!--<Border Grid.Column="1" BorderBrush="{DynamicResource borderBrush}" BorderThickness="0.5,0,0,0"></Border>-->
+        <Popup AllowsTransparency="True" x:Name="pop"  PopupAnimation="Slide" Placement="AbsolutePoint">
+            <Border Width="200" Height="200"></Border>
+        </Popup>
+        <!--<DataGrid Style="{StaticResource DataGridStyle}" RowDetailsVisibilityMode="VisibleWhenSelected" x:Name="datagrid" BorderBrush="{DynamicResource borderBrush}" ItemsSource="{Binding AssemblyList}" Margin="0,10,0,0" CanUserAddRows="False"  AutoGenerateColumns="False" ColumnHeaderHeight="35" RowHeight="35">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding AssemblySelectedCommand}" ></i:InvokeCommandAction>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <DataGrid.Columns>
+                -->
+        <!--<DataGridTemplateColumn  Width="72">
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="选择" Foreground="{DynamicResource DataGridForeground}" lang:LanguageManager.LangText="选择" FontSize="14"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox VerticalAlignment="Center" IsChecked="{Binding IsSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"></CheckBox>
+                            -->
+        <!--<TextBlock Text="{Binding PlateName}" Foreground="{DynamicResource DataGridForeground}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>-->
+        <!--
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>-->
+        <!--
+                <DataGridTemplateColumn SortMemberPath="AssemblyName" Width="*">
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock d:Text="组件名称" Text="{DynamicResource AssemblyName}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Style="{StaticResource CommonTextBox}" FocusVisualStyle="{x:Null}" BorderBrush="Transparent" Background="Transparent" Text="{Binding AssemblyName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="2">
+
+                            </TextBox>
+                            -->
+        <!--<TextBlock Text="{Binding PlateName}" Foreground="{DynamicResource DataGridForeground}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>-->
+        <!--
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn   Width="*">
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock d:Text="描述" Text="{DynamicResource AssemblyDescription}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox   Style="{StaticResource CommonTextBox}"   FocusVisualStyle="{x:Null}" BorderBrush="Transparent" Background="Transparent" Text="{Binding AssemblyDescription,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="2">
+
+                            </TextBox>
+                            -->
+        <!--<TextBlock Text="{Binding PlateName}" Foreground="{DynamicResource DataGridForeground}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>-->
+        <!--
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn  Width="60" Visibility="Collapsed">
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock d:Text="默认勾选" Text="{DynamicResource AssemblyDefaultCheck}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <CheckBox VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsAutoSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></CheckBox>
+                            </StackPanel>
+                            -->
+        <!--<TextBlock Text="{Binding PlateName}" Foreground="{DynamicResource DataGridForeground}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>-->
+        <!--
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn  Width="90" Visibility="Visible">
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock d:Text="操作" Text="{DynamicResource AssemblyOperate}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button Style="{StaticResource CommonButtonStyle}" Width="80" Height="30" d:Content="删除" Content="{DynamicResource AssemblyDelete}" CommandParameter="{Binding }" Command="{Binding DataContext.DelGroupCommand,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"></Button>
+                            </StackPanel>
+                            -->
+        <!--<TextBlock Text="{Binding PlateName}" Foreground="{DynamicResource DataGridForeground}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>-->
+        <!--
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="{DynamicResource datagridLinesBrush}" Height="35"  BorderThickness="0,0,1,0">
+                        <CheckBox HorizontalAlignment="Left" Margin="5,0,0,0" d:Content="默认勾选" Content="{DynamicResource AssemblyDefaultCheck}" VerticalAlignment="Center"  IsChecked="{Binding IsAutoSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></CheckBox>
+                        -->
+        <!--<Button Style="{StaticResource CommonButtonStyle}" Width="80" Height="30" Content="删除" lang:LanguageManager.LangText="删除" CommandParameter="{Binding }" Command="{Binding DataContext.DelGroupCommand,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"></Button>-->
+        <!--
+                    </Border>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow" BasedOn="{StaticResource DefaultDataGridRowStyle}">
+                    <Setter Property="IsSelected" Value="{Binding IsSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></Setter>
+                    -->
+        <!--<Setter Property = "ContextMenu" >
+                        <Setter.Value>
+                            <ContextMenu>
+                                <Menu>
+                                    <MenuItem Header="A"></MenuItem>
+                                    <MenuItem Header="b"></MenuItem>
+                                </Menu>
+                            </ContextMenu>
+                        </Setter.Value>
+                    </Setter>-->
+        <!--
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background" Value="#D9E6F6"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
+        </DataGrid>-->
+
+        <ItemsControl Grid.Row="0" Grid.ColumnSpan="2"  ItemsSource="{Binding AssemblyList}" Margin="10,10,0,0">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel></WrapPanel>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Command="{Binding DataContext.ShowDetailCommand,RelativeSource={RelativeSource AncestorType=ItemsControl}}" CommandParameter="{Binding }">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+
+                                <Border MinWidth="250" MinHeight="250" BorderBrush="{DynamicResource borderBrush}" CornerRadius="4" Background="{DynamicResource projectNewCreateBackground}" BorderThickness="1"  Margin="5">
+                                    <StackPanel Orientation="Vertical" Margin="10,10,0,0">
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <!--<TextBox Style="{StaticResource CommonTextBox}" FocusVisualStyle="{x:Null}" IsReadOnly="True" HorizontalContentAlignment="Center" BorderBrush="Transparent" Background="Transparent" Text="{Binding AssemblyName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="2">
+
+                                </TextBox>-->
+                                            <TextBlock d:Text="组件名称" VerticalAlignment="Center" Text="{Binding AssemblyName}" HorizontalAlignment="Center"  Foreground="{DynamicResource DataGridForeground}"  FontSize="16"></TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock d:Text="描述" VerticalAlignment="Center" Text="{DynamicResource AssemblyDescription}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></TextBlock>
+                                            <TextBlock  d:Text="：" VerticalAlignment="Center" Text="{DynamicResource Format_Colon}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></TextBlock>
+                                            <TextBox   Style="{StaticResource CommonTextBox}"  Width="120" Height="30"  FocusVisualStyle="{x:Null}" BorderBrush="Transparent" Background="Transparent" Text="{Binding AssemblyDescription,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="2">
+
+                                            </TextBox>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock d:Text="默认勾选" VerticalAlignment="Center" Text="{DynamicResource AssemblyDefaultCheck}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></TextBlock>
+                                            <TextBlock  d:Text="：" Text="{DynamicResource Format_Colon}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></TextBlock>
+                                            <CheckBox VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsAutoSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></CheckBox>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+        <Border Grid.Row="1" BorderBrush="{DynamicResource borderBrush}" Grid.ColumnSpan="2" Margin="0,5,0,5" BorderThickness="0,0.5,0.5,0.5">
+            <StackPanel Orientation="Vertical" Margin="10,5,0,5">
+                <CheckBox d:Content="允许用户选择要安装的组" Content="{DynamicResource AssemblyCanUseChoose}" IsChecked="{Binding IsAllowChoose,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="0,5,0,5"></CheckBox>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,5,0,5">
+                    <Button MinWidth="80" Height="30" d:Content="添加组" Content="{DynamicResource AssemblyAddGroup}" Command="{Binding AddGroupCommand}"  Style="{StaticResource CommonButtonStyle}"></Button>
+                    <Button MinWidth="80" Height="30" d:Content="删除组" Content="{DynamicResource AssemblyDelGroup}" Margin="10,0,0,0" Style="{StaticResource CommonButtonStyle}"></Button>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+        <DataGrid Grid.Column="1" Margin="10,10,10,0" Visibility="Collapsed" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionMode="Single" HorizontalScrollBarVisibility="Auto" Style="{StaticResource DataGridStyle}"  ItemsSource="{Binding FileList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" BorderBrush="{DynamicResource borderBrush}"  CanUserAddRows="False"  AutoGenerateColumns="False" ColumnHeaderHeight="35" MinRowHeight="35">
+
+            <DataGrid.Columns>
+                <DataGridTemplateColumn  MinWidth="72">
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <CheckBox Command="{Binding DataContext.FileAllCheckCommand,RelativeSource={RelativeSource AncestorType=DataGrid}}" IsChecked="{Binding DataContext.IsAllChecked,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}" d:Content="选择" Content="{DynamicResource AssemblyChoose}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></CheckBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox HorizontalAlignment="Center" Command="{Binding DataContext.FileCheckCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=DataGrid}}"  IsChecked="{Binding IsSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"></CheckBox>
+                            <!--<TextBlock Text="{Binding PlateName}" Foreground="{DynamicResource DataGridForeground}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>-->
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn  Width="*" SortMemberPath="FilePath">
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock  d:Text="文件目录" Text="{DynamicResource AssemblyDir}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Style="{StaticResource CommonTextBox}" BorderBrush="Transparent" Background="Transparent" IsReadOnly="True" Text="{Binding FilePath}" Margin="2"></TextBox>
+                            <!--<TextBlock Text="{Binding PlateName}" Foreground="{DynamicResource DataGridForeground}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>-->
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn   MinWidth="100">
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock d:Text="目标目录" Text="{DynamicResource AssemblyTargetDir}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox Style="{StaticResource CommonComboBoxStyle}" 
+                                      DisplayMemberPath="DisplayName"
+                                      VerticalContentAlignment="Center"
+                                      SelectedItem="{Binding TargetPath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      ItemsSource="{Binding DataContext.TargetDirList,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"></ComboBox>
+                            <!--<TextBox Style="{StaticResource CommonTextBox}"  IsReadOnly="True" Text="{Binding TargetPath}"  Margin="5,0,5,0"></TextBox>-->
+                            <!--<TextBlock Text="{Binding PlateName}" Foreground="{DynamicResource DataGridForeground}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>-->
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <!--<DataGridTemplateColumn  MinWidth="150">
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="复制到根目录" Foreground="{DynamicResource DataGridForeground}" lang:LanguageManager.LangText="复制到根目录" FontSize="14">
+                                <TextBlock.ToolTip>
+                                    <TextBlock Text="启用后将无视子级目录，将文件复制到根目录!" lang:LanguageManager.LangText="启用后将无视子级目录，将文件复制到根目录!"></TextBlock>
+                                </TextBlock.ToolTip>
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <CheckBox IsChecked="{Binding IsCopyToRootDir,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" >
+                                </CheckBox>
+
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>-->
+                <DataGridTemplateColumn  MinWidth="80" Visibility="Collapsed">
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock d:Text="操作" Text="{DynamicResource AssemblyOperate}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Vertical">
+
+                                    <StackPanel IsEnabled="{Binding IsExe,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,0,0">
+                                        <CheckBox IsChecked="{Binding IsNeedInstall,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  VerticalContentAlignment="Center" HorizontalContentAlignment="Left"  d:Content="安装" Content="{DynamicResource AssemblyInstall}"></CheckBox>
+                                        <CheckBox IsChecked="{Binding IsNeedQuietInstall,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"  Margin="10,0,0,0" d:Content="静默安装" Content="{DynamicResource AssemblyQuietInstall}"></CheckBox>
+                                    </StackPanel>
+                                    <CheckBox  Margin="5,0,0,0" IsChecked="{Binding IsNoNeedCopy,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" d:Content="不复制" Content="{DynamicResource AssemblUnCopy}"></CheckBox>
+
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <!--<DataGridTemplateColumn  Width="72">
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="操作" Foreground="{DynamicResource DataGridForeground}" lang:LanguageManager.LangText="操作" FontSize="14"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Style="{StaticResource CommonButtonStyle}" Width="80" Height="30" Content="删除" lang:LanguageManager.LangText="删除"></Button>
+                            </StackPanel>
+                            -->
+                <!--<TextBlock Text="{Binding PlateName}" Foreground="{DynamicResource DataGridForeground}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>-->
+                <!--
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>-->
+            </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="{DynamicResource datagridLinesBrush}" BorderThickness="0,0,1,0" Height="35">
+                        <StackPanel Orientation="Horizontal" Margin="5">
+
+                            <StackPanel IsEnabled="{Binding IsExe,Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="5,0,0,0">
+                                <CheckBox IsChecked="{Binding IsNeedInstall,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Margin="5,0,0,0" d:Content="安装" Content="{DynamicResource AssemblyInstall}"></CheckBox>
+                                <CheckBox IsChecked="{Binding IsNeedQuietInstall,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5,0,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"  d:Content="静默安装" Content="{DynamicResource AssemblyQuietInstall}"></CheckBox>
+                            </StackPanel>
+                            <CheckBox  Margin="5,0,0,0" IsChecked="{Binding IsExistNoNeedCopy,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" d:Content="如果存在不复制" Content="{DynamicResource AssemblExistUnCopy}"></CheckBox>
+                            <CheckBox  Margin="5,0,0,0" IsChecked="{Binding IsNoNeedCopy,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" d:Content="不复制" Content="{DynamicResource AssemblUnCopy}"></CheckBox>
+                            <CheckBox  Margin="5,0,0,0" IsChecked="{Binding IsNoNeedDelete,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" d:Content="不删除" Content="{DynamicResource AssemblUnDelete}"></CheckBox>
+
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+        </DataGrid>
+        <Border Grid.Row="1" Grid.Column="1"  Visibility="Collapsed" BorderBrush="{DynamicResource borderBrush}"  Margin="10,5,10,5" BorderThickness="0.5,0.5,0.5,0.5">
+            <StackPanel Orientation="Vertical" Margin="10,5,0,5">
+                <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,5,0,5">
+                    <Button MinWidth="80" Height="30" d:Content="添加单个文件" Content="{DynamicResource AssemblAddFile}" Command="{Binding AddFileCommand}"  Style="{StaticResource CommonButtonStyle}"></Button>
+                    <Button MinWidth="80" Height="30" d:Content="添加多个文件" Content="{DynamicResource AssemblAddMultiFile}" Command="{Binding AddFileByDirCommand}" Margin="5,0,0,0" Style="{StaticResource CommonButtonStyle}"></Button>
+                    <Button MinWidth="80" Height="30" d:Content="添加文件夹" Content="{DynamicResource AssemblAddDir}" Command="{Binding AddDirCommand}" Margin="5,0,0,0"  Style="{StaticResource CommonButtonStyle}"></Button>
+                    <Button MinWidth="80" Height="30" d:Content="删除" Content="{DynamicResource AssemblyDelete}" Command="{Binding DeletedCommand}" Margin="10,0,0,0" Style="{StaticResource CommonButtonStyle}"></Button>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

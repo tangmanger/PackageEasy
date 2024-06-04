@@ -1,0 +1,256 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <sys:String x:Key="Format_Colon">:</sys:String>
+    <sys:String x:Key="None">None</sys:String>
+    <sys:String x:Key="Sure">Yes</sys:String>
+    
+    <!--Main interface-->
+    <sys:String x:Key="MainFile">File</sys:String>
+    <sys:String x:Key="MainNewFile">New</sys:String>
+    <sys:String x:Key="MainOpen">Open..</sys:String>
+    <sys:String x:Key="MainClose">Close</sys:String>
+    <sys:String x:Key="MainSave">Save</sys:String>
+    <sys:String x:Key="MainSaveAs">Save as..</sys:String>
+    <sys:String x:Key="MainExportScript">Export Script</sys:String>
+    <sys:String x:Key="MainImportScript">Open script</sys:String>
+    <sys:String x:Key="MainExit">Exit</sys:String>
+
+    <sys:String x:Key="MainBulid">Generate</sys:String>
+    <sys:String x:Key="MainCompile">Compile</sys:String>
+    <sys:String x:Key="MainTools">Tools</sys:String>
+    <sys:String x:Key="MainSetting">Settings</sys:String>
+    <sys:String x:Key="MainExtension">Extension</sys:String>
+    <sys:String x:Key="MainManageExtension">Manage Extension</sys:String>
+    <sys:String x:Key="MainHelp">Help</sys:String>
+    <sys:String x:Key="MainAbout">About PackageEasy</sys:String>
+    <sys:String x:Key="MainHome">Home</sys:String>
+
+    <!--Home page interface-->
+    <sys:String x:Key="HomeNewProject">New project</sys:String>
+
+    <!--Project interface-->
+    <sys:String x:Key="ProjectBaseInfo">Basic information</sys:String>
+    <sys:String x:Key="ProjectAssemblyInfo">Component information</sys:String>
+    <sys:String x:Key="ProjectAppIcon">Application icon</sys:String>
+    <sys:String x:Key="ProjectRegistry">Registry</sys:String>
+    <sys:String x:Key="ProjectLanguage">Multi-language</sys:String>
+    <sys:String x:Key="ProjectEnd">End interface</sys:String>
+    <!--Basic information-->
+    <sys:String x:Key="BaseInfoAppName">Application name:</sys:String>
+    <sys:String x:Key="BaseInfoAppVersion">Application version:</sys:String>
+    <sys:String x:Key="BaseInfoDisplayUninstall">Displayed during uninstall</sys:String>
+    <sys:String x:Key="BaseInfoFileVersion">File version:</sys:String>
+    <sys:String x:Key="BaseInfoFileVersionTips">For example: 1.0.0.1</sys:String>
+    <sys:String x:Key="BaseInfoCompany">Company name:</sys:String>
+    <sys:String x:Key="BaseInfoAppWeb">Application website:</sys:String>
+    <sys:String x:Key="BaseInfoAppIcon">Application icon:</sys:String>
+    <sys:String x:Key="BaseInfoOutPut">Output file name:</sys:String>
+    <sys:String x:Key="BaseInfoUserInterFace">GUI:</sys:String>
+    <sys:String x:Key="BaseInfoCompressAlgo">Compression algorithm:</sys:String>
+    <sys:String x:Key="BaseInfoPublisher">Application Publisher:</sys:String>
+    <sys:String x:Key="BaseInfoLanuageChoose">Language selection:</sys:String>
+    <sys:String x:Key="BaseInfoLanuageFile">Language file settings:</sys:String>
+    <sys:String x:Key="BaseInfoInstallIcon">Installation package icon:</sys:String>
+    <sys:String x:Key="BaseInfoUnInstallIcon">Uninstall icon:</sys:String>
+    <sys:String x:Key="BaseInfoDefaultDir">Application default directory:</sys:String>
+    <sys:String x:Key="BaseInfoCanChooseDir">Allow directory changes</sys:String>
+    <sys:String x:Key="BaseInfoLiscense">Authorization file:</sys:String>
+    <sys:String x:Key="BaseInfoLiscenseCheck">Enable authorization</sys:String>
+    <sys:String x:Key="BaseInfoButtonType">Button type:</sys:String>
+    <sys:String x:Key="BaseInfoButtonTypeClassic">Classic Button</sys:String>
+    <sys:String x:Key="BaseInfoButtonTypeCheck">Check box</sys:String>
+    <sys:String x:Key="BaseInfoButtonTypeCircle">Circular radio button</sys:String>
+    <sys:String x:Key="BaseInfoWorkSapce">Working directory:</sys:String>
+    <sys:String x:Key="BaseInfoUseRelative">Use relative path</sys:String>
+
+    <!--Component information-->
+    <sys:String x:Key="AssemblyName">Component name</sys:String>
+    <sys:String x:Key="AssemblyDescription">Description</sys:String>
+    <sys:String x:Key="AssemblyDefaultCheck">Default checked</sys:String>
+    <sys:String x:Key="AssemblyOperate">Operation</sys:String>
+    <sys:String x:Key="AssemblyDelete">Delete</sys:String>
+    <sys:String x:Key="AssemblyCanUseChoose">Allow users to choose which assembly to install</sys:String>
+    <sys:String x:Key="AssemblyAddGroup">Add group</sys:String>
+    <sys:String x:Key="AssemblyDelGroup">Delete group</sys:String>
+    <sys:String x:Key="AssemblyChoose">Choose</sys:String>
+    <sys:String x:Key="AssemblyDir">File Directory</sys:String>
+    <sys:String x:Key="AssemblyTargetDir">Target directory</sys:String>
+    <sys:String x:Key="AssemblyInstall">Installation</sys:String>
+    <sys:String x:Key="AssemblyQuietInstall">Silent installation</sys:String>
+    <sys:String x:Key="AssemblUnCopy">Do not copy</sys:String>
+    <sys:String x:Key="AssemblAddFile">Add a single file</sys:String>
+    <sys:String x:Key="AssemblAddMultiFile">Add multiple files</sys:String>
+    <sys:String x:Key="AssemblAddDir">Add folder</sys:String>
+    <sys:String x:Key="AssemblExistUnCopy">Do not copy if exists</sys:String>
+    <sys:String x:Key="AssemblUnDelete">Do not delete</sys:String>
+    <sys:String x:Key="AssemblNeedCopy">Whether to copy</sys:String>
+    <sys:String x:Key="AssemblInstallType">Installation method</sys:String>
+    <sys:String x:Key="AssemblIgnore">Ignore</sys:String>
+    <sys:String x:Key="MultiTargetDirPathChanged">There are multiple current selections. Do you want to update all target directories?</sys:String>
+    
+    
+    <!--Application icon-->
+    <sys:String x:Key="AppIconMenuName">Application&quot;Start Menu&quot;Folder name:</sys:String>
+    <sys:String x:Key="AppIconAllowChangeMenuName">Allows users to change the "Start Menu" folder name</sys:String>
+    <sys:String x:Key="AppIconStartShortCuts">Create Internet shortcuts in the "Start Menu" folder</sys:String>
+    <sys:String x:Key="AppIconStartUninstallShortCuts">Create an uninstall icon in the "Start Menu"</sys:String>
+    <sys:String x:Key="AppIconChoose">Choose</sys:String>
+    <sys:String x:Key="AppIconTargetDirPath">Target folder</sys:String>
+    <sys:String x:Key="AppIconShortCutName">Shortcut name</sys:String>
+    <sys:String x:Key="AppIconTargetFilePath">Target file</sys:String>
+    <sys:String x:Key="AppIconOperate">Operation</sys:String>
+    <sys:String x:Key="AppIconAdd">Add</sys:String>
+    <sys:String x:Key="AppIconEdit">Edit</sys:String>
+    <sys:String x:Key="AppIconDelSelected">Delete selected</sys:String>
+
+    <!--Registration interface-->
+    <sys:String x:Key="RegistryFormat">Registration file format:</sys:String>
+    <sys:String x:Key="RegistryExample">Example: .pge,.pky</sys:String>
+    <sys:String x:Key="RegistryCanChooseSection">Optional component</sys:String>
+    <sys:String x:Key="RegistryProcessName">Registration process:</sys:String>
+    <sys:String x:Key="RegistryProcessExample">For example: PackageEasy.exe</sys:String>
+    <sys:String x:Key="RegistryPassword">Password:</sys:String>
+    <sys:String x:Key="RegistryEnablePassword">Enable Password</sys:String>
+
+    <!--Multi-language-->
+    <sys:String x:Key="MultiLanguageChoose">Choose</sys:String>
+    <sys:String x:Key="MultiLanguage">Language</sys:String>
+    <sys:String x:Key="MultiLanguageAdd">Add</sys:String>
+    <sys:String x:Key="MultiLanguageDel">Delete</sys:String>
+    <sys:String x:Key="MultiLanguageTargetFile">Target file</sys:String>
+    <sys:String x:Key="MultiLanguageTargetRootDir">Target root directory</sys:String>
+    <sys:String x:Key="MultiLanguageTargetDir">Target directory</sys:String>
+
+    <!--End interface-->
+    <sys:String x:Key="EndProcess">Program:</sys:String>
+    <sys:String x:Key="EndStartProcess">Start after installation is complete</sys:String>
+    <sys:String x:Key="EndParams">Parameters:</sys:String>
+    <sys:String x:Key="EndReadmeName">Readme:</sys:String>
+    <!--<sys:String x:Key="EndUseUnInstall">Uninstall prompt:</sys:String>-->
+    <sys:String x:Key="EndUnInstallTips">Uninstall tips:</sys:String>
+    <sys:String x:Key="EndUnInstallMsg">Uninstall message:</sys:String>
+    <sys:String x:Key="EndChcekProcessName">Detected process name:</sys:String>
+    <sys:String x:Key="EndChcekProcessExample">For example: PackageEasy.exe</sys:String>
+    <sys:String x:Key="EndInstallContent">Installation tips:</sys:String>
+    <sys:String x:Key="EndUnInstallContent">Uninstallation prompt:</sys:String>
+    <sys:String x:Key="EndUseCheckProcess">Enable process detection</sys:String>
+
+    <!--About the interface-->
+    <sys:String x:Key="AboutSoftWare">About software</sys:String>
+    <sys:String x:Key="AboutSoftWareName">Software name:</sys:String>
+    <sys:String x:Key="AboutSoftWareVersion">Product version:</sys:String>
+    <sys:String x:Key="AboutSoftWareDescription">Product description:</sys:String>
+    <sys:String x:Key="AboutSoftWareDescriptionInfo">Because the NSIS packaging script learning curve is steep, HM NIS Edit is more troublesome to visually adjust after generating the script, so I made this tool to facilitate everyone. If you are not good at it, please ask Forgive me, power generation for love!</sys:String>
+    <sys:String x:Key="AboutSoftWareConnectMe">Contact me:</sys:String>
+    <sys:String x:Key="AboutSoftWareCopyRight">Copyright ©2021-2036 PackageEasy All Rights Reserved</sys:String>
+
+
+    <!--Setting interface-->
+    <sys:String x:Key="SettingNSIS">NSIS Settings</sys:String>
+    <sys:String x:Key="SettingDisplay">Display settings</sys:String>
+    <sys:String x:Key="SettingCompilePath">Compiler path:</sys:String>
+    <sys:String x:Key="SettingNsisHelper">Help documentation:</sys:String>
+    <sys:String x:Key="SettingLanguage">Language:</sys:String>
+    <sys:String x:Key="SettingTheme">Theme:</sys:String>
+    
+    <!--cs interface-->
+    <!--Main interface cs-->
+    <sys:String x:Key="MainExportScriptTips">Convert to relative path?</sys:String>
+    <sys:String x:Key="MainSaveFailTips">Save failed!</sys:String>
+    <sys:String x:Key="MainExportSuccessTips">Export script successful!</sys:String>
+    <sys:String x:Key="MainExportFailTips">Export script failed!</sys:String>
+    <sys:String x:Key="MainCompileSuccessTips">Compilation successful!</sys:String>
+    <sys:String x:Key="MainCompileFailTips">Compilation failed!</sys:String>
+    <sys:String x:Key="MainCompileFailExtTips">Compilation failed! {0}</sys:String>
+
+    <!--Home page interface-->
+    <sys:String x:Key="HomeFileHasOpened">The current file is open!</sys:String>
+    <sys:String x:Key="HomeFileNoExist">The current file {0} does not exist. Do you want to remove it from recently opened?</sys:String>
+
+
+    <!--Basic information interface cs-->
+    <sys:String x:Key="BaseInfoEnglish">English</sys:String>
+    <sys:String x:Key="BaseInfoChinese">Chinese</sys:String>
+    <sys:String x:Key="BaseInfoAppNameNotEmpty">The application name cannot be empty!</sys:String>
+    <sys:String x:Key="BaseInfoFileVersionFormat">The file version format must be X.X.X.X (X is a number)!</sys:String>
+    <sys:String x:Key="BaseInfoOutPutFileName">The output file name cannot be empty!</sys:String>
+    <sys:String x:Key="BaseInfoLicenseFileNotExist">Authorization does not exist!</sys:String>
+    <sys:String x:Key="BaseInfoAppIconNotExist">The application icon does not exist!</sys:String>
+    <sys:String x:Key="BaseInfoUnInstallAppIconNotExist">The uninstall icon does not exist!</sys:String>
+    <sys:String x:Key="BaseInfoInstallAppIconNotExist">The installation package icon does not exist!</sys:String>
+    <sys:String x:Key="BaseInfoFaceTypeNo">None</sys:String>
+    <sys:String x:Key="BaseInfoFaceTypeMorden">Modern</sys:String>
+    <sys:String x:Key="BaseInfoFaceTypeClassic">Classic</sys:String>
+    <sys:String x:Key="BaseInfoLangFormatError">The current language file format is incorrect, please refer to the example!</sys:String>
+    <sys:String x:Key="BaseInfoSaveBefore">Please save first!</sys:String>
+
+    <!--Basic interface-->
+    <sys:String x:Key="BaseViewNewProject">New Project*</sys:String>
+
+    <!--Application icon information-->
+    <sys:String x:Key="AppIconStartMenuNameTips">Application\"Start Menu\" folder name cannot be empty!</sys:String>
+    <sys:String x:Key="AppIconTargetDirNotNull">The target folder name cannot be empty!</sys:String>
+    <sys:String x:Key="AppIconShortcutNotNull">The shortcut name cannot be empty!</sys:String>
+    <sys:String x:Key="AppIconTargetFileNotNull">The destination file cannot be empty!</sys:String>
+    <sys:String x:Key="AppIconSelectDelItem">Please select the item to delete!</sys:String>
+
+    <!--Component information interface-->
+    <sys:String x:Key="AssemblyNewSection">New group</sys:String>
+    <sys:String x:Key="AssemblyWorkSpaceNotNull">The working directory is empty!</sys:String>
+    <sys:String x:Key="AssemblyChooseSection">Please choose a group!</sys:String>
+    <sys:String x:Key="AssemblyNullFileList">There is currently no file list!</sys:String>
+    <sys:String x:Key="AssemblyFileIsNull">The current file {0} is empty!</sys:String>
+    <sys:String x:Key="AssemblyFileNotExist">Cannot find file {0} in workspace!</sys:String>
+    <sys:String x:Key="AssemblyIgnoreSuccess">Ignore success!</sys:String>
+    <sys:String x:Key="AssemblyUnIgnoreSuccess">Cancel ignore successfully!</sys:String>
+    <sys:String x:Key="AssemblyFileList">File list</sys:String>
+    <sys:String x:Key="AssemblyIgnoreFileList">Ignore file list</sys:String>
+    <sys:String x:Key="AssemblyUnIgnore">Remove ignore</sys:String>
+    
+    <!--End interface-->
+    <sys:String x:Key="EndUninstallTip">Are you sure you want to completely remove $(^Name) and all its components?</sys:String>
+    <sys:String x:Key="EndUninstallMsg">$(^Name) was successfully removed from your computer.</sys:String>
+    <sys:String x:Key="EndUninstallProcessTips">The uninstaller has detected that ${PRODUCT_NAME} is running. Do you want to force close it and continue uninstalling?</sys:String>
+    <sys:String x:Key="EndInstallProcessTips">The installation program detects that ${PRODUCT_NAME} is running. Do you want to force close and continue the installation?</sys:String>
+    <sys:String x:Key="EndApplicationNameIsNotNull">End page: The program cannot be empty!</sys:String>
+    <sys:String x:Key="EndProcessNameIsNotNull">End page: The detected process name cannot be empty!</sys:String>
+    <sys:String x:Key="EndUninstallProcessTipsIsNotNull">End page: Uninstall tips cannot be empty!</sys:String>
+    <sys:String x:Key="EndInstallProcessTipsIsNotNull">End page: The program cannot be empty!</sys:String>
+    <sys:String x:Key="EndReadMeNameIsNotNull">End page: Readme file cannot be empty!</sys:String>
+
+    <!--Multi-language interface-->
+    <sys:String x:Key="LangIsNotNull">Multi-language: The language cannot be empty!</sys:String>
+    <sys:String x:Key="LangAssemblyFileIsNotNull">Multi-language: The target file cannot be empty!</sys:String>
+    <sys:String x:Key="LangTargetPathIsNotNull">Multi-language: The target root directory cannot be empty!</sys:String>
+    <sys:String x:Key="LangTargetDirIsNotNull">Multi-language: The target directory cannot be empty!</sys:String>
+
+    <!--Registration interface-->
+    <sys:String x:Key="RegistryRegistryFormatIsNotNull">Registration interface: Please fill in the associated program name!</sys:String>
+    <sys:String x:Key="RegistryPasswordIsNotNull">Registration interface: Please fill in the password!</sys:String>
+
+    <!--Tools-->
+    <sys:String x:Key="ToolAbout">About PackageEasy</sys:String>
+    <sys:String x:Key="ToolPlugInManager">Plug-in settings</sys:String>
+    <sys:String x:Key="ToolScriptControl">Script preview</sys:String>
+    <sys:String x:Key="ToolSettingControl">Settings</sys:String>
+    <sys:String x:Key="ThemeDefault">Default theme</sys:String>
+    <sys:String x:Key="ThemeBlack">Black theme</sys:String>
+    <sys:String x:Key="SaveSuccess">Save successfully!</sys:String>
+    <sys:String x:Key="SaveFail">Save failed!</sys:String>
+    <sys:String x:Key="OpenFileError">An error occurred while opening the file!</sys:String>
+    <sys:String x:Key="TableNotSave">The current label {0} is not saved, do you want to save it?</sys:String>
+    <sys:String x:Key="Yes">OK</sys:String>
+    <sys:String x:Key="No">No</sys:String>
+    <sys:String x:Key="Cancel">Cancel</sys:String>
+    <sys:String x:Key="Close">Close</sys:String>
+    <sys:String x:Key="PasswordBox">Password:</sys:String>
+    <sys:String x:Key="WatingTips">Please wait...</sys:String>
+    <sys:String x:Key="Null">None</sys:String>
+    <sys:String x:Key="SampleChinese">Simplified Chinese</sys:String>
+    <sys:String x:Key="English">English</sys:String>
+    <sys:String x:Key="ProcessCheck">Process Check</sys:String>
+    <sys:String x:Key="FileNoExist">File does not exist!</sys:String>
+    <sys:String x:Key="InstallSuccess">Installation successful!</sys:String>
+    
+</ResourceDictionary>

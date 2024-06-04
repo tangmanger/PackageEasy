@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using PackageEasy.Common;
 using PackageEasy.Common.Helpers;
+using PackageEasy.Domain.Common;
 using PackageEasy.Domain.Enums;
 using PackageEasy.Domain.Interfaces;
 using PackageEasy.Domain.Models;
@@ -208,7 +209,7 @@ namespace PackageEasy.ViewModels
         {
             if (AppIconInfoList == null || !AppIconInfoList.Any(x => x.IsSelected == true))
             {
-                TMessageBox.ShowMsg("请选择要删除的项");
+                TMessageBox.ShowMsg(CommonSettings.AppIconSelectDelItem);
                 return;
             }
             var selectedItem = AppIconInfoList.ToList().FindAll(c => c.IsSelected == true);
@@ -290,7 +291,7 @@ namespace PackageEasy.ViewModels
         {
             if (string.IsNullOrWhiteSpace(StartMenuName))
             {
-                TMessageBox.ShowMsg("应用程序\"开始菜单\"文件夹名称不能为空!");
+                TMessageBox.ShowMsg(CommonSettings.AppIconStartMenuNameTips);
                 return false;
             }
             if (AppIconInfoList != null && AppIconInfoList.Count > 0)
@@ -299,17 +300,17 @@ namespace PackageEasy.ViewModels
                 {
                     if (item.IconDir == null)
                     {
-                        TMessageBox.ShowMsg("目标文件夹名称不能为空!");
+                        TMessageBox.ShowMsg(CommonSettings.AppIconTargetDirNotNull);
                         return false;
                     }
                     if (string.IsNullOrWhiteSpace(item.ShortcutPath))
                     {
-                        TMessageBox.ShowMsg("快捷方式名称不能为空!");
+                        TMessageBox.ShowMsg(CommonSettings.AppIconShortcutNotNull);
                         return false;
                     }
                     if (string.IsNullOrWhiteSpace(item.FilePath))
                     {
-                        TMessageBox.ShowMsg("目的文件不能为空!");
+                        TMessageBox.ShowMsg(CommonSettings.AppIconTargetFileNotNull);
                         return false;
                     }
                 }

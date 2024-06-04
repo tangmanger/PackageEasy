@@ -1,0 +1,257 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <sys:String x:Key="Format_Colon">：</sys:String>
+    <sys:String x:Key="None">无</sys:String>
+    <sys:String x:Key="Sure">是</sys:String>
+
+    <!--主界面-->
+    <sys:String x:Key="MainFile">文件</sys:String>
+    <sys:String x:Key="MainNewFile">新建</sys:String>
+    <sys:String x:Key="MainOpen">打开..</sys:String>
+    <sys:String x:Key="MainClose">关闭</sys:String>
+    <sys:String x:Key="MainSave">保存</sys:String>
+    <sys:String x:Key="MainSaveAs">另存为..</sys:String>
+    <sys:String x:Key="MainExportScript">导出脚本</sys:String>
+    <sys:String x:Key="MainImportScript">打开脚本</sys:String>
+    <sys:String x:Key="MainExit">退出</sys:String>
+
+    <sys:String x:Key="MainBulid">生成</sys:String>
+    <sys:String x:Key="MainCompile">编译</sys:String>
+    <sys:String x:Key="MainTools">工具</sys:String>
+    <sys:String x:Key="MainSetting">设置</sys:String>
+    <sys:String x:Key="MainExtension">扩展</sys:String>
+    <sys:String x:Key="MainManageExtension">管理扩展</sys:String>
+    <sys:String x:Key="MainHelp">帮助</sys:String>
+    <sys:String x:Key="MainAbout">关于PackageEasy</sys:String>
+    <sys:String x:Key="MainHome">首页</sys:String>
+
+    <!--主页界面-->
+    <sys:String x:Key="HomeNewProject">新建工程</sys:String>
+
+    <!--工程界面-->
+    <sys:String x:Key="ProjectBaseInfo">基础信息</sys:String>
+    <sys:String x:Key="ProjectAssemblyInfo">组件信息</sys:String>
+    <sys:String x:Key="ProjectAppIcon">应用程序图标</sys:String>
+    <sys:String x:Key="ProjectRegistry">注册表</sys:String>
+    <sys:String x:Key="ProjectLanguage">多语言</sys:String>
+    <sys:String x:Key="ProjectEnd">结束界面</sys:String>
+    <!--基础信息-->
+    <sys:String x:Key="BaseInfoAppName">应用程序名称：</sys:String>
+    <sys:String x:Key="BaseInfoAppVersion">应用程序版本：</sys:String>
+    <sys:String x:Key="BaseInfoDisplayUninstall">卸载时显示</sys:String>
+    <sys:String x:Key="BaseInfoFileVersion">文件版本：</sys:String>
+    <sys:String x:Key="BaseInfoFileVersionTips">例如：1.0.0.1</sys:String>
+    <sys:String x:Key="BaseInfoCompany">公司名称：</sys:String>
+    <sys:String x:Key="BaseInfoAppWeb">应用程序网站：</sys:String>
+    <sys:String x:Key="BaseInfoAppIcon">应用程序图标：</sys:String>
+    <sys:String x:Key="BaseInfoOutPut">输出文件名称：</sys:String>
+    <sys:String x:Key="BaseInfoUserInterFace">用户图形界面：</sys:String>
+    <sys:String x:Key="BaseInfoCompressAlgo">压缩算法：</sys:String>
+    <sys:String x:Key="BaseInfoPublisher">应用程序出版人：</sys:String>
+    <sys:String x:Key="BaseInfoLanuageChoose">语言选择：</sys:String>
+    <sys:String x:Key="BaseInfoLanuageFile">语言文件设置：</sys:String>
+    <sys:String x:Key="BaseInfoInstallIcon">安装包图标：</sys:String>
+    <sys:String x:Key="BaseInfoUnInstallIcon">卸载图标：</sys:String>
+    <sys:String x:Key="BaseInfoDefaultDir">应用程序默认目录：</sys:String>
+    <sys:String x:Key="BaseInfoCanChooseDir">允许更改目录</sys:String>
+    <sys:String x:Key="BaseInfoLiscense">授权文件：</sys:String>
+    <sys:String x:Key="BaseInfoLiscenseCheck">启用授权</sys:String>
+    <sys:String x:Key="BaseInfoButtonType">按钮类型：</sys:String>
+    <sys:String x:Key="BaseInfoButtonTypeClassic">古典按钮</sys:String>
+    <sys:String x:Key="BaseInfoButtonTypeCheck">勾选框</sys:String>
+    <sys:String x:Key="BaseInfoButtonTypeCircle">圆形单选框</sys:String>
+    <sys:String x:Key="BaseInfoWorkSapce">工作目录：</sys:String>
+    <sys:String x:Key="BaseInfoUseRelative">使用相对路径</sys:String>
+
+    <!--组件信息-->
+    <sys:String x:Key="AssemblyName">组件名称</sys:String>
+    <sys:String x:Key="AssemblyDescription">描述</sys:String>
+    <sys:String x:Key="AssemblyDefaultCheck">默认选中</sys:String>
+    <sys:String x:Key="AssemblyOperate">操作</sys:String>
+    <sys:String x:Key="AssemblyDelete">删除</sys:String>
+    <sys:String x:Key="AssemblyCanUseChoose">允许用户选择要安装的组</sys:String>
+    <sys:String x:Key="AssemblyAddGroup">添加组</sys:String>
+    <sys:String x:Key="AssemblyDelGroup">删除组</sys:String>
+    <sys:String x:Key="AssemblyChoose">选择</sys:String>
+    <sys:String x:Key="AssemblyDir">文件目录</sys:String>
+    <sys:String x:Key="AssemblyTargetDir">目标目录</sys:String>
+    <sys:String x:Key="AssemblyInstall">安装</sys:String>
+    <sys:String x:Key="AssemblyQuietInstall">静默安装</sys:String>
+    <sys:String x:Key="AssemblUnCopy">不复制</sys:String>
+    <sys:String x:Key="AssemblAddFile">添加单个文件</sys:String>
+    <sys:String x:Key="AssemblAddMultiFile">添加多个文件</sys:String>
+    <sys:String x:Key="AssemblAddDir">添加文件夹</sys:String>
+    <sys:String x:Key="AssemblExistUnCopy">如果存在不复制</sys:String>
+    <sys:String x:Key="AssemblUnDelete">不删除</sys:String>
+    <sys:String x:Key="AssemblNeedCopy">是否复制</sys:String>
+    <sys:String x:Key="AssemblInstallType">安装方式</sys:String>
+    <sys:String x:Key="AssemblIgnore">忽略</sys:String>
+    <sys:String x:Key="MultiTargetDirPathChanged">当前选择有多个，是否更新所有目标目录！</sys:String>
+
+
+    <!--应用程序图标-->
+    <sys:String x:Key="AppIconMenuName">应用程序&quot;开始菜单&quot;文件夹名称:</sys:String>
+    <sys:String x:Key="AppIconAllowChangeMenuName">允许用户更改&quot;开始菜单文&quot;件夹名称</sys:String>
+    <sys:String x:Key="AppIconStartShortCuts">在&quot;开始菜单&quot;文件夹创建互联网快捷方式</sys:String>
+    <sys:String x:Key="AppIconStartUninstallShortCuts">在&quot;开始菜单&quot;创建解除安装图标</sys:String>
+    <sys:String x:Key="AppIconChoose">选择</sys:String>
+    <sys:String x:Key="AppIconTargetDirPath">目标文件夹</sys:String>
+    <sys:String x:Key="AppIconShortCutName">快捷方式名称</sys:String>
+    <sys:String x:Key="AppIconTargetFilePath">目的文件</sys:String>
+    <sys:String x:Key="AppIconOperate">操作</sys:String>
+    <sys:String x:Key="AppIconAdd">添加</sys:String>
+    <sys:String x:Key="AppIconEdit">编辑</sys:String>
+    <sys:String x:Key="AppIconDelSelected">删除选中</sys:String>
+
+
+    <!--注册界面-->
+    <sys:String x:Key="RegistryFormat">注册文件格式：</sys:String>
+    <sys:String x:Key="RegistryExample">示例： .pge,.pky</sys:String>
+    <sys:String x:Key="RegistryCanChooseSection">可选组件</sys:String>
+    <sys:String x:Key="RegistryProcessName">注册进程：</sys:String>
+    <sys:String x:Key="RegistryProcessExample">例如：PackageEasy.exe</sys:String>
+    <sys:String x:Key="RegistryPassword">密码：</sys:String>
+    <sys:String x:Key="RegistryEnablePassword">启用密码</sys:String>
+
+    <!--多语言-->
+    <sys:String x:Key="MultiLanguageChoose">选择</sys:String>
+    <sys:String x:Key="MultiLanguage">语言</sys:String>
+    <sys:String x:Key="MultiLanguageAdd">添加</sys:String>
+    <sys:String x:Key="MultiLanguageDel">删除</sys:String>
+    <sys:String x:Key="MultiLanguageTargetFile">目标文件</sys:String>
+    <sys:String x:Key="MultiLanguageTargetRootDir">目标根目录</sys:String>
+    <sys:String x:Key="MultiLanguageTargetDir">目标目录</sys:String>
+
+    <!--结束界面-->
+    <sys:String x:Key="EndProcess">程序：</sys:String>
+    <sys:String x:Key="EndStartProcess">安装完成后启动</sys:String>
+    <sys:String x:Key="EndParams">参数：</sys:String>
+    <sys:String x:Key="EndReadmeName">自述：</sys:String>
+    <!--<sys:String x:Key="EndUseUnInstall">解除安装提示：</sys:String>-->
+    <sys:String x:Key="EndUnInstallTips">解除安装提示：</sys:String>
+    <sys:String x:Key="EndUnInstallMsg">解除安装消息：</sys:String>
+    <sys:String x:Key="EndChcekProcessName">检测的进程名：</sys:String>
+    <sys:String x:Key="EndChcekProcessExample">例如：PackageEasy.exe</sys:String>
+    <sys:String x:Key="EndInstallContent">安装提示：</sys:String>
+    <sys:String x:Key="EndUnInstallContent">卸载提示：</sys:String>
+    <sys:String x:Key="EndUseCheckProcess">启用进程检测</sys:String>
+
+    <!--关于界面-->
+    <sys:String x:Key="AboutSoftWare">关于软件</sys:String>
+    <sys:String x:Key="AboutSoftWareName">软件名：</sys:String>
+    <sys:String x:Key="AboutSoftWareVersion">产品版本：</sys:String>
+    <sys:String x:Key="AboutSoftWareDescription">产品说明：</sys:String>
+    <sys:String x:Key="AboutSoftWareDescriptionInfo">因为NSIS的打包脚本学习曲线陡峭，HM NIS Edit 在生成脚本后，可视化调整比较麻烦，所以在做了这个工具来方便大家,做的不好的请见谅，为爱发电！</sys:String>
+    <sys:String x:Key="AboutSoftWareConnectMe">联系我：</sys:String>
+    <sys:String x:Key="AboutSoftWareCopyRight">版权所有 ©2021-2036 PackageEasy 保留所有权利</sys:String>
+
+
+    <!--设置界面-->
+    <sys:String x:Key="SettingNSIS">NSIS设置</sys:String>
+    <sys:String x:Key="SettingDisplay">显示设置</sys:String>
+    <sys:String x:Key="SettingCompilePath">编译器路径：</sys:String>
+    <sys:String x:Key="SettingNsisHelper">帮助文档：</sys:String>
+    <sys:String x:Key="SettingTheme">主题：</sys:String>
+    <sys:String x:Key="SettingLanguage">语言：</sys:String>
+    
+    <!--cs界面-->
+    <!--主界面cs-->
+    <sys:String x:Key="MainExportScriptTips">是否转换成相对路径？</sys:String>
+    <sys:String x:Key="MainSaveFailTips">保存失败！</sys:String>
+    <sys:String x:Key="MainExportSuccessTips">导出脚本成功！</sys:String>
+    <sys:String x:Key="MainExportFailTips">导出脚本失败！</sys:String>
+    <sys:String x:Key="MainCompileSuccessTips">编译成功！</sys:String>
+    <sys:String x:Key="MainCompileFailTips">编译失败！</sys:String>
+    <sys:String x:Key="MainCompileFailExtTips">编译失败！{0}</sys:String>
+
+    <!--主页界面-->
+    <sys:String x:Key="HomeFileHasOpened">当前文件已打开！</sys:String>
+    <sys:String x:Key="HomeFileNoExist">当前文件{0}不存在,是否从最近打开移除？</sys:String>
+
+
+    <!--基础信息界面cs-->
+    <sys:String x:Key="BaseInfoEnglish">英文</sys:String>
+    <sys:String x:Key="BaseInfoChinese">中文</sys:String>
+    <sys:String x:Key="BaseInfoAppNameNotEmpty">应用程序名不能为空！</sys:String>
+    <sys:String x:Key="BaseInfoFileVersionFormat">文件版本格式必须为X.X.X.X (X为数字)！</sys:String>
+    <sys:String x:Key="BaseInfoOutPutFileName">输出文件名称不能为空！</sys:String>
+    <sys:String x:Key="BaseInfoLicenseFileNotExist">授权不存在！</sys:String>
+    <sys:String x:Key="BaseInfoAppIconNotExist">应用程序图标不存在！</sys:String>
+    <sys:String x:Key="BaseInfoUnInstallAppIconNotExist">卸载图标不存在！</sys:String>
+    <sys:String x:Key="BaseInfoInstallAppIconNotExist">安装包图标不存在！</sys:String>
+    <sys:String x:Key="BaseInfoFaceTypeNo">无</sys:String>
+    <sys:String x:Key="BaseInfoFaceTypeMorden">现代</sys:String>
+    <sys:String x:Key="BaseInfoFaceTypeClassic">古典</sys:String>
+    <sys:String x:Key="BaseInfoLangFormatError">当前语言文件格式不正确,请参考示例！</sys:String>
+    <sys:String x:Key="BaseInfoSaveBefore">请先进行保存！</sys:String>
+
+    <!--基础界面-->
+    <sys:String x:Key="BaseViewNewProject">新工程*</sys:String>
+
+    <!--应用图标信息-->
+    <sys:String x:Key="AppIconStartMenuNameTips">应用程序\"开始菜单\"文件夹名称不能为空！</sys:String>
+    <sys:String x:Key="AppIconTargetDirNotNull">目标文件夹名称不能为空！</sys:String>
+    <sys:String x:Key="AppIconShortcutNotNull">快捷方式名称不能为空！</sys:String>
+    <sys:String x:Key="AppIconTargetFileNotNull">目的文件不能为空！</sys:String>
+    <sys:String x:Key="AppIconSelectDelItem">请选择要删除的项！</sys:String>
+
+    <!--组件信息界面-->
+    <sys:String x:Key="AssemblyNewSection">新建组</sys:String>
+    <sys:String x:Key="AssemblyWorkSpaceNotNull">工作目录为空！</sys:String>
+    <sys:String x:Key="AssemblyChooseSection">请选择组！</sys:String>
+    <sys:String x:Key="AssemblyNullFileList">当前没有文件列表！</sys:String>
+    <sys:String x:Key="AssemblyFileIsNull">当前文件{0}为空！</sys:String>
+    <sys:String x:Key="AssemblyFileNotExist">无法在工作空间找到文件{0}！</sys:String>
+    <sys:String x:Key="AssemblyIgnoreSuccess">忽略成功！</sys:String>
+    <sys:String x:Key="AssemblyUnIgnoreSuccess">取消忽略成功！</sys:String>
+    <sys:String x:Key="AssemblyFileList">文件列表</sys:String>
+    <sys:String x:Key="AssemblyIgnoreFileList">忽略文件列表</sys:String>
+    <sys:String x:Key="AssemblyUnIgnore">移除忽略</sys:String>
+
+    <!--结束界面-->
+    <sys:String x:Key="EndUninstallTip">你确实要完全移除 $(^Name) ，其及所有的组件？</sys:String>
+    <sys:String x:Key="EndUninstallMsg">$(^Name) 已成功地从你的计算机移除。</sys:String>
+    <sys:String x:Key="EndUninstallProcessTips">卸载程序检测到 ${PRODUCT_NAME} 正在运行，是否强行关闭并继续卸载？</sys:String>
+    <sys:String x:Key="EndInstallProcessTips">安装程序检测到 ${PRODUCT_NAME} 正在运行，是否强行关闭并继续安装？</sys:String>
+    <sys:String x:Key="EndApplicationNameIsNotNull">结束页面：程序不能为空！</sys:String>
+    <sys:String x:Key="EndProcessNameIsNotNull">结束页面：检测的进程名不能空！</sys:String>
+    <sys:String x:Key="EndUninstallProcessTipsIsNotNull">结束页面：卸载提示不能为空！</sys:String>
+    <sys:String x:Key="EndInstallProcessTipsIsNotNull">结束页面：程序不能为空！</sys:String>
+    <sys:String x:Key="EndReadMeNameIsNotNull">结束页面：自述文件不能为空！</sys:String>
+
+    <!--多语言界面-->
+    <sys:String x:Key="LangIsNotNull">多语言：所属语言不能为空！</sys:String>
+    <sys:String x:Key="LangAssemblyFileIsNotNull">多语言：目标文件不能为空！</sys:String>
+    <sys:String x:Key="LangTargetPathIsNotNull">多语言：目标根目录不能为空！</sys:String>
+    <sys:String x:Key="LangTargetDirIsNotNull">多语言：目标目录不能为空！</sys:String>
+
+    <!--注册界面-->
+    <sys:String x:Key="RegistryRegistryFormatIsNotNull">注册界面：请填写关联的程序名称！</sys:String>
+    <sys:String x:Key="RegistryPasswordIsNotNull">注册界面：请填写密码！</sys:String>
+
+    <!--工具-->
+    <sys:String x:Key="ToolAbout">关于PackageEasy</sys:String>
+    <sys:String x:Key="ToolPlugInManager">插件设置</sys:String>
+    <sys:String x:Key="ToolScriptControl">脚本预览</sys:String>
+    <sys:String x:Key="ToolSettingControl">设置</sys:String>
+    <sys:String x:Key="ThemeDefault">默认主题</sys:String>
+    <sys:String x:Key="ThemeBlack">黑色主题</sys:String>
+    <sys:String x:Key="SaveSuccess">保存成功！</sys:String>
+    <sys:String x:Key="SaveFail">保存失败！</sys:String>
+    <sys:String x:Key="OpenFileError">打开文件发生错误！</sys:String>
+    <sys:String x:Key="TableNotSave">当前标签 {0} 未保存,是否保存？</sys:String>
+    <sys:String x:Key="Yes">确定</sys:String>
+    <sys:String x:Key="No">否</sys:String>
+    <sys:String x:Key="Cancel">取消</sys:String>
+    <sys:String x:Key="Close">关闭</sys:String>
+    <sys:String x:Key="PasswordBox">密码：</sys:String>
+    <sys:String x:Key="WatingTips">请稍等...</sys:String>
+    <sys:String x:Key="Null">无</sys:String>
+    <sys:String x:Key="SampleChinese">简体中文</sys:String>
+    <sys:String x:Key="English">英文</sys:String>
+    <sys:String x:Key="ProcessCheck">进程检测</sys:String>
+    <sys:String x:Key="FileNoExist">文件不存在！</sys:String>
+    <sys:String x:Key="InstallSuccess">安装成功！</sys:String>
+
+</ResourceDictionary>

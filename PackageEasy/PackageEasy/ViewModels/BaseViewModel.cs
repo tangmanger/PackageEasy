@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using PackageEasy.Common.Data;
+using PackageEasy.Domain.Common;
 using PackageEasy.Helpers;
 using PackageEasy.Models;
 using PackageEasy.Views;
@@ -26,7 +27,7 @@ namespace PackageEasy.ViewModels
             ProjectViewModel projectViewModel = new ProjectViewModel();
             ProjectView projectView = new ProjectView();
             projectView.DataContext = projectViewModel;
-            projectViewModel.ProjectName = "新工程*".GetLangText();
+            projectViewModel.ProjectName = CommonSettings.BaseViewNewProject.GetLangText();
             ViewCaheModel viewCaheModel = new ViewCaheModel();
             viewCaheModel.ProjectKey = projectViewModel.Key;
             viewCaheModel.BaseProjectViewModel = projectViewModel;

@@ -18,10 +18,16 @@ namespace PackageEasy.Services
 
         public event Action<string, string> CreateProject;
         public event Action PreCompile;
+        public event Action LanguageChanged;
 
         public void OnCreateProject(string name, string key)
         {
             CreateProject?.Invoke(name, key);
+        }
+
+        public void OnLanguageChanged()
+        {
+            LanguageChanged?.Invoke();
         }
 
         public void OnPreCompile()

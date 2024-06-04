@@ -4,6 +4,7 @@ using PackageEasy.Common.Data;
 using PackageEasy.Common.Helpers;
 using PackageEasy.Common.Logs;
 using PackageEasy.Domain;
+using PackageEasy.Domain.Common;
 using PackageEasy.Domain.Enums;
 using PackageEasy.Domain.Interfaces;
 using PackageEasy.Domain.Models;
@@ -32,13 +33,6 @@ namespace PackageEasy.ViewModels
         public BaseInfoViewModel(ViewType viewType, string key) : base(viewType, key)
         {
             //WorkSpace = ConfigHelper.Config.WorkSpace;
-            UserFaceList = new List<DescModel<UserFaceType>>
-            {
-                new DescModel<UserFaceType>() { Data = UserFaceType.None, DisplayName = UserFaceType.None.GetDescription() },
-                new DescModel<UserFaceType>() { Data = UserFaceType.Morden, DisplayName = UserFaceType.Morden.GetDescription() },
-                new DescModel<UserFaceType>() { Data = UserFaceType.Classic, DisplayName = UserFaceType.Classic.GetDescription() }
-            };
-            UserFaceSelectItem = UserFaceList.Find(P => P.Data == UserFaceType.Morden) ?? new DescModel<UserFaceType>() { Data = UserFaceType.Morden, DisplayName = UserFaceType.Morden.GetDescription() };
             CompressAlgoList = new List<DescModel<CompressionAlgoType>>()
             {
                 new DescModel<CompressionAlgoType>(){ Data=CompressionAlgoType.None,DisplayName=CompressionAlgoType.None.GetDescription() },
@@ -47,6 +41,36 @@ namespace PackageEasy.ViewModels
                 new DescModel<CompressionAlgoType>(){ Data=CompressionAlgoType.LZMA,DisplayName=CompressionAlgoType.LZMA.GetDescription() }
             };
             ComPressAlgo = CompressAlgoList.Find(p => p.Data == CompressionAlgoType.Zlib) ?? new DescModel<CompressionAlgoType>() { Data = CompressionAlgoType.Zlib, DisplayName = CompressionAlgoType.Zlib.GetDescription() };
+            Init();
+            if (SystemDirList != null)
+                SystemDir = SystemDirList.FirstOrDefault();
+            ButtonType = ButtonType.Classical;
+            InstallList = new List<InstallLanguageModel>()
+            {
+                new InstallLanguageModel(){ LanguageType=LanguageType.En_SH,LanguageName=CommonSettings.BaseInfoEnglish.GetLangText(),Code="English",LanguageDisplayKey="${LANG_ENGLISH}"},
+                new InstallLanguageModel(){ LanguageType=LanguageType.Zh_CN,LanguageName=CommonSettings.BaseInfoChinese.GetLangText(),Code="SimpChinese",LanguageDisplayKey="${LANG_SimpChinese}"},
+            };
+            Service.PreCompile += Service_PreCompile;
+            if (ProjectInfo == null)
+                ProjectInfo = new ProjectInfoModel();
+            BaseInfoModel baseInfoModel = ProjectInfo.BaseInfo;
+            if (baseInfoModel == null)
+                baseInfoModel = new BaseInfoModel();
+        }
+
+        private void Init()
+        {
+            var list = new List<DescModel<UserFaceType>>
+            {
+                new DescModel<UserFaceType>() { Data = UserFaceType.None, DisplayName = UserFaceType.None.GetDescription() },
+                new DescModel<UserFaceType>() { Data = UserFaceType.Morden, DisplayName = UserFaceType.Morden.GetDescription() },
+                new DescModel<UserFaceType>() { Data = UserFaceType.Classic, DisplayName = UserFaceType.Classic.GetDescription() }
+            };
+            if (UserFaceSelectItem == null)
+                UserFaceSelectItem = list.Find(P => P.Data == UserFaceType.Morden) ?? new DescModel<UserFaceType>() { Data = UserFaceType.Morden, DisplayName = UserFaceType.Morden.GetDescription() };
+            else
+                UserFaceSelectItem = list.Find(p => p.Data == UserFaceSelectItem.Data);
+            UserFaceList = list;
             SystemDirList = new List<string>()
             {
                 "$PROGRAMFILES",
@@ -59,21 +83,8 @@ namespace PackageEasy.ViewModels
                 "$SMPROGRAMS",
                 "$QUICKLAUNCH"
             };
-            if (SystemDirList != null)
-                SystemDir = SystemDirList.FirstOrDefault();
-            ButtonType = ButtonType.Classical;
-            InstallList = new List<InstallLanguageModel>()
-            {
-                new InstallLanguageModel(){ LanguageType=LanguageType.En_SH,LanguageName="英文".GetLangText(),Code="English",LanguageDisplayKey="${LANG_ENGLISH}"},
-                new InstallLanguageModel(){ LanguageType=LanguageType.Zh_CN,LanguageName="简体中文".GetLangText(),Code="SimpChinese",LanguageDisplayKey="${LANG_SimpChinese}"},
-            };
-            Service.PreCompile += Service_PreCompile;
-            if (ProjectInfo == null)
-                ProjectInfo = new ProjectInfoModel();
-            BaseInfoModel baseInfoModel = ProjectInfo.BaseInfo;
-            if (baseInfoModel == null)
-                baseInfoModel = new BaseInfoModel();
         }
+
 
 
 
@@ -439,6 +450,30 @@ namespace PackageEasy.ViewModels
 
         #region 方法
 
+        public override void LanguageChanged()
+        {
+            Init();
+            var selected = new List<string>();
+            if (InstallList != null)
+            {
+                selected = InstallList.FindAll(p => p.IsSelected).Select(c => c.Code).ToList();
+            }
+
+            InstallList = new List<InstallLanguageModel>()
+            {
+                new InstallLanguageModel(){ LanguageType=LanguageType.En_SH,LanguageName=CommonSettings.BaseInfoEnglish.GetLangText(),Code="English",LanguageDisplayKey="${LANG_ENGLISH}"},
+                new InstallLanguageModel(){ LanguageType=LanguageType.Zh_CN,LanguageName=CommonSettings.BaseInfoChinese.GetLangText(),Code="SimpChinese",LanguageDisplayKey="${LANG_SimpChinese}"},
+            };
+            foreach (var item in InstallList)
+            {
+                if (selected != null && selected.Exists(c => c == item.Code))
+                {
+                    item.IsSelected = true;
+                }
+
+            }
+        }
+
         public override void Save()
         {
             if (ProjectInfo == null)
@@ -630,7 +665,7 @@ namespace PackageEasy.ViewModels
         {
             if (string.IsNullOrWhiteSpace(ApplicationName))
             {
-                TMessageBox.ShowMsg("", "应用程序名不能为空!");
+                TMessageBox.ShowMsg("", CommonSettings.BaseInfoAppNameNotEmpty);
                 return false;
             }
             if (!string.IsNullOrWhiteSpace(ProductVersion))
@@ -638,39 +673,39 @@ namespace PackageEasy.ViewModels
                 var data = ProductVersion.Split('.').ToList();
                 if (data.Count != 4)
                 {
-                    TMessageBox.ShowMsg("", "文件版本格式必须为X.X.X.X (X为数字)!");
+                    TMessageBox.ShowMsg("", CommonSettings.BaseInfoFileVersionFormat);
                     return false;
                 }
                 int d = 0;
                 if (data.Exists(C => int.TryParse(C, out d) == false))
                 {
-                    TMessageBox.ShowMsg("", "文件版本格式必须为X.X.X.X (X为数字)!");
+                    TMessageBox.ShowMsg("", CommonSettings.BaseInfoFileVersionFormat);
                     return false;
                 }
             }
             if (string.IsNullOrWhiteSpace(AppOutPath))
             {
-                TMessageBox.ShowMsg("", "输出文件名称不能为空!");
+                TMessageBox.ShowMsg("", CommonSettings.BaseInfoOutPutFileName);
                 return false;
             }
             if (IsLicenseChecked && (string.IsNullOrWhiteSpace(ProjectInfo.BaseInfo.LicenseFilePath) || !File.Exists(ProjectInfo.BaseInfo.LicenseFilePath)))
             {
-                TMessageBox.ShowMsg("", "授权不存在!");
+                TMessageBox.ShowMsg("", CommonSettings.BaseInfoLicenseFileNotExist);
                 return false;
             }
             if (!string.IsNullOrWhiteSpace(AppIconPath) && !CheckFileExist(AppIconPath))
             {
-                TMessageBox.ShowMsg("", "应用程序图标不存在!");
+                TMessageBox.ShowMsg("", CommonSettings.BaseInfoAppIconNotExist);
                 return false;
             }
             if (!string.IsNullOrWhiteSpace(UnInstallIconPath) && !CheckFileExist(UnInstallIconPath))
             {
-                TMessageBox.ShowMsg("", "卸载图标不存在!");
+                TMessageBox.ShowMsg("", CommonSettings.BaseInfoUnInstallAppIconNotExist);
                 return false;
             }
             if (!string.IsNullOrWhiteSpace(InstallIconPath) && !CheckFileExist(InstallIconPath))
             {
-                TMessageBox.ShowMsg("", "安装包图标不存在!");
+                TMessageBox.ShowMsg("", CommonSettings.BaseInfoInstallAppIconNotExist);
                 return false;
             }
 
@@ -693,7 +728,7 @@ namespace PackageEasy.ViewModels
             if (string.IsNullOrWhiteSpace(workPath))
             {
                 Log.Write("工作目录为空!");
-                TMessageBox.ShowMsg("", "工作目录为空!");
+                TMessageBox.ShowMsg("", CommonSettings.AssemblyWorkSpaceNotNull);
                 return;
             }
             var str = FileHelper.SeletcedFilePath("json");
@@ -709,7 +744,7 @@ namespace PackageEasy.ViewModels
                 List<LanguageModel> list = File.ReadAllText(str).DeserializeObject<List<LanguageModel>>();
                 if (list == null || list.Count == 0)
                 {
-                    TMessageBox.ShowMsg("", "当前语言文件格式不正确,请参考示例!");
+                    TMessageBox.ShowMsg("", CommonSettings.BaseInfoLangFormatError);
                     return;
                 }
                 ProjectInfo.BaseInfo.DisplayLanguageList = list;
@@ -725,7 +760,7 @@ namespace PackageEasy.ViewModels
             if (string.IsNullOrWhiteSpace(WorkSpace))
             {
                 Log.Write("工作目录为空!");
-                TMessageBox.ShowMsg("", "工作目录为空!");
+                TMessageBox.ShowMsg("", CommonSettings.AssemblyWorkSpaceNotNull);
                 return;
             }
             var str = FileHelper.SeletcedFilePath("ico");
@@ -733,12 +768,12 @@ namespace PackageEasy.ViewModels
             {
                 var icon = (IconType)int.Parse(i);
                 FileInfo fileInfo = new FileInfo(str);
-                var copyPath = Path.Combine(WorkSpace, fileInfo.Name);
+                var copyPath = Path.Combine(ProjectInfo.GetWorkSpace(), fileInfo.Name);
                 if (!File.Exists(copyPath))
                 {
                     File.Copy(str, copyPath, true);
                 }
-                str = copyPath.Replace(WorkSpace, "");
+                str = copyPath.Replace(ProjectInfo.GetWorkSpace(), "");
                 switch (icon)
                 {
                     case IconType.None:
@@ -818,14 +853,14 @@ namespace PackageEasy.ViewModels
                     if (string.IsNullOrWhiteSpace(WorkSpace))
                     {
                         Log.Write("工作目录为空!");
-                        TMessageBox.ShowMsg("", "工作目录为空!");
+                        TMessageBox.ShowMsg("", CommonSettings.AssemblyWorkSpaceNotNull);
                         IsUseRelativePath = false;
                         return;
                     }
                 }
                 if (!File.Exists(ProjectInfo.ExtraInfo.FilePath))
                 {
-                    TMessageBox.ShowMsg("", "请先进行保存!");
+                    TMessageBox.ShowMsg("", CommonSettings.BaseInfoSaveBefore);
                     IsUseRelativePath = false;
                     return;
                 }

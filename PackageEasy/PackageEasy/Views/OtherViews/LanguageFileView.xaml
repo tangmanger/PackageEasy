@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PackageEasy.Views.OtherViews"
-             xmlns:lang="clr-namespace:PackageEasy.Common.Data;assembly=PackageEasy.Common"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -18,7 +17,7 @@
                     <DataGridTemplateColumn Width="100">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate>
-                                <TextBlock Text="选择"  lang:LanguageManager.LangText="选择" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                                <TextBlock d:Text="选择"  Text="{DynamicResource MultiLanguageChoose}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
                             </DataTemplate>
                         </DataGridTemplateColumn.HeaderTemplate>
                         <DataGridTemplateColumn.CellTemplate>
@@ -30,7 +29,7 @@
                     <DataGridTemplateColumn Width="*">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate>
-                                <TextBlock Text="语言"  lang:LanguageManager.LangText="语言" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                                <TextBlock d:Text="语言"  Text="{DynamicResource MultiLanguage}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
                             </DataTemplate>
                         </DataGridTemplateColumn.HeaderTemplate>
                         <DataGridTemplateColumn.CellTemplate>
@@ -42,7 +41,7 @@
                     <DataGridTemplateColumn Width="*">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate>
-                                <TextBlock Text="目标文件"  lang:LanguageManager.LangText="目标文件" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                                <TextBlock d:Text="目标文件"  Text="{DynamicResource MultiLanguageTargetFile}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
                             </DataTemplate>
                         </DataGridTemplateColumn.HeaderTemplate>
                         <DataGridTemplateColumn.CellTemplate>
@@ -54,7 +53,7 @@
                     <DataGridTemplateColumn   MinWidth="100">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate>
-                                <TextBlock Text="目标根目录" Foreground="{DynamicResource DataGridForeground}" lang:LanguageManager.LangText="目标根目录" FontSize="14"></TextBlock>
+                                <TextBlock d:Text="目标根目录" Foreground="{DynamicResource DataGridForeground}" Text="{DynamicResource MultiLanguageTargetRootDir}" FontSize="14"></TextBlock>
                             </DataTemplate>
                         </DataGridTemplateColumn.HeaderTemplate>
                         <DataGridTemplateColumn.CellTemplate>
@@ -72,7 +71,7 @@
                     <DataGridTemplateColumn Width="*">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate>
-                                <TextBlock Text="目标目录"  lang:LanguageManager.LangText="目标目录" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                                <TextBlock d:Text="目标目录" Text="{DynamicResource MultiLanguageTargetDir}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
                             </DataTemplate>
                         </DataGridTemplateColumn.HeaderTemplate>
                         <DataGridTemplateColumn.CellTemplate>
@@ -84,8 +83,8 @@
                 </DataGrid.Columns>
             </DataGrid>
             <WrapPanel Grid.Row="1" Margin="5,5,5,10">
-                <Button Content="添加" Style="{StaticResource CommonButtonStyle}" Command="{Binding AddCommand}" MinWidth="80" Height="30"></Button>
-                <Button Content="删除" Style="{StaticResource CommonButtonStyle}" Command="{Binding DelCommand}" Margin="5,0,0,0" MinWidth="80" Height="30"></Button>
+                <Button d:Content="添加" Content="{DynamicResource MultiLanguageAdd}" Style="{StaticResource CommonButtonStyle}" Command="{Binding AddCommand}" MinWidth="80" Height="30"></Button>
+                <Button d:Content="删除" Content="{DynamicResource MultiLanguageDel}" Style="{StaticResource CommonButtonStyle}" Command="{Binding DelCommand}" Margin="5,0,0,0" MinWidth="80" Height="30"></Button>
             </WrapPanel>
         </Grid>
     </Grid>

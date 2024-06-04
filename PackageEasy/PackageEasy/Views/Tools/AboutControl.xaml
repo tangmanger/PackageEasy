@@ -5,36 +5,35 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PackageEasy.Views.Tools"
              xmlns:controls="clr-namespace:PackageEasy.Controls.Controls;assembly=PackageEasy.Controls"
-             xmlns:lang="clr-namespace:PackageEasy.Common.Data;assembly=PackageEasy.Common"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" >
     <Grid x:Name="grid">
         <StackPanel Orientation="Vertical" Margin="20,10.5,0,0">
-            <TextBlock Text="关于软件" lang:LanguageManager.LangText="关于软件" FontSize="16"></TextBlock>
+            <TextBlock d:Text="关于软件" Text="{DynamicResource AboutSoftWare}" FontSize="16"></TextBlock>
             <StackPanel Orientation="Horizontal" Margin="0,18,0,0">
-                <TextBlock Text="软件名:" lang:LanguageManager.LangText="软件名:" FontSize="14"></TextBlock>
+                <TextBlock d:Text="软件名：" Text="{DynamicResource AboutSoftWareName}" FontSize="14"></TextBlock>
                 <TextBlock Text="PackageEasy" Margin="5,0,0,0" FontSize="14"></TextBlock>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Visibility="Visible">
-                <TextBlock Text="产品版本:" lang:LanguageManager.LangText="产品版本:" FontSize="14"></TextBlock>
+                <TextBlock d:Text="产品版本：" Text="{DynamicResource AboutSoftWareVersion}"  FontSize="14"></TextBlock>
                 <TextBlock Text="{Binding Version}" Margin="5,0,0,0" FontSize="14"></TextBlock>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Visibility="Visible" >
-                <TextBlock Text="产品说明:" lang:LanguageManager.LangText="产品说明:" FontSize="14"></TextBlock>
-                <TextBlock  TextWrapping="WrapWithOverflow" Margin="6,0,0,0" MaxWidth="529"  Text="因为NSIS的打包脚本学习曲线陡峭，HM NIS Edit 在生成脚本后，可视化调整比较麻烦，所以在做了这个工具来方便大家,做的不好的请见谅，为爱发电!"
-                          lang:LanguageManager.LangText="因为NSIS的打包脚本学习曲线陡峭，HM NIS Edit 在生成脚本后，可视化调整比较麻烦，所以在做了这个工具来方便大家,做的不好的请见谅，为爱发电!" FontSize="14"></TextBlock>
+                <TextBlock d:Text="产品说明:" Text="{DynamicResource AboutSoftWareDescription}" FontSize="14"></TextBlock>
+                <TextBlock  TextWrapping="WrapWithOverflow" Margin="6,0,0,0" MaxWidth="450"  d:Text="因为NSIS的打包脚本学习曲线陡峭，HM NIS Edit 在生成脚本后，可视化调整比较麻烦，所以在做了这个工具来方便大家,做的不好的请见谅，为爱发电！"
+                         Text="{DynamicResource AboutSoftWareDescriptionInfo}" FontSize="14"></TextBlock>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                <TextBlock Text="GitHub:" lang:LanguageManager.LangText="GitHub:" FontSize="14"></TextBlock>
+                <TextBlock Text="GitHub:"  FontSize="14"></TextBlock>
                 <TextBlock FontSize="14" Margin="5,0,0,0">
                   <Hyperlink NavigateUri="https://github.com/tangmanger/PackageEasy" Command="{Binding NavigateCommand}" CommandParameter="{Binding Path=NavigateUri,RelativeSource={RelativeSource Mode=Self}}">PackageEasy</Hyperlink>
                 </TextBlock>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Visibility="Visible">
-                <TextBlock Text="联系我:" lang:LanguageManager.LangText="联系我:" FontSize="14"></TextBlock>
+                <TextBlock d:Text="联系我：" Text="{DynamicResource AboutSoftWareConnectMe}" FontSize="14"></TextBlock>
                 <Image  Margin="5,0,0,0" Width="100" Height="100" Source="/Resources/Images/wx.jpg" ></Image>
             </StackPanel>
-            <TextBlock Text="版权所有 ©2021-2036 PackageEasy 保留所有权利" lang:LanguageManager.LangText="版权所有 ©2021-2036 PackageEasy 保留所有权利" Margin="0,10,0,0" FontSize="14"></TextBlock>
+            <TextBlock d:Text="版权所有 ©2021-2036 PackageEasy 保留所有权利" Text="{DynamicResource AboutSoftWareCopyRight}" Margin="0,10,0,0" FontSize="14"></TextBlock>
 
         </StackPanel>
     </Grid>

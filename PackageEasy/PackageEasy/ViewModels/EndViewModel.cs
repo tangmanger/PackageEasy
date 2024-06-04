@@ -1,6 +1,7 @@
 ﻿using PackageEasy.Common;
 using PackageEasy.Common.Data;
 using PackageEasy.Common.Helpers;
+using PackageEasy.Domain.Common;
 using PackageEasy.Domain.Enums;
 using PackageEasy.Domain.Interfaces;
 using PackageEasy.Domain.Models;
@@ -24,10 +25,10 @@ namespace PackageEasy.ViewModels
 
         public EndViewModel(ViewType viewType, string key) : base(viewType, key)
         {
-            UninstallTip = "你确实要完全移除 $(^Name) ，其及所有的组件？";
-            UninstallMsg = "$(^Name) 已成功地从你的计算机移除。";
-            UninstallProcessTips = "卸载程序检测到 ${PRODUCT_NAME} 正在运行，是否强行关闭并继续卸载?";
-            InstallProcessTips = "安装程序检测到 ${PRODUCT_NAME} 正在运行，是否强行关闭并继续安装?";
+            UninstallTip = CommonSettings.EndUninstallTip.GetLangText();
+            UninstallMsg = CommonSettings.EndUninstallMsg.GetLangText();
+            UninstallProcessTips = CommonSettings.EndUninstallProcessTips.GetLangText(); 
+            InstallProcessTips = CommonSettings.EndInstallProcessTips.GetLangText(); 
         }
 
         #region 属性
@@ -258,32 +259,32 @@ namespace PackageEasy.ViewModels
 
         public override bool ValidateData()
         {
-            if ( string.IsNullOrWhiteSpace(ApplicationName))
+            if (string.IsNullOrWhiteSpace(ApplicationName))
             {
-                TMessageBox.ShowMsg("结束页面：程序不能为空!");
+                TMessageBox.ShowMsg(CommonSettings.EndApplicationNameIsNotNull);
                 return false;
             }
             if (IsEnableProcess)
             {
                 if (string.IsNullOrWhiteSpace(ProcessName))
                 {
-                    TMessageBox.ShowMsg("检测的进程名不能空!");
+                    TMessageBox.ShowMsg(CommonSettings.EndProcessNameIsNotNull);
                     return false;
                 }
                 if (string.IsNullOrWhiteSpace(UninstallProcessTips))
                 {
-                    TMessageBox.ShowMsg("卸载提示不能为空!");
+                    TMessageBox.ShowMsg(CommonSettings.EndUninstallProcessTipsIsNotNull);
                     return false;
                 }
-                if (string.IsNullOrWhiteSpace(UninstallProcessTips))
+                if (string.IsNullOrWhiteSpace(InstallProcessTips))
                 {
-                    TMessageBox.ShowMsg("安装提示不能为空!");
+                    TMessageBox.ShowMsg(CommonSettings.EndInstallProcessTipsIsNotNull);
                     return false;
                 }
             }
             if (IsShowReadme && string.IsNullOrWhiteSpace(ReadMeName))
             {
-                TMessageBox.ShowMsg("自述文件不能为空!");
+                TMessageBox.ShowMsg(CommonSettings.EndReadMeNameIsNotNull);
                 return false;
             }
             return base.ValidateData();

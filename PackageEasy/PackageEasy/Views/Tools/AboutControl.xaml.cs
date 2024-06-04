@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using PackageEasy.Common.Data;
 using PackageEasy.Controls.Controls;
+using PackageEasy.Domain.Common;
 using PackageEasy.Helpers;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,7 @@ namespace PackageEasy.Views.Tools
             Version = CacheDataHelper.Version;
         }
 
-        public override string Description => "关于PackageEasy".GetLangText();
+        public override string Description => CommonSettings.ToolAbout.GetLangText();
 
         public override bool ShowSureButton => false;
         public override void Load()

@@ -11,7 +11,7 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="139"></ColumnDefinition>
+            <ColumnDefinition MinWidth="139" Width="AUTO" ></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Border BorderBrush="{DynamicResource borderBrush}" BorderThickness="0.5,0,0,0" Grid.Column="1"></Border>
@@ -25,12 +25,12 @@
                 <RowDefinition Height="auto"></RowDefinition>
                 <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
-            <RadioButton Style="{StaticResource SelecetRadioButtonStyle}" IsChecked="True" GroupName="tz"  Margin="4,12,4,0" Content="基础信息" lang:LanguageManager.LangText="基础信息"  Command="{Binding ViewCommand}" CommandParameter="2" x:Name="opreate"  Height="48"></RadioButton>
-            <RadioButton Style="{StaticResource SelecetRadioButtonStyle}"  GroupName="tz"   Grid.Row="1"  Margin="4,12,4,0" Content="组件信息" lang:LanguageManager.LangText="组件信息"  Command="{Binding ViewCommand}" CommandParameter="3"   Height="48"></RadioButton>
-            <RadioButton Style="{StaticResource SelecetRadioButtonStyle}"  GroupName="tz"    Grid.Row="2" Margin="4,12,4,0" Content="应用程序图标" lang:LanguageManager.LangText="应用程序图标"  Command="{Binding ViewCommand}" CommandParameter="4"   Height="48"></RadioButton>
-            <RadioButton Style="{StaticResource SelecetRadioButtonStyle}"  GroupName="tz"    Grid.Row="3" Margin="4,12,4,0" Content="注册表" lang:LanguageManager.LangText="注册表"  Command="{Binding ViewCommand}" CommandParameter="6"   Height="48"></RadioButton>
-            <RadioButton Style="{StaticResource SelecetRadioButtonStyle}"  GroupName="tz"    Grid.Row="4" Margin="4,12,4,0" Content="多语言" lang:LanguageManager.LangText="多语言"  Command="{Binding ViewCommand}" CommandParameter="7"   Height="48"></RadioButton>
-            <RadioButton Style="{StaticResource SelecetRadioButtonStyle}"  GroupName="tz"    Grid.Row="5" Margin="4,12,4,0" Content="结束界面" lang:LanguageManager.LangText="结束界面"  Command="{Binding ViewCommand}" CommandParameter="5"   Height="48"></RadioButton>
+            <RadioButton  Style="{StaticResource SelecetRadioButtonStyle}" IsChecked="True" GroupName="tz"  Margin="4,12,4,0" d:Content="基础信息" Content="{DynamicResource ProjectBaseInfo}"  Command="{Binding ViewCommand}" CommandParameter="2" x:Name="opreate"  Height="48"></RadioButton>
+            <RadioButton Style="{StaticResource SelecetRadioButtonStyle}"  GroupName="tz"   Grid.Row="1"  Margin="4,12,4,0" d:Content="组件信息" Content="{DynamicResource ProjectAssemblyInfo}"  Command="{Binding ViewCommand}" CommandParameter="3"   Height="48"></RadioButton>
+            <RadioButton Style="{StaticResource SelecetRadioButtonStyle}"  GroupName="tz"    Grid.Row="2" Margin="4,12,4,0" d:Content="应用程序图标" Content="{DynamicResource ProjectAppIcon}"  Command="{Binding ViewCommand}" CommandParameter="4"   Height="48"></RadioButton>
+            <RadioButton Style="{StaticResource SelecetRadioButtonStyle}"  GroupName="tz"    Grid.Row="3" Margin="4,12,4,0" d:Content="注册表" Content="{DynamicResource ProjectRegistry}"  Command="{Binding ViewCommand}" CommandParameter="6"   Height="48"></RadioButton>
+            <RadioButton Style="{StaticResource SelecetRadioButtonStyle}"  GroupName="tz"    Grid.Row="4" Margin="4,12,4,0" d:Content="多语言" Content="{DynamicResource ProjectLanguage}"  Command="{Binding ViewCommand}" CommandParameter="7"   Height="48"></RadioButton>
+            <RadioButton Style="{StaticResource SelecetRadioButtonStyle}"  GroupName="tz"    Grid.Row="5" Margin="4,12,4,0" d:Content="结束界面" Content="{DynamicResource ProjectEnd}"  Command="{Binding ViewCommand}" CommandParameter="5"   Height="48"></RadioButton>
         </Grid>
         <ContentControl Grid.Column="1" Content="{Binding WorkView}"></ContentControl>
     </Grid>

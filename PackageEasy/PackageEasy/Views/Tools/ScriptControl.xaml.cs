@@ -1,5 +1,6 @@
 ﻿using PackageEasy.Common.Data;
 using PackageEasy.Controls.Controls;
+using PackageEasy.Domain.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -40,7 +41,7 @@ namespace PackageEasy.Views.Tools
             }
             return document;
         }
-        public override string Description => "脚本预览".GetLangText();
+        public override string Description => CommonSettings.ToolScriptControl.GetLangText();
 
         public override void Load()
         {

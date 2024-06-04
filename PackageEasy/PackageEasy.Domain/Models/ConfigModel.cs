@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PackageEasy.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,5 +19,9 @@ namespace PackageEasy.Domain.Models
         /// 主题id
         /// </summary>
         public string ThemeId { get; set; }
+        /// <summary>
+        /// 多语言
+        /// </summary>
+        public int Lang { get; set; } =0;
     }
 }

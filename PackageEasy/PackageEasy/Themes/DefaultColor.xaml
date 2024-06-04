@@ -15,6 +15,8 @@
     <!--button-->
     <SolidColorBrush x:Key="CommonButtonBackgroundBrush" Color="White"></SolidColorBrush>
     <SolidColorBrush x:Key="CommonButtonBorderBrush" Color="LightGray"></SolidColorBrush>
+    <SolidColorBrush x:Key="CommonButtonForeground" Color="Black"></SolidColorBrush>
+
     <!--SelecetRadioButtonStyle-->
     <SolidColorBrush x:Key="selecetRadioIsCheckedForeground" Color="#5E70A7" />
     <SolidColorBrush x:Key="selecetRadioIsCheckedBackground" Color="#D9E6F6" />
@@ -35,6 +37,7 @@
     <SolidColorBrush x:Key="commonTextBoxBackground" Color="#FFFFFF" />
     <SolidColorBrush x:Key="commonTextBoxBorderBrush" Color="#26000000" />
     <SolidColorBrush x:Key="commonDisableTextBoxBackground" Color="#4C919191"></SolidColorBrush>
+    <SolidColorBrush x:Key="commonTextBoxForeground" Color="Black"></SolidColorBrush>
     <!--ResultLightView-->
     <SolidColorBrush x:Key="resultLightViewForeground" Color="#26000000"></SolidColorBrush>
     <SolidColorBrush x:Key="DataGridForeground" Color="Black"></SolidColorBrush>
@@ -69,4 +72,18 @@
     <!--PasswordStyle-->
     <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
     <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
+    <!--基础页面颜色-->
+    <SolidColorBrush x:Key="baseInfoForeground" Color="Black"></SolidColorBrush>
+
+    <!--TableControl-->
+    <SolidColorBrush x:Key="TabItem.Foreground" Color="White"></SolidColorBrush>
+    <SolidColorBrush x:Key="TabItem.Background" Color="#3B4F81"/>
+    <SolidColorBrush x:Key="TabItem.MouseOver.Background" Color="#BBC6F1">
+    </SolidColorBrush>
+    <SolidColorBrush x:Key="TabItem.MouseOver.Border" Color="#BBC6F1"/>
+    <SolidColorBrush x:Key="TabItem.Selected.Foreground" Color="Black"/>
+    <SolidColorBrush x:Key="TabItem.Selected.Background" Color="#F5CC84"/>
+    <SolidColorBrush x:Key="TabItem.Selected.Border" Color="Transparent"/>
+    <SolidColorBrush x:Key="TabItem.Disabled.Background" Color="#3B4F81"/>
+    <SolidColorBrush x:Key="TabItem.Disabled.Border" Color="Transparent"/>
 </ResourceDictionary>

@@ -19,7 +19,7 @@ namespace PackageEasy.NSIS
         {
             throw new NotImplementedException();
         }
-        public  string GetWorkSpace( ProjectInfoModel projectInfo)
+        public string GetWorkSpace(ProjectInfoModel projectInfo)
         {
             if (!projectInfo.BaseInfo.IsUseRelativePath) return projectInfo.BaseInfo.WorkSpace;
 
@@ -317,6 +317,7 @@ namespace PackageEasy.NSIS
                                 sectionDic.Add(sec, item.AssemblyDescription);
                             sectionCheckDic.Add(sec, item.IsAutoSelected);
                             var files = item.FileList.OrderBy(p => p.IsNeedInstall).OrderBy(p => p.IsNeedQuietInstall).ToList();
+                            int fileIndex = 0;
                             foreach (var file in files)
                             {
                                 if (file.IsNoNeedCopy) continue;
@@ -345,15 +346,34 @@ namespace PackageEasy.NSIS
 
                                 if (currentDirectory != dirPath)
                                 {
-                                    delDirs.Add(dirPath);
+                                    if (!file.IsNoNeedDelete)
+                                        delDirs.Add(dirPath);
                                     currentDirectory = dirPath;
                                     list.Add($"  SetOutPath \"{dirPath}\"");
                                 }
                                 var path = GetWorkSpace(projectInfoModel) + file.FilePath;
                                 if (!file.IsDirectory)
-                                    //    list.Add($"  CreateDirectory  \"{path}\"");
-                                    //else
-                                    list.Add($"  File \"{path}\"");
+                                {
+                                    string fileFond = $"fileFond{fileIndex}";
+                                    string fileNotFond= $"fileNotFond{fileIndex}";
+                                    string done = $"done{fileIndex}";
+                                    if (file.IsExistNoNeedCopy)
+                                    {
+                                        var filePathExist =  $"{dirPath}" + file.FilePath;
+                                        list.Add($"  StrCpy $0 {filePathExist}");
+                                        list.Add("  IfFileExists $0 " + fileFond+ $" {fileNotFond}");
+                                        list.Add($"  {fileFond}:");
+                                        list.Add($"  Goto {done}");
+                                        list.Add($"  {fileNotFond}:");
+                                        list.Add($"  File \"{path}\"");
+                                        list.Add($"  {done}:");
+                                    }
+                                    else
+                                    {
+                                        list.Add($"  File \"{path}\"");
+                                    }
+                                    fileIndex++;
+                                }
                                 FileInfo fileInfo = new FileInfo(path);
                                 if (file.IsNeedInstall)
                                 {
@@ -683,6 +703,13 @@ namespace PackageEasy.NSIS
                     list.Add("  endding:");
                     list.Add("  nsProcess::_Unload");
                 }
+                else
+                {
+                    list.Add("  GoTo endding");
+                    list.Add("  stopit:");
+                    list.Add("  Abort");
+                    list.Add("  endding:");
+                }
                 list.Add("FunctionEnd");
                 list.Add(";卸载开始");
                 list.Add("Section Uninstall");
@@ -701,8 +728,8 @@ namespace PackageEasy.NSIS
 
                             foreach (var file in item.FileList)
                             {
-
-                                list.Add($" Delete \"{file.TargetPath.DisplayName}{file.FilePath}\"");
+                                if (!file.IsNoNeedDelete)
+                                    list.Add($" Delete \"{file.TargetPath.DisplayName}{file.FilePath}\"");
 
                             }
                             count++;

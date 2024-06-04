@@ -54,7 +54,7 @@ namespace PackageEasy.Helpers
         {
             get
             {
-                return "1.0.4";
+                return "1.0.5";
             }
         }
 
@@ -62,7 +62,7 @@ namespace PackageEasy.Helpers
         {
             get
             {
-                return "20240330105358";
+                return "20240604235807";
             }
         }
         /// <summary>

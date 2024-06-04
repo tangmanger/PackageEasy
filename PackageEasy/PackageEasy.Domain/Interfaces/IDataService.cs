@@ -18,6 +18,10 @@ namespace PackageEasy.Domain.Interfaces
         /// </summary>
         string ProjectKey { get; set; }
         /// <summary>
+        /// 语言变化
+        /// </summary>
+        event Action LanguageChanged;
+        /// <summary>
         /// 编译前事件
         /// </summary>
         event Action PreCompile;
@@ -35,5 +39,10 @@ namespace PackageEasy.Domain.Interfaces
         /// 编译前事件
         /// </summary>
         void OnPreCompile();
+
+        /// <summary>
+        /// 多语言变化
+        /// </summary>
+        void OnLanguageChanged();
     }
 }

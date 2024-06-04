@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Style TargetType="{x:Type MenuItem}">
+    <Style x:Key="BaseMenuItemStyle" TargetType="{x:Type MenuItem}">
         <Setter Property="MinWidth" Value="65"></Setter>
         <Setter Property="MinHeight" Value="23"></Setter>
         <Setter Property="FontSize" Value="14"></Setter>
@@ -111,6 +111,13 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+    <Style   TargetType="{x:Type MenuItem}" BasedOn="{StaticResource BaseMenuItemStyle}"/>
+
+    <Style  x:Key="menuContextStyle"  BasedOn="{StaticResource BaseMenuItemStyle}" TargetType="{x:Type MenuItem}">
+
+        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}"/>
+       
     </Style>
     <Style x:Key="sep" TargetType="{x:Type Separator}">
         <Setter Property="Margin" Value="0,3" />

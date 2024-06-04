@@ -25,6 +25,7 @@ using System.IO;
 using CommunityToolkit.Mvvm.DependencyInjection;
 using System.ComponentModel;
 using PackageEasy.Domain.Models;
+using PackageEasy.Domain.Common;
 
 namespace PackageEasy
 {
@@ -63,8 +64,9 @@ namespace PackageEasy
             CommandBindings.Add(new CommandBinding(SystemCommands.MinimizeWindowCommand, MinimizeExecute));
             NavigationHelper.GoTo(ViewType.Home);
             var currentTheme = ThemeHelper.Themes.Find(p => p.ThemeId == ConfigHelper.Config.ThemeId);
-            ThemeHelper.UpdateTheme(currentTheme ?? new ThemeModel());
-
+            ThemeHelper.UpdateTheme(currentTheme ?? new ThemeModel() { ThemeId = "default", ThemeName = "DefaultColor.xaml" });
+            var currentLang = LanguageHelper.LanguageTypes.Find(p => p.Id == ConfigHelper.Config.Lang);
+            LanguageHelper.SetLangType(currentLang??new LanguageTypeModel() { Id = 0, DisplayName = CommonSettings.SampleChinese, FilePath = "Zh-CN.xaml" });
 
         }
 
@@ -133,7 +135,7 @@ namespace PackageEasy
                         if (CacheDataHelper.FileOpenDic.ContainsValue(CacheDataHelper.OpenPath))
                         {
 
-                            TMessageBox.ShowMsg("", "当前文件已打开!");
+                            TMessageBox.ShowMsg("", CommonSettings.HomeFileHasOpened);
                             CacheDataHelper.OpenPath = string.Empty;
                             return IntPtr.Zero;
                         }

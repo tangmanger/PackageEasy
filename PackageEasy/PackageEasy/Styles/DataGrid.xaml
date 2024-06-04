@@ -113,6 +113,9 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="#D9E6F6"/>
             </Trigger>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="#FF9FC7F7"/>
+            </Trigger>
         </Style.Triggers>
     </Style>
 

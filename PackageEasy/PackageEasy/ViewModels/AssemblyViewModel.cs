@@ -4,11 +4,14 @@ using PackageEasy.Common.Data;
 using PackageEasy.Common.Helpers;
 using PackageEasy.Common.Logs;
 using PackageEasy.Domain;
+using PackageEasy.Domain.Common;
 using PackageEasy.Domain.Enums;
 using PackageEasy.Domain.Interfaces;
 using PackageEasy.Domain.Models;
 using PackageEasy.Domain.Models.SaveModel;
 using PackageEasy.Enums;
+using PackageEasy.ViewModels.Dialogs;
+using PackageEasy.Views.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -49,6 +52,7 @@ namespace PackageEasy.ViewModels
 
 
         #region 属性
+
         AssemblyInfoModel assemblyInfoModel = new AssemblyInfoModel();
 
         List<AssemblyFileModel> allFileList = new List<AssemblyFileModel>();
@@ -57,6 +61,14 @@ namespace PackageEasy.ViewModels
         private List<AssemblyFileModel> fileList;
         private bool isAllowChoose;
         private bool isShow;
+        private bool isAllChecked;
+        private bool isExe;
+        private bool install;
+        private bool quietInstall;
+        private bool isExistNoNeedCopy;
+        private bool isNoNeedCopy;
+        private bool isNoNeedDelete;
+        private List<AssemblyFileModel> ignoreFileList;
 
         /// <summary>
         /// 组件信息
@@ -79,6 +91,10 @@ namespace PackageEasy.ViewModels
             set
             {
                 fileList = value;
+                if (value != null)
+                {
+                    IsAllChecked = !value.Exists(f => f.IsSelected == false);
+                }
                 OnPropertyChanged();
             }
         }
@@ -117,10 +133,141 @@ namespace PackageEasy.ViewModels
             }
         }
 
+        /// <summary>
+        /// 全选
+        /// </summary>
+        public bool IsAllChecked
+        {
+            get => isAllChecked;
+            set
+            {
+                isAllChecked = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// 是否是exe
+        /// </summary>
+        public bool IsExe
+        {
+            get => isExe;
+            set
+            {
+                isExe = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// 安装
+        /// </summary>
+        public bool Install
+        {
+            get => install;
+            set
+            {
+                install = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// 静默安装
+        /// </summary>
+        public bool QuietInstall
+        {
+            get => quietInstall;
+            set
+            {
+                quietInstall = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// 存在则不复制
+        /// </summary>
+        public bool IsExistNoNeedCopy
+        {
+            get => isExistNoNeedCopy;
+            set
+            {
+                isExistNoNeedCopy = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// 不复制
+        /// </summary>
+        public bool IsNoNeedCopy
+        {
+            get => isNoNeedCopy;
+            set
+            {
+                isNoNeedCopy = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// 卸载后不删除
+        /// </summary>
+        public bool IsNoNeedDelete
+        {
+            get => isNoNeedDelete;
+            set
+            {
+                isNoNeedDelete = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// 忽略文件列表
+        /// </summary>
+        public List<AssemblyFileModel> IgnoreFileList
+        {
+            get => ignoreFileList;
+            set
+            {
+                ignoreFileList = value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         #region 命令
 
+        /// <summary>
+        /// 全选
+        /// </summary>
+
+        public RelayCommand FileAllCheckCommand => new RelayCommand(() =>
+        {
+            if (FileList != null)
+            {
+                foreach (var file in FileList)
+                {
+                    file.IsSelected = IsAllChecked;
+                }
+            }
+
+        });
+
+        /// <summary>
+        /// 单个文件选择
+        /// </summary>
+        public RelayCommand FileCheckCommand => new RelayCommand(() =>
+        {
+
+            if (FileList != null)
+            {
+                IsAllChecked = !FileList.Exists(c => c.IsSelected == false);
+            }
+        });
 
         public RelayCommand AssemblyMenuCommand => new RelayCommand(() =>
         {
@@ -137,7 +284,7 @@ namespace PackageEasy.ViewModels
             {
                 id = AssemblyList.Max(c => c.AssemblyId) + 1;
             }
-            AssemblyList.Add(new AssemblyModel() { AssemblyId = id, IsAutoSelected = true, AssemblyName = "新建组".GetLangText() });
+            AssemblyList.Add(new AssemblyModel() { AssemblyId = id, IsAutoSelected = true, AssemblyName = CommonSettings.AssemblyNewSection.GetLangText() });
             AssemblyList = new List<AssemblyModel>(AssemblyList);
         });
 
@@ -158,7 +305,20 @@ namespace PackageEasy.ViewModels
         {
             var s = AssemblyList.Find(p => p.IsSelected);
             if (s != null)
+            {
                 FileList = s.FileList;
+                IgnoreFileList = s.IgnoreFileList;
+            }
+        });
+
+
+        public RelayCommand<AssemblyModel> ShowDetailCommand => new RelayCommand<AssemblyModel>((s) =>
+        {
+            AssemblyFilesDialog assemblyFiles = new AssemblyFilesDialog();
+            AssemblyFilesViewModel assemblyFileModel = new AssemblyFilesViewModel(s.FileList, TargetDirList);
+            assemblyFiles.DataContext = assemblyFileModel;
+            assemblyFiles.ShowDialog();
+
         });
 
         /// <summary>
@@ -169,16 +329,17 @@ namespace PackageEasy.ViewModels
             if (string.IsNullOrWhiteSpace(ProjectInfo.GetWorkSpace()))
             {
                 Log.Write("工作目录为空!");
-                TMessageBox.ShowMsg("", "工作目录为空!");
+                TMessageBox.ShowMsg("", CommonSettings.AssemblyWorkSpaceNotNull);
                 return;
             }
             var currentAssembly = AssemblyList.Find(p => p.IsSelected == true);
             if (currentAssembly == null)
             {
-                TMessageBox.ShowMsg("", "请选择组!");
+                TMessageBox.ShowMsg("", CommonSettings.AssemblyChooseSection);
                 return;
             }
-
+            if (currentAssembly.IgnoreFileList == null)
+                currentAssembly.IgnoreFileList = new List<AssemblyFileModel>();
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
             var result = folderBrowserDialog.ShowDialog();
             if (result == DialogResult.OK || result == DialogResult.Yes)
@@ -207,6 +368,8 @@ namespace PackageEasy.ViewModels
                         continue;
                         assemblyFileModels.Remove(current);
                     }
+                    if (currentAssembly.IgnoreFileList.Exists(c => c.FilePath == assemblyFileModel.FilePath))
+                        continue;
                     assemblyFileModels.Add(assemblyFileModel);
                 }
             }
@@ -223,21 +386,22 @@ namespace PackageEasy.ViewModels
             if (string.IsNullOrWhiteSpace(ProjectInfo.GetWorkSpace()))
             {
                 Log.Write("工作目录为空!");
-                TMessageBox.ShowMsg("", "工作目录为空!");
+                TMessageBox.ShowMsg("", CommonSettings.AssemblyWorkSpaceNotNull);
                 return;
             }
             var currentAssembly = AssemblyList.Find(p => p.IsSelected == true);
             if (currentAssembly == null)
             {
-                TMessageBox.ShowMsg("", "请选择组!");
+                TMessageBox.ShowMsg("", CommonSettings.AssemblyChooseSection);
                 return;
             }
-
+            if (currentAssembly.IgnoreFileList == null)
+                currentAssembly.IgnoreFileList = new List<AssemblyFileModel>();
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
             var result = folderBrowserDialog.ShowDialog();
             if (result == DialogResult.OK || result == DialogResult.Yes)
             {
-                
+
                 if (!Directory.Exists(folderBrowserDialog.SelectedPath))
                 {
                     return;
@@ -301,6 +465,8 @@ namespace PackageEasy.ViewModels
                         continue;
                         assemblyFileModels.Remove(current);
                     }
+                    if (currentAssembly.IgnoreFileList.Exists(c => c.FilePath == assemblyFileModel.FilePath))
+                        continue;
                     assemblyFileModels.Add(assemblyFileModel);
                 }
             }
@@ -316,15 +482,17 @@ namespace PackageEasy.ViewModels
             if (string.IsNullOrWhiteSpace(ProjectInfo.GetWorkSpace()))
             {
                 Log.Write("工作目录为空!");
-                TMessageBox.ShowMsg("", "工作目录为空!");
+                TMessageBox.ShowMsg("", CommonSettings.AssemblyWorkSpaceNotNull);
                 return;
             }
             var currentAssembly = AssemblyList.Find(p => p.IsSelected == true);
             if (currentAssembly == null)
             {
-                TMessageBox.ShowMsg("", "请选择组!");
+                TMessageBox.ShowMsg("", CommonSettings.AssemblyChooseSection);
                 return;
             }
+            if (currentAssembly.IgnoreFileList == null)
+                currentAssembly.IgnoreFileList = new List<AssemblyFileModel>();
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
             var result = folderBrowserDialog.ShowDialog();
             if (result == DialogResult.OK || result == DialogResult.Yes)
@@ -335,6 +503,8 @@ namespace PackageEasy.ViewModels
                 }
                 if (currentAssembly.FileList == null)
                     currentAssembly.FileList = new List<AssemblyFileModel>();
+                if (currentAssembly.IgnoreFileList == null)
+                    currentAssembly.IgnoreFileList = new List<AssemblyFileModel>();
                 var files = GetFiles(folderBrowserDialog.SelectedPath);
                 List<AssemblyFileModel> assemblyFileModels = currentAssembly.FileList;
                 currentAssembly.SelectDir = folderBrowserDialog.SelectedPath;
@@ -369,6 +539,8 @@ namespace PackageEasy.ViewModels
                         continue;
                         assemblyFileModels.Remove(current);
                     }
+                    if (currentAssembly.IgnoreFileList.Exists(c => c.FilePath == assemblyFileModel.FilePath))
+                        continue;
                     assemblyFileModels.Add(assemblyFileModel);
                 }
 
@@ -387,13 +559,13 @@ namespace PackageEasy.ViewModels
             if (string.IsNullOrWhiteSpace(ProjectInfo.GetWorkSpace()))
             {
                 Log.Write("工作目录为空!");
-                TMessageBox.ShowMsg("", "工作目录为空!");
+                TMessageBox.ShowMsg("", CommonSettings.AssemblyWorkSpaceNotNull);
                 return;
             }
             var currentAssembly = AssemblyList.Find(p => p.IsSelected == true);
             if (currentAssembly == null)
             {
-                TMessageBox.ShowMsg("", "请选择组!");
+                TMessageBox.ShowMsg("", CommonSettings.AssemblyChooseSection);
                 return;
             }
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -442,7 +614,7 @@ namespace PackageEasy.ViewModels
         {
             if (FileList == null || FileList.Count == 0)
             {
-                TMessageBox.ShowMsg("当前没有文件列表!");
+                TMessageBox.ShowMsg(CommonSettings.AssemblyNullFileList);
                 return;
             }
             List<AssemblyFileModel> files = new List<AssemblyFileModel>();
@@ -464,6 +636,156 @@ namespace PackageEasy.ViewModels
             {
                 s.FileList = FileList;
             }
+        });
+
+        /// <summary>
+        /// 打开菜单
+        /// </summary>
+        public RelayCommand OpenMenuCommand => new RelayCommand(() =>
+        {
+            if (FileList != null)
+            {
+                var selected = FileList.FindAll(f => f.IsSelected);
+                if (selected != null && selected.Count > 0)
+                {
+                    IsExe = !selected.Exists(c => c.IsExe == false);
+                    Install = !selected.Exists(c => c.IsNeedInstall == false);
+                    QuietInstall = !selected.Exists(c => c.IsNeedQuietInstall == false);
+                    IsExistNoNeedCopy = !selected.Exists(c => c.IsExistNoNeedCopy == false);
+                    IsNoNeedCopy = !selected.Exists(c => c.IsNoNeedCopy == false);
+                    IsNoNeedDelete = !selected.Exists(c => c.IsNoNeedDelete == false);
+                    return;
+                }
+
+            }
+            IsExe = false;
+            Install = false;
+            QuietInstall = false;
+            IsExistNoNeedCopy = false;
+            IsNoNeedDelete = false;
+            IsNoNeedCopy = false;
+        });
+
+        /// <summary>
+        /// 设置安装方式
+        /// </summary>
+        public RelayCommand<FileMenuOperateType> SetMenuCommand => new RelayCommand<FileMenuOperateType>((s) =>
+        {
+            if (FileList != null)
+            {
+                var selected = FileList.FindAll(f => f.IsSelected);
+                if (selected == null || selected.Count == 0) return;
+                if (s == FileMenuOperateType.Ignore)
+                {
+                    var currentAssembly = AssemblyList.Find(p => p.IsSelected == true);
+                    if (currentAssembly == null) return;
+                    if (currentAssembly.IgnoreFileList == null)
+                        currentAssembly.IgnoreFileList = new List<AssemblyFileModel>();
+                    foreach (var item in selected)
+                    {
+                        if (currentAssembly.IgnoreFileList.Exists(c => c.FilePath == item.FilePath))
+                        {
+                            continue;
+                        }
+                        currentAssembly.IgnoreFileList.Add(item);
+                    }
+                    foreach (var item in selected)
+                    {
+                        currentAssembly.FileList.Remove(item);
+                    }
+                    FileList = new List<AssemblyFileModel>(currentAssembly.FileList);
+                    IgnoreFileList = new List<AssemblyFileModel>(currentAssembly.IgnoreFileList);
+                    TMessageBox.ShowMsg(CommonSettings.AssemblyIgnoreSuccess);
+                    return;
+                }
+                foreach (var item in selected)
+                {
+                    switch (s)
+                    {
+                        case FileMenuOperateType.Install:
+                            item.IsNeedInstall = !item.IsNeedInstall;
+                            item.IsNeedQuietInstall = false;
+                            break;
+                        case FileMenuOperateType.QuietInstall:
+                            item.IsNeedInstall = false;
+                            item.IsNeedQuietInstall = !item.IsNeedQuietInstall;
+                            break;
+                        case FileMenuOperateType.IsExistNoNeedCopy:
+                            item.IsExistNoNeedCopy = !item.IsExistNoNeedCopy;
+                            item.IsNoNeedCopy = false;
+
+                            break;
+                        case FileMenuOperateType.IsNoNeedCopy:
+                            item.IsExistNoNeedCopy = false;
+                            item.IsNoNeedCopy = !item.IsNoNeedCopy;
+                            break;
+                        case FileMenuOperateType.IsNoNeedDelete:
+                            item.IsNoNeedDelete = !item.IsNoNeedDelete;
+                            break;
+                        default:
+                            break;
+                    }
+
+                }
+            }
+        });
+
+        /// <summary>
+        /// 设置选中
+        /// </summary>
+        public RelayCommand<AssemblyModel> SetAssemblyMenuCommand => new RelayCommand<AssemblyModel>((a) =>
+        {
+            a.IsAutoSelected = !a.IsAutoSelected;
+        });
+
+        /// <summary>
+        /// 设置忽略
+        /// </summary>
+        public RelayCommand<AssemblyFileModel> SetUnIgnoreCommand => new RelayCommand<AssemblyFileModel>((s) =>
+        {
+            var currentAssembly = AssemblyList.Find(p => p.IsSelected == true);
+            if (currentAssembly == null) return;
+            if (currentAssembly.IgnoreFileList == null)
+                currentAssembly.IgnoreFileList = new List<AssemblyFileModel>();
+            currentAssembly.IgnoreFileList.Remove(s);
+            currentAssembly.FileList.Add(s);
+
+            FileList = new List<AssemblyFileModel>(currentAssembly.FileList);
+            IgnoreFileList = new List<AssemblyFileModel>(currentAssembly.IgnoreFileList);
+            TMessageBox.ShowMsg(CommonSettings.AssemblyIgnoreSuccess);
+        });
+        bool isChanging;
+        /// <summary>
+        /// 变更目标目录
+        /// </summary>
+        public RelayCommand<DescModel<TargetDirType>> TargetPathChangedCommand => new RelayCommand<DescModel<TargetDirType>>((s) =>
+        {
+            if (isChanging) return;
+            isChanging = true;
+            try
+            {
+                var result = TMessageBox.ShowMsg(CommonSettings.MultiTargetDirPathChanged, MessageLevel.Question);
+                if (result != TMessageBoxResult.OK) return;
+                var selected = FileList.FindAll(c => c.IsSelected == true);
+                if (selected == null) return;
+                foreach (var item in selected)
+                {
+                    if (item.TargetPath.Data != s.Data)
+                    {
+                        item.TargetPath = s;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                isChanging = false;
+            }
+
+
         });
 
         #endregion
@@ -535,7 +857,15 @@ namespace PackageEasy.ViewModels
                         file.TargetPath = TargetDirList.Find(p => p.Data == file.TargetPath.Data);
                     }
                 }
+                if (assitem.IgnoreFileList != null)
+                {
+                    foreach (var file in assitem.IgnoreFileList)
+                    {
+                        file.TargetPath = TargetDirList.Find(p => p.Data == file.TargetPath.Data);
+                    }
+                }
             }
+
             var first = AssemblyList.FirstOrDefault();
             if (first != null)
             {
@@ -566,13 +896,13 @@ namespace PackageEasy.ViewModels
                             var path = ProjectInfo.GetWorkSpace() + file.FilePath;
                             if (string.IsNullOrWhiteSpace(path))
                             {
-                                string str = string.Format("当前文件{0}为空!".GetLangText(), file.FilePath);
+                                string str = string.Format(CommonSettings.AssemblyFileIsNull.GetLangText(), file.FilePath);
                                 TMessageBox.ShowMsg("", str);
                                 return false;
                             }
                             if (file.IsDirectory == false && !File.Exists(path))
                             {
-                                string str = string.Format("无法在工作空间找到文件{0}!".GetLangText(), file.FilePath);
+                                string str = string.Format(CommonSettings.AssemblyFileNotExist.GetLangText(), file.FilePath);
                                 TMessageBox.ShowMsg("", str);
                                 return false;
                             }

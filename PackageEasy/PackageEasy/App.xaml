@@ -11,6 +11,7 @@
                     <vm:ViewModelLocator x:Key="locator"></vm:ViewModelLocator>
                 </ResourceDictionary>
                 <ResourceDictionary Source="/Themes/DefaultColor.xaml"></ResourceDictionary>
+                <!--<ResourceDictionary Source="/Files/zh-cn.xaml"></ResourceDictionary>-->
                 <ResourceDictionary Source="/Styles/ProcessStyle.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/Styles/TextBlock.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/Styles/Button.xaml"></ResourceDictionary>
@@ -22,6 +23,7 @@
                 <ResourceDictionary Source="/Styles/Menu.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/Styles/Converters.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/Styles/PasswordBoxStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="/Styles/TableItemStyle.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

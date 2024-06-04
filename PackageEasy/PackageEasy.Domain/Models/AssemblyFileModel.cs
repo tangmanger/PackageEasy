@@ -23,6 +23,8 @@ namespace PackageEasy.Domain.Models
         private bool isNeedInstall;
         private bool isExe;
         private bool isNoNeedCopy;
+        private bool isExistNoNeedCopy;
+        private bool isNoNeedDelete;
 
         /// <summary>
         /// 选择
@@ -66,7 +68,7 @@ namespace PackageEasy.Domain.Models
             set
             {
                 filePath = value;
-                if (!string.IsNullOrEmpty(value) && value.ToLower().EndsWith(".exe"))
+                if (!string.IsNullOrEmpty(value) && (value.ToLower().EndsWith(".exe")|| value.ToLower().EndsWith(".bat")))
                 {
                     IsExe = true;
                 }
@@ -159,5 +161,29 @@ namespace PackageEasy.Domain.Models
         /// 是否是目录
         /// </summary>
         public bool IsDirectory { get; set; }
+        /// <summary>
+        /// 如果存在则不复制
+        /// </summary>
+        public bool IsExistNoNeedCopy
+        {
+            get => isExistNoNeedCopy;
+            set
+            {
+                isExistNoNeedCopy = value;
+                RaisePropertyChanged();
+            }
+        }
+        /// <summary>
+        /// 不用删除
+        /// </summary>
+        public bool IsNoNeedDelete
+        {
+            get => isNoNeedDelete;
+            set
+            {
+                isNoNeedDelete = value;
+                RaisePropertyChanged();
+            }
+        }
     }
 }

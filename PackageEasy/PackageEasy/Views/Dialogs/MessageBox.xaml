@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PackageEasy.Views.Dialogs"
-        xmlns:lang="clr-namespace:PackageEasy.Common.Data;assembly=PackageEasy.Common"
         WindowStartupLocation="CenterOwner"
         WindowState="Normal"
         ResizeMode="NoResize"
@@ -48,9 +47,9 @@
             </Border>
             <TextBlock Text="" FontSize="16" Grid.Row="1" HorizontalAlignment="Center" TextWrapping="WrapWithOverflow" Margin="5,0,5,0" VerticalAlignment="Center" x:Name="msg"></TextBlock>
             <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Center" Margin="0,20,0,20">
-                <Button Style="{StaticResource CommonButtonStyle}" Visibility="Collapsed" x:Name="ok" Content="确定" lang:LanguageManager.LangText="确定" Click="ok_Click" Width="76" Height="36"></Button>
-                <Button Content="否" lang:LanguageManager.LangText="否" Visibility="Collapsed" Style="{StaticResource CommonButtonStyle}" x:Name="no" Margin="15,0,0,0" Width="76" Click="no_Click" Height="36" ></Button>
-                <Button Style="{StaticResource CommonButtonStyle}" Visibility="Collapsed" Content="关闭"  lang:LanguageManager.LangText="关闭" Click="ImageButton_Click" x:Name="cancel" Width="76" Margin="15,0,0,0" Height="36"></Button>
+                <Button Style="{StaticResource CommonButtonStyle}" Visibility="Collapsed" x:Name="ok" d:Content="确定" Content="{DynamicResource Yes}" Click="ok_Click" Width="76" Height="36"></Button>
+                <Button d:Content="否" Content="{DynamicResource No}" Visibility="Collapsed" Style="{StaticResource CommonButtonStyle}" x:Name="no" Margin="15,0,0,0" Width="76" Click="no_Click" Height="36" ></Button>
+                <Button Style="{StaticResource CommonButtonStyle}" Visibility="Collapsed" d:Content="关闭" Content="{DynamicResource Close}" Click="ImageButton_Click" x:Name="cancel" Width="76" Margin="15,0,0,0" Height="36"></Button>
             </StackPanel>
         </Grid>
     </Border>

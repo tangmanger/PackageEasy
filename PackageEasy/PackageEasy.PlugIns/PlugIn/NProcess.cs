@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 using PackageEasy.Common.Data;
 using System.IO;
 using PackageEasy.Common.Helpers;
+using PackageEasy.Domain.Common;
 
 namespace PackageEasy.PlugIns
 {
-    [PlugIn("进程检测", "\ue675", typeof(NProcess), "b4a3ab4f-9cd3-401d-acd9-8058c4028211")]
+    [PlugIn(CommonSettings.ProcessCheck, "\ue675", typeof(NProcess), "b4a3ab4f-9cd3-401d-acd9-8058c4028211")]
     public class NProcess : BasePlugInModel
     {
         public string Description => "NProcess";
@@ -24,7 +25,7 @@ namespace PackageEasy.PlugIns
             var filePath = Path.Combine(DataHelper.Plugin, "nsProcess.zip");
             if (!File.Exists(filePath))
             {
-                return new Tuple<bool, string>(true, "文件不存在!".GetLangText());
+                return new Tuple<bool, string>(true, CommonSettings.FileNoExist.GetLangText());
             }
             var tempDir = DataHelper.Temp;
             var result = ZipHelper.UnZipFile(filePath, "", tempDir);
@@ -52,7 +53,7 @@ namespace PackageEasy.PlugIns
                     }
                 }
             }
-            return new Tuple<bool, string>(true, "安装成功!".GetLangText());
+            return new Tuple<bool, string>(true, CommonSettings.InstallSuccess.GetLangText());
 
         }
 
