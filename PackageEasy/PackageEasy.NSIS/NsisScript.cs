@@ -354,14 +354,17 @@ namespace PackageEasy.NSIS
                                 var path = GetWorkSpace(projectInfoModel) + file.FilePath;
                                 if (!file.IsDirectory)
                                 {
-                                    string uid = $"fileExist{fileIndex}";
+                                    string fileFond = $"fileFond{fileIndex}";
+                                    string fileNotFond= $"fileNotFond{fileIndex}";
                                     string done = $"done{fileIndex}";
                                     if (file.IsExistNoNeedCopy)
                                     {
-                                        list.Add($"  StrCpy $0 {path}");
-                                        list.Add("  IfFileExists $0 0 " + uid);
+                                        var filePathExist =  $"{dirPath}" + file.FilePath;
+                                        list.Add($"  StrCpy $0 {filePathExist}");
+                                        list.Add("  IfFileExists $0 " + fileFond+ $" {fileNotFond}");
+                                        list.Add($"  {fileFond}:");
                                         list.Add($"  Goto {done}");
-                                        list.Add($"  {uid}:");
+                                        list.Add($"  {fileNotFond}:");
                                         list.Add($"  File \"{path}\"");
                                         list.Add($"  {done}:");
                                     }
