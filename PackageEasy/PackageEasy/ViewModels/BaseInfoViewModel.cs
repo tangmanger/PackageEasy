@@ -453,11 +453,25 @@ namespace PackageEasy.ViewModels
         public override void LanguageChanged()
         {
             Init();
+            var selected = new List<string>();
+            if (InstallList != null)
+            {
+                selected = InstallList.FindAll(p => p.IsSelected).Select(c => c.Code).ToList();
+            }
+
             InstallList = new List<InstallLanguageModel>()
             {
                 new InstallLanguageModel(){ LanguageType=LanguageType.En_SH,LanguageName=CommonSettings.BaseInfoEnglish.GetLangText(),Code="English",LanguageDisplayKey="${LANG_ENGLISH}"},
                 new InstallLanguageModel(){ LanguageType=LanguageType.Zh_CN,LanguageName=CommonSettings.BaseInfoChinese.GetLangText(),Code="SimpChinese",LanguageDisplayKey="${LANG_SimpChinese}"},
             };
+            foreach (var item in InstallList)
+            {
+                if (selected != null && selected.Exists(c => c == item.Code))
+                {
+                    item.IsSelected = true;
+                }
+
+            }
         }
 
         public override void Save()
