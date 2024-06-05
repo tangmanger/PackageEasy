@@ -1,17 +1,10 @@
 # Based on NSIS packaging visualization tool
-
-
 ## Original intention of development
 * The original HM NIS Edit is very simple to create and install, but it is not easy to modify, so it is newly added.
 * The original nsi script directly adds components, or deletes components, deletes files, etc. It is not simple to operate.
 * The most important thing is that I want to do something for fun~ Haha
 ## Software Architecture
   It is developed using WPF+MVVM, imitating the Visual Studio style (although the imitation is not that thorough -_-!). It is developed based on .net 6 and supports simultaneous editing of multiple projects. The binding file format is __.pge__ file format. At present, there are still many business scenarios that are not covered, and there are still some minor bugs, which will be slowly maintained and improved in the future.
-
-  # README.md
-- en [English](readmes/README.md)
-- zh_CN [简体中文](readmes/README.zh_CN.md)
-
 ## Release Notes
 ### V1.0.5
 * Solve the problem of multi-language switching
