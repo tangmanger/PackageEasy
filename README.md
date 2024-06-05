@@ -10,7 +10,7 @@
 
   # README.md
 - en [English](readmes/README.md)
-- zh_CN [简体中文](readmes/README.zh_CN.md)
+- zh_CN [简体中文](/readmes/README.zh_CN.md)
 
 ## Release Notes
 ### V1.0.5
