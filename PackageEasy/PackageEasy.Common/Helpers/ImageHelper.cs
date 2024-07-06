@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -39,7 +40,7 @@ namespace PackageEasy.Common.Helpers
             {
                 return null;
             }
-
+        
         }
         /// <summary>
         /// 转换到base64
@@ -70,5 +71,6 @@ namespace PackageEasy.Common.Helpers
                 }
             }
         }
+
     }
 }
