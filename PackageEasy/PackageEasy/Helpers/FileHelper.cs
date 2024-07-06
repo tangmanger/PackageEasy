@@ -28,7 +28,7 @@ namespace PackageEasy.Helpers
         public static Tuple<bool, string> OpenFile(ProjectViewModel projectViewModel)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.DefaultExt = StaticStringHelper.PGE; // Default file extension
+            openFileDialog.DefaultExt = StaticStringHelper.PGE; //
             openFileDialog.Filter = $"pge documents|*{StaticStringHelper.PGE};*{StaticStringHelper.PKY}|pky documents|*{StaticStringHelper.PKY};*{StaticStringHelper.PGE}"; // Filter files by extension
             var result = openFileDialog.ShowDialog();
             if (result == true)
