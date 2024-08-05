@@ -449,7 +449,8 @@ namespace PackageEasy.ViewModels
                             if (info.DirectoryName != null)
                                 Directory.CreateDirectory(info.DirectoryName);
                         }
-                        File.Copy(file, path, true);
+                        if (!File.Exists(path))
+                            File.Copy(file, path, true);
                         assemblyFileModel.FilePath = path.Replace(ProjectInfo.GetWorkSpace(), "");
                     }
                     else
@@ -523,7 +524,8 @@ namespace PackageEasy.ViewModels
                             if (info.DirectoryName != null)
                                 Directory.CreateDirectory(info.DirectoryName);
                         }
-                        File.Copy(file, path, true);
+                        if (!File.Exists(path))
+                            File.Copy(file, path, true);
                         assemblyFileModel.FilePath = path.Replace(ProjectInfo.GetWorkSpace(), "");
                     }
                     else
@@ -588,7 +590,8 @@ namespace PackageEasy.ViewModels
                         if (info.DirectoryName != null)
                             Directory.CreateDirectory(info.DirectoryName);
                     }
-                    File.Copy(fileInfo.FullName, path, true);
+                    if (!File.Exists(path))
+                        File.Copy(fileInfo.FullName, path, true);
 
                     assemblyFileModel.FilePath = path.Replace(ProjectInfo.GetWorkSpace(), "");
 
