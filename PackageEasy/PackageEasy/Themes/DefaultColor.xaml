@@ -12,6 +12,7 @@
     <SolidColorBrush x:Key="menuDisabledForground" Color="LightGray"></SolidColorBrush>
     <SolidColorBrush x:Key="watingBackground" Color="LightGray"></SolidColorBrush>
     <SolidColorBrush x:Key="mainForeground" Color="Black"></SolidColorBrush>
+    <SolidColorBrush x:Key="baseForeground" Color="Black"></SolidColorBrush>
     <!--button-->
     <SolidColorBrush x:Key="CommonButtonBackgroundBrush" Color="White"></SolidColorBrush>
     <SolidColorBrush x:Key="CommonButtonBorderBrush" Color="LightGray"></SolidColorBrush>
@@ -45,6 +46,8 @@
     <SolidColorBrush x:Key="datagridLinesBrush" Color="DimGray" />
     <SolidColorBrush x:Key="datagridColumnHeaderBackground" Color="#E9ECF6" />
     <SolidColorBrush x:Key="datagridColumnHeaderForeground" Color="Black" />
+    <SolidColorBrush x:Key="datagridRowMouseOver" Color="#D9E6F6" />
+    <SolidColorBrush x:Key="datagridRowSelected" Color="#FF9FC7F7" />
     <!--主页颜色-->
     <SolidColorBrush Color="#CCD5F0" x:Key="titleColoBrushes"></SolidColorBrush>
     <SolidColorBrush Color="#5D6B99" x:Key="mainTablePanelBrushes" ></SolidColorBrush>

@@ -148,7 +148,7 @@
                     </Setter>-->
                     <Style.Triggers>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="#D9E6F6"/>
+                            <Setter Property="Background" Value="{DynamicResource datagridRowSelected}"/>
                         </Trigger>
                     </Style.Triggers>
                 </Style>
@@ -157,23 +157,23 @@
 
         <Border Grid.Row="1" BorderBrush="{DynamicResource borderBrush}"  Margin="0,5,0,5" BorderThickness="0,0.5,0.5,0.5">
             <StackPanel Orientation="Vertical" Margin="10,5,0,5">
-                <CheckBox d:Content="允许用户选择要安装的组" Content="{DynamicResource AssemblyCanUseChoose}" IsChecked="{Binding IsAllowChoose,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="0,5,0,5"></CheckBox>
+                <CheckBox d:Content="允许用户选择要安装的组" Foreground="{DynamicResource baseForeground}" Content="{DynamicResource AssemblyCanUseChoose}" IsChecked="{Binding IsAllowChoose,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Margin="0,5,0,5"></CheckBox>
                 <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,5,0,5">
                     <Button MinWidth="80" Height="30" d:Content="添加组" Content="{DynamicResource AssemblyAddGroup}" Command="{Binding AddGroupCommand}"  Style="{StaticResource CommonButtonStyle}"></Button>
                     <Button MinWidth="80" Height="30" d:Content="删除组" Content="{DynamicResource AssemblyDelGroup}" Margin="10,0,0,0" Style="{StaticResource CommonButtonStyle}"></Button>
                 </StackPanel>
             </StackPanel>
         </Border>
-        <TabControl Grid.Column="1" Margin="10,10,10,0" >
+        <TabControl Grid.Column="1" Margin="10,10,10,0"  Background="Transparent">
             <TabItem  d:Header="文件列表" Height="25" Header="{DynamicResource AssemblyFileList}">
-                <DataGrid Grid.Column="1" x:Name="fileDataGrid" FontWeight="Normal"  VirtualizingPanel.VirtualizationMode="Standard" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionMode="Extended" HorizontalScrollBarVisibility="Auto" Style="{StaticResource DataGridStyle}"  ItemsSource="{Binding FileList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" BorderBrush="{DynamicResource borderBrush}"  CanUserAddRows="False"  AutoGenerateColumns="False" ColumnHeaderHeight="35" MinRowHeight="35">
+                <DataGrid Grid.Column="1" x:Name="fileDataGrid" Background="Transparent" FontWeight="Normal"  VirtualizingPanel.VirtualizationMode="Standard" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionMode="Extended" HorizontalScrollBarVisibility="Auto" Style="{StaticResource DataGridStyle}"  ItemsSource="{Binding FileList,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" BorderBrush="{DynamicResource borderBrush}"  CanUserAddRows="False"  AutoGenerateColumns="False" ColumnHeaderHeight="35" MinRowHeight="35">
                     <DataGrid.RowStyle>
                         <Style TargetType="DataGridRow" BasedOn="{StaticResource DefaultDataGridRowStyle}">
                             <Setter Property="IsSelected" Value="{Binding IsSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></Setter>
                             <EventSetter Event="PreviewMouseRightButtonDown" Handler="DataGridRow_PreviewMouseDown"></EventSetter>
                             <Style.Triggers>
                                 <Trigger Property="IsSelected" Value="True">
-                                    <Setter Property="Background" Value="#D9E6F6"/>
+                                    <Setter Property="Background"  Value="{DynamicResource datagridRowSelected}"/>
                                 </Trigger>
 
                             </Style.Triggers>

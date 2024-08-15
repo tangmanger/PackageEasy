@@ -8,7 +8,7 @@
              xmlns:controls="clr-namespace:PackageEasy.Controls.Controls;assembly=PackageEasy.Controls"
              xmlns:lang="clr-namespace:PackageEasy.Common.Data;assembly=PackageEasy.Common"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"  Foreground="{DynamicResource baseForeground}" >
 
     <Grid  Margin="30,20,0,0" HorizontalAlignment="Left">
         <Grid.ColumnDefinitions>
@@ -34,8 +34,8 @@
             <RowDefinition Height="*" ></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock d:Text="程序:" Text="{DynamicResource EndProcess}" VerticalAlignment="Center" HorizontalAlignment="Right" ></TextBlock>
-        <ComboBox Grid.Column="1" Width="220" Height="30" Style="{StaticResource CommonComboBoxStyle}" HorizontalAlignment="Left" VerticalContentAlignment="Center" ItemsSource="{Binding TargetFilesList}" SelectedItem="{Binding ApplicationName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5,0,0,0"></ComboBox>
-        <CheckBox Grid.Column="2" IsChecked="{Binding IsAutoRun,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Grid.ColumnSpan="2" Margin="5,0,0,0" VerticalAlignment="Center" d:Content="安装完成后启动" Content="{DynamicResource EndStartProcess}"></CheckBox>
+        <ComboBox Grid.Column="1"    Width="220" Height="30" Style="{StaticResource CommonComboBoxStyle}" HorizontalAlignment="Left" VerticalContentAlignment="Center" ItemsSource="{Binding TargetFilesList}" SelectedItem="{Binding ApplicationName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5,0,0,0"></ComboBox>
+        <CheckBox Grid.Column="2" Foreground="{DynamicResource baseForeground}" IsChecked="{Binding IsAutoRun,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Grid.ColumnSpan="2" Margin="5,0,0,0" VerticalAlignment="Center" d:Content="安装完成后启动" Content="{DynamicResource EndStartProcess}"></CheckBox>
 
         <TextBlock d:Text="参数:" Margin="0,10,0,0" Grid.Row="1" Text="{DynamicResource EndParams}" VerticalAlignment="Center" HorizontalAlignment="Right" ></TextBlock>
         <TextBox Grid.Column="1"   Grid.Row="1" Width="220" Height="30" Style="{StaticResource CommonTextBox}" Text="{Binding RunParam,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,10,0,0"></TextBox>
@@ -44,7 +44,7 @@
         <ComboBox Grid.Column="1"  Grid.Row="2" IsEnabled="{Binding IsShowReadme,UpdateSourceTrigger=PropertyChanged}" Width="220" Height="30" VerticalContentAlignment="Center"  ItemsSource="{Binding TargetFilesList}" SelectedItem="{Binding ReadMeName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource CommonComboBoxStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,10,0,0"></ComboBox>
         <CheckBox Grid.Column="2"  Grid.Row="2"  IsChecked="{Binding IsShowReadme,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Grid.ColumnSpan="2" Margin="5,10,0,0" VerticalAlignment="Center" VerticalContentAlignment="Center" d:Content="展示自述" Content="{DynamicResource EndShowReadmeName}"></CheckBox>
         <!--<Border Grid.Row="3" Grid.ColumnSpan="7" BorderBrush="{DynamicResource borderBrush}" Height="30" Background="Red" Margin="0,5,0,0" BorderThickness="0,0.5,0,0"></Border>-->
-        <CheckBox Grid.Row="7" d:Content="使用解除安装程序" Grid.ColumnSpan="2" Margin="0,10,0,0" Visibility="Collapsed" Content="{DynamicResource EndUnInstallMsg}"></CheckBox>
+        <CheckBox Grid.Row="7"  Foreground="{DynamicResource baseForeground}"  d:Content="使用解除安装程序" Grid.ColumnSpan="2" Margin="0,10,0,0" Visibility="Collapsed" Content="{DynamicResource EndUnInstallMsg}"></CheckBox>
 
         <TextBlock d:Text="解除安装提示:"  Margin="0,10,0,0" Grid.Row="4" Text="{DynamicResource EndUnInstallTips}" VerticalAlignment="Center" HorizontalAlignment="Right" ></TextBlock>
         <TextBox Grid.Column="1"   Grid.Row="4" Width="220" MinHeight="30" Style="{StaticResource CommonTextBox}" TextWrapping="Wrap" Text="{Binding UninstallTip,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,10,0,0"></TextBox>
@@ -52,13 +52,13 @@
         <TextBlock d:Text="解除安装消息:" Margin="0,10,0,0" Grid.Row="5" Text="{DynamicResource EndUnInstallMsg}"  VerticalAlignment="Center" HorizontalAlignment="Right" ></TextBlock>
         <TextBox Grid.Column="1"   Grid.Row="5" Width="220" MinHeight="30" Style="{StaticResource CommonTextBox}"   TextWrapping="Wrap" Text="{Binding UninstallMsg,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,10,0,0"></TextBox>
         <TextBlock d:Text="检测的进程名:" Margin="0,10,0,0" Grid.Row="6" Text="{DynamicResource EndChcekProcessName}" VerticalAlignment="Center" HorizontalAlignment="Right" ></TextBlock>
-        <controls:PlaceholderTextBox Grid.Column="1" d:PlaceHolderText="例如:PackageEasy.exe" PlaceHolderText="{DynamicResource EndChcekProcessExample}" IsEnabled="{Binding IsEnableProcess}" Grid.Row="6" Width="220" MinHeight="30" Style="{StaticResource PlaceholderTextBoxStyle}"   TextWrapping="Wrap" Text="{Binding ProcessName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,10,0,0"></controls:PlaceholderTextBox>
+        <controls:PlaceholderTextBox  Foreground="{DynamicResource baseForeground}"  CaretBrush="{DynamicResource baseForeground}" Grid.Column="1" d:PlaceHolderText="例如:PackageEasy.exe" PlaceHolderText="{DynamicResource EndChcekProcessExample}" IsEnabled="{Binding IsEnableProcess}" Grid.Row="6" Width="220" MinHeight="30" Style="{StaticResource PlaceholderTextBoxStyle}"   TextWrapping="Wrap" Text="{Binding ProcessName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,10,0,0"></controls:PlaceholderTextBox>
 
         <TextBlock d:Text="安装提示:" Margin="0,10,0,0" Grid.Row="7" Text="{DynamicResource EndInstallContent}" VerticalAlignment="Center" HorizontalAlignment="Right" ></TextBlock>
         <TextBox  IsEnabled="{Binding IsEnableProcess}" Grid.Column="1" Grid.Row="7" Width="220" MinHeight="30" Style="{StaticResource CommonTextBox}"   TextWrapping="Wrap" Text="{Binding InstallProcessTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,10,0,0"></TextBox>
         <TextBlock d:Text="卸载提示:" Margin="0,10,0,0" Grid.Row="8" Text="{DynamicResource EndUnInstallContent}" VerticalAlignment="Center" HorizontalAlignment="Right" ></TextBlock>
         <TextBox Grid.Column="1" Grid.Row="8" IsEnabled="{Binding IsEnableProcess}"  Width="220" MinHeight="30" Style="{StaticResource CommonTextBox}"   TextWrapping="Wrap" Text="{Binding UninstallProcessTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,10,0,0"></TextBox>
-        <CheckBox Grid.Column="2"  Grid.Row="6" IsChecked="{Binding IsEnableProcess,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Grid.ColumnSpan="2" Margin="5,0,0,0" VerticalAlignment="Center" d:Content="启用进程检测" Content="{DynamicResource EndUseCheckProcess}"></CheckBox>
+        <CheckBox Grid.Column="2"  Foreground="{DynamicResource baseForeground}"   Grid.Row="6" IsChecked="{Binding IsEnableProcess,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Grid.ColumnSpan="2" Margin="5,0,0,0" VerticalAlignment="Center" d:Content="启用进程检测" Content="{DynamicResource EndUseCheckProcess}"></CheckBox>
         <!--<TextBlock Grid.Row="6" Text="解除安装图标:" lang:LanguageManager.LangText="解除安装图标:" VerticalAlignment="Center"  HorizontalAlignment="Right"></TextBlock>
         <StackPanel Orientation="Horizontal" Grid.Row="6" Grid.Column="1">
             <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource CommonTextBox}" Width="150" Height="25" VerticalContentAlignment="Center" Margin="5,10,0,10"></TextBox>

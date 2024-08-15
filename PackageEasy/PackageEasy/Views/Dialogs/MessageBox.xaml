@@ -23,7 +23,7 @@
                   />
 
     </WindowChrome.WindowChrome>
-    <Border BorderThickness="1" Background="White" CornerRadius="4" BorderBrush="{DynamicResource MainWindowBorderBrush}">
+    <Border BorderThickness="1" Background="{DynamicResource MainWorkAreaBackgroud}"  CornerRadius="4" BorderBrush="{DynamicResource MainWindowBorderBrush}">
         <Grid >
             <Grid.RowDefinitions>
                 <RowDefinition Height="32"></RowDefinition>
@@ -45,7 +45,7 @@
                     </StackPanel>
                 </Grid>
             </Border>
-            <TextBlock Text="" FontSize="16" Grid.Row="1" HorizontalAlignment="Center" TextWrapping="WrapWithOverflow" Margin="5,0,5,0" VerticalAlignment="Center" x:Name="msg"></TextBlock>
+            <TextBlock Text="" Foreground="{DynamicResource baseForeground}" FontSize="16" Grid.Row="1" HorizontalAlignment="Center" TextWrapping="WrapWithOverflow" Margin="5,0,5,0" VerticalAlignment="Center" x:Name="msg"></TextBlock>
             <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Center" Margin="0,20,0,20">
                 <Button Style="{StaticResource CommonButtonStyle}" Visibility="Collapsed" x:Name="ok" d:Content="确定" Content="{DynamicResource Yes}" Click="ok_Click" Width="76" Height="36"></Button>
                 <Button d:Content="否" Content="{DynamicResource No}" Visibility="Collapsed" Style="{StaticResource CommonButtonStyle}" x:Name="no" Margin="15,0,0,0" Width="76" Click="no_Click" Height="36" ></Button>

@@ -17,19 +17,19 @@
                     <DataGridTemplateColumn Width="100">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate>
-                                <TextBlock d:Text="选择"  Text="{DynamicResource MultiLanguageChoose}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                                <TextBlock d:Text="选择"  Foreground="{DynamicResource baseForeground}"   Text="{DynamicResource MultiLanguageChoose}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
                             </DataTemplate>
                         </DataGridTemplateColumn.HeaderTemplate>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <CheckBox VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></CheckBox>
+                                <CheckBox  Foreground="{DynamicResource baseForeground}"  VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></CheckBox>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn Width="*">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate>
-                                <TextBlock d:Text="语言"  Text="{DynamicResource MultiLanguage}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                                <TextBlock d:Text="语言"   Foreground="{DynamicResource baseForeground}"  Text="{DynamicResource MultiLanguage}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
                             </DataTemplate>
                         </DataGridTemplateColumn.HeaderTemplate>
                         <DataGridTemplateColumn.CellTemplate>
@@ -41,7 +41,7 @@
                     <DataGridTemplateColumn Width="*">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate>
-                                <TextBlock d:Text="目标文件"  Text="{DynamicResource MultiLanguageTargetFile}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                                <TextBlock d:Text="目标文件"  Foreground="{DynamicResource baseForeground}"   Text="{DynamicResource MultiLanguageTargetFile}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
                             </DataTemplate>
                         </DataGridTemplateColumn.HeaderTemplate>
                         <DataGridTemplateColumn.CellTemplate>
@@ -53,7 +53,7 @@
                     <DataGridTemplateColumn   MinWidth="100">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate>
-                                <TextBlock d:Text="目标根目录" Foreground="{DynamicResource DataGridForeground}" Text="{DynamicResource MultiLanguageTargetRootDir}" FontSize="14"></TextBlock>
+                                <TextBlock d:Text="目标根目录" Foreground="{DynamicResource DataGridForeground}" Text="{DynamicResource MultiLanguageTargetRootDir}" ></TextBlock>
                             </DataTemplate>
                         </DataGridTemplateColumn.HeaderTemplate>
                         <DataGridTemplateColumn.CellTemplate>
@@ -71,7 +71,7 @@
                     <DataGridTemplateColumn Width="*">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate>
-                                <TextBlock d:Text="目标目录" Text="{DynamicResource MultiLanguageTargetDir}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                                <TextBlock d:Text="目标目录"  Foreground="{DynamicResource baseForeground}"  Text="{DynamicResource MultiLanguageTargetDir}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
                             </DataTemplate>
                         </DataGridTemplateColumn.HeaderTemplate>
                         <DataGridTemplateColumn.CellTemplate>

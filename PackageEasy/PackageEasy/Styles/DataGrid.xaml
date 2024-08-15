@@ -111,10 +111,10 @@
         <Setter Property="Background" Value="Transparent" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#D9E6F6"/>
+                <Setter Property="Background" Value="{DynamicResource datagridRowMouseOver}"/>
             </Trigger>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="#FF9FC7F7"/>
+                <Setter Property="Background" Value="{DynamicResource datagridRowSelected}"/>
             </Trigger>
         </Style.Triggers>
     </Style>

@@ -12,6 +12,7 @@
     <SolidColorBrush x:Key="menuDisabledForground" Color="#5C5C5C"></SolidColorBrush>
     <SolidColorBrush x:Key="watingBackground" Color="LightGray"></SolidColorBrush>
     <SolidColorBrush x:Key="mainForeground" Color="White"></SolidColorBrush>
+    <SolidColorBrush x:Key="baseForeground" Color="White"></SolidColorBrush>
     <!--button-->
     <SolidColorBrush x:Key="CommonButtonBackgroundBrush" Color="#3D3D3D"></SolidColorBrush>
     <SolidColorBrush x:Key="CommonButtonBorderBrush" Color="#26FFFFFF"></SolidColorBrush>
@@ -34,7 +35,7 @@
     <SolidColorBrush x:Key="progressColoBrush" Color="#FF006CBE" />
     <!--CommonTextBox-->
     <SolidColorBrush x:Key="commonTextBoxBackground" Color="#3D3D3D" />
-    <SolidColorBrush x:Key="commonTextBoxBorderBrush" Color="#26FFFFFF" />
+    <SolidColorBrush x:Key="commonTextBoxBorderBrush" Color="DimGray" />
     <SolidColorBrush x:Key="commonDisableTextBoxBackground" Color="#4C919191"></SolidColorBrush>
     <SolidColorBrush x:Key="commonTextBoxForeground" Color="White"></SolidColorBrush>
     <!--ResultLightView-->
@@ -42,8 +43,10 @@
     <SolidColorBrush x:Key="DataGridForeground" Color="White"></SolidColorBrush>
     <!--DataGridStyle-->
     <SolidColorBrush x:Key="datagridLinesBrush" Color="DimGray" />
-    <SolidColorBrush x:Key="datagridColumnHeaderBackground" Color="#E9ECF6" />
+    <SolidColorBrush x:Key="datagridColumnHeaderBackground" Color="DimGray" />
     <SolidColorBrush x:Key="datagridColumnHeaderForeground" Color="Black" />
+    <SolidColorBrush x:Key="datagridRowMouseOver" Color="DimGray" />
+    <SolidColorBrush x:Key="datagridRowSelected" Color="#FFC3C3C3" />
     <!--主页颜色-->
     <SolidColorBrush Color="#1F1F1F" x:Key="titleColoBrushes"></SolidColorBrush>
     <SolidColorBrush Color="#1F1F1F" x:Key="mainTablePanelBrushes" ></SolidColorBrush>
@@ -70,4 +73,17 @@
     <SolidColorBrush x:Key="pluginMouseOverBackground" Color="#E6E7EF" ></SolidColorBrush>
     <!--基础页面颜色-->
     <SolidColorBrush x:Key="baseInfoForeground" Color="White"></SolidColorBrush>
+
+
+    <!--TableControl-->
+    <SolidColorBrush x:Key="TabItem.Foreground" Color="White"></SolidColorBrush>
+    <SolidColorBrush x:Key="TabItem.Background" Color="#2E2E2E"/>
+    <SolidColorBrush x:Key="TabItem.MouseOver.Background" Color="#3D3D3D">
+    </SolidColorBrush>
+    <SolidColorBrush x:Key="TabItem.MouseOver.Border" Color="#2E2E2E"/>
+    <SolidColorBrush x:Key="TabItem.Selected.Foreground" Color="White"/>
+    <SolidColorBrush x:Key="TabItem.Selected.Background" Color="#3D3D3D"/>
+    <SolidColorBrush x:Key="TabItem.Selected.Border" Color="#2E2E2E"/>
+    <SolidColorBrush x:Key="TabItem.Disabled.Background" Color="#3B4F81"/>
+    <SolidColorBrush x:Key="TabItem.Disabled.Border" Color="Transparent"/>
 </ResourceDictionary>
