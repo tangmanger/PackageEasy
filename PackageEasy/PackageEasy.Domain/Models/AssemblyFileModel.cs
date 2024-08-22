@@ -26,6 +26,8 @@ namespace PackageEasy.Domain.Models
         private bool isNoNeedCopy;
         private bool isExistNoNeedCopy;
         private bool isNoNeedDelete;
+        private string customTargetPath;
+        private bool isUseCustomPath;
 
         /// <summary>
         /// 选择
@@ -70,7 +72,7 @@ namespace PackageEasy.Domain.Models
             set
             {
                 filePath = value;
-                if (!string.IsNullOrEmpty(value) && (value.ToLower().EndsWith(".exe")|| value.ToLower().EndsWith(".bat")))
+                if (!string.IsNullOrEmpty(value) && (value.ToLower().EndsWith(".exe") || value.ToLower().EndsWith(".bat")))
                 {
                     IsExe = true;
                 }
@@ -91,6 +93,30 @@ namespace PackageEasy.Domain.Models
             set
             {
                 targetPath = value;
+                RaisePropertyChanged();
+            }
+        }
+        /// <summary>
+        /// 用户目标路径
+        /// </summary>
+        public string CustomTargetPath
+        {
+            get => customTargetPath;
+            set
+            {
+                customTargetPath = value;
+                RaisePropertyChanged();
+            }
+        }
+        /// <summary>
+        /// 用户自定义路径
+        /// </summary>
+        public bool IsUseCustomPath
+        {
+            get => isUseCustomPath;
+            set
+            {
+                isUseCustomPath = value;
                 RaisePropertyChanged();
             }
         }

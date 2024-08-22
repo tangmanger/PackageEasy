@@ -18,6 +18,8 @@ namespace PackageEasy.Domain.Models
         private AssemblyFileModel assemblyFile;
         private AssemblyFileModel targetDir;
         private DescModel<TargetDirType> targetPath;
+        private string customTargetPath;
+        private bool isUseCustomPath;
 
         /// <summary>
         /// 选择
@@ -80,6 +82,30 @@ namespace PackageEasy.Domain.Models
             set
             {
                 targetPath = value;
+                RaisePropertyChanged();
+            }
+        }
+        /// <summary>
+        /// 用户目标路径
+        /// </summary>
+        public string CustomTargetPath
+        {
+            get => customTargetPath;
+            set
+            {
+                customTargetPath = value;
+                RaisePropertyChanged();
+            }
+        }
+        /// <summary>
+        /// 用户自定义路径
+        /// </summary>
+        public bool IsUseCustomPath
+        {
+            get => isUseCustomPath;
+            set
+            {
+                isUseCustomPath = value;
                 RaisePropertyChanged();
             }
         }

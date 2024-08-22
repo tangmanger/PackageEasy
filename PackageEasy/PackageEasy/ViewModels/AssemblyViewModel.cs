@@ -237,6 +237,19 @@ namespace PackageEasy.ViewModels
             }
         }
 
+        /// <summary>
+        /// 用户路径
+        /// </summary>
+        public bool IsUseCustomPath
+        {
+            get => isUseCustomPath;
+            set
+            {
+                isUseCustomPath = value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         #region 命令
@@ -657,6 +670,7 @@ namespace PackageEasy.ViewModels
                     IsExistNoNeedCopy = !selected.Exists(c => c.IsExistNoNeedCopy == false);
                     IsNoNeedCopy = !selected.Exists(c => c.IsNoNeedCopy == false);
                     IsNoNeedDelete = !selected.Exists(c => c.IsNoNeedDelete == false);
+                    IsUseCustomPath = !selected.Exists(c => c.IsUseCustomPath == false);
                     return;
                 }
 
@@ -667,6 +681,7 @@ namespace PackageEasy.ViewModels
             IsExistNoNeedCopy = false;
             IsNoNeedDelete = false;
             IsNoNeedCopy = false;
+            IsUseCustomPath = false;
         });
 
         /// <summary>
@@ -725,6 +740,9 @@ namespace PackageEasy.ViewModels
                         case FileMenuOperateType.IsNoNeedDelete:
                             item.IsNoNeedDelete = !item.IsNoNeedDelete;
                             break;
+                        case FileMenuOperateType.UseCustomPath:
+                            item.IsUseCustomPath = !item.IsUseCustomPath;
+                            break;
                         default:
                             break;
                     }
@@ -758,6 +776,8 @@ namespace PackageEasy.ViewModels
             TMessageBox.ShowMsg(CommonSettings.AssemblyIgnoreSuccess);
         });
         bool isChanging;
+        private bool isUseCustomPath;
+
         /// <summary>
         /// 变更目标目录
         /// </summary>

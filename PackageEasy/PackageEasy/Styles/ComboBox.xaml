@@ -64,6 +64,7 @@
             <Path Name="Arrow"
                   Grid.ColumnSpan="2"
                   Margin="3,1,8,0"
+                  
                   Fill="{TemplateBinding Foreground}"
                   Data="{DynamicResource DownArrowGeometry}"
                   HorizontalAlignment="Right"
@@ -171,7 +172,7 @@
 
                             </ToggleButton.Template>
                         </ToggleButton>
-                        <ToggleButton Grid.Column="1"  IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}" >
+                        <ToggleButton Grid.Column="1" Visibility="Collapsed" IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}" >
                             <ToggleButton.Template>
 
                                 <ControlTemplate TargetType="ToggleButton">

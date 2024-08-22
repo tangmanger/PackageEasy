@@ -252,5 +252,6 @@
     <sys:String x:Key="ProcessCheck">Process Check</sys:String>
     <sys:String x:Key="FileNoExist">File does not exist!</sys:String>
     <sys:String x:Key="InstallSuccess">Installation successful!</sys:String>
-    
+    <sys:String x:Key="BaseInfoInstallForALL">Install For All User:</sys:String>
+    <sys:String x:Key="AssemblyCustomPath">Use Custom Path</sys:String>
 </ResourceDictionary>

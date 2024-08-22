@@ -13,6 +13,7 @@ namespace PackageEasy.Domain.Enums
         IsExistNoNeedCopy,
         IsNoNeedCopy,
         IsNoNeedDelete,
-        Ignore
+        Ignore,
+        UseCustomPath
     }
 }

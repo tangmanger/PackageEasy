@@ -219,18 +219,31 @@
                             </DataGridTemplateColumn.HeaderTemplate>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <ComboBox Style="{StaticResource CommonComboBoxStyle}" 
+                                    <Grid>
+                                        <TextBox Text="{Binding CustomTargetPath}" Style="{StaticResource CommonTextBox}" x:Name="text" Visibility="Collapsed"></TextBox>
+
+                                        <ComboBox Style="{StaticResource CommonComboBoxStyle}" x:Name="combox"
                                       DisplayMemberPath="DisplayName" 
                                       VerticalContentAlignment="Center" 
                                       SelectedItem="{Binding TargetPath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                       ItemsSource="{Binding DataContext.TargetDirList,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}">
-                                        <i:Interaction.Triggers>
-                                            <i:EventTrigger EventName="SelectionChanged" >
-                                                <i:InvokeCommandAction Command="{Binding DataContext.TargetPathChangedCommand,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}" CommandParameter="{Binding Path=SelectedItem,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ComboBox}}"></i:InvokeCommandAction>
-                                            </i:EventTrigger>
-                                        </i:Interaction.Triggers>  
-                                        
-                                    </ComboBox>
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="SelectionChanged" >
+                                                    <i:InvokeCommandAction Command="{Binding DataContext.TargetPathChangedCommand,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}" CommandParameter="{Binding Path=SelectedItem,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ComboBox}}"></i:InvokeCommandAction>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+
+                                        </ComboBox>
+                                    </Grid>
+
+                                    <!--<TextBox Style="{StaticResource CommonTextBox}"  IsReadOnly="True" Text="{Binding TargetPath}"  Margin="5,0,5,0"></TextBox>-->
+                                    <!--<TextBlock Text="{Binding PlateName}" Foreground="{DynamicResource DataGridForeground}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>-->
+                                    <DataTemplate.Triggers>
+                                        <DataTrigger Binding="{Binding IsUseCustomPath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Value="true">
+                                            <Setter Property="Visibility" Value="Visible" TargetName="text"></Setter>
+                                            <Setter Property="Visibility" Value="Collapsed" TargetName="combox"></Setter>
+                                        </DataTrigger>
+                                    </DataTemplate.Triggers>
                                     <!--<TextBox Style="{StaticResource CommonTextBox}"  IsReadOnly="True" Text="{Binding TargetPath}"  Margin="5,0,5,0"></TextBox>-->
                                     <!--<TextBlock Text="{Binding PlateName}" Foreground="{DynamicResource DataGridForeground}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>-->
                                 </DataTemplate>
@@ -370,6 +383,7 @@
                             <!--<MenuItem  Style="{StaticResource menuContextStyle}" IsChecked="{Binding IsNoNeedDelete}"  Command="{Binding SetMenuCommand}" CommandParameter="{x:Static enmus:FileMenuOperateType.IsNoNeedDelete}"  d:Header="不删除" Header="{DynamicResource AssemblUnDelete}"  ></MenuItem>-->
                             <Separator Style="{StaticResource sep}"/>
                             <MenuItem  Style="{StaticResource menuContextStyle}" d:Header="忽略" Command="{Binding SetMenuCommand}" CommandParameter="{x:Static enmus:FileMenuOperateType.Ignore}"  Header="{DynamicResource AssemblIgnore}"  ></MenuItem>
+                            <MenuItem  Style="{StaticResource menuContextStyle}"  IsChecked="{Binding IsUseCustomPath}" d:Header="使用用户路径" Command="{Binding SetMenuCommand}" CommandParameter="{x:Static enmus:FileMenuOperateType.UseCustomPath}"  Header="{DynamicResource AssemblyCustomPath}"  ></MenuItem>
 
                         </ContextMenu>
                     </DataGrid.ContextMenu>
@@ -417,14 +431,14 @@
                             </DataGridTemplateColumn.HeaderTemplate>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <ComboBox Style="{StaticResource CommonComboBoxStyle}" 
+
+                                    <ComboBox x:Name="combox" Style="{StaticResource CommonComboBoxStyle}" 
                                             IsEnabled="False"
                                             DisplayMemberPath="DisplayName"
                                             VerticalContentAlignment="Center"
                                             SelectedItem="{Binding TargetPath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                             ItemsSource="{Binding DataContext.TargetDirList,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"></ComboBox>
-                                    <!--<TextBox Style="{StaticResource CommonTextBox}"  IsReadOnly="True" Text="{Binding TargetPath}"  Margin="5,0,5,0"></TextBox>-->
-                                    <!--<TextBlock Text="{Binding PlateName}" Foreground="{DynamicResource DataGridForeground}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>-->
+
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

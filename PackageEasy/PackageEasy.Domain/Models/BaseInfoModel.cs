@@ -181,5 +181,9 @@ namespace PackageEasy.Domain.Models
         /// 使用相对路径
         /// </summary>
         public bool IsUseRelativePath { get; set; }
+        /// <summary>
+        /// 安装到所有用户
+        /// </summary>
+        public bool InstallForAll { get; set; }
     }
 }

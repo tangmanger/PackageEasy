@@ -119,6 +119,7 @@ namespace PackageEasy.ViewModels
         private string productVersion;
         private bool isShowInUnInstall;
         private bool isUseRelativePath;
+        private bool installForAll;
 
         /// <summary>
         /// 应用程序名称
@@ -446,6 +447,19 @@ namespace PackageEasy.ViewModels
             }
         }
 
+        /// <summary>
+        /// 安装
+        /// </summary>
+        public bool InstallForAll
+        {
+            get => installForAll;
+            set
+            {
+                installForAll = value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         #region 方法
@@ -507,6 +521,7 @@ namespace PackageEasy.ViewModels
             baseInfoModel.ProductVersion = ProductVersion;
             baseInfoModel.IsShowInUnInstall = IsShowInUnInstall;
             baseInfoModel.IsUseRelativePath = IsUseRelativePath;
+            baseInfoModel.InstallForAll = InstallForAll;
             baseInfoModel.LanguageList = InstallList.FindAll(c => c.IsSelected);
             if (baseInfoModel.LanguageList == null || baseInfoModel.LanguageList.Count == 0)
             {
@@ -573,6 +588,7 @@ namespace PackageEasy.ViewModels
                         }
                     }
                 }
+                InstallForAll = ProjectInfo.BaseInfo.InstallForAll;
                 IsShowInUnInstall = ProjectInfo.BaseInfo.IsShowInUnInstall;
                 LanguagePath = ProjectInfo.BaseInfo.LanguagePath;
                 IsLicenseChecked = ProjectInfo.BaseInfo.IsLicenseChecked;
@@ -630,6 +646,7 @@ namespace PackageEasy.ViewModels
             baseInfoModel.ProductVersion = ProductVersion;
             baseInfoModel.IsShowInUnInstall = IsShowInUnInstall;
             baseInfoModel.IsUseRelativePath = IsUseRelativePath;
+            baseInfoModel.InstallForAll = InstallForAll;
             var str = WorkSpace + LanguagePath;
             if (!string.IsNullOrWhiteSpace(LanguagePath) && File.Exists(str))
             {

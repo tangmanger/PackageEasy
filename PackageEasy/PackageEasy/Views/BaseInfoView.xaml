@@ -135,7 +135,10 @@
             </StackPanel>
             <CheckBox Foreground="{DynamicResource baseInfoForeground}" IsChecked="{Binding IsUseRelativePath}" Command="{Binding UseRelativeCommand}" d:Content="使用相对路径" Content="{DynamicResource BaseInfoUseRelative}"  Margin="5,18,0,0"  VerticalContentAlignment="Top"></CheckBox>
         </StackPanel>
-
+        <TextBlock Grid.Row="6" d:Text="安装到所有用户:" Grid.Column="2" Text="{DynamicResource BaseInfoInstallForALL}" VerticalAlignment="Center"  HorizontalAlignment="Right"></TextBlock>
+        <StackPanel Grid.Row="6" Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center" Grid.ColumnSpan="3" Margin="5,0,0,0">
+            <CheckBox Foreground="{DynamicResource baseInfoForeground}" d:Content="是" Content="{DynamicResource  Sure}" IsChecked="{Binding InstallForAll}" ></CheckBox>
+        </StackPanel>
 
     </Grid>
 </UserControl>

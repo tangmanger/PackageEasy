@@ -38,6 +38,7 @@ namespace PackageEasy.Common.Helpers
         }
         public static bool CheckChanged<T>(T model, T old)
         {
+            if (model == null) return true;
             var modelProperties = model.GetType().GetProperties().ToList();
             foreach (var property in modelProperties)
             {

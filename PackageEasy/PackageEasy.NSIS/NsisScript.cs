@@ -312,6 +312,8 @@ namespace PackageEasy.NSIS
                             string str = $"Section \"$({item.SectionName})\" {sec}";
                             list.Add(str);
                             list.Add("  SetOverwrite try");
+                            if (!hasSetIcon)
+                                list.Add("  SetShellVarContext all");
                             sections.Add(sec);
                             if (!string.IsNullOrWhiteSpace(item.AssemblyDescription))
                                 sectionDic.Add(sec, item.AssemblyDescription);
@@ -322,6 +324,9 @@ namespace PackageEasy.NSIS
                             {
                                 if (file.IsNoNeedCopy) continue;
                                 string dirPath = file.TargetPath.DisplayName;
+                                //启用用户目录
+                                if (file.IsUseCustomPath)
+                                    dirPath = file.CustomTargetPath;
                                 if (!string.IsNullOrWhiteSpace(file.SubPath))
                                     dirPath += file.SubPath;
 
@@ -331,6 +336,9 @@ namespace PackageEasy.NSIS
                                     if (multiFile != null)
                                     {
                                         dirPath = multiFile.TargetPath.DisplayName;
+                                        //启用用户目录
+                                        if (file.IsUseCustomPath)
+                                            dirPath = file.CustomTargetPath;
                                         dirPath += multiFile.TargetDir.FilePath;
                                         delDirs.Add(dirPath);
                                         currentDirectory = dirPath;
@@ -355,13 +363,13 @@ namespace PackageEasy.NSIS
                                 if (!file.IsDirectory)
                                 {
                                     string fileFond = $"fileFond{fileIndex}";
-                                    string fileNotFond= $"fileNotFond{fileIndex}";
+                                    string fileNotFond = $"fileNotFond{fileIndex}";
                                     string done = $"done{fileIndex}";
                                     if (file.IsExistNoNeedCopy)
                                     {
-                                        var filePathExist =  $"{dirPath}" + file.FilePath;
+                                        var filePathExist = $"{dirPath}" + file.FilePath;
                                         list.Add($"  StrCpy $0 {filePathExist}");
-                                        list.Add("  IfFileExists $0 " + fileFond+ $" {fileNotFond}");
+                                        list.Add("  IfFileExists $0 " + fileFond + $" {fileNotFond}");
                                         list.Add($"  {fileFond}:");
                                         list.Add($"  Goto {done}");
                                         list.Add($"  {fileNotFond}:");
@@ -729,7 +737,12 @@ namespace PackageEasy.NSIS
                             foreach (var file in item.FileList)
                             {
                                 if (!file.IsNoNeedDelete)
-                                    list.Add($" Delete \"{file.TargetPath.DisplayName}{file.FilePath}\"");
+                                {
+                                    if (file.IsUseCustomPath)
+                                        list.Add($" Delete \"{file.CustomTargetPath}{file.FilePath}\"");
+                                    else
+                                        list.Add($" Delete \"{file.TargetPath.DisplayName}{file.FilePath}\"");
+                                }
 
                             }
                             count++;

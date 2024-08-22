@@ -63,7 +63,8 @@
     <sys:String x:Key="BaseInfoButtonTypeCircle">圆形单选框</sys:String>
     <sys:String x:Key="BaseInfoWorkSapce">工作目录：</sys:String>
     <sys:String x:Key="BaseInfoUseRelative">使用相对路径</sys:String>
-
+    <sys:String x:Key="BaseInfoInstallForALL">安装到所有用户：</sys:String>
+    
     <!--组件信息-->
     <sys:String x:Key="AssemblyName">组件名称</sys:String>
     <sys:String x:Key="AssemblyDescription">描述</sys:String>
@@ -88,7 +89,7 @@
     <sys:String x:Key="AssemblInstallType">安装方式</sys:String>
     <sys:String x:Key="AssemblIgnore">忽略</sys:String>
     <sys:String x:Key="MultiTargetDirPathChanged">当前选择有多个，是否更新所有目标目录！</sys:String>
-
+    <sys:String x:Key="AssemblyCustomPath">使用用户路径</sys:String>
 
     <!--应用程序图标-->
     <sys:String x:Key="AppIconMenuName">应用程序&quot;开始菜单&quot;文件夹名称:</sys:String>
