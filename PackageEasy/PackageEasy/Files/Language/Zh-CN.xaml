@@ -15,6 +15,8 @@
     <sys:String x:Key="MainExportScript">导出脚本</sys:String>
     <sys:String x:Key="MainImportScript">打开脚本</sys:String>
     <sys:String x:Key="MainExit">退出</sys:String>
+    <sys:String x:Key="MainDataStore">数据</sys:String>
+    <sys:String x:Key="MainTargetPath" >路径管理</sys:String>
 
     <sys:String x:Key="MainBulid">生成</sys:String>
     <sys:String x:Key="MainCompile">编译</sys:String>
@@ -64,7 +66,7 @@
     <sys:String x:Key="BaseInfoWorkSapce">工作目录：</sys:String>
     <sys:String x:Key="BaseInfoUseRelative">使用相对路径</sys:String>
     <sys:String x:Key="BaseInfoInstallForALL">安装到所有用户：</sys:String>
-    
+
     <!--组件信息-->
     <sys:String x:Key="AssemblyName">组件名称</sys:String>
     <sys:String x:Key="AssemblyDescription">描述</sys:String>
@@ -155,7 +157,7 @@
     <sys:String x:Key="SettingNsisHelper">帮助文档：</sys:String>
     <sys:String x:Key="SettingTheme">主题：</sys:String>
     <sys:String x:Key="SettingLanguage">语言：</sys:String>
-    
+
     <!--cs界面-->
     <!--主界面cs-->
     <sys:String x:Key="MainExportScriptTips">是否转换成相对路径？</sys:String>
@@ -255,4 +257,14 @@
     <sys:String x:Key="FileNoExist">文件不存在！</sys:String>
     <sys:String x:Key="InstallSuccess">安装成功！</sys:String>
 
+    <!--目标路径管理-->
+    <sys:String x:Key="TargetPathDisplayName">展示目录</sys:String>
+    <sys:String x:Key="TargetPathName">目标目录</sys:String>
+    <sys:String x:Key="TargetCreateTime">创建时间</sys:String>
+    <sys:String x:Key="TargetIsDefault">默认</sys:String>
+    <sys:String x:Key="TargetOperate">操作</sys:String>
+    <sys:String x:Key="TargetDel">删除</sys:String>
+    <sys:String x:Key="TargetSearchName">展示名称：</sys:String>
+    <sys:String x:Key="TargetSearchButton">搜索</sys:String>
+    <sys:String x:Key="TargetAdd">添加</sys:String>
 </ResourceDictionary>

@@ -21,7 +21,7 @@
                     GlassFrameThickness="0"
                     NonClientFrameEdges="None"
                     CornerRadius="0"
-                    ResizeBorderThickness="1"
+                    ResizeBorderThickness="3"
                     UseAeroCaptionButtons="False"
                      />
 

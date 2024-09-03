@@ -47,7 +47,9 @@ namespace PackageEasy.Domain
         /// 结束页
         /// </summary>
         public FinishModel FinishInfo { get; set; }
-
-   
+        /// <summary>
+        /// 目标目录
+        /// </summary>
+        public List<TargetPathModel> TargetPaths { get; set; }
     }
 }

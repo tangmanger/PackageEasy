@@ -172,7 +172,7 @@
 
                             </ToggleButton.Template>
                         </ToggleButton>
-                        <ToggleButton Grid.Column="1" Visibility="Collapsed" IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}" >
+                        <ToggleButton Grid.Column="1"  IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}" >
                             <ToggleButton.Template>
 
                                 <ControlTemplate TargetType="ToggleButton">

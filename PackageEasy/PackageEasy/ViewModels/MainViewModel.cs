@@ -48,7 +48,7 @@ namespace PackageEasy.ViewModels
             LanguageHelper.LanguageChanged += LanguageHelper_LanguageChanged;
         }
 
-      
+
 
         #region 属性
 
@@ -589,6 +589,16 @@ namespace PackageEasy.ViewModels
 
         });
 
+        /// <summary>
+        /// 路径管理
+        /// </summary>
+        public RelayCommand TargetPathCommand => new RelayCommand(() =>
+        {
+            TargetPathControl targetPathControl = new TargetPathControl();
+            ShowWindow showWindow = new ShowWindow(targetPathControl);
+            showWindow.ResizeMode=ResizeMode.CanResize;
+            showWindow.ShowDialog();
+        });
 
         /// <summary>
         /// 打开文件
