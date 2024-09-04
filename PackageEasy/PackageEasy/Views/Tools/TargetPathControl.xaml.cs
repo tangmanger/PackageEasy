@@ -1,4 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using PackageEasy.Common;
+using PackageEasy.Common.Data;
 using PackageEasy.Common.Helpers;
 using PackageEasy.Controls.Controls;
 using PackageEasy.Domain;
@@ -31,19 +33,27 @@ namespace PackageEasy.Views.Tools
         {
             InitializeComponent();
             DataContext = this;
+            SaveLocalVisibility = Visibility.Collapsed;
         }
         ProjectInfoModel _projectInfo;
         List<TargetPathModel> allFiles;
         private string searchText;
+        private string targetDisplayPath;
+        private string targetPath;
+        private Visibility addTargetPathVisibility;
+        private bool isSaveToLocal;
+        private Visibility saveLocalVisibility;
 
         public TargetPathControl(ProjectInfoModel projectInfo)
         {
             InitializeComponent();
             DataContext = this;
             _projectInfo = projectInfo;
+            SaveLocalVisibility = Visibility.Visible;
         }
         public override void Load()
         {
+            AddTargetPathVisibility = Visibility.Collapsed;
             if (_projectInfo != null)
             {
                 if (_projectInfo.TargetPaths == null)
@@ -74,6 +84,11 @@ namespace PackageEasy.Views.Tools
             if (_projectInfo != null)
             {
                 _projectInfo.TargetPaths = allFiles;
+                if (IsSaveToLocal)
+                {
+                    StoreHelper.UpdateLocalTargetPaths(allFiles);
+
+                }
             }
             else
             {
@@ -109,6 +124,67 @@ namespace PackageEasy.Views.Tools
                 RaisePropertyChanged();
             }
         }
+        /// <summary>
+        /// 显示目录
+        /// </summary>
+        public string TargetDisplayPath
+        {
+            get => targetDisplayPath;
+            set
+            {
+                targetDisplayPath = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// 目标目录
+        /// </summary>
+        public string TargetPath
+        {
+            get => targetPath;
+            set
+            {
+                targetPath = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// 新增是否可见
+        /// </summary>
+        public Visibility AddTargetPathVisibility
+        {
+            get => addTargetPathVisibility;
+            set
+            {
+                addTargetPathVisibility = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// 保存到本地
+        /// </summary>
+        public bool IsSaveToLocal
+        {
+            get => isSaveToLocal;
+            set
+            {
+                isSaveToLocal = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public Visibility SaveLocalVisibility
+        {
+            get => saveLocalVisibility;
+            set
+            {
+                saveLocalVisibility = value;
+                RaisePropertyChanged();
+            }
+        }
 
         #endregion
 
@@ -123,8 +199,7 @@ namespace PackageEasy.Views.Tools
         });
 
         /// <summary>
-        /// 查询所有
-        /// </summary>
+        /// <summary>
         public RelayCommand QueryCommand => new RelayCommand(() =>
         {
 
@@ -133,7 +208,45 @@ namespace PackageEasy.Views.Tools
 
         public RelayCommand AddCommand => new RelayCommand(() =>
         {
+            AddTargetPathVisibility = Visibility.Visible;
+        });
 
+        public RelayCommand SureCommand => new RelayCommand(() =>
+        {
+            if (string.IsNullOrWhiteSpace(TargetDisplayPath))
+            {
+                TMessageBox.ShowMsg(string.Format("{0}不能为空！".GetLangText(), "展示目录".GetLangText()));
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(TargetPath))
+            {
+                TMessageBox.ShowMsg(string.Format("{0}不能为空！".GetLangText(), "目标目录".GetLangText()));
+                return;
+            }
+            if (allFiles != null && allFiles.Count > 0 && allFiles.Exists(c => c.DisplayName == targetDisplayPath))
+            {
+
+                TMessageBox.ShowMsg(string.Format("{0}已经存在！".GetLangText(), "展示目录".GetLangText()));
+                return;
+            }
+            TargetPathModel targetPathModel = new TargetPathModel();
+            targetPathModel.CreateTime = DateTime.Now;
+            targetPathModel.UpdateTime = DateTime.Now;
+            targetPathModel.TargetPath = TargetPath;
+            targetPathModel.IsDefault = false;
+            targetPathModel.DisplayName = TargetDisplayPath;
+            targetPathModel.IsUserCreated = true;
+            if (allFiles == null)
+                allFiles = new List<TargetPathModel>();
+            allFiles.Add(targetPathModel);
+            Query();
+            AddTargetPathVisibility = Visibility.Collapsed;
+        });
+
+        public RelayCommand CancelCommand => new RelayCommand(() =>
+        {
+
+            AddTargetPathVisibility = Visibility.Collapsed;
         });
 
         #endregion

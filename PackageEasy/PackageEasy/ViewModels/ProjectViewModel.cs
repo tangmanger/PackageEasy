@@ -160,6 +160,12 @@ namespace PackageEasy.ViewModels
             if (ProjectInfo == null)
                 ProjectInfo = new ProjectInfoModel();
             File.WriteAllText(baseInfoPath, ProjectInfo.ExtraInfo.SerializeObject());
+
+            var targetPath = Path.Combine(SavePath, "TargetPaths.json");
+            if (ProjectInfo.TargetPaths == null || ProjectInfo.TargetPaths.Count == 0)
+                ProjectInfo.TargetPaths = StoreHelper.ReadLocalTargetFiles();
+            File.WriteAllText(targetPath, ProjectInfo.TargetPaths.SerializeObject());
+
             foreach (var item in ViewCaches)
             {
                 item.Value.BaseProjectViewModel.Save();

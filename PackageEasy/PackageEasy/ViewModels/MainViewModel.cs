@@ -594,9 +594,27 @@ namespace PackageEasy.ViewModels
         /// </summary>
         public RelayCommand TargetPathCommand => new RelayCommand(() =>
         {
-            TargetPathControl targetPathControl = new TargetPathControl();
+            TargetPathControl targetPathControl = null;
+            var table = TableList.Find(p => p.IsActive);
+            if (table != null)
+            {
+                if (CacheDataHelper.ProjectDic.ContainsKey(table.ProjectKey))
+                {
+                    var project = CacheDataHelper.ProjectDic[table.ProjectKey];
+                    if (project != null)
+                    {
+                        targetPathControl = new TargetPathControl(project);
+                    }
+                }
+            }
+            else
+            {
+                targetPathControl = new TargetPathControl();
+            }
             ShowWindow showWindow = new ShowWindow(targetPathControl);
-            showWindow.ResizeMode=ResizeMode.CanResize;
+            showWindow.Width = 850;
+            showWindow.Height = 550;
+            showWindow.ResizeMode = ResizeMode.CanResize;
             showWindow.ShowDialog();
         });
 

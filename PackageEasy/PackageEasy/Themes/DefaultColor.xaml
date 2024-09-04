@@ -89,4 +89,7 @@
     <SolidColorBrush x:Key="TabItem.Selected.Border" Color="Transparent"/>
     <SolidColorBrush x:Key="TabItem.Disabled.Background" Color="#3B4F81"/>
     <SolidColorBrush x:Key="TabItem.Disabled.Border" Color="Transparent"/>
+    <!--目标路径-->
+    <SolidColorBrush x:Key="TargetPathControl.AddBorder.Background" Color="LightGray"></SolidColorBrush>
+    <SolidColorBrush x:Key="TargetPathControl.WorkBackground" Color="White"></SolidColorBrush>
 </ResourceDictionary>

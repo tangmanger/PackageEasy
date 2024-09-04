@@ -37,10 +37,10 @@ namespace PackageEasy.Common.Helpers
                     LocalTargetPaths.Add(new TargetPathModel()
                     {
                         CreateTime = DateTime.Now,
-                        DisplayName = targetDirType.ToString(),
+                        DisplayName = $"${targetDirType.ToString()}",
                         IsDefault = true,
                         IsUserCreated = false,
-                        TargetPath = targetDirType.ToString(),
+                        TargetPath = $"${targetDirType.ToString()}",
                         UpdateTime = DateTime.Now,
                     });
                 }
@@ -60,6 +60,21 @@ namespace PackageEasy.Common.Helpers
             var data = LocalTargetPaths.SerializeObject();
             File.WriteAllText(TargetFilePath, data);
         }
+        /// <summary>
+        /// 更新
+        /// </summary>
+        /// <param name="localTargetPaths"></param>
+        public static void UpdateLocalTargetPaths(List<TargetPathModel> localTargetPaths)
+        {
+            if (localTargetPaths == null || localTargetPaths.Count == 0) return;
+            var allNewData = localTargetPaths.FindAll(p => !LocalTargetPaths.Exists(c => c.DisplayName == p.DisplayName));
+            if (allNewData == null || allNewData.Count == 0) return;
+            LocalTargetPaths.AddRange(allNewData);
+        }
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="targetPath"></param>
         public static void DelLocalTargetPath(TargetPathModel targetPath)
         {
             if (targetPath == null) return;

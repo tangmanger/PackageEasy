@@ -35,7 +35,7 @@ namespace PackageEasy.Helpers
             {
                 if (CacheDataHelper.FileOpenDic.ContainsValue(openFileDialog.FileName))
                 {
-                    return new Tuple<bool, string>(false,CommonSettings.HomeFileHasOpened);
+                    return new Tuple<bool, string>(false, CommonSettings.HomeFileHasOpened);
                 }
 
                 return Open(openFileDialog.FileName, projectViewModel);
@@ -93,6 +93,16 @@ namespace PackageEasy.Helpers
                 projectViewModel.ProjectInfo.ExtraInfo.FilePath = filePath;
 
             }
+            var targetPath = Path.Combine(path, "TargetPaths.json");
+            if (!File.Exists(targetPath))
+            {
+                projectViewModel.ProjectInfo.TargetPaths = StoreHelper.ReadLocalTargetFiles();
+            }
+            else
+            {
+                projectViewModel.ProjectInfo.TargetPaths = File.ReadAllText(targetPath).DeserializeObject<List<TargetPathModel>>();
+            }
+
             var baseInfo = Path.Combine(path, "BaseInfo.json");
 
             FileInfo fileInfo = new FileInfo(filePath);
@@ -231,7 +241,7 @@ namespace PackageEasy.Helpers
             }
             else
             {
-                oldFilePath=filePath;
+                oldFilePath = filePath;
                 if (projectViewModel.ProjectInfo.Registry != null && projectViewModel.ProjectInfo.Registry.IsUsePassword)
                 {
                     filePath = filePath.Replace(StaticStringHelper.PGE, StaticStringHelper.PKY);
@@ -258,7 +268,7 @@ namespace PackageEasy.Helpers
             }
             var success = ZipHelper.Compress(projectViewModel.SavePath, filePath, password);
             Directory.Delete(projectViewModel.SavePath, true);
-            if(oldFilePath!=filePath)
+            if (oldFilePath != filePath)
             {
                 File.Delete(oldFilePath);
             }

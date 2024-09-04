@@ -35,17 +35,7 @@ namespace PackageEasy.ViewModels
         public AssemblyViewModel(ViewType viewType, string key) : base(viewType, key)
         {
             AssemblyList = new List<AssemblyModel>();
-            TargetDirList = new List<DescModel<TargetDirType>>();
-            foreach (var target in Enum.GetValues(typeof(TargetDirType)))
-            {
-                TargetDirType targetDirType = (TargetDirType)target;
-                TargetDirList.Add(new DescModel<TargetDirType>()
-                {
-                    Data = targetDirType,
-                    DisplayName = $"${targetDirType.ToString()}",
-                    Description = $"${targetDirType.ToString()}"
-                });
-            }
+            TargetDirList = ProjectInfo.TargetPaths;
             assemblyInfoModel.AssemblyList = AssemblyList;
             ProjectInfo.AssemblyInfo = assemblyInfoModel;
         }
@@ -56,7 +46,7 @@ namespace PackageEasy.ViewModels
         AssemblyInfoModel assemblyInfoModel = new AssemblyInfoModel();
 
         List<AssemblyFileModel> allFileList = new List<AssemblyFileModel>();
-        private List<DescModel<TargetDirType>> targetDirList;
+        private List<TargetPathModel> targetDirList;
         private List<AssemblyModel> assemblyList;
         private List<AssemblyFileModel> fileList;
         private bool isAllowChoose;
@@ -101,7 +91,7 @@ namespace PackageEasy.ViewModels
         /// <summary>
         /// 目标目录
         /// </summary>
-        public List<DescModel<TargetDirType>> TargetDirList
+        public List<TargetPathModel> TargetDirList
         {
             get => targetDirList;
             set
@@ -327,10 +317,10 @@ namespace PackageEasy.ViewModels
 
         public RelayCommand<AssemblyModel> ShowDetailCommand => new RelayCommand<AssemblyModel>((s) =>
         {
-            AssemblyFilesDialog assemblyFiles = new AssemblyFilesDialog();
-            AssemblyFilesViewModel assemblyFileModel = new AssemblyFilesViewModel(s.FileList, TargetDirList);
-            assemblyFiles.DataContext = assemblyFileModel;
-            assemblyFiles.ShowDialog();
+            //AssemblyFilesDialog assemblyFiles = new AssemblyFilesDialog();
+            //AssemblyFilesViewModel assemblyFileModel = new AssemblyFilesViewModel(s.FileList, TargetDirList);
+            //assemblyFiles.DataContext = assemblyFileModel;
+            //assemblyFiles.ShowDialog();
 
         });
 
@@ -374,7 +364,7 @@ namespace PackageEasy.ViewModels
                     assemblyFileModel.SubPath = fileInfo?.FullName?.Replace(currentAssembly.SelectDir, "") ?? "";
                     assemblyFileModel.FilePath = assemblyFileModel.SubPath;
                     assemblyFileModel.IsDirectory = true;
-                    assemblyFileModel.TargetPath = TargetDirList.FirstOrDefault() ?? new DescModel<TargetDirType>() { Data = TargetDirType.INSTDIR };
+                    assemblyFileModel.TargetPath = TargetDirList.FirstOrDefault() ?? new TargetPathModel();
                     var current = assemblyFileModels.Find(p => p.FilePath == assemblyFileModel.FilePath);
                     if (current != null)
                     {
@@ -435,7 +425,7 @@ namespace PackageEasy.ViewModels
                     assemblyFileModel.SubPath = fileInfo?.FullName?.Replace(currentAssembly.SelectDir, "") ?? "";
                     assemblyFileModel.FilePath = assemblyFileModel.SubPath;
                     assemblyFileModel.IsDirectory = true;
-                    assemblyFileModel.TargetPath = TargetDirList.FirstOrDefault() ?? new DescModel<TargetDirType>() { Data = TargetDirType.INSTDIR };
+                    assemblyFileModel.TargetPath = TargetDirList.FirstOrDefault() ?? new TargetPathModel();
                     var current = assemblyFileModels.Find(p => p.FilePath == assemblyFileModel.FilePath);
                     if (current != null)
                     {
@@ -472,7 +462,7 @@ namespace PackageEasy.ViewModels
                     }
                     FileInfo fileInfo = new FileInfo(file);
                     assemblyFileModel.SubPath = fileInfo?.DirectoryName?.Replace(currentAssembly.SelectDir, "") ?? "";
-                    assemblyFileModel.TargetPath = TargetDirList.FirstOrDefault() ?? new DescModel<TargetDirType>() { Data = TargetDirType.INSTDIR };
+                    assemblyFileModel.TargetPath = TargetDirList.FirstOrDefault() ?? new TargetPathModel();
                     var current = assemblyFileModels.Find(p => p.FilePath == assemblyFileModel.FilePath);
                     if (current != null)
                     {
@@ -547,7 +537,7 @@ namespace PackageEasy.ViewModels
                     }
                     FileInfo fileInfo = new FileInfo(file);
                     assemblyFileModel.SubPath = fileInfo?.DirectoryName?.Replace(currentAssembly.SelectDir, "") ?? "";
-                    assemblyFileModel.TargetPath = TargetDirList.FirstOrDefault() ?? new DescModel<TargetDirType>() { Data = TargetDirType.INSTDIR };
+                    assemblyFileModel.TargetPath = TargetDirList.FirstOrDefault() ?? new TargetPathModel();
                     var current = assemblyFileModels.Find(p => p.FilePath == assemblyFileModel.FilePath);
                     if (current != null)
                     {
@@ -614,7 +604,7 @@ namespace PackageEasy.ViewModels
                     assemblyFileModel.FilePath = fileInfo.FullName.Replace(ProjectInfo.GetWorkSpace(), "");
                 }
                 assemblyFileModel.SubPath = fileInfo?.DirectoryName?.Replace(fileInfo.Directory.FullName, "") ?? "";
-                assemblyFileModel.TargetPath = TargetDirList.FirstOrDefault() ?? new DescModel<TargetDirType>() { Data = TargetDirType.INSTDIR };
+                assemblyFileModel.TargetPath = TargetDirList.FirstOrDefault() ?? new TargetPathModel();
                 currentAssembly.FileList.Add(assemblyFileModel);
                 if (currentAssembly.FileList == null)
                     currentAssembly.FileList = new List<AssemblyFileModel>();
@@ -781,7 +771,7 @@ namespace PackageEasy.ViewModels
         /// <summary>
         /// 变更目标目录
         /// </summary>
-        public RelayCommand<DescModel<TargetDirType>> TargetPathChangedCommand => new RelayCommand<DescModel<TargetDirType>>((s) =>
+        public RelayCommand<TargetPathModel> TargetPathChangedCommand => new RelayCommand<TargetPathModel>((s) =>
         {
             if (isChanging) return;
             isChanging = true;
@@ -793,7 +783,7 @@ namespace PackageEasy.ViewModels
                 if (selected == null) return;
                 foreach (var item in selected)
                 {
-                    if (item.TargetPath.Data != s.Data)
+                    if (item.TargetPath.DisplayName != s.DisplayName)
                     {
                         item.TargetPath = s;
                     }
@@ -867,6 +857,7 @@ namespace PackageEasy.ViewModels
         {
             base.RefreshData();
             assemblyInfoModel = ProjectInfo.AssemblyInfo;
+            TargetDirList = ProjectInfo.TargetPaths;
             if (assemblyInfoModel == null)
                 assemblyInfoModel = new AssemblyInfoModel();
             AssemblyList = assemblyInfoModel.AssemblyList ?? new List<AssemblyModel>();
@@ -877,14 +868,14 @@ namespace PackageEasy.ViewModels
                 {
                     foreach (var file in assitem.FileList)
                     {
-                        file.TargetPath = TargetDirList.Find(p => p.Data == file.TargetPath.Data);
+                        file.TargetPath = TargetDirList.Find(p => p.DisplayName == file.TargetPath.DisplayName) ?? new TargetPathModel();
                     }
                 }
                 if (assitem.IgnoreFileList != null)
                 {
                     foreach (var file in assitem.IgnoreFileList)
                     {
-                        file.TargetPath = TargetDirList.Find(p => p.Data == file.TargetPath.Data);
+                        file.TargetPath = TargetDirList.Find(p => p.DisplayName == file.TargetPath.DisplayName) ?? new TargetPathModel();
                     }
                 }
             }

@@ -267,4 +267,6 @@
     <sys:String x:Key="TargetSearchName">展示名称：</sys:String>
     <sys:String x:Key="TargetSearchButton">搜索</sys:String>
     <sys:String x:Key="TargetAdd">添加</sys:String>
+    <sys:String x:Key="TargetIsUserCreate">用户创建</sys:String>
+    <sys:String x:Key="TargetSaveToLocal">保存到本地</sys:String>
 </ResourceDictionary>

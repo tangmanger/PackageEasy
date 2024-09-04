@@ -15,7 +15,7 @@ namespace PackageEasy.Domain.Models
     /// </summary>
     public class AssemblyFileModel : BaseModel
     {
-        private DescModel<TargetDirType> targetPath;
+        private TargetPathModel targetPath;
         private string filePath;
         private int assemblyId;
         private int fileId;
@@ -87,7 +87,7 @@ namespace PackageEasy.Domain.Models
         /// <summary>
         /// 目标路径
         /// </summary>
-        public DescModel<TargetDirType> TargetPath
+        public TargetPathModel TargetPath
         {
             get => targetPath;
             set

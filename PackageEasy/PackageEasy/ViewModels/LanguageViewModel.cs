@@ -21,17 +21,17 @@ namespace PackageEasy.ViewModels
         {
             if (MultiFileList == null)
                 MultiFileList = new List<MultiFileModel>();
-            TargetDirList = new List<DescModel<TargetDirType>>();
-            foreach (var target in Enum.GetValues(typeof(TargetDirType)))
-            {
-                TargetDirType targetDirType = (TargetDirType)target;
-                TargetDirList.Add(new DescModel<TargetDirType>()
-                {
-                    Data = targetDirType,
-                    DisplayName = $"${targetDirType.ToString()}",
-                    Description = $"${targetDirType.ToString()}"
-                });
-            }
+            //TargetDirList = new List<DescModel<TargetDirType>>();
+            //foreach (var target in Enum.GetValues(typeof(TargetDirType)))
+            //{
+            //    TargetDirType targetDirType = (TargetDirType)target;
+            //    TargetDirList.Add(new DescModel<TargetDirType>()
+            //    {
+            //        Data = targetDirType,
+            //        DisplayName = $"${targetDirType.ToString()}",
+            //        Description = $"${targetDirType.ToString()}"
+            //    });
+            //}
         }
 
 
@@ -42,7 +42,7 @@ namespace PackageEasy.ViewModels
         private List<InstallLanguageModel> installLangList;
         private List<AssemblyFileModel> fileList;
         private List<AssemblyFileModel> dirList;
-        private List<DescModel<TargetDirType>> targetDirList;
+        private List<TargetPathModel> targetDirList;
 
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace PackageEasy.ViewModels
         /// <summary>
         /// 目标目录
         /// </summary>
-        public List<DescModel<TargetDirType>> TargetDirList
+        public List<TargetPathModel> TargetDirList
         {
             get => targetDirList;
             set
@@ -136,6 +136,9 @@ namespace PackageEasy.ViewModels
 
         private void InitList()
         {
+            TargetDirList = ProjectInfo.TargetPaths;
+            if (TargetDirList == null)
+                TargetDirList = StoreHelper.ReadLocalTargetFiles();
             InstallLangList = ProjectInfo.BaseInfo.LanguageList;
             if (ProjectInfo.AssemblyInfo != null && ProjectInfo.AssemblyInfo.AssemblyList != null)
             {
@@ -154,7 +157,7 @@ namespace PackageEasy.ViewModels
                 if (item != null && DirList != null && item.TargetDir != null)
                     item.TargetDir = DirList?.Find(c => c?.FilePath == item.TargetDir?.FilePath) ?? DirList.FirstOrDefault();
                 if (item != null && TargetDirList != null && item.TargetPath != null)
-                    item.TargetPath = TargetDirList.Find(c => c.Data == item.TargetPath.Data) ?? TargetDirList.FirstOrDefault();
+                    item.TargetPath = TargetDirList.Find(c => c.DisplayName == item.TargetPath.DisplayName) ?? TargetDirList.FirstOrDefault();
             }
         }
 

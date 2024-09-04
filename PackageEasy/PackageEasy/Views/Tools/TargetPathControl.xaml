@@ -59,7 +59,7 @@
                 <DataGridTemplateColumn  MinWidth="55" SortMemberPath="IsUserCreated">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock  d:Text="默认" Text="{DynamicResource TargetIsDefault}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></TextBlock>
+                            <TextBlock  d:Text="用户创建" Text="{DynamicResource TargetIsUserCreate}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
@@ -82,5 +82,27 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <Grid Grid.RowSpan="2" Visibility="{Binding AddTargetPathVisibility}">
+            <Border Background="{DynamicResource TargetPathControl.AddBorder.Background}" Opacity="0.5" ></Border>
+            <Border Width="auto" Height="auto" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{DynamicResource TargetPathControl.WorkBackground}" CornerRadius="8">
+                <StackPanel Margin="25,20">
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <TextBlock d:Text="展示目录" VerticalAlignment="Center"  Style="{StaticResource DefaultTextBlockStyle}"  Text="{DynamicResource TargetPathDisplayName}"></TextBlock>
+                        <TextBlock d:Text="：" VerticalAlignment="Center"  Style="{StaticResource DefaultTextBlockStyle}"  Text="{DynamicResource Format_Colon}"></TextBlock>
+                        <TextBox Width="150" Height="30" Margin="5,0,0,0" Text="{Binding TargetDisplayPath}"  Style="{StaticResource CommonTextBox}"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal"  Margin="5">
+                        <TextBlock d:Text="目标目录"  VerticalAlignment="Center" Style="{StaticResource DefaultTextBlockStyle}" Text="{DynamicResource TargetPathName}"></TextBlock>
+                        <TextBlock d:Text="：" VerticalAlignment="Center"  Style="{StaticResource DefaultTextBlockStyle}"  Text="{DynamicResource Format_Colon}"></TextBlock>
+                        <TextBox Width="150" Height="30" Margin="5,0,0,0" Text="{Binding TargetPath}" Style="{StaticResource CommonTextBox}"></TextBox>
+                    </StackPanel>
+                    <CheckBox d:Content="保存到本地" Visibility="{Binding SaveLocalVisibility}" Content="{DynamicResource TargetSaveToLocal}" IsChecked="{Binding IsSaveToLocal}" Margin="5"></CheckBox>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                        <Button Width="80" Height="30" Command="{Binding SureCommand}" Margin="5,0,0,0" d:Content="确定" Content="{DynamicResource Yes}" Style="{StaticResource CommonButtonStyle}"></Button>
+                        <Button Width="80" Height="30" Command="{Binding CancelCommand}" Margin="15,0,0,0" d:Content="取消"  Content="{DynamicResource Cancel}" Style="{StaticResource CommonButtonStyle}"></Button>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
     </Grid>
 </controls:BaseControl>

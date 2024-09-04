@@ -312,8 +312,10 @@ namespace PackageEasy.NSIS
                             string str = $"Section \"$({item.SectionName})\" {sec}";
                             list.Add(str);
                             list.Add("  SetOverwrite try");
-                            if (!hasSetIcon)
-                                list.Add("  SetShellVarContext all");
+                            if (!hasSetIcon && projectInfoModel != null && projectInfoModel.BaseInfo != null && projectInfoModel.BaseInfo.InstallForAll)
+                            {
+                                list.Add(" SetShellVarContext all");
+                            }
                             sections.Add(sec);
                             if (!string.IsNullOrWhiteSpace(item.AssemblyDescription))
                                 sectionDic.Add(sec, item.AssemblyDescription);
@@ -323,7 +325,7 @@ namespace PackageEasy.NSIS
                             foreach (var file in files)
                             {
                                 if (file.IsNoNeedCopy) continue;
-                                string dirPath = file.TargetPath.DisplayName;
+                                string dirPath = file.TargetPath.TargetPath;
                                 //启用用户目录
                                 if (file.IsUseCustomPath)
                                     dirPath = file.CustomTargetPath;
@@ -335,7 +337,7 @@ namespace PackageEasy.NSIS
                                     var multiFile = projectInfoModel.MultiFiles.Find(c => c.AssemblyFile.FilePath == file.FilePath && c.AssemblyFile.AssemblyId == file.AssemblyId);
                                     if (multiFile != null)
                                     {
-                                        dirPath = multiFile.TargetPath.DisplayName;
+                                        dirPath = multiFile.TargetPath.TargetPath;
                                         //启用用户目录
                                         if (file.IsUseCustomPath)
                                             dirPath = file.CustomTargetPath;
@@ -637,6 +639,7 @@ namespace PackageEasy.NSIS
 
                 list.Add("Function un.onInit");
                 list.Add(" !insertmacro MUI_UNGETLANGUAGE");
+             
                 if (projectInfoModel.FinishInfo != null)
                 {
                     if (!string.IsNullOrWhiteSpace(projectInfoModel.FinishInfo.UninstallTip))
@@ -725,6 +728,10 @@ namespace PackageEasy.NSIS
                 {
                     list.Add($"!insertmacro MUI_STARTMENU_GETFOLDER \"Application\" $ICONS_GROUP");
                 }
+                if ( projectInfoModel != null && projectInfoModel.BaseInfo != null && projectInfoModel.BaseInfo.InstallForAll)
+                {
+                    list.Add(" SetShellVarContext all");
+                }
                 if (projectInfoModel != null && projectInfoModel.AssemblyInfo != null)
                 {
                     if (projectInfoModel.AssemblyInfo.AssemblyList != null)
@@ -741,7 +748,7 @@ namespace PackageEasy.NSIS
                                     if (file.IsUseCustomPath)
                                         list.Add($" Delete \"{file.CustomTargetPath}{file.FilePath}\"");
                                     else
-                                        list.Add($" Delete \"{file.TargetPath.DisplayName}{file.FilePath}\"");
+                                        list.Add($" Delete \"{file.TargetPath.TargetPath}{file.FilePath}\"");
                                 }
 
                             }

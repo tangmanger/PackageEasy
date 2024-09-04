@@ -17,7 +17,7 @@ namespace PackageEasy.Domain.Models
         private InstallLanguageModel lang;
         private AssemblyFileModel assemblyFile;
         private AssemblyFileModel targetDir;
-        private DescModel<TargetDirType> targetPath;
+        private TargetPathModel targetPath;
         private string customTargetPath;
         private bool isUseCustomPath;
 
@@ -76,7 +76,7 @@ namespace PackageEasy.Domain.Models
         /// <summary>
         /// 目标路径
         /// </summary>
-        public DescModel<TargetDirType> TargetPath
+        public TargetPathModel TargetPath
         {
             get => targetPath;
             set
