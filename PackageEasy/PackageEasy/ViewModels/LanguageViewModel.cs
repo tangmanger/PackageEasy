@@ -32,7 +32,10 @@ namespace PackageEasy.ViewModels
             //        Description = $"${targetDirType.ToString()}"
             //    });
             //}
+            Service.TargetPathChanged += Service_TargetPathChanged;
         }
+
+       
 
 
         #region 属性
@@ -136,7 +139,7 @@ namespace PackageEasy.ViewModels
 
         private void InitList()
         {
-            TargetDirList = ProjectInfo.TargetPaths;
+            TargetDirList = new List<TargetPathModel>(ProjectInfo.TargetPaths);
             if (TargetDirList == null)
                 TargetDirList = StoreHelper.ReadLocalTargetFiles();
             InstallLangList = ProjectInfo.BaseInfo.LanguageList;
@@ -193,6 +196,16 @@ namespace PackageEasy.ViewModels
                 }
             }
             return true;
+        }
+
+        public override void Dispose()
+        {
+            base.Dispose();
+            Service.TargetPathChanged -= Service_TargetPathChanged;
+        }
+        private void Service_TargetPathChanged()
+        {
+            InitList();
         }
 
         #endregion

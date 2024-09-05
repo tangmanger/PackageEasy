@@ -30,6 +30,10 @@ namespace PackageEasy.Domain.Interfaces
         /// </summary>
         event Action<string, string> CreateProject;
         /// <summary>
+        /// 目标路径变化
+        /// </summary>
+        event Action TargetPathChanged;
+        /// <summary>
         /// 创建实验
         /// </summary>
         /// <param name="name"></param>
@@ -44,5 +48,10 @@ namespace PackageEasy.Domain.Interfaces
         /// 多语言变化
         /// </summary>
         void OnLanguageChanged();
+
+        /// <summary>
+        /// 目标路径变化
+        /// </summary>
+        void OnTargetPathChanged();
     }
 }

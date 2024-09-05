@@ -537,6 +537,7 @@ namespace PackageEasy.ViewModels
         {
             if (ProjectInfo != null && ProjectInfo.BaseInfo != null)
             {
+                ProjectInfo.BaseInfo.Key = ParentKey;
                 ApplicationName = ProjectInfo.BaseInfo.ApplicationName;
                 ApplicationPublisher = ProjectInfo.BaseInfo.ApplicationPublisher;
                 ApplicationUrl = ProjectInfo.BaseInfo.ApplicationUrl;

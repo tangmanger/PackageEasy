@@ -19,6 +19,7 @@ namespace PackageEasy.Services
         public event Action<string, string> CreateProject;
         public event Action PreCompile;
         public event Action LanguageChanged;
+        public event Action TargetPathChanged;
 
         public void OnCreateProject(string name, string key)
         {
@@ -33,6 +34,11 @@ namespace PackageEasy.Services
         public void OnPreCompile()
         {
             PreCompile?.Invoke();
+        }
+
+        public void OnTargetPathChanged()
+        {
+            TargetPathChanged?.Invoke();
         }
     }
 }

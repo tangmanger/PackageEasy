@@ -76,7 +76,7 @@
                     </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Margin="5,0,5,0" Style="{StaticResource CommonButtonStyle}" Command="{Binding DataContext.DelTargetCommand,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}" MinWidth="80" Height="30" Content="{DynamicResource TargetDel}"></Button>
+                            <Button Margin="5,0,5,0" IsEnabled="{Binding IsUserCreated}" Style="{StaticResource CommonButtonStyle}" Command="{Binding DataContext.DelTargetCommand,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}" MinWidth="80" Height="30" CommandParameter="{Binding }" Content="{DynamicResource TargetDel}"></Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

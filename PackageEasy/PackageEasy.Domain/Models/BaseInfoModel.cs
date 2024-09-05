@@ -1,4 +1,5 @@
-﻿using PackageEasy.Domain.Enums;
+﻿using PackageEasy.Domain.Attributes;
+using PackageEasy.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace PackageEasy.Domain.Models
     /// </summary>
     public class BaseInfoModel
     {
+        [SaveIgnore]
         public string Key { get; set; }
 
         private string applicationName;

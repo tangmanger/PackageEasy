@@ -38,7 +38,10 @@ namespace PackageEasy.ViewModels
             TargetDirList = ProjectInfo.TargetPaths;
             assemblyInfoModel.AssemblyList = AssemblyList;
             ProjectInfo.AssemblyInfo = assemblyInfoModel;
+            Service.TargetPathChanged += Service_TargetPathChanged;
         }
+
+
 
 
         #region 属性
@@ -803,6 +806,17 @@ namespace PackageEasy.ViewModels
 
         #region 方法
 
+        private void Service_TargetPathChanged()
+        {
+            RefreshData();
+        }
+
+        public override void Dispose()
+        {
+            base.Dispose();
+            Service.TargetPathChanged -= Service_TargetPathChanged;
+        }
+
         public override void NavigateOut()
         {
             base.NavigateOut();
@@ -855,7 +869,7 @@ namespace PackageEasy.ViewModels
         {
             base.RefreshData();
             assemblyInfoModel = ProjectInfo.AssemblyInfo;
-            TargetDirList = ProjectInfo.TargetPaths;
+            TargetDirList = new List<TargetPathModel>(ProjectInfo.TargetPaths);
             if (assemblyInfoModel == null)
                 assemblyInfoModel = new AssemblyInfoModel();
             AssemblyList = assemblyInfoModel.AssemblyList ?? new List<AssemblyModel>();

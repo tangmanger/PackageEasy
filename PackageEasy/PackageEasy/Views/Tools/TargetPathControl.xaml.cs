@@ -4,7 +4,9 @@ using PackageEasy.Common.Data;
 using PackageEasy.Common.Helpers;
 using PackageEasy.Controls.Controls;
 using PackageEasy.Domain;
+using PackageEasy.Domain.Interfaces;
 using PackageEasy.Domain.Models;
+using PackageEasy.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -89,6 +91,9 @@ namespace PackageEasy.Views.Tools
                     StoreHelper.UpdateLocalTargetPaths(allFiles);
                     StoreHelper.SetLocalTargetPaths(allFiles);
                 }
+                IDataService dataService = ServiceHelper.GetService(_projectInfo.BaseInfo.Key);
+                if (dataService != null)
+                    dataService.OnTargetPathChanged();
             }
             else
             {
@@ -193,7 +198,12 @@ namespace PackageEasy.Views.Tools
         public RelayCommand<TargetPathModel> DelTargetCommand => new RelayCommand<TargetPathModel>((s) =>
         {
 
-            allFiles.Remove(s);
+            var c = allFiles.FirstOrDefault(c => c.DisplayName == s.DisplayName);
+            if (c != null)
+            {
+                allFiles.Remove(c);
+            }
+
             Query();
 
         });
