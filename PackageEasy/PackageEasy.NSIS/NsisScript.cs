@@ -326,9 +326,7 @@ namespace PackageEasy.NSIS
                             {
                                 if (file.IsNoNeedCopy) continue;
                                 string dirPath = file.TargetPath.TargetPath;
-                                //启用用户目录
-                                if (file.IsUseCustomPath)
-                                    dirPath = file.CustomTargetPath;
+
                                 if (!string.IsNullOrWhiteSpace(file.SubPath))
                                     dirPath += file.SubPath;
 
@@ -338,9 +336,7 @@ namespace PackageEasy.NSIS
                                     if (multiFile != null)
                                     {
                                         dirPath = multiFile.TargetPath.TargetPath;
-                                        //启用用户目录
-                                        if (file.IsUseCustomPath)
-                                            dirPath = file.CustomTargetPath;
+
                                         dirPath += multiFile.TargetDir.FilePath;
                                         delDirs.Add(dirPath);
                                         currentDirectory = dirPath;
@@ -639,7 +635,7 @@ namespace PackageEasy.NSIS
 
                 list.Add("Function un.onInit");
                 list.Add(" !insertmacro MUI_UNGETLANGUAGE");
-             
+
                 if (projectInfoModel.FinishInfo != null)
                 {
                     if (!string.IsNullOrWhiteSpace(projectInfoModel.FinishInfo.UninstallTip))
@@ -728,7 +724,7 @@ namespace PackageEasy.NSIS
                 {
                     list.Add($"!insertmacro MUI_STARTMENU_GETFOLDER \"Application\" $ICONS_GROUP");
                 }
-                if ( projectInfoModel != null && projectInfoModel.BaseInfo != null && projectInfoModel.BaseInfo.InstallForAll)
+                if (projectInfoModel != null && projectInfoModel.BaseInfo != null && projectInfoModel.BaseInfo.InstallForAll)
                 {
                     list.Add(" SetShellVarContext all");
                 }
@@ -745,10 +741,7 @@ namespace PackageEasy.NSIS
                             {
                                 if (!file.IsNoNeedDelete)
                                 {
-                                    if (file.IsUseCustomPath)
-                                        list.Add($" Delete \"{file.CustomTargetPath}{file.FilePath}\"");
-                                    else
-                                        list.Add($" Delete \"{file.TargetPath.TargetPath}{file.FilePath}\"");
+                                    list.Add($" Delete \"{file.TargetPath.TargetPath}{file.FilePath}\"");
                                 }
 
                             }

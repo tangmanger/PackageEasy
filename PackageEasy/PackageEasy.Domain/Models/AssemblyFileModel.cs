@@ -27,7 +27,6 @@ namespace PackageEasy.Domain.Models
         private bool isExistNoNeedCopy;
         private bool isNoNeedDelete;
         private string customTargetPath;
-        private bool isUseCustomPath;
 
         /// <summary>
         /// 选择
@@ -108,18 +107,7 @@ namespace PackageEasy.Domain.Models
                 RaisePropertyChanged();
             }
         }
-        /// <summary>
-        /// 用户自定义路径
-        /// </summary>
-        public bool IsUseCustomPath
-        {
-            get => isUseCustomPath;
-            set
-            {
-                isUseCustomPath = value;
-                RaisePropertyChanged();
-            }
-        }
+      
         /// <summary>
         /// 子路径
         /// </summary>

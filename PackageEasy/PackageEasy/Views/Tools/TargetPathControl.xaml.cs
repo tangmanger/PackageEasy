@@ -87,7 +87,7 @@ namespace PackageEasy.Views.Tools
                 if (IsSaveToLocal)
                 {
                     StoreHelper.UpdateLocalTargetPaths(allFiles);
-
+                    StoreHelper.SetLocalTargetPaths(allFiles);
                 }
             }
             else

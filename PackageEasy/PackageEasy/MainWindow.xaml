@@ -82,7 +82,10 @@
                                 </MenuItem>
                             </MenuItem>
                             <MenuItem MinWidth="50" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="14" HorizontalContentAlignment="Center"  d:Header="数据" Header="{DynamicResource MainDataStore}">
-                                <MenuItem d:Header="路径管理" Header="{DynamicResource MainTargetPath}" Command="{Binding TargetPathCommand}" InputGestureText=""  >
+                                <MenuItem d:Header="路径管理" Header="{DynamicResource MainTargetPath}" Command="{Binding TargetPathCommand}" InputGestureText="" >
+                                    <MenuItem.Icon>
+                                        <TextBlock Style="{StaticResource IconFontStyle}" FontSize="14" Text="&#xe672;"></TextBlock>
+                                    </MenuItem.Icon>
                                 </MenuItem>
                             </MenuItem>
                             <MenuItem MinWidth="50" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="14" HorizontalContentAlignment="Center"  d:Header="帮助" Header="{DynamicResource MainHelp}">

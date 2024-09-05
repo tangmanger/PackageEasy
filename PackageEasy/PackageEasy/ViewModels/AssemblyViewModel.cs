@@ -660,7 +660,6 @@ namespace PackageEasy.ViewModels
                     IsExistNoNeedCopy = !selected.Exists(c => c.IsExistNoNeedCopy == false);
                     IsNoNeedCopy = !selected.Exists(c => c.IsNoNeedCopy == false);
                     IsNoNeedDelete = !selected.Exists(c => c.IsNoNeedDelete == false);
-                    IsUseCustomPath = !selected.Exists(c => c.IsUseCustomPath == false);
                     return;
                 }
 
@@ -731,7 +730,6 @@ namespace PackageEasy.ViewModels
                             item.IsNoNeedDelete = !item.IsNoNeedDelete;
                             break;
                         case FileMenuOperateType.UseCustomPath:
-                            item.IsUseCustomPath = !item.IsUseCustomPath;
                             break;
                         default:
                             break;

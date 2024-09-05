@@ -63,7 +63,8 @@
     <sys:String x:Key="BaseInfoButtonTypeCircle">Circular radio button</sys:String>
     <sys:String x:Key="BaseInfoWorkSapce">Working directory:</sys:String>
     <sys:String x:Key="BaseInfoUseRelative">Use relative path</sys:String>
-
+    <sys:String x:Key="BaseInfoInstallForALL">Install to all users:</sys:String>
+    
     <!--Component information-->
     <sys:String x:Key="AssemblyName">Component name</sys:String>
     <sys:String x:Key="AssemblyDescription">Description</sys:String>
@@ -252,6 +253,19 @@
     <sys:String x:Key="ProcessCheck">Process Check</sys:String>
     <sys:String x:Key="FileNoExist">File does not exist!</sys:String>
     <sys:String x:Key="InstallSuccess">Installation successful!</sys:String>
-    <sys:String x:Key="BaseInfoInstallForALL">Install For All User:</sys:String>
     <sys:String x:Key="AssemblyCustomPath">Use Custom Path</sys:String>
+
+    <!--Target path management-->
+    <sys:String x:Key="TargetPathDisplayName">Display directory</sys:String>
+    <sys:String x:Key="TargetPathName">Target directory</sys:String>
+    <sys:String x:Key="TargetCreateTime">Creation time</sys:String>
+    <sys:String x:Key="TargetIsDefault">Default</sys:String>
+    <sys:String x:Key="TargetOperate">Operation</sys:String>
+    <sys:String x:Key="TargetDel">Delete</sys:String>
+    <sys:String x:Key="TargetSearchName">Display name:</sys:String>
+    <sys:String x:Key="TargetSearchButton">Search</sys:String>
+    <sys:String x:Key="TargetAdd">Add</sys:String>
+
+    <sys:String x:Key="MainDataStore">Data</sys:String>
+    <sys:String x:Key="MainTargetPath" >Path Management</sys:String>
 </ResourceDictionary>

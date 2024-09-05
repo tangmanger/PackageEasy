@@ -52,7 +52,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>-->
-                <DataGridTemplateColumn SortMemberPath="AssemblyName" Width="*">
+                <DataGridTemplateColumn SortMemberPath="AssemblyName" Width="1.5*">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
                             <TextBlock d:Text="组件名称" Text="{DynamicResource AssemblyName}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></TextBlock>
@@ -219,8 +219,6 @@
                             </DataGridTemplateColumn.HeaderTemplate>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Grid>
-                                        <TextBox Text="{Binding CustomTargetPath}" Style="{StaticResource CommonTextBox}" x:Name="text" Visibility="Collapsed"></TextBox>
 
                                         <ComboBox Style="{StaticResource CommonComboBoxStyle}" x:Name="combox"
                                       DisplayMemberPath="DisplayName" 
@@ -234,16 +232,10 @@
                                             </i:Interaction.Triggers>
 
                                         </ComboBox>
-                                    </Grid>
 
                                     <!--<TextBox Style="{StaticResource CommonTextBox}"  IsReadOnly="True" Text="{Binding TargetPath}"  Margin="5,0,5,0"></TextBox>-->
                                     <!--<TextBlock Text="{Binding PlateName}" Foreground="{DynamicResource DataGridForeground}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>-->
-                                    <DataTemplate.Triggers>
-                                        <DataTrigger Binding="{Binding IsUseCustomPath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Value="true">
-                                            <Setter Property="Visibility" Value="Visible" TargetName="text"></Setter>
-                                            <Setter Property="Visibility" Value="Collapsed" TargetName="combox"></Setter>
-                                        </DataTrigger>
-                                    </DataTemplate.Triggers>
+                                   
                                     <!--<TextBox Style="{StaticResource CommonTextBox}"  IsReadOnly="True" Text="{Binding TargetPath}"  Margin="5,0,5,0"></TextBox>-->
                                     <!--<TextBlock Text="{Binding PlateName}" Foreground="{DynamicResource DataGridForeground}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>-->
                                 </DataTemplate>
@@ -383,7 +375,6 @@
                             <!--<MenuItem  Style="{StaticResource menuContextStyle}" IsChecked="{Binding IsNoNeedDelete}"  Command="{Binding SetMenuCommand}" CommandParameter="{x:Static enmus:FileMenuOperateType.IsNoNeedDelete}"  d:Header="不删除" Header="{DynamicResource AssemblUnDelete}"  ></MenuItem>-->
                             <Separator Style="{StaticResource sep}"/>
                             <MenuItem  Style="{StaticResource menuContextStyle}" d:Header="忽略" Command="{Binding SetMenuCommand}" CommandParameter="{x:Static enmus:FileMenuOperateType.Ignore}"  Header="{DynamicResource AssemblIgnore}"  ></MenuItem>
-                            <MenuItem  Style="{StaticResource menuContextStyle}"  IsChecked="{Binding IsUseCustomPath}" d:Header="使用用户路径" Command="{Binding SetMenuCommand}" CommandParameter="{x:Static enmus:FileMenuOperateType.UseCustomPath}"  Header="{DynamicResource AssemblyCustomPath}"  ></MenuItem>
 
                         </ContextMenu>
                     </DataGrid.ContextMenu>

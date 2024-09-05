@@ -50,18 +50,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Width="auto">
-                        <DataGridTemplateColumn.HeaderTemplate>
-                            <DataTemplate>
-                                <TextBlock Margin="5,0,5,0" d:Text="使用用户路径" Text="{DynamicResource AssemblyCustomPath}"  Foreground="{DynamicResource baseForeground}"    VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.HeaderTemplate>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <CheckBox VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsUseCustomPath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  ></CheckBox>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                   
                     <DataGridTemplateColumn   MinWidth="100">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate>
@@ -70,8 +59,7 @@
                         </DataGridTemplateColumn.HeaderTemplate>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                    <Grid>
-                                        <TextBox Text="{Binding CustomTargetPath}" Style="{StaticResource CommonTextBox}" x:Name="text" Visibility="Collapsed"></TextBox>
+                                 
 
                                         <ComboBox Style="{StaticResource CommonComboBoxStyle}" x:Name="combox"
                                                 
@@ -81,15 +69,7 @@
                       ItemsSource="{Binding DataContext.TargetDirList,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"></ComboBox>
                                         <!--<TextBox Style="{StaticResource CommonTextBox}"  IsReadOnly="True" Text="{Binding TargetPath}"  Margin="5,0,5,0"></TextBox>-->
                                         <!--<TextBlock Text="{Binding PlateName}" Foreground="{DynamicResource DataGridForeground}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>-->
-                                    </Grid>
-                                <!--<TextBox Style="{StaticResource CommonTextBox}"  IsReadOnly="True" Text="{Binding TargetPath}"  Margin="5,0,5,0"></TextBox>-->
-                                <!--<TextBlock Text="{Binding PlateName}" Foreground="{DynamicResource DataGridForeground}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>-->
-                                <DataTemplate.Triggers>
-                                    <DataTrigger Binding="{Binding IsUseCustomPath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Value="true">
-                                        <Setter Property="Visibility" Value="Visible" TargetName="text"></Setter>
-                                        <Setter Property="Visibility" Value="Collapsed" TargetName="combox"></Setter>
-                                    </DataTrigger>
-                                </DataTemplate.Triggers>
+                           
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

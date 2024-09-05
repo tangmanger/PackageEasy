@@ -64,7 +64,7 @@ namespace PackageEasy.Views.Tools
                     ThemeName = item.ThemeName,
                 });
             }
-
+            ThemeList = new List<ThemeModel>(ThemeList);
             CurrentTheme = ThemeList.Find(p => p.ThemeId == ConfigHelper.Config.ThemeId) ?? ThemeList.FirstOrDefault() ?? new ThemeModel();
             LanguageTypes = new List<LanguageTypeModel>();
             foreach (var item in LanguageHelper.LanguageTypes)
