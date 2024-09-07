@@ -35,7 +35,7 @@ namespace PackageEasy.ViewModels
             Service.TargetPathChanged += Service_TargetPathChanged;
         }
 
-       
+
 
 
         #region 属性
@@ -139,10 +139,13 @@ namespace PackageEasy.ViewModels
 
         private void InitList()
         {
+            if(ProjectInfo.TargetPaths==null)
+                ProjectInfo.TargetPaths=StoreHelper.ReadLocalTargetFiles();
             TargetDirList = new List<TargetPathModel>(ProjectInfo.TargetPaths);
             if (TargetDirList == null)
                 TargetDirList = StoreHelper.ReadLocalTargetFiles();
-            InstallLangList = ProjectInfo.BaseInfo.LanguageList;
+            if (ProjectInfo.BaseInfo != null)
+                InstallLangList = ProjectInfo.BaseInfo.LanguageList;
             if (ProjectInfo.AssemblyInfo != null && ProjectInfo.AssemblyInfo.AssemblyList != null)
             {
                 var allFiles = ProjectInfo.AssemblyInfo.AssemblyList.FindAll(p => p.FileList != null).SelectMany(c => c.FileList).ToList();

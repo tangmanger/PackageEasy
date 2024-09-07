@@ -91,7 +91,7 @@ namespace PackageEasy.Views.Tools
                     StoreHelper.UpdateLocalTargetPaths(allFiles);
                     StoreHelper.SetLocalTargetPaths(allFiles);
                 }
-                IDataService dataService = ServiceHelper.GetService(_projectInfo.BaseInfo.Key);
+                IDataService dataService = ServiceHelper.GetService(_projectInfo.ProjectKey);
                 if (dataService != null)
                     dataService.OnTargetPathChanged();
             }

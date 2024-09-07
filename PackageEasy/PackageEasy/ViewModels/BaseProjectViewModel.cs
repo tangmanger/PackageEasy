@@ -84,6 +84,7 @@ namespace PackageEasy.ViewModels
             {
                 CacheDataHelper.ProjectDic.Add(Key, ProjectInfo);
             }
+            ProjectInfo.ProjectKey = Key;
             Service = ServiceHelper.GetService(Key);
             Service.LanguageChanged += LanguageChanged;
 

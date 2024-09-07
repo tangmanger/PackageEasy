@@ -15,6 +15,7 @@ namespace PackageEasy.Domain
     /// </summary>
     public class ProjectInfoModel
     {
+        public string ProjectKey { get; set; }
         /// <summary>
         /// 额外信息
         /// </summary>
