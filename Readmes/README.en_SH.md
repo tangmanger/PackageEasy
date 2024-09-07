@@ -1,4 +1,4 @@
-# Based on NSIS packaging visualization tool
+﻿# Based on NSIS packaging visualization tool
 ## Original intention of development
 * The original HM NIS Edit is very simple to create and install, but it is not easy to modify, so it is newly added.
 * The original nsi script directly adds components, or deletes components, deletes files, etc. It is not simple to operate.
@@ -6,6 +6,16 @@
 ## Software Architecture
   It is developed using WPF+MVVM, imitating the Visual Studio style (although the imitation is not that thorough -_-!). It is developed based on .net 6 and supports simultaneous editing of multiple projects. The binding file format is __.pge__ file format. At present, there are still many business scenarios that are not covered, and there are still some minor bugs, which will be slowly maintained and improved in the future.
 ## Release Notes
+### V1.0.6 update
+* Support user-defined target path, and support local saving for cross-project use
+*Installation supports all users (solve the problem of installing under administrators and running under non-administrators)
+* Fixed a virtualization issue that caused the file list to be displayed incorrectly
+* Fix the inaccuracy in saving independent fields
+* Fixed error in copying files between working directory and source directory
+* Supplement the color values ​​of the black theme part
+* Fixed the issue of theme list display error when switching languages
+* [Update instructions](https://mp.weixin.qq.com/s/g71bUtea4KC0t3PnA4Qtsw)
+
 ### V1.0.5
 * Solve the problem of multi-language switching
 * To solve the installation problem, you can choose to copy files to the specified directory

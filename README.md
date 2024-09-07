@@ -13,6 +13,15 @@
 - zh_CN [简体中文](Readmes/README.zh_CN.md)
 
 ## Release Notes
+### V1.0.6 update
+* Support user-defined target path, and support local saving for cross-project use
+*Installation supports all users (solve the problem of installing under administrators and running under non-administrators)
+* Fixed a virtualization issue that caused the file list to be displayed incorrectly
+* Fix the inaccuracy in saving independent fields
+* Fixed error in copying files between working directory and source directory
+* Supplement the color values ​​of the black theme part
+* Fixed the issue of theme list display error when switching languages
+* [Update instructions](https://mp.weixin.qq.com/s/g71bUtea4KC0t3PnA4Qtsw)
 ### V1.0.5
 * Solve the problem of multi-language switching
 * To solve the installation problem, you can choose to copy files to the specified directory
