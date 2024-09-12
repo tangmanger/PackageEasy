@@ -36,6 +36,8 @@ namespace PackageEasy.ViewModels
         {
             AssemblyList = new List<AssemblyModel>();
             TargetDirList = ProjectInfo.TargetPaths;
+            if (TargetDirList == null)
+                TargetDirList = StoreHelper.ReadLocalTargetFiles();
             assemblyInfoModel.AssemblyList = AssemblyList;
             ProjectInfo.AssemblyInfo = assemblyInfoModel;
             Service.TargetPathChanged += Service_TargetPathChanged;
@@ -870,6 +872,8 @@ namespace PackageEasy.ViewModels
             base.RefreshData();
             assemblyInfoModel = ProjectInfo.AssemblyInfo;
             TargetDirList = new List<TargetPathModel>(ProjectInfo.TargetPaths);
+            if (TargetDirList == null)
+                TargetDirList = StoreHelper.ReadLocalTargetFiles();
             if (assemblyInfoModel == null)
                 assemblyInfoModel = new AssemblyInfoModel();
             AssemblyList = assemblyInfoModel.AssemblyList ?? new List<AssemblyModel>();
