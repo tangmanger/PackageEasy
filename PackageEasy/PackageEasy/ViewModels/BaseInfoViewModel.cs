@@ -859,6 +859,10 @@ namespace PackageEasy.ViewModels
                     return;
                 }
                 WorkSpace = folderBrowserDialog.SelectedPath;
+                if (ProjectInfo.BaseInfo == null)
+                    ProjectInfo.BaseInfo = new BaseInfoModel() { WorkSpace = WorkSpace };
+                else
+                    ProjectInfo.BaseInfo.WorkSpace = WorkSpace;
             }
         });
 
