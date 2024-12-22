@@ -411,6 +411,24 @@ namespace PackageEasy.NSIS
 
                                         foreach (var icon in projectInfoModel.AppIcon.AppIconInfoList)
                                         {
+                                            var targetDir = icon.FilePath.Split('\\');
+                                            if (targetDir != null)
+                                            {
+                                                if (targetDir.Length == 0)
+                                                    list.Add($"  SetOutPath \"$INSTDIR\"");
+                                                else
+                                                {
+                                                    var c = targetDir.LastOrDefault();
+                                                    if (c != null)
+                                                    {
+                                                        var tc = string.Join("\\", targetDir.Take(targetDir.Length - 1));
+                                                        if (string.IsNullOrWhiteSpace(tc))
+                                                            list.Add($"  SetOutPath \"$INSTDIR\"");
+                                                        else
+                                                            list.Add($"  SetOutPath \"{tc}\"");
+                                                    }
+                                                }
+                                            }
                                             if (icon.IconDir.Data == TargetDirType.SMPROGRAMS)
                                             {
                                                 list.Add($"  CreateShortCut \"$SMPROGRAMS\\{dirName ?? "a"}\\{icon.ShortcutPath ?? "a"}.lnk\" \"{icon.FilePath}\"");
