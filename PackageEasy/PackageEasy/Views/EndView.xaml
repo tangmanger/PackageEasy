@@ -64,7 +64,12 @@
             <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource CommonTextBox}" Width="150" Height="25" VerticalContentAlignment="Center" Margin="5,10,0,10"></TextBox>
             <Button Width="50" Height="25" Content="..." Style="{StaticResource CommonButtonStyle}" Margin="5,0,0,0"></Button>
         </StackPanel>-->
-
+        <TextBlock d:Text="卸载前事件:" Grid.Row="9" Text="{DynamicResource EndBeforeUnInstall}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,0,0"></TextBlock>
+        <ComboBox Grid.Column="1"  Grid.Row="9" IsEnabled="{Binding IsBeforeUnInstall,UpdateSourceTrigger=PropertyChanged}" Width="220" Height="30" VerticalContentAlignment="Center"  ItemsSource="{Binding TargetFilesList}" SelectedItem="{Binding UnInstallApplication,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource CommonComboBoxStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,10,0,0"></ComboBox>
+        <StackPanel Grid.Row="9" Grid.Column="2" Orientation="Horizontal">
+            <CheckBox Grid.Column="2"  Grid.Row="9"   IsChecked="{Binding IsQuietInstall,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  IsEnabled="{Binding IsBeforeUnInstall,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Grid.ColumnSpan="2" Margin="5,10,0,0" VerticalAlignment="Center" VerticalContentAlignment="Center" d:Content="静默安装" Content="{DynamicResource AssemblyQuietInstall}"></CheckBox>
+            <CheckBox Grid.Column="2"  Grid.Row="9"  IsChecked="{Binding IsBeforeUnInstall,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Grid.ColumnSpan="2" Margin="5,10,0,0" VerticalAlignment="Center" VerticalContentAlignment="Center" d:Content="启用" Content="{DynamicResource EndEnableBeforeUnInstall}"></CheckBox>
+        </StackPanel>
 
     </Grid>
 </UserControl>

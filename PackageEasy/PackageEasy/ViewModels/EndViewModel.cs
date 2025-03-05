@@ -27,8 +27,8 @@ namespace PackageEasy.ViewModels
         {
             UninstallTip = CommonSettings.EndUninstallTip.GetLangText();
             UninstallMsg = CommonSettings.EndUninstallMsg.GetLangText();
-            UninstallProcessTips = CommonSettings.EndUninstallProcessTips.GetLangText(); 
-            InstallProcessTips = CommonSettings.EndInstallProcessTips.GetLangText(); 
+            UninstallProcessTips = CommonSettings.EndUninstallProcessTips.GetLangText();
+            InstallProcessTips = CommonSettings.EndInstallProcessTips.GetLangText();
         }
 
         #region 属性
@@ -45,6 +45,9 @@ namespace PackageEasy.ViewModels
         private string installProcessTips;
         private string processName;
         private bool isShowReadme;
+        private bool isBeforeUnInstall;
+        private string unInstallApplication;
+        private bool isQuietInstall;
 
         /// <summary>
         /// 自动运行
@@ -201,6 +204,45 @@ namespace PackageEasy.ViewModels
             }
         }
 
+        /// <summary>
+        /// 卸载程序
+        /// </summary>
+        public string UnInstallApplication
+        {
+            get => unInstallApplication;
+            set
+            {
+                unInstallApplication = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// 卸载前事件
+        /// </summary>
+        public bool IsBeforeUnInstall
+        {
+            get => isBeforeUnInstall;
+            set
+            {
+                isBeforeUnInstall = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// 静默安装
+        /// </summary>
+        public bool IsQuietInstall
+        {
+            get => isQuietInstall;
+            set
+            {
+                isQuietInstall = value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         #region 方法
@@ -212,6 +254,8 @@ namespace PackageEasy.ViewModels
                 TargetFilesList = new List<string>();
             if (ProjectInfo != null && ProjectInfo.FinishInfo != null)
             {
+                IsQuietInstall = ProjectInfo.FinishInfo.IsQuietInstall;
+                IsBeforeUnInstall = ProjectInfo.FinishInfo.IsBeforeUnInstall;
                 IsAutoRun = ProjectInfo.FinishInfo.IsAutoRun;
                 IsShowReadme = ProjectInfo.FinishInfo.IsShowReadme;
                 ApplicationName = TargetFilesList.Find(p => p == ProjectInfo.FinishInfo.ApplicationName) ?? "";
@@ -228,6 +272,8 @@ namespace PackageEasy.ViewModels
                 if (!string.IsNullOrWhiteSpace(ProjectInfo.FinishInfo.ProcessName))
                     ProcessName = ProjectInfo.FinishInfo.ProcessName;
                 IsEnableProcess = ProjectInfo.FinishInfo.IsEnableProcess;
+                if (!string.IsNullOrWhiteSpace(ProjectInfo.FinishInfo.UnInstallApplication))
+                    UnInstallApplication = ProjectInfo.FinishInfo.UnInstallApplication;
             }
         }
         public override void Save()
@@ -248,6 +294,9 @@ namespace PackageEasy.ViewModels
                 finishModel.InstallProcessTips = InstallProcessTips;
                 finishModel.ProcessName = ProcessName;
                 finishModel.IsShowReadme = IsShowReadme;
+                finishModel.IsBeforeUnInstall = IsBeforeUnInstall;
+                finishModel.UnInstallApplication = UnInstallApplication;
+                finishModel.IsQuietInstall = IsQuietInstall;
                 var path = Path.Combine(SavePath, "FinishInfo.json");
                 File.WriteAllText(path, finishModel.SerializeObject());
             }

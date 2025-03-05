@@ -139,6 +139,9 @@
     <sys:String x:Key="EndInstallContent">安装提示：</sys:String>
     <sys:String x:Key="EndUnInstallContent">卸载提示：</sys:String>
     <sys:String x:Key="EndUseCheckProcess">启用进程检测</sys:String>
+    <sys:String x:Key="EndBeforeUnInstall">卸载前事件：</sys:String>
+    <sys:String x:Key="EndEnableBeforeUnInstall">启用卸载前事件</sys:String>
+    <sys:String x:Key="EndShowReadmeName">展示自述</sys:String>
 
     <!--关于界面-->
     <sys:String x:Key="AboutSoftWare">关于软件</sys:String>

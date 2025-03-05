@@ -122,78 +122,79 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ComboBox}">
-                    <Grid Name="MainGrid" SnapsToDevicePixels="true" IsEnabled="{TemplateBinding IsEnabled}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" Width="31"/>
-                        </Grid.ColumnDefinitions>
-                        <Popup Name="PART_Popup"
+                    <Border x:Name="mainBorder" CornerRadius="4" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                        <Grid Name="MainGrid" SnapsToDevicePixels="true" IsEnabled="{TemplateBinding IsEnabled}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" Width="31"/>
+                            </Grid.ColumnDefinitions>
+                            <Popup Name="PART_Popup"
                                AllowsTransparency="true"
                                Grid.ColumnSpan="2"
                                Placement="Bottom"
                                Margin="1"
                                IsOpen="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
                                PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}">
-                            <Grid Background="White" Margin="4" MinWidth="{Binding ElementName=MainGrid,Path=ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
-                                <Border Background="White" BorderBrush="#0F000000" BorderThickness="1" CornerRadius="2.5" Margin="-1" />
-                                <Border Background="White" BorderBrush="#0C000000" BorderThickness="1" CornerRadius="2.75" Margin="-2" />
+                                <Grid Background="White" Margin="4" MinWidth="{Binding ElementName=MainGrid,Path=ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                    <Border Background="White" BorderBrush="#0F000000" BorderThickness="1" CornerRadius="2.5" Margin="-1" />
+                                    <Border Background="White" BorderBrush="#0C000000" BorderThickness="1" CornerRadius="2.75" Margin="-2" />
 
-                                <Border x:Name="DropDownBorder"
+                                    <Border x:Name="DropDownBorder"
                                      
                                         BorderThickness="1"
                                         Margin="0,-1,0,0">
-                                    <!-- popup border thickness not dependent on BorderThickness property-->
-                                    <ScrollViewer Name="DropDownScrollViewer">
-                                        <Grid RenderOptions.ClearTypeHint="Enabled">
-                                            <Canvas Height="0" Width="0" HorizontalAlignment="Left" VerticalAlignment="Top">
-                                                <Rectangle 
+                                        <!-- popup border thickness not dependent on BorderThickness property-->
+                                        <ScrollViewer Name="DropDownScrollViewer">
+                                            <Grid RenderOptions.ClearTypeHint="Enabled">
+                                                <Canvas Height="0" Width="0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                                    <Rectangle 
                                                     Name="OpaqueRect"
                                                     Height="{Binding ElementName=DropDownBorder,Path=ActualHeight}" 
                                                     Width="{Binding ElementName=DropDownBorder,Path=ActualWidth}" 
                                                     Fill="{Binding ElementName=DropDownBorder,Path=Background}" />
-                                            </Canvas>
-                                            <ItemsPresenter Name="ItemsPresenter"  KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                                        </Grid>
-                                    </ScrollViewer>
-                                </Border>
-                            </Grid>
-                        </Popup>
-                        <ToggleButton Grid.ColumnSpan="2"
+                                                </Canvas>
+                                                <ItemsPresenter Name="ItemsPresenter"  KeyboardNavigation.DirectionalNavigation="Contained" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                            </Grid>
+                                        </ScrollViewer>
+                                    </Border>
+                                </Grid>
+                            </Popup>
+                            <ToggleButton Grid.ColumnSpan="2"
                                       Background="{TemplateBinding Background}"
                                       BorderBrush="{TemplateBinding BorderBrush}"
                                       BorderThickness="{TemplateBinding BorderThickness}"
                                       IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
                                       Padding="0,0,0,10">
-                            <ToggleButton.Template>
-                                <ControlTemplate TargetType="ToggleButton">
-                                    <Border  Background="White" BorderThickness="1" BorderBrush="LightGray" Height="{TemplateBinding Height}" >
-                                    </Border>
-                                </ControlTemplate>
+                                <ToggleButton.Template>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border  Background="White" BorderThickness="0" CornerRadius="4"  BorderBrush="LightGray" Height="{TemplateBinding Height}" >
+                                        </Border>
+                                    </ControlTemplate>
 
-                            </ToggleButton.Template>
-                        </ToggleButton>
-                        <ToggleButton Grid.Column="1"  IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}" >
-                            <ToggleButton.Template>
+                                </ToggleButton.Template>
+                            </ToggleButton>
+                            <ToggleButton Grid.Column="1"  IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}" >
+                                <ToggleButton.Template>
 
-                                <ControlTemplate TargetType="ToggleButton">
-                                    <Border BorderBrush="#FFE3E2E2" x:Name="bo" BorderThickness="1,0,0,0" Background="#FFE3E2E2">
-                                        <Path Name="Arrow"
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border BorderBrush="Transparent" x:Name="bo" CornerRadius="4" BorderThickness="0" Background="#FFE3E2E2">
+                                            <Path Name="Arrow"
                               
                              
                               Fill="{TemplateBinding Foreground}"
                               Data="{DynamicResource DownArrowGeometry}"
                               HorizontalAlignment="Center"
                               VerticalAlignment="Center" IsHitTestVisible="False"/>
-                                    </Border>
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="IsChecked" Value="true">
-                                            <Setter Property="Background" Value="{DynamicResource dropComboxArrowBackground}" TargetName="bo"></Setter>
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </ToggleButton.Template>
-                        </ToggleButton>
-                        <ContentPresenter IsHitTestVisible="false"
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsChecked" Value="true">
+                                                <Setter Property="Background" Value="{DynamicResource dropComboxArrowBackground}" TargetName="bo"></Setter>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>
+                            <ContentPresenter IsHitTestVisible="false"
                                           Margin="{TemplateBinding Padding}"
                                           Content="{TemplateBinding SelectionBoxItem}"
                                           ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
@@ -203,21 +204,23 @@
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
 
-                    </Grid>
+                        </Grid>
+                    </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="HasItems" Value="false">
                             <Setter TargetName="DropDownBorder" Property="Height" Value="95"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Foreground" Value="{DynamicResource InputTextDisabled}"/>
+                            <Setter Property="Background" TargetName="mainBorder" Value="{DynamicResource InputBorderHover}" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter Property="Background" Value="{DynamicResource InputBackgroundHover}" />
                             <Setter Property="BorderBrush" Value="{DynamicResource InputBorderHover}" />
                         </Trigger>
-                        <Trigger Property="IsFocused" Value="true">
+                        <!--<Trigger Property="IsFocused" Value="true">
                             <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
-                        </Trigger>
+                        </Trigger>-->
                         <Trigger Property="IsGrouping" Value="true">
                             <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
                         </Trigger>
