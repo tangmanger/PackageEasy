@@ -431,11 +431,11 @@ namespace PackageEasy.NSIS
                                             }
                                             if (icon.IconDir.Data == TargetDirType.SMPROGRAMS)
                                             {
-                                                list.Add($"  CreateShortCut \"$SMPROGRAMS\\{dirName ?? "a"}\\{icon.ShortcutPath ?? "a"}.lnk\" \"{icon.FilePath}\"");
+                                                list.Add($"  CreateShortCut \"$SMPROGRAMS\\{dirName ?? "a"}\\{icon.ShortcutPath ?? "a"}.lnk\" \"{icon.FilePath}\" {(string.IsNullOrWhiteSpace(icon.AppIconCutShotParam) ? "" : $"\"{icon.AppIconCutShotParam}\"")}");
                                             }
                                             else
                                             {
-                                                list.Add($"  CreateShortCut \"{icon.IconDir.DisplayName ?? "a"}\\{icon.ShortcutPath ?? "a"}.lnk\" \"{icon.FilePath}\"");
+                                                list.Add($"  CreateShortCut \"{icon.IconDir.DisplayName ?? "a"}\\{icon.ShortcutPath ?? "a"}.lnk\" \"{icon.FilePath}\"  {(string.IsNullOrWhiteSpace(icon.AppIconCutShotParam) ? "" : $"\"{icon.AppIconCutShotParam}\"")}");
                                             }
                                         }
                                     }

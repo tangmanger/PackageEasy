@@ -106,7 +106,7 @@
     <sys:String x:Key="AppIconAdd">添加</sys:String>
     <sys:String x:Key="AppIconEdit">编辑</sys:String>
     <sys:String x:Key="AppIconDelSelected">删除选中</sys:String>
-
+    <sys:String x:Key="AppIconCutShotParam">启动参数</sys:String>
 
     <!--注册界面-->
     <sys:String x:Key="RegistryFormat">注册文件格式：</sys:String>

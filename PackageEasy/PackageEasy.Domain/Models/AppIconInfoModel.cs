@@ -20,6 +20,7 @@ namespace PackageEasy.Domain.Models
         private string shortcutPath;
         private string filePath;
         private DescModel<TargetDirType> iconDir;
+        private string appIconCutShotParam;
 
         /// <summary>
         /// 快捷方式
@@ -71,6 +72,19 @@ namespace PackageEasy.Domain.Models
             set
             {
                 isSelected = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// 快捷方式启动参数
+        /// </summary>
+        public string AppIconCutShotParam
+        {
+            get => appIconCutShotParam;
+            set
+            {
+                appIconCutShotParam = value;
                 RaisePropertyChanged();
             }
         }

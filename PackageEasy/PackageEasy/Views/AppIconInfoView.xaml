@@ -73,6 +73,19 @@
                 <DataGridTemplateColumn   Width="*">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
+                            <TextBlock d:Text="启动参数" Text="{DynamicResource AppIconCutShotParam}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.HeaderTemplate>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Style="{StaticResource CommonTextBox}" Text="{Binding AppIconCutShotParam,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="2"></TextBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+                <DataGridTemplateColumn   Width="*">
+                    <DataGridTemplateColumn.HeaderTemplate>
+                        <DataTemplate>
                             <TextBlock d:Text="目的文件" Text="{DynamicResource AppIconTargetFilePath}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.HeaderTemplate>
