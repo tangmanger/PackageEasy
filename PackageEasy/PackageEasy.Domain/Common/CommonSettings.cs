@@ -347,7 +347,12 @@ namespace PackageEasy.Domain.Common
         /// <summary>
         /// 多个路径变更
         /// </summary>
-        public const string MultiTargetDirPathChanged= "MultiTargetDirPathChanged";
+        public const string MultiTargetDirPathChanged = "MultiTargetDirPathChanged";
+        /// <summary>
+        /// 忽略文件夹提示
+        /// </summary>
+
+        public const string AssemblyIgnoreDirTips = "AssemblyIgnoreDirTips";
 
         #endregion
 

@@ -16,8 +16,8 @@ using System.Windows.Shapes;
 
 namespace PackageEasy.Views
 {
-          /// <summary>
-         /// 作者：TT
+    /// <summary>
+    /// 作者：TT
     /// 时间：2023-03-12 22:49:08
     /// 描述： AssemblyView.xaml 的交互逻辑、
     /// TANGMANGER
@@ -31,11 +31,13 @@ namespace PackageEasy.Views
 
         private void DataGridRow_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            DataGridRow dataGridRow = sender as DataGridRow;
+            fileDataGrid.SelectedItems.Clear();
+            DataGridRow? dataGridRow = sender as DataGridRow;
             if (dataGridRow != null)
             {
                 dataGridRow.IsSelected = true;
             }
+            e.Handled = false;
         }
 
         private void datagrid_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)

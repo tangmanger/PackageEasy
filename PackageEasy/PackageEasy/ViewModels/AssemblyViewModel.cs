@@ -245,6 +245,19 @@ namespace PackageEasy.ViewModels
             }
         }
 
+        /// <summary>
+        /// 是否是文件夹
+        /// </summary>
+        public bool IsDir
+        {
+            get => isDir;
+            set
+            {
+                isDir = value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         #region 命令
@@ -665,10 +678,12 @@ namespace PackageEasy.ViewModels
                     IsExistNoNeedCopy = !selected.Exists(c => c.IsExistNoNeedCopy == false);
                     IsNoNeedCopy = !selected.Exists(c => c.IsNoNeedCopy == false);
                     IsNoNeedDelete = !selected.Exists(c => c.IsNoNeedDelete == false);
+                    IsDir = !selected.Exists(c => c.IsDirectory == false);
                     return;
                 }
 
             }
+            IsDir = false;
             IsExe = false;
             Install = false;
             QuietInstall = false;
@@ -689,26 +704,41 @@ namespace PackageEasy.ViewModels
                 if (selected == null || selected.Count == 0) return;
                 if (s == FileMenuOperateType.Ignore)
                 {
-                    var currentAssembly = AssemblyList.Find(p => p.IsSelected == true);
-                    if (currentAssembly == null) return;
-                    if (currentAssembly.IgnoreFileList == null)
-                        currentAssembly.IgnoreFileList = new List<AssemblyFileModel>();
-                    foreach (var item in selected)
-                    {
-                        if (currentAssembly.IgnoreFileList.Exists(c => c.FilePath == item.FilePath))
-                        {
-                            continue;
-                        }
-                        currentAssembly.IgnoreFileList.Add(item);
-                    }
-                    foreach (var item in selected)
-                    {
-                        currentAssembly.FileList.Remove(item);
-                    }
-                    FileList = new List<AssemblyFileModel>(currentAssembly.FileList);
-                    IgnoreFileList = new List<AssemblyFileModel>(currentAssembly.IgnoreFileList);
+                    bool flowControl = IgnoreOnly(selected);
                     TMessageBox.ShowMsg(CommonSettings.AssemblyIgnoreSuccess);
                     return;
+                }
+                if (s == FileMenuOperateType.IgnoreDir)
+                {
+                    var result = TMessageBox.ShowMsg(CommonSettings.AssemblyIgnoreDirTips, MessageLevel.YesNoCancel);
+                    if (result == TMessageBoxResult.Close) return;
+                    bool isCurrent = result == TMessageBoxResult.Cancel;
+                    if (isCurrent)
+                    {
+                        bool flowControl = IgnoreOnly(selected);
+                        TMessageBox.ShowMsg(CommonSettings.AssemblyIgnoreSuccess);
+                        return;
+                    }
+                    else
+                    {
+                        var dirList=selected.Select(x=>x.FilePath).ToList();
+                        if(dirList!=null)
+                        {
+                            List<AssemblyFileModel> ignoreFiles=new List<AssemblyFileModel>();
+                            foreach (var item in dirList)
+                            {
+                                var dirFiles= FileList.FindAll(x=>x.FilePath.ToLower().StartsWith(item.ToLower())).ToList();
+                                if(dirFiles!=null)
+                                {
+                                    dirFiles= dirFiles.FindAll(x=>!ignoreFiles.Exists(c=>c.FilePath==x.FilePath)).ToList();
+                                    ignoreFiles.AddRange(dirFiles);
+                                }
+                            }
+                            IgnoreOnly(ignoreFiles);
+                            TMessageBox.ShowMsg(CommonSettings.AssemblyIgnoreSuccess);
+                            return;
+                        }
+                    }
                 }
                 foreach (var item in selected)
                 {
@@ -744,6 +774,29 @@ namespace PackageEasy.ViewModels
             }
         });
 
+        private bool IgnoreOnly(List<AssemblyFileModel> selected)
+        {
+            var currentAssembly = AssemblyList.Find(p => p.IsSelected == true);
+            if (currentAssembly == null) return false;
+            if (currentAssembly.IgnoreFileList == null)
+                currentAssembly.IgnoreFileList = new List<AssemblyFileModel>();
+            foreach (var item in selected)
+            {
+                if (currentAssembly.IgnoreFileList.Exists(c => c.FilePath == item.FilePath))
+                {
+                    continue;
+                }
+                currentAssembly.IgnoreFileList.Add(item);
+            }
+            foreach (var item in selected)
+            {
+                currentAssembly.FileList.Remove(item);
+            }
+            FileList = new List<AssemblyFileModel>(currentAssembly.FileList);
+            IgnoreFileList = new List<AssemblyFileModel>(currentAssembly.IgnoreFileList);
+            return true;
+        }
+
         /// <summary>
         /// 设置选中
         /// </summary>
@@ -770,6 +823,7 @@ namespace PackageEasy.ViewModels
         });
         bool isChanging;
         private bool isUseCustomPath;
+        private bool isDir;
 
         /// <summary>
         /// 变更目标目录

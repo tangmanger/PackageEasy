@@ -90,6 +90,8 @@
     <sys:String x:Key="AssemblNeedCopy">是否复制</sys:String>
     <sys:String x:Key="AssemblInstallType">安装方式</sys:String>
     <sys:String x:Key="AssemblIgnore">忽略</sys:String>
+    <sys:String x:Key="AssemblIgnoreDirectory">忽略当前文件夹</sys:String>
+    <sys:String x:Key="AssemblyIgnoreDirTips">忽略文件夹及子文件夹(包含所有文件)？</sys:String>
     <sys:String x:Key="MultiTargetDirPathChanged">当前选择有多个，是否更新所有目标目录！</sys:String>
     <sys:String x:Key="AssemblyCustomPath">使用用户路径</sys:String>
 
