@@ -431,11 +431,11 @@ namespace PackageEasy.NSIS
                                             }
                                             if (icon.IconDir.Data == TargetDirType.SMPROGRAMS)
                                             {
-                                                list.Add($"  CreateShortCut \"$SMPROGRAMS\\{dirName ?? "a"}\\{icon.ShortcutPath ?? "a"}.lnk\" \"{icon.FilePath}\"");
+                                                list.Add($"  CreateShortCut \"$SMPROGRAMS\\{dirName ?? "a"}\\{icon.ShortcutPath ?? "a"}.lnk\" \"{icon.FilePath}\" {(string.IsNullOrWhiteSpace(icon.AppIconCutShotParam) ? "" : $"\"{icon.AppIconCutShotParam}\"")}");
                                             }
                                             else
                                             {
-                                                list.Add($"  CreateShortCut \"{icon.IconDir.DisplayName ?? "a"}\\{icon.ShortcutPath ?? "a"}.lnk\" \"{icon.FilePath}\"");
+                                                list.Add($"  CreateShortCut \"{icon.IconDir.DisplayName ?? "a"}\\{icon.ShortcutPath ?? "a"}.lnk\" \"{icon.FilePath}\"  {(string.IsNullOrWhiteSpace(icon.AppIconCutShotParam) ? "" : $"\"{icon.AppIconCutShotParam}\"")}");
                                             }
                                         }
                                     }
@@ -746,6 +746,13 @@ namespace PackageEasy.NSIS
                 {
                     list.Add(" SetShellVarContext all");
                 }
+                if (projectInfoModel != null && projectInfoModel.FinishInfo != null && projectInfoModel.FinishInfo.IsBeforeUnInstall)
+                {
+                    if (projectInfoModel.FinishInfo.IsQuietInstall)
+                        list.Add($" ExecWait '\"{projectInfoModel.FinishInfo.UnInstallApplication}\" /q' $R1");
+                    else
+                        list.Add($" ExecWait '\"{projectInfoModel.FinishInfo.UnInstallApplication}\"'");
+                }
                 if (projectInfoModel != null && projectInfoModel.AssemblyInfo != null)
                 {
                     if (projectInfoModel.AssemblyInfo.AssemblyList != null)
@@ -841,6 +848,8 @@ namespace PackageEasy.NSIS
                 list.Add($" Delete \"$INSTDIR\\uninst.exe\"");
                 list.Add($" DeleteRegKey ${{PRODUCT_UNINST_ROOT_KEY}} \"${{PRODUCT_UNINST_KEY}}\"");
                 list.Add($" DeleteRegKey HKLM \"${{PRODUCT_DIR_REGKEY}}\"");
+
+
                 list.Add("SectionEnd");
 
 

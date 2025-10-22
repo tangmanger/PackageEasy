@@ -52,5 +52,17 @@ namespace PackageEasy.Domain.Models
         /// 展示自述
         /// </summary>
         public bool IsShowReadme { get; set; }
+        /// <summary>
+        /// 卸载前执行脚本
+        /// </summary>
+        public string UnInstallApplication { get; set; }
+        /// <summary>
+        /// 启用卸载前事件
+        /// </summary>
+        public bool IsBeforeUnInstall { get; set; }
+        /// <summary>
+        /// 静默安装
+        /// </summary>
+        public bool IsQuietInstall { get; set; }
     }
 }

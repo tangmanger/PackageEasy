@@ -7,13 +7,13 @@
         xmlns:local="clr-namespace:PackageEasy"
         xmlns:PackageControls="clr-namespace:PackageEasy.Common.Controls;assembly=PackageEasy.Common"
         mc:Ignorable="d"
-        Title="Package Easy Bate v1.0"   AllowsTransparency="True" Background="Transparent" WindowStyle="None" Height="750" Width="1200" WindowStartupLocation="CenterScreen" DataContext="{Binding Main,Source={StaticResource locator}}">
+        Title="Package Easy Bate v1.0"    Background="Transparent" WindowStyle="None" Height="750" Width="1200" WindowStartupLocation="CenterScreen" DataContext="{Binding Main,Source={StaticResource locator}}">
 
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="30"
-                    GlassFrameThickness="0"
+                    GlassFrameThickness="15"
                     NonClientFrameEdges="None"
-                    CornerRadius="0"
+                    CornerRadius="5"
                     ResizeBorderThickness="2"
                     UseAeroCaptionButtons="False"
                      />

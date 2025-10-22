@@ -59,7 +59,7 @@
                 <DataGridTemplateColumn  MinWidth="55" SortMemberPath="IsUserCreated">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock  d:Text="用户创建" Text="{DynamicResource TargetIsUserCreate}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></TextBlock>
+                            <TextBlock  d:Text="用户创建" Text="{DynamicResource TargetIsUserCreate}" Foreground="{DynamicResource DataGridForeground}" Margin="5,0,5,0"  FontSize="14"></TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>

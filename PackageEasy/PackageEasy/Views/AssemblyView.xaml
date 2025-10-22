@@ -375,6 +375,7 @@
                             <!--<MenuItem  Style="{StaticResource menuContextStyle}" IsChecked="{Binding IsNoNeedDelete}"  Command="{Binding SetMenuCommand}" CommandParameter="{x:Static enmus:FileMenuOperateType.IsNoNeedDelete}"  d:Header="不删除" Header="{DynamicResource AssemblUnDelete}"  ></MenuItem>-->
                             <Separator Style="{StaticResource sep}"/>
                             <MenuItem  Style="{StaticResource menuContextStyle}" d:Header="忽略" Command="{Binding SetMenuCommand}" CommandParameter="{x:Static enmus:FileMenuOperateType.Ignore}"  Header="{DynamicResource AssemblIgnore}"  ></MenuItem>
+                            <MenuItem  IsEnabled="{Binding IsDir}" Style="{StaticResource menuContextStyle}" d:Header="忽略当前文件夹" Command="{Binding SetMenuCommand}" CommandParameter="{x:Static enmus:FileMenuOperateType.IgnoreDir}"  Header="{DynamicResource AssemblIgnoreDirectory}"  ></MenuItem>
 
                         </ContextMenu>
                     </DataGrid.ContextMenu>
