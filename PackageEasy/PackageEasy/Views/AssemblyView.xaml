@@ -378,7 +378,7 @@
                             <MenuItem  IsEnabled="{Binding IsDir}" Style="{StaticResource menuContextStyle}" d:Header="忽略当前文件夹" Command="{Binding SetMenuCommand}" CommandParameter="{x:Static enmus:FileMenuOperateType.IgnoreDir}"  Header="{DynamicResource AssemblIgnoreDirectory}"  ></MenuItem>
                             <MenuItem   Style="{StaticResource menuContextStyle}" ItemsSource="{Binding FormatList}" d:Header="忽略当前文件格式" Command="{Binding SetMenuCommand}" CommandParameter="{x:Static enmus:FileMenuOperateType.IgnoreFormat}"  Header="{DynamicResource AssemblyIgnoreFileExtension}"  >
                                 <MenuItem.ItemContainerStyle>
-                                    <Style TargetType="MenuItem">
+                                    <Style TargetType="MenuItem" BasedOn="{StaticResource menuContextStyle}">
                                         <Setter Property="Header" Value="{Binding ExtensionName}"/>
                                         <Setter Property="Command" Value="{Binding MenuCommand}"/>
                                         <Setter Property="CommandParameter" Value="{Binding ExtensionName}"/>

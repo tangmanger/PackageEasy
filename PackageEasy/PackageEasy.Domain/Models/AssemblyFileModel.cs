@@ -1,4 +1,5 @@
-﻿using PackageEasy.Domain.Attributes;
+﻿using Newtonsoft.Json;
+using PackageEasy.Domain.Attributes;
 using PackageEasy.Domain.Enums;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,7 @@ namespace PackageEasy.Domain.Models
         /// 选择
         /// </summary>
         [SaveIgnore]
+        [JsonIgnore]
         public bool IsSelected
         {
             get => isSelected;
