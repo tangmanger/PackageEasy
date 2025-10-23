@@ -31,6 +31,10 @@ namespace PackageEasy.Views
 
         private void DataGridRow_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
+            if(Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
+            {
+                return;
+            }
             fileDataGrid.SelectedItems.Clear();
             DataGridRow? dataGridRow = sender as DataGridRow;
             if (dataGridRow != null)
