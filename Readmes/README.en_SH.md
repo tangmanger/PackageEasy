@@ -6,6 +6,14 @@
 ## Software Architecture
   It is developed using WPF+MVVM, imitating the Visual Studio style (although the imitation is not that thorough -_-!). It is developed based on .net 6 and supports simultaneous editing of multiple projects. The binding file format is __.pge__ file format. At present, there are still many business scenarios that are not covered, and there are still some minor bugs, which will be slowly maintained and improved in the future.
 ## Release Notes
+### Update V1.0.7 For 1024 Programmer's Day 
+* Uninstall execution script
+* Shortcut parameters
+* Ignore by folder
+* Right-click to select bug
+* Ignore according to file format
+* Right-clicking and refreshing can scan the working directory files and add them automatically
+  
 ### V1.0.6 update
 * Support user-defined target path, and support local saving for cross-project use
 *Installation supports all users (solve the problem of installing under administrators and running under non-administrators)
