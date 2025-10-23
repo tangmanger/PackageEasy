@@ -13,6 +13,14 @@
 - zh_CN [简体中文](Readmes/README.zh_CN.md)
 
 ## Release Notes
+### Update V1.0.7 For 1024 Programmer's Day 
+* Uninstall execution script
+* Shortcut parameters
+* Ignore by folder
+* Right-click to select bug
+* Ignore according to file format
+* Right-clicking and refreshing can scan the working directory files and add them automatically
+  
 ### V1.0.6 update
 * Support user-defined target path, and support local saving for cross-project use
 *Installation supports all users (solve the problem of installing under administrators and running under non-administrators)
