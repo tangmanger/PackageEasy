@@ -9,7 +9,7 @@
   It is developed using WPF+MVVM, imitating the Visual Studio style (although the imitation is not that thorough -_-!). It is developed based on .net 6 and supports simultaneous editing of multiple projects. The binding file format is __.pge__ file format. At present, there are still many business scenarios that are not covered, and there are still some minor bugs, which will be slowly maintained and improved in the future.
 
   # README.md
-- en [English](Readmes/README.md)
+- en [English](Readmes/README.en_SH.md)
 - zh_CN [简体中文](Readmes/README.zh_CN.md)
 
 ## Release Notes
