@@ -24,7 +24,7 @@ namespace PackageEasy.Helpers
         /// <summary>
         /// Project 缓存
         /// </summary>
-        public static Dictionary<string, ViewCaheModel> ProjectCahes = new Dictionary<string, ViewCaheModel>();
+        public static Dictionary<string, ViewCaheModel> ProjectCaches = new Dictionary<string, ViewCaheModel>();
         /// <summary>
         /// 项目
         /// </summary>

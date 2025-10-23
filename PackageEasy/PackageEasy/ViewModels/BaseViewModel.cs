@@ -33,7 +33,7 @@ namespace PackageEasy.ViewModels
             viewCaheModel.BaseProjectViewModel = projectViewModel;
             viewCaheModel.ProjectView = projectView;
 
-            CacheDataHelper.ProjectCahes.Add(projectViewModel.Key, viewCaheModel);
+            CacheDataHelper.ProjectCaches.Add(projectViewModel.Key, viewCaheModel);
             return projectViewModel;
            
         }

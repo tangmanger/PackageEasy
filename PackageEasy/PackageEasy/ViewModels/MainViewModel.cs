@@ -154,9 +154,9 @@ namespace PackageEasy.ViewModels
         public RelayCommand<TableModel> SwitchProjectCommand => new RelayCommand<TableModel>((t) =>
         {
             var projectKey = t.ProjectKey;
-            if (CacheDataHelper.ProjectCahes.ContainsKey(projectKey))
+            if (CacheDataHelper.ProjectCaches.ContainsKey(projectKey))
             {
-                WorkView = CacheDataHelper.ProjectCahes[projectKey].ProjectView;
+                WorkView = CacheDataHelper.ProjectCaches[projectKey].ProjectView;
                 IsMenuCanEdit = true;
             }
         });
@@ -215,7 +215,7 @@ namespace PackageEasy.ViewModels
             var table = TableList.Find(p => p.IsActive);
             if (table != null)
             {
-                if (CacheDataHelper.ProjectCahes.ContainsKey(table.ProjectKey))
+                if (CacheDataHelper.ProjectCaches.ContainsKey(table.ProjectKey))
                 {
                     var messageResult = TMessageBox.ShowMsg(CommonSettings.MainExportScriptTips, MessageLevel.YesNoCancel);
                     if (messageResult == TMessageBoxResult.Close) return;
@@ -224,7 +224,7 @@ namespace PackageEasy.ViewModels
                     {
                         service.OnPreCompile();
                     }
-                    var viewCaheModel = CacheDataHelper.ProjectCahes[table.ProjectKey];
+                    var viewCaheModel = CacheDataHelper.ProjectCaches[table.ProjectKey];
                     if (viewCaheModel != null)
                     {
                         string dirPath = "";
@@ -313,7 +313,7 @@ namespace PackageEasy.ViewModels
             var table = TableList.Find(p => p.IsActive);
             if (table != null)
             {
-                if (CacheDataHelper.ProjectCahes.ContainsKey(table.ProjectKey))
+                if (CacheDataHelper.ProjectCaches.ContainsKey(table.ProjectKey))
                 {
 
                     var service = ServiceHelper.GetService(table.ProjectKey);
@@ -321,7 +321,7 @@ namespace PackageEasy.ViewModels
                     {
                         service.OnPreCompile();
                     }
-                    var viewCaheModel = CacheDataHelper.ProjectCahes[table.ProjectKey];
+                    var viewCaheModel = CacheDataHelper.ProjectCaches[table.ProjectKey];
                     if (viewCaheModel != null)
                     {
                         ProjectViewModel? projectViewModel = viewCaheModel.BaseProjectViewModel as ProjectViewModel;
@@ -487,9 +487,9 @@ namespace PackageEasy.ViewModels
             var table = TableList.Find(p => p.IsActive);
             if (table != null)
             {
-                if (CacheDataHelper.ProjectCahes.ContainsKey(table.ProjectKey))
+                if (CacheDataHelper.ProjectCaches.ContainsKey(table.ProjectKey))
                 {
-                    var viewCaheModel = CacheDataHelper.ProjectCahes[table.ProjectKey];
+                    var viewCaheModel = CacheDataHelper.ProjectCaches[table.ProjectKey];
                     if (viewCaheModel != null)
                     {
                         ProjectViewModel? projectViewModel = viewCaheModel.BaseProjectViewModel as ProjectViewModel;
@@ -530,9 +530,9 @@ namespace PackageEasy.ViewModels
             var table = TableList.Find(p => p.IsActive);
             if (table != null)
             {
-                if (CacheDataHelper.ProjectCahes.ContainsKey(table.ProjectKey))
+                if (CacheDataHelper.ProjectCaches.ContainsKey(table.ProjectKey))
                 {
-                    var viewCaheModel = CacheDataHelper.ProjectCahes[table.ProjectKey];
+                    var viewCaheModel = CacheDataHelper.ProjectCaches[table.ProjectKey];
                     if (viewCaheModel != null)
                     {
                         ProjectViewModel? projectViewModel = viewCaheModel.BaseProjectViewModel as ProjectViewModel;
@@ -762,9 +762,9 @@ namespace PackageEasy.ViewModels
                 }
             }
             //Log.Write(projectName + "----------------" + projectKey);
-            if (CacheDataHelper.ProjectCahes.ContainsKey(projectKey))
+            if (CacheDataHelper.ProjectCaches.ContainsKey(projectKey))
             {
-                WorkView = CacheDataHelper.ProjectCahes[projectKey].ProjectView;
+                WorkView = CacheDataHelper.ProjectCaches[projectKey].ProjectView;
                 IsMenuCanEdit = true;
             }
 
@@ -843,9 +843,9 @@ namespace PackageEasy.ViewModels
         /// <returns></returns>
         private bool CloseTips(TableModel? t)
         {
-            if (CacheDataHelper.ProjectCahes.ContainsKey(t.ProjectKey))
+            if (CacheDataHelper.ProjectCaches.ContainsKey(t.ProjectKey))
             {
-                var viewCaheModel = CacheDataHelper.ProjectCahes[t.ProjectKey];
+                var viewCaheModel = CacheDataHelper.ProjectCaches[t.ProjectKey];
                 if (viewCaheModel != null)
                 {
                     ProjectViewModel? projectViewModel = viewCaheModel.BaseProjectViewModel as ProjectViewModel;
@@ -887,7 +887,7 @@ namespace PackageEasy.ViewModels
                         }
 
                         projectViewModel.Dispose();
-                        CacheDataHelper.ProjectCahes.Remove(t.ProjectKey);
+                        CacheDataHelper.ProjectCaches.Remove(t.ProjectKey);
                         if (CacheDataHelper.FileOpenDic.ContainsKey(t.ProjectKey))
                             CacheDataHelper.FileOpenDic.Remove(t.ProjectKey);
                         ///找到当前索引
