@@ -15,6 +15,8 @@ namespace PackageEasy.Domain.Enums
         IsNoNeedDelete,
         Ignore,
         IgnoreDir,
-        UseCustomPath
+        IgnoreFormat,
+        UseCustomPath,
+        Refresh
     }
 }
