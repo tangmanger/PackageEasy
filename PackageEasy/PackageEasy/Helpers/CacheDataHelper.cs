@@ -24,7 +24,7 @@ namespace PackageEasy.Helpers
         /// <summary>
         /// Project 缓存
         /// </summary>
-        public static Dictionary<string, ViewCaheModel> ProjectCahes = new Dictionary<string, ViewCaheModel>();
+        public static Dictionary<string, ViewCaheModel> ProjectCaches = new Dictionary<string, ViewCaheModel>();
         /// <summary>
         /// 项目
         /// </summary>
@@ -54,7 +54,7 @@ namespace PackageEasy.Helpers
         {
             get
             {
-                return "1.0.6";
+                return "1.0.7";
             }
         }
 
@@ -62,7 +62,7 @@ namespace PackageEasy.Helpers
         {
             get
             {
-                return "20241216092218";
+                return "20251023233841";
             }
         }
         /// <summary>

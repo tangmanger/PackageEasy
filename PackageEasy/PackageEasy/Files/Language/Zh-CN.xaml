@@ -92,8 +92,10 @@
     <sys:String x:Key="AssemblIgnore">忽略</sys:String>
     <sys:String x:Key="AssemblIgnoreDirectory">忽略当前文件夹</sys:String>
     <sys:String x:Key="AssemblyIgnoreDirTips">忽略文件夹及子文件夹(包含所有文件)？</sys:String>
+    <sys:String x:Key="AssemblyIgnoreFileExtension">忽略当前文件格式</sys:String>
     <sys:String x:Key="MultiTargetDirPathChanged">当前选择有多个，是否更新所有目标目录！</sys:String>
     <sys:String x:Key="AssemblyCustomPath">使用用户路径</sys:String>
+    <sys:String x:Key="AssemblyRefresh">刷新</sys:String>
 
     <!--应用程序图标-->
     <sys:String x:Key="AppIconMenuName">应用程序&quot;开始菜单&quot;文件夹名称:</sys:String>

@@ -9,7 +9,7 @@
         xmlns:lang="clr-namespace:PackageEasy.Common.Data;assembly=PackageEasy.Common"
         ShowInTaskbar="False"
        
-        AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize" Background="Transparent"  Foreground="{StaticResource mainForeground}" Loaded="Window_Loaded" Height="400" Width="650"
+        AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize" Background="Transparent"  Foreground="{StaticResource mainForeground}" Loaded="Window_Loaded" Height="420" Width="650"
         WindowStartupLocation="CenterOwner" >
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Unload" >
