@@ -36,6 +36,7 @@ namespace PackageEasy.Views
             if (dataGridRow != null)
             {
                 dataGridRow.IsSelected = true;
+                fileDataGrid.SelectedItems.Add(dataGridRow.DataContext);
             }
             e.Handled = false;
         }
