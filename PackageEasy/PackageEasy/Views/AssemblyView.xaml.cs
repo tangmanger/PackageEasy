@@ -1,4 +1,5 @@
-﻿using PackageEasy.ViewModels;
+﻿using PackageEasy.Domain.Models;
+using PackageEasy.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,8 +32,21 @@ namespace PackageEasy.Views
 
         private void DataGridRow_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            fileDataGrid.SelectedItems.Clear();
+            if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
+            {
+                return;
+            }
             DataGridRow? dataGridRow = sender as DataGridRow;
+
+            if (dataGridRow != null)
+            {
+                AssemblyFileModel? assemblyFileModel = dataGridRow.DataContext as AssemblyFileModel;
+                if (assemblyFileModel != null)
+                {
+                    if (assemblyFileModel.IsSelected) return;
+                }
+            }
+            fileDataGrid.SelectedItems.Clear();
             if (dataGridRow != null)
             {
                 dataGridRow.IsSelected = true;
