@@ -5,6 +5,7 @@ using PackageEasy.Domain;
 using PackageEasy.Domain.Common;
 using PackageEasy.Domain.Helpers;
 using PackageEasy.Domain.Models;
+using PackageEasy.Domain.Models.Compares;
 using PackageEasy.Domain.Models.SaveModel;
 using PackageEasy.ViewModels;
 using PackageEasy.Views.Dialogs;
@@ -100,7 +101,7 @@ namespace PackageEasy.Helpers
             }
             else
             {
-                projectViewModel.ProjectInfo.TargetPaths = File.ReadAllText(targetPath).DeserializeObject<List<TargetPathModel>>();
+                projectViewModel.ProjectInfo.TargetPaths = File.ReadAllText(targetPath).DeserializeObject<List<TargetPathModel>>().Distinct(new TargetPathCompare()).ToList();
                 var files = StoreHelper.ReadLocalTargetFiles().FindAll(c => projectViewModel.ProjectInfo.TargetPaths.Exists(f => f.DisplayName == c.DisplayName));
                 if (files != null && files.Count > 0)
                 {

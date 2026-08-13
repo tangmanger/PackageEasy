@@ -4,6 +4,7 @@ using PackageEasy.Domain;
 using PackageEasy.Domain.Enums;
 using PackageEasy.Domain.Interfaces;
 using PackageEasy.Domain.Models;
+using PackageEasy.Domain.Models.Compares;
 using PackageEasy.Enums;
 using PackageEasy.Models;
 using PackageEasy.Views;
@@ -164,7 +165,7 @@ namespace PackageEasy.ViewModels
             var targetPath = Path.Combine(SavePath, "TargetPaths.json");
             if (ProjectInfo.TargetPaths == null || ProjectInfo.TargetPaths.Count == 0)
                 ProjectInfo.TargetPaths = StoreHelper.ReadLocalTargetFiles();
-            File.WriteAllText(targetPath, ProjectInfo.TargetPaths.SerializeObject());
+            File.WriteAllText(targetPath, ProjectInfo.TargetPaths.Distinct(new TargetPathCompare()).SerializeObject());
 
             foreach (var item in ViewCaches)
             {
