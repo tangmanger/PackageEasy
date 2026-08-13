@@ -19,6 +19,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Input;
 
 namespace PackageEasy.ViewModels
 {
@@ -41,7 +42,10 @@ namespace PackageEasy.ViewModels
             assemblyInfoModel.AssemblyList = AssemblyList;
             ProjectInfo.AssemblyInfo = assemblyInfoModel;
             Service.TargetPathChanged += Service_TargetPathChanged;
+            Service.AssemblyItemChanged += Service_AssemblyItemChanged;
         }
+
+
 
 
 
@@ -922,7 +926,7 @@ namespace PackageEasy.ViewModels
             }
         });
 
-     
+
 
         /// <summary>
         /// 设置选中
@@ -955,12 +959,16 @@ namespace PackageEasy.ViewModels
         /// </summary>
         public RelayCommand<TargetPathModel> TargetPathChangedCommand => new RelayCommand<TargetPathModel>((s) =>
         {
+            if (s == null) return;
             if (isChanging) return;
             isChanging = true;
             try
             {
-                var result = TMessageBox.ShowMsg(CommonSettings.MultiTargetDirPathChanged, MessageLevel.Question);
-                if (result != TMessageBoxResult.OK) return;
+                if (FileList.Count(x => x.IsSelected == true) > 1)
+                {
+                    var result = TMessageBox.ShowMsg(CommonSettings.MultiTargetDirPathChanged, MessageLevel.Question);
+                    if (result != TMessageBoxResult.OK) return;
+                }
                 var selected = FileList.FindAll(c => c.IsSelected == true);
                 if (selected == null) return;
                 foreach (var item in selected)
@@ -1014,11 +1022,26 @@ namespace PackageEasy.ViewModels
         {
             RefreshData();
         }
+        private void Service_AssemblyItemChanged(AssemblyFileModel arg1, string arg2)
+        {
+            if (arg1 != null && arg2 == "AssemblyItem")
+            {
+                if (!Keyboard.IsKeyDown(System.Windows.Input.Key.LeftCtrl) && !Keyboard.IsKeyDown(System.Windows.Input.Key.RightCtrl))
+                {
+                    foreach (var item in AssemblyList)
+                    {
+                        item.IsSelected = false;
+                    }
+                }
+                arg1.IsSelected = true;
+            }
+        }
 
         public override void Dispose()
         {
             base.Dispose();
             Service.TargetPathChanged -= Service_TargetPathChanged;
+            Service.AssemblyItemChanged -= Service_AssemblyItemChanged;
         }
 
         public override void NavigateOut()
@@ -1086,7 +1109,14 @@ namespace PackageEasy.ViewModels
                 {
                     foreach (var file in assitem.FileList)
                     {
-                        file.TargetPath = TargetDirList.Find(p => p.DisplayName == file.TargetPath.DisplayName) ?? new TargetPathModel();
+                        if (file.TargetPath == null)
+                        {
+                            file.TargetPath = TargetDirList.FirstOrDefault() ?? new TargetPathModel();
+                        }
+                        else
+                        {
+                            file.TargetPath = TargetDirList.Find(p => p.DisplayName == file.TargetPath.DisplayName) ?? new TargetPathModel();
+                        }
                     }
                 }
                 if (assitem.IgnoreFileList != null)

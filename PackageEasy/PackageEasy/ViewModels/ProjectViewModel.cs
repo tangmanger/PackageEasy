@@ -102,7 +102,7 @@ namespace PackageEasy.ViewModels
             ViewCaches.Add(ViewType.BaseInfoView, new ViewCaheModel() { BaseProjectViewModel = baseInfoViewModel, ProjectView = baseInfoView });
 
 
-            AssemblyView assemblyView = new AssemblyView();
+            AssemblyView assemblyView = new AssemblyView(Service);
             AssemblyViewModel assemblyViewModel = new AssemblyViewModel(ViewType.AssemblyView, Key);
             assemblyView.DataContext = assemblyViewModel;
             assemblyViewModel.ProjectInfo = ProjectInfo;

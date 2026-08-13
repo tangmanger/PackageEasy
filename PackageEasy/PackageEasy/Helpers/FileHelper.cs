@@ -102,7 +102,7 @@ namespace PackageEasy.Helpers
             else
             {
                 projectViewModel.ProjectInfo.TargetPaths = File.ReadAllText(targetPath).DeserializeObject<List<TargetPathModel>>().Distinct(new TargetPathCompare()).ToList();
-                var files = StoreHelper.ReadLocalTargetFiles().FindAll(c => projectViewModel.ProjectInfo.TargetPaths.Exists(f => f.DisplayName == c.DisplayName));
+                var files = StoreHelper.ReadLocalTargetFiles().FindAll(c => !projectViewModel.ProjectInfo.TargetPaths.Exists(f => f.DisplayName == c.DisplayName));
                 if (files != null && files.Count > 0)
                 {
                     projectViewModel.ProjectInfo.TargetPaths.AddRange(files);

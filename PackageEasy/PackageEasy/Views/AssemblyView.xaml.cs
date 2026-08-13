@@ -1,4 +1,5 @@
-﻿using PackageEasy.Domain.Models;
+﻿using PackageEasy.Domain.Interfaces;
+using PackageEasy.Domain.Models;
 using PackageEasy.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -25,33 +26,24 @@ namespace PackageEasy.Views
     /// </summary>
     public partial class AssemblyView : UserControl
     {
-        public AssemblyView()
+        IDataService Service;
+        public AssemblyView(IDataService dataService)
         {
             InitializeComponent();
+            Service = dataService;
         }
 
         private void DataGridRow_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
-            {
-                return;
-            }
             DataGridRow? dataGridRow = sender as DataGridRow;
-
             if (dataGridRow != null)
             {
                 AssemblyFileModel? assemblyFileModel = dataGridRow.DataContext as AssemblyFileModel;
                 if (assemblyFileModel != null)
                 {
-                    if (assemblyFileModel.IsSelected) return;
+                    Service?.OnSelectedAssemblyItemChanged(assemblyFileModel,"AssemblyItem");
                 }
             }
-            fileDataGrid.SelectedItems.Clear();
-            if (dataGridRow != null)
-            {
-                dataGridRow.IsSelected = true;
-            }
-            e.Handled = false;
         }
 
         private void datagrid_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)

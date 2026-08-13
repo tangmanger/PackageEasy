@@ -1,7 +1,9 @@
 ﻿using PackageEasy.Domain.Interfaces;
+using PackageEasy.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,6 +22,7 @@ namespace PackageEasy.Services
         public event Action PreCompile;
         public event Action LanguageChanged;
         public event Action TargetPathChanged;
+        public event Action<AssemblyFileModel, string> AssemblyItemChanged;
 
         public void OnCreateProject(string name, string key)
         {
@@ -34,6 +37,11 @@ namespace PackageEasy.Services
         public void OnPreCompile()
         {
             PreCompile?.Invoke();
+        }
+
+        public void OnSelectedAssemblyItemChanged(AssemblyFileModel assemblyFile, string key)
+        {
+            AssemblyItemChanged?.Invoke(assemblyFile, key);
         }
 
         public void OnTargetPathChanged()
