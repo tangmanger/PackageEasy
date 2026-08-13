@@ -171,8 +171,6 @@
                         <Style TargetType="DataGridRow" BasedOn="{StaticResource DefaultDataGridRowStyle}">
                             <Setter Property="IsSelected" Value="{Binding IsSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></Setter>
                             <EventSetter Event="PreviewMouseRightButtonDown" Handler="DataGridRow_PreviewMouseDown"></EventSetter>
-                           
-                           
                             <Style.Triggers>
                                 <Trigger Property="IsSelected" Value="True">
                                     <Setter Property="Background"  Value="{DynamicResource datagridRowSelected}"/>

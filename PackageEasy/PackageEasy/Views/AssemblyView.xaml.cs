@@ -41,9 +41,10 @@ namespace PackageEasy.Views
                 AssemblyFileModel? assemblyFileModel = dataGridRow.DataContext as AssemblyFileModel;
                 if (assemblyFileModel != null)
                 {
-                    Service?.OnSelectedAssemblyItemChanged(assemblyFileModel,"AssemblyItem");
+                    Service?.OnSelectedAssemblyItemChanged(assemblyFileModel, "AssemblyItem");
                 }
             }
+            e.Handled = false;
         }
 
         private void datagrid_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)

@@ -1026,9 +1026,9 @@ namespace PackageEasy.ViewModels
         {
             if (arg1 != null && arg2 == "AssemblyItem")
             {
-                if (!Keyboard.IsKeyDown(System.Windows.Input.Key.LeftCtrl) && !Keyboard.IsKeyDown(System.Windows.Input.Key.RightCtrl))
+                if (!Keyboard.IsKeyDown(System.Windows.Input.Key.LeftCtrl) && !Keyboard.IsKeyDown(System.Windows.Input.Key.RightCtrl) && !arg1.IsSelected)
                 {
-                    foreach (var item in AssemblyList)
+                    foreach (var item in FileList)
                     {
                         item.IsSelected = false;
                     }
