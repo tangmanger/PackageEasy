@@ -13,6 +13,17 @@
 - zh_CN [简体中文](Readmes/README.zh_CN.md)
 
 ## Release Notes
+
+### Update V1.0.8
+* Add new directory helper class `DirHelper`, supporting hierarchical path splitting
+* Add new `TargetPathCompare` deduplication comparer to resolve duplicate target‑path issues
+* Enhance the "Ignore Current Folder" feature to support multi‑level directory selection
+* Refactor right‑click selection logic to support multi‑selection with the Ctrl key
+* Fix the issue where `BoolToVisibilityConverter` did not support parameter inversion
+* Optimize file‑adding logic, supporting directory‑structure addition and SubPath repair
+* Optimize target‑path change confirmation logic; suppress confirmation pop‑ups for single files
+* Modify local target‑file reading logic: switch from "get included items" to "get excluded items"
+
 ### Update V1.0.7 For 1024 Programmer's Day 
 * Uninstall execution script
 * Shortcut parameters
