@@ -20,6 +20,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Input;
 
 namespace PackageEasy.ViewModels
 {
@@ -42,7 +43,10 @@ namespace PackageEasy.ViewModels
             assemblyInfoModel.AssemblyList = AssemblyList;
             ProjectInfo.AssemblyInfo = assemblyInfoModel;
             Service.TargetPathChanged += Service_TargetPathChanged;
+            Service.AssemblyItemChanged += Service_AssemblyItemChanged;
         }
+
+
 
 
 
@@ -69,6 +73,7 @@ namespace PackageEasy.ViewModels
         private bool isUseCustomPath;
         private bool isDir;
         private List<ExtensionMenuModel> formatList = new List<ExtensionMenuModel>();
+        private List<ExtensionMenuModel> dirList = new List<ExtensionMenuModel>();
 
         /// <summary>
         /// 组件信息
@@ -263,12 +268,30 @@ namespace PackageEasy.ViewModels
             }
         }
 
+
+        /// <summary>
+        /// 格式列表
+        /// </summary>
         public List<ExtensionMenuModel> FormatList
         {
             get => formatList;
             set
             {
                 formatList = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        /// <summary>
+        /// 文件夹列表
+        /// </summary>
+        public List<ExtensionMenuModel> DirList
+        {
+            get => dirList;
+            set
+            {
+                dirList = value;
                 OnPropertyChanged();
             }
         }
@@ -387,7 +410,7 @@ namespace PackageEasy.ViewModels
                 var dirs = GetDirs(folderBrowserDialog.SelectedPath);
                 List<AssemblyFileModel> assemblyFileModels = currentAssembly.FileList;
                 DirectoryInfo rootInfo = new DirectoryInfo(folderBrowserDialog.SelectedPath);
-                currentAssembly.SelectDir = rootInfo.Parent?.FullName;
+                currentAssembly.SelectDir = rootInfo?.Parent?.FullName ?? "";
                 foreach (var file in dirs)
                 {
                     if (currentAssembly.SelectDir == file) { continue; }
@@ -402,7 +425,6 @@ namespace PackageEasy.ViewModels
                     if (current != null)
                     {
                         continue;
-                        assemblyFileModels.Remove(current);
                     }
                     if (currentAssembly.IgnoreFileList.Exists(c => c.FilePath == assemblyFileModel.FilePath))
                         continue;
@@ -463,7 +485,6 @@ namespace PackageEasy.ViewModels
                     if (current != null)
                     {
                         continue;
-                        assemblyFileModels.Remove(current);
                     }
                     assemblyFileModels.Add(assemblyFileModel);
                 }
@@ -684,6 +705,7 @@ namespace PackageEasy.ViewModels
         {
             if (FileList != null)
             {
+                DirList = new List<ExtensionMenuModel>();
                 FormatList = new List<ExtensionMenuModel>();
                 FormatList = FileList.Select(x => new FileInfo(x.FilePath).Extension.ToLower())
                 .Distinct()
@@ -700,7 +722,13 @@ namespace PackageEasy.ViewModels
                     IsExistNoNeedCopy = !selected.Exists(c => c.IsExistNoNeedCopy == false);
                     IsNoNeedCopy = !selected.Exists(c => c.IsNoNeedCopy == false);
                     IsNoNeedDelete = !selected.Exists(c => c.IsNoNeedDelete == false);
-                    IsDir = !selected.Exists(c => c.IsDirectory == false);
+                    // DirList = selected.SelectMany(x => x.IsDirectory == false ? x.FilePath.Split('\\').ToList().FindAll(y => y != new FileInfo(x.FilePath).Name) : x.FilePath.Split('\\').ToList()).Distinct().ToList().FindAll(x => !string.IsNullOrWhiteSpace(x))
+                    //.Select(x => new ExtensionMenuModel() { ExtensionName = x, MenuCommand = SetExtensionMenuCommand })
+                    //.ToList();
+                    DirList = selected.SelectMany(x => x.FilePath.GetDirs(x.IsDirectory)).Distinct().ToList().FindAll(x => !string.IsNullOrWhiteSpace(x))
+                 .Select(x => new ExtensionMenuModel() { ExtensionName = x, MenuCommand = SetDirMenuCommand })
+                 .ToList();
+                    IsDir = DirList.Count > 0;
                     return;
                 }
 
@@ -725,6 +753,44 @@ namespace PackageEasy.ViewModels
                 var ignoreFiles = FileList.FindAll(x => new FileInfo(x.FilePath).Extension.ToLower() == s.ToLower());
                 IgnoreOnly(ignoreFiles);
                 TMessageBox.ShowMsg(CommonSettings.AssemblyIgnoreSuccess);
+            }
+        });
+
+        /// <summary>
+        /// 忽略文件夹
+        /// </summary>
+        public RelayCommand<string> SetDirMenuCommand => new RelayCommand<string>((s) =>
+        {
+            var result = TMessageBox.ShowMsg(CommonSettings.AssemblyIgnoreDirTips, MessageLevel.YesNoCancel);
+            if (result == TMessageBoxResult.Close) return;
+            bool isCurrent = result == TMessageBoxResult.Cancel;
+            var selected = FileList.FindAll(f => f.FilePath.ToLower() == "\\" + s.ToLower());
+            if (selected == null || selected.Count == 0) return;
+            if (isCurrent)
+            {
+                bool flowControl = IgnoreOnly(selected);
+                TMessageBox.ShowMsg(CommonSettings.AssemblyIgnoreSuccess);
+                return;
+            }
+            else
+            {
+                var dirList = selected.Select(x => x.FilePath).ToList();
+                if (dirList != null)
+                {
+                    List<AssemblyFileModel> ignoreFiles = new List<AssemblyFileModel>();
+                    foreach (var item in dirList)
+                    {
+                        var dirFiles = FileList.FindAll(x => x.FilePath.ToLower().StartsWith(item.ToLower())).ToList();
+                        if (dirFiles != null)
+                        {
+                            dirFiles = dirFiles.FindAll(x => !ignoreFiles.Exists(c => c.FilePath == x.FilePath)).ToList();
+                            ignoreFiles.AddRange(dirFiles);
+                        }
+                    }
+                    IgnoreOnly(ignoreFiles);
+                    TMessageBox.ShowMsg(CommonSettings.AssemblyIgnoreSuccess);
+                    return;
+                }
             }
         });
         /// <summary>
@@ -780,6 +846,42 @@ namespace PackageEasy.ViewModels
                     var currentAssembly = AssemblyList.Find(p => p.IsSelected == true);
                     if (currentAssembly != null)
                     {
+                        var dirs = GetDirs(ProjectInfo.GetWorkSpace());
+                        List<AssemblyFileModel> assemblyFileModels = currentAssembly.FileList;
+                        DirectoryInfo rootInfo = new DirectoryInfo(ProjectInfo.GetWorkSpace());
+                        currentAssembly.SelectDir = ProjectInfo.GetWorkSpace();
+                        foreach (var file in dirs)
+                        {
+                            var relativePath = file.Replace(ProjectInfo.GetWorkSpace(), "");
+                            if (!currentAssembly.FileList.Exists(c => c.FilePath == relativePath) &&
+                                (currentAssembly.IgnoreFileList == null || !currentAssembly.IgnoreFileList.Exists(c => c.FilePath == relativePath)))
+                            {
+                                if (currentAssembly.SelectDir == file) { continue; }
+                                AssemblyFileModel assemblyFileModel = new AssemblyFileModel();
+                                assemblyFileModel.AssemblyId = currentAssembly.AssemblyId;
+                                DirectoryInfo fileInfo = new DirectoryInfo(file);
+                                string fullPath = fileInfo.FullName;
+                                if (ProjectInfo.BaseInfo.IsUseRelativePath)
+                                {
+                                    fullPath = Path.GetRelativePath(currentAssembly.SelectDir, fullPath);
+                                }
+                                if (!string.IsNullOrWhiteSpace(fullPath) && fullPath != "." && !fullPath.StartsWith("\\"))
+                                {
+                                    fullPath = "\\" + fullPath;
+                                }
+                                assemblyFileModel.SubPath = fullPath?.Replace(currentAssembly.SelectDir, "") ?? "";
+                                assemblyFileModel.FilePath = assemblyFileModel.SubPath;
+                                assemblyFileModel.IsDirectory = true;
+                                assemblyFileModel.TargetPath = TargetDirList.FirstOrDefault() ?? new TargetPathModel();
+                                var current = assemblyFileModels.Find(p => p.FilePath == assemblyFileModel.FilePath);
+                                if (current != null)
+                                {
+                                    continue;
+                                }
+                                assemblyFileModels.Add(assemblyFileModel);
+                            }
+                        }
+
                         var allFiles = GetFiles(ProjectInfo.GetWorkSpace());
                         foreach (var file in allFiles)
                         {
@@ -790,6 +892,18 @@ namespace PackageEasy.ViewModels
                                 AssemblyFileModel assemblyFileModel = new AssemblyFileModel();
                                 assemblyFileModel.AssemblyId = currentAssembly.AssemblyId;
                                 assemblyFileModel.FilePath = relativePath;
+                                FileInfo fileInfo = new FileInfo(file);
+                                string fullPath = fileInfo.DirectoryName ?? "";
+
+                                if (ProjectInfo.BaseInfo.IsUseRelativePath)
+                                {
+                                    fullPath = Path.GetRelativePath(currentAssembly.SelectDir, fullPath);
+                                }
+                                if (!string.IsNullOrWhiteSpace(fullPath) && fullPath != "." && !fullPath.StartsWith("\\"))
+                                {
+                                    fullPath = "\\" + fullPath;
+                                }
+                                assemblyFileModel.SubPath = fullPath?.Replace(currentAssembly.SelectDir, "") ?? "";
                                 assemblyFileModel.TargetPath = TargetDirList.FirstOrDefault() ?? new TargetPathModel();
                                 currentAssembly.FileList.Add(assemblyFileModel);
                             }
@@ -865,12 +979,16 @@ namespace PackageEasy.ViewModels
         /// </summary>
         public RelayCommand<TargetPathModel> TargetPathChangedCommand => new RelayCommand<TargetPathModel>((s) =>
         {
+            if (s == null) return;
             if (isChanging) return;
             isChanging = true;
             try
             {
-                var result = TMessageBox.ShowMsg(CommonSettings.MultiTargetDirPathChanged, MessageLevel.Question);
-                if (result != TMessageBoxResult.OK) return;
+                if (FileList.Count(x => x.IsSelected == true) > 1)
+                {
+                    var result = TMessageBox.ShowMsg(CommonSettings.MultiTargetDirPathChanged, MessageLevel.Question);
+                    if (result != TMessageBoxResult.OK) return;
+                }
                 var selected = FileList.FindAll(c => c.IsSelected == true);
                 if (selected == null) return;
                 foreach (var item in selected)
@@ -924,11 +1042,26 @@ namespace PackageEasy.ViewModels
         {
             RefreshData();
         }
+        private void Service_AssemblyItemChanged(AssemblyFileModel arg1, string arg2)
+        {
+            if (arg1 != null && arg2 == "AssemblyItem")
+            {
+                if (!Keyboard.IsKeyDown(System.Windows.Input.Key.LeftCtrl) && !Keyboard.IsKeyDown(System.Windows.Input.Key.RightCtrl) && !arg1.IsSelected)
+                {
+                    foreach (var item in FileList)
+                    {
+                        item.IsSelected = false;
+                    }
+                }
+                arg1.IsSelected = true;
+            }
+        }
 
         public override void Dispose()
         {
             base.Dispose();
             Service.TargetPathChanged -= Service_TargetPathChanged;
+            Service.AssemblyItemChanged -= Service_AssemblyItemChanged;
         }
 
         public override void NavigateOut()
@@ -996,7 +1129,14 @@ namespace PackageEasy.ViewModels
                 {
                     foreach (var file in assitem.FileList)
                     {
-                        file.TargetPath = TargetDirList.Find(p => p.DisplayName == file.TargetPath.DisplayName) ?? new TargetPathModel();
+                        if (file.TargetPath == null)
+                        {
+                            file.TargetPath = TargetDirList.FirstOrDefault() ?? new TargetPathModel();
+                        }
+                        else
+                        {
+                            file.TargetPath = TargetDirList.Find(p => p.DisplayName == file.TargetPath.DisplayName) ?? new TargetPathModel();
+                        }
                     }
                 }
                 if (assitem.IgnoreFileList != null)

@@ -15,6 +15,8 @@ namespace PackageEasy.Converters
         {
             if (value == null) return Visibility.Collapsed;
             bool flage = (bool)value;
+            if (parameter != null)
+                return flage ? Visibility.Collapsed : Visibility.Visible;
             return flage ? Visibility.Visible : Visibility.Collapsed;
         }
 

@@ -594,7 +594,7 @@ namespace PackageEasy.ViewModels
         /// </summary>
         public RelayCommand TargetPathCommand => new RelayCommand(() =>
         {
-            TargetPathControl targetPathControl = null;
+            TargetPathControl? targetPathControl = null;
             var table = TableList.Find(p => p.IsActive);
             if (table != null)
             {
@@ -611,11 +611,14 @@ namespace PackageEasy.ViewModels
             {
                 targetPathControl = new TargetPathControl();
             }
-            ShowWindow showWindow = new ShowWindow(targetPathControl);
-            showWindow.Width = 850;
-            showWindow.Height = 550;
-            showWindow.ResizeMode = ResizeMode.CanResize;
-            showWindow.ShowDialog();
+            if (targetPathControl != null)
+            {
+                ShowWindow showWindow = new ShowWindow(targetPathControl);
+                showWindow.Width = 850;
+                showWindow.Height = 550;
+                showWindow.ResizeMode = ResizeMode.CanResize;
+                showWindow.ShowDialog();
+            }
         });
 
         /// <summary>

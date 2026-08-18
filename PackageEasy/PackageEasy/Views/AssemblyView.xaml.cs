@@ -1,4 +1,6 @@
-﻿using PackageEasy.ViewModels;
+﻿using PackageEasy.Domain.Interfaces;
+using PackageEasy.Domain.Models;
+using PackageEasy.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,9 +26,11 @@ namespace PackageEasy.Views
     /// </summary>
     public partial class AssemblyView : UserControl
     {
-        public AssemblyView()
+        IDataService Service;
+        public AssemblyView(IDataService dataService)
         {
             InitializeComponent();
+            Service = dataService;
         }
 
         private void DataGridRow_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -35,12 +39,14 @@ namespace PackageEasy.Views
             {
                 return;
             }
-            fileDataGrid.SelectedItems.Clear();
             DataGridRow? dataGridRow = sender as DataGridRow;
             if (dataGridRow != null)
             {
-                dataGridRow.IsSelected = true;
-                fileDataGrid.SelectedItems.Add(dataGridRow.DataContext);
+                AssemblyFileModel? assemblyFileModel = dataGridRow.DataContext as AssemblyFileModel;
+                if (assemblyFileModel != null)
+                {
+                    Service?.OnSelectedAssemblyItemChanged(assemblyFileModel, "AssemblyItem");
+                }
             }
             e.Handled = false;
         }
