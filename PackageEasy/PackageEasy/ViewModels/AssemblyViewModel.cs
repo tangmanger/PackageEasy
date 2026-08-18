@@ -859,7 +859,16 @@ namespace PackageEasy.ViewModels
                                 AssemblyFileModel assemblyFileModel = new AssemblyFileModel();
                                 assemblyFileModel.AssemblyId = currentAssembly.AssemblyId;
                                 DirectoryInfo fileInfo = new DirectoryInfo(file);
-                                assemblyFileModel.SubPath = fileInfo?.FullName?.Replace(currentAssembly.SelectDir, "") ?? "";
+                                string fullPath = fileInfo.FullName;
+                                if (ProjectInfo.BaseInfo.IsUseRelativePath)
+                                {
+                                    fullPath = Path.GetRelativePath(currentAssembly.SelectDir, fullPath);
+                                }
+                                if (!string.IsNullOrWhiteSpace(fullPath) && fullPath != "." && !fullPath.StartsWith("\\"))
+                                {
+                                    fullPath = "\\" + fullPath;
+                                }
+                                assemblyFileModel.SubPath = fullPath?.Replace(currentAssembly.SelectDir, "") ?? "";
                                 assemblyFileModel.FilePath = assemblyFileModel.SubPath;
                                 assemblyFileModel.IsDirectory = true;
                                 assemblyFileModel.TargetPath = TargetDirList.FirstOrDefault() ?? new TargetPathModel();
@@ -883,7 +892,17 @@ namespace PackageEasy.ViewModels
                                 assemblyFileModel.AssemblyId = currentAssembly.AssemblyId;
                                 assemblyFileModel.FilePath = relativePath;
                                 FileInfo fileInfo = new FileInfo(file);
-                                assemblyFileModel.SubPath = fileInfo?.DirectoryName?.Replace(currentAssembly.SelectDir, "") ?? "";
+                                string fullPath = fileInfo.DirectoryName ?? "";
+
+                                if (ProjectInfo.BaseInfo.IsUseRelativePath)
+                                {
+                                    fullPath = Path.GetRelativePath(currentAssembly.SelectDir, fullPath);
+                                }
+                                if (!string.IsNullOrWhiteSpace(fullPath) && fullPath != "." && !fullPath.StartsWith("\\"))
+                                {
+                                    fullPath = "\\" + fullPath;
+                                }
+                                assemblyFileModel.SubPath = fullPath?.Replace(currentAssembly.SelectDir, "") ?? "";
                                 assemblyFileModel.TargetPath = TargetDirList.FirstOrDefault() ?? new TargetPathModel();
                                 currentAssembly.FileList.Add(assemblyFileModel);
                             }
