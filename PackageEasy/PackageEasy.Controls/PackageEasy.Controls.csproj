@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="log4net" Version="3.3.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\PackageEasy.Common\PackageEasy.Common.csproj" />
   </ItemGroup>
 
