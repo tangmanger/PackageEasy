@@ -6,50 +6,50 @@
         xmlns:local="clr-namespace:PackageEasy.Views.Dialogs"
         WindowStartupLocation="CenterOwner"
         WindowState="Normal"
-        ResizeMode="NoResize"
-     
-       
-        AllowsTransparency="True" WindowStyle="None" Background="Transparent"
+        
+        AllowsTransparency="False" WindowStyle="None" Background="{DynamicResource MainWorkAreaBackgroud}"
         ShowInTaskbar="False"
         mc:Ignorable="d"
-         Height="212" Width="450" MinHeight="212" MinWidth="450" >
+        Height="228" Width="460" MinHeight="228" MinWidth="460">
     <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="30"
-                 GlassFrameThickness="0"
-                 NonClientFrameEdges="None"
-                 CornerRadius="0"
-                 ResizeBorderThickness="1"
-                 UseAeroCaptionButtons="False"
-                  />
-
+        <WindowChrome CaptionHeight="44"
+                      GlassFrameThickness="0,0,0,1"
+                      NonClientFrameEdges="None"
+                      CornerRadius="8"
+                      ResizeBorderThickness="1"
+                      UseAeroCaptionButtons="False" />
     </WindowChrome.WindowChrome>
-    <Border BorderThickness="1" Background="{DynamicResource MainWorkAreaBackgroud}"  CornerRadius="4" BorderBrush="{DynamicResource MainWindowBorderBrush}">
-        <Grid >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="32"></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-            </Grid.RowDefinitions>
-            <Border Background="{DynamicResource titleColoBrushes}" CornerRadius="4,4,0,0">
-                <Grid WindowChrome.IsHitTestVisibleInChrome="True" Margin="0,6,0,6">
-                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" >
-                        <Image Height="18" Width="18" VerticalAlignment="Center" Margin="15,0,0,0" Source="/Resources/Images/tools.png"></Image>
-                        <TextBlock  Margin="5,0,0,0" VerticalAlignment="Center" Text="{Binding Title,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
-                    </StackPanel>
 
-                    <StackPanel WindowChrome.IsHitTestVisibleInChrome="True"  Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
-                        <!--<Button Style="{StaticResource IconButtonStyle}" FontSize="16" Margin="10,0,10,0"  Command="{x:Static SystemCommands.MinimizeWindowCommand}"  Foreground="{DynamicResource mainOperateButtonBrushes}" Content="&#xea6a;"></Button>-->
-                        <!--<Button Style="{StaticResource IconButtonStyle}" FontSize="16" Margin="10,0,10,0"  Command="{x:Static SystemCommands.MaximizeWindowCommand}"  x:Name="max" Foreground="{DynamicResource mainOperateButtonBrushes}" Content="&#xe65d;"></Button>-->
-                        <!--<Button Style="{StaticResource IconButtonStyle}" FontSize="16" Margin="10,0,10,0"  Command="{x:Static SystemCommands.RestoreWindowCommand}" x:Name="normal" Foreground="{DynamicResource mainOperateButtonBrushes}" Content="&#xe692;"></Button>-->
-                        <Button Style="{StaticResource IconButtonStyle}" FontSize="16" Foreground="{DynamicResource mainOperateButtonBrushes}" Command="{x:Static SystemCommands.CloseWindowCommand}" Content="&#xe607;"></Button>
+    <Border Background="{DynamicResource MainWorkAreaBackgroud}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="44"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <!--标题栏-->
+            <Border Background="{DynamicResource shellBrush}" CornerRadius="0" BorderBrush="{DynamicResource borderBrush}" BorderThickness="0,0,0,1">
+                <Grid>
+                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Margin="16,0,0,0">
+                        <Image Style="{StaticResource AppLogoStyle}" Width="22" Height="22"></Image>
+                        <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource mainForeground}"
+                                   Text="{Binding Title, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"></TextBlock>
                     </StackPanel>
+                    <Button WindowChrome.IsHitTestVisibleInChrome="True" HorizontalAlignment="Right" Style="{StaticResource CaptionCloseButtonStyle}" FontSize="14"
+                            Command="{x:Static SystemCommands.CloseWindowCommand}" Content="&#xe607;"></Button>
                 </Grid>
             </Border>
-            <TextBlock Text="" Foreground="{DynamicResource baseForeground}" FontSize="16" Grid.Row="1" HorizontalAlignment="Center" TextWrapping="WrapWithOverflow" Margin="5,0,5,0" VerticalAlignment="Center" x:Name="msg"></TextBlock>
-            <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Center" Margin="0,20,0,20">
-                <Button Style="{StaticResource CommonButtonStyle}" Visibility="Collapsed" x:Name="ok" d:Content="确定" Content="{DynamicResource Yes}" Click="ok_Click" Width="76" Height="36"></Button>
-                <Button d:Content="否" Content="{DynamicResource No}" Visibility="Collapsed" Style="{StaticResource CommonButtonStyle}" x:Name="no" Margin="15,0,0,0" Width="76" Click="no_Click" Height="36" ></Button>
-                <Button Style="{StaticResource CommonButtonStyle}" Visibility="Collapsed" d:Content="关闭" Content="{DynamicResource Close}" Click="ImageButton_Click" x:Name="cancel" Width="76" Margin="15,0,0,0" Height="36"></Button>
+
+            <!--消息-->
+            <TextBlock Text="" Foreground="{DynamicResource baseForeground}" FontSize="13" Grid.Row="1" HorizontalAlignment="Center" TextWrapping="WrapWithOverflow"
+                       TextAlignment="Center" Margin="24,10,24,10" VerticalAlignment="Center" x:Name="msg"></TextBlock>
+
+            <!--按钮-->
+            <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" Margin="0,4,0,20">
+                <Button Style="{StaticResource PrimaryButtonStyle}" Visibility="Collapsed" x:Name="ok" Content="{DynamicResource Yes}" Click="ok_Click" Width="88" Height="32"></Button>
+                <Button Content="{DynamicResource No}" Visibility="Collapsed" Style="{StaticResource CommonButtonStyle}" x:Name="no" Margin="12,0,0,0" Width="88" Height="32" Click="no_Click"></Button>
+                <Button Style="{StaticResource CommonButtonStyle}" Visibility="Collapsed" Content="{DynamicResource Close}" Click="ImageButton_Click" x:Name="cancel" Width="88" Height="32" Margin="12,0,0,0"></Button>
             </StackPanel>
         </Grid>
     </Border>

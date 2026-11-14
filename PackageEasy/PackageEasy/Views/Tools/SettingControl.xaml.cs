@@ -33,8 +33,6 @@ namespace PackageEasy.Views.Tools
     {
         private string makensisPath;
         private string nSISHelperPath;
-        private List<ThemeModel> themeList;
-        private ThemeModel currentTheme;
         private List<LanguageTypeModel> languageTypes;
         private LanguageTypeModel selectedLanguageType;
 
@@ -54,18 +52,6 @@ namespace PackageEasy.Views.Tools
 
         private void LanguageHelper_LanguageChanged()
         {
-            ThemeList = new List<ThemeModel>();
-            foreach (var item in ThemeHelper.Themes)
-            {
-                ThemeList.Add(new ThemeModel()
-                {
-                    ThemeDescription = item.ThemeDescription.GetLangText(),
-                    ThemeId = item.ThemeId,
-                    ThemeName = item.ThemeName,
-                });
-            }
-            ThemeList = new List<ThemeModel>(ThemeList);
-            CurrentTheme = ThemeList.Find(p => p.ThemeId == ConfigHelper.Config.ThemeId) ?? ThemeList.FirstOrDefault() ?? new ThemeModel();
             LanguageTypes = new List<LanguageTypeModel>();
             foreach (var item in LanguageHelper.LanguageTypes)
             {
@@ -118,37 +104,6 @@ namespace PackageEasy.Views.Tools
             }
         }
 
-        /// <summary>
-        /// 主题列表
-        /// </summary>
-        public List<ThemeModel> ThemeList
-        {
-            get => themeList;
-            set
-            {
-                themeList = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        /// <summary>
-        /// 当前主题
-        /// </summary>
-        public ThemeModel CurrentTheme
-        {
-            get => currentTheme;
-            set
-            {
-                currentTheme = value;
-                if (value != null && ConfigHelper.Config.ThemeId != value.ThemeId)
-                {
-                    ConfigHelper.Config.ThemeId = value.ThemeId;
-                    ConfigHelper.Save(true);
-                    ThemeHelper.UpdateTheme(value);
-                }
-                RaisePropertyChanged();
-            }
-        }
         /// <summary>
         /// 多语言列表
         /// </summary>

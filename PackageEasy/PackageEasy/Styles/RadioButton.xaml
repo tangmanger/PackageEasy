@@ -2,20 +2,28 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:PackageControls="clr-namespace:PackageEasy.Common.Controls;assembly=PackageEasy.Common">
     <ScaleTransform ScaleY="1.05"  x:Key="scale"></ScaleTransform>
+
+    <!--工程页签：38 高、激活白底 + 顶部 2px 主色线-->
     <Style x:Key="IconRadioButtonStyle" TargetType="PackageControls:IconRadioButton">
+        <Setter Property="Foreground" Value="{DynamicResource iconRadioButtonForeground}"></Setter>
+        <Setter Property="FontSize" Value="12.5"></Setter>
+        <Setter Property="Cursor" Value="Hand"></Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="PackageControls:IconRadioButton">
-                    <Border x:Name="border" Height="27" RenderTransformOrigin="0.5,1" Background="{DynamicResource iconRadioButtonBackground}">
-                        <Grid VerticalAlignment="Bottom" Margin="0,0,0,4">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                <ColumnDefinition></ColumnDefinition>
-                                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Style="{StaticResource IconFontStyle}"   Foreground="{DynamicResource iconRadioButtonForeground}" x:Name="icon" Margin="10,0,0,0" Text="{TemplateBinding Icon}"></TextBlock>
-                            <TextBlock HorizontalAlignment="Left" Foreground="{DynamicResource iconRadioButtonForeground}" TextTrimming="CharacterEllipsis" FontSize="{TemplateBinding FontSize}" ToolTip="{TemplateBinding Content}" x:Name="textblock" Grid.Column="1" VerticalAlignment="Center" Margin="5,0,0,0" Text="{TemplateBinding Content}"></TextBlock>
-                            <Button Grid.Column="2" Width="35" Background="Transparent" Foreground="{DynamicResource iconRadioButtonForeground}" x:Name="close" Command="{TemplateBinding CloseCommand}" CommandParameter="{Binding }" Style="{StaticResource IconButtonStyle}" Content="&#xe607;"></Button>
+                    <Border x:Name="border" Height="38" Background="{DynamicResource iconRadioButtonBackground}" BorderBrush="Transparent" BorderThickness="0,0,0,1">
+                        <Grid>
+                            <Border x:Name="activeLine" Height="2" VerticalAlignment="Top" Background="{DynamicResource Accent}" Opacity="0"></Border>
+                            <Grid Margin="12,0,6,0" VerticalAlignment="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Style="{StaticResource IconFontStyle}" FontSize="14"   Foreground="{TemplateBinding Foreground}" x:Name="icon" Margin="0,0,6,0" Text="{TemplateBinding Icon}"></TextBlock>
+                                <TextBlock HorizontalAlignment="Left" Foreground="{TemplateBinding Foreground}" TextTrimming="CharacterEllipsis" FontSize="{TemplateBinding FontSize}" ToolTip="{TemplateBinding Content}" x:Name="textblock" Grid.Column="1" VerticalAlignment="Center" Text="{TemplateBinding Content}"></TextBlock>
+                                <Button Grid.Column="2" Width="22" Height="22" Margin="4,0,0,0" VerticalAlignment="Center" Background="Transparent" FontSize="10" Foreground="{TemplateBinding Foreground}" x:Name="close" Command="{TemplateBinding CloseCommand}" CommandParameter="{Binding }" Style="{StaticResource IconButtonStyle}" Content="&#xe607;"></Button>
+                            </Grid>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -27,12 +35,13 @@
                             <Setter Property="Visibility" Value="Collapsed" TargetName="icon"></Setter>
                         </Trigger>
                         <Trigger Property="IsChecked" Value="true">
-                            <Setter Property="Height" Value="28" TargetName="border"></Setter>
                             <Setter Property="Background" Value="{DynamicResource iconRadioButtonCheckBackground}" TargetName="border"></Setter>
+                            <Setter Property="BorderBrush" Value="{DynamicResource borderBrush}" TargetName="border"></Setter>
+                            <Setter Property="Opacity" Value="1" TargetName="activeLine"></Setter>
                             <Setter Property="Foreground"  Value="{DynamicResource iconRadioButtonCheckForeground}"  TargetName="textblock"></Setter>
                             <Setter Property="Foreground"  Value="{DynamicResource iconRadioButtonCheckForeground}"  TargetName="icon"></Setter>
                             <Setter Property="Foreground"  Value="{DynamicResource iconRadioButtonCheckForeground}"  TargetName="close"></Setter>
-                            <Setter Property="FontWeight"  Value="Bold"  TargetName="textblock"></Setter>
+                            <Setter Property="FontWeight"  Value="SemiBold"  TargetName="textblock"></Setter>
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -51,21 +60,33 @@
     </Style>
 
 
+    <!--左导航项：32 高、6 圆角、选中白底主色字；Content 支持内联 Path + 文本-->
     <Style x:Key="SelecetRadioButtonStyle" TargetType="RadioButton">
+        <Setter Property="Foreground" Value="{DynamicResource selecetRadioForeground}"></Setter>
+        <Setter Property="FontSize" Value="13"></Setter>
+        <Setter Property="Height" Value="32"></Setter>
+        <Setter Property="Margin" Value="0,2"></Setter>
+        <Setter Property="Padding" Value="10,0"></Setter>
+        <Setter Property="Cursor" Value="Hand"></Setter>
+        <Setter Property="HorizontalContentAlignment" Value="Left"></Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
-                    <Border x:Name="border" CornerRadius="4" Background="Transparent">
-                        <StackPanel Orientation="Horizontal">
-                            <Image Visibility="Hidden" x:Name="image" Source="/Resources/Images/Triangle.png" Height="6" Width="10" Margin="19,0,0,0"></Image>
-                            <TextBlock Text="{TemplateBinding Content}" Foreground="{DynamicResource selecetRadioForeground}" x:Name="textBlock" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="14" Margin="7,0,0,0"></TextBlock>
-                        </StackPanel>
+                    <Border x:Name="border" CornerRadius="6" Background="Transparent" Padding="{TemplateBinding Padding}">
+                        <ContentPresenter ContentSource="Content" TextElement.Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" RecognizesAccessKey="True"></ContentPresenter>
                     </Border>
                     <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"></Condition>
+                                <Condition Property="IsChecked" Value="False"></Condition>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" TargetName="border" Value="{DynamicResource surface2Brush}"></Setter>
+                        </MultiTrigger>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter Property="Visibility" TargetName="image" Value="Visible"></Setter>
                             <Setter Property="Background" TargetName="border" Value="{DynamicResource selecetRadioIsCheckedBackground}"></Setter>
-                            <Setter Property="Foreground" Value="{DynamicResource selecetRadioIsCheckedForeground}" TargetName="textBlock"></Setter>
+                            <Setter Property="Foreground" Value="{DynamicResource selecetRadioIsCheckedForeground}"></Setter>
+                            <Setter Property="FontWeight" Value="SemiBold"></Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -73,18 +94,103 @@
         </Setter>
     </Style>
 
+    <!--设置弹窗左侧导航-->
     <Style x:Key="SettingTableStyle" TargetType="RadioButton">
+        <Setter Property="Foreground" Value="{DynamicResource textSecondaryBrush}"></Setter>
+        <Setter Property="FontSize" Value="12.5"></Setter>
+        <Setter Property="Height" Value="34"></Setter>
+        <Setter Property="Margin" Value="0,2"></Setter>
+        <Setter Property="Padding" Value="10,0"></Setter>
+        <Setter Property="Cursor" Value="Hand"></Setter>
+        <Setter Property="HorizontalContentAlignment" Value="Left"></Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
-                    <Border Background="Transparent" x:Name="border"  >
-                        <TextBlock Text="{TemplateBinding Content}"  x:Name="text" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"></TextBlock>
+                    <Border Background="Transparent" x:Name="border" CornerRadius="6" Padding="{TemplateBinding Padding}">
+                        <ContentPresenter TextElement.Foreground="{TemplateBinding Foreground}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"></ContentPresenter>
                     </Border>
                     <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"></Condition>
+                                <Condition Property="IsChecked" Value="False"></Condition>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" TargetName="border" Value="{DynamicResource surface2Brush}"></Setter>
+                        </MultiTrigger>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter Property="Foreground" TargetName="text" Value="{DynamicResource settingControlBottonBackground}"></Setter>
-                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource settingControlBottonBackground}"></Setter>
-                            <Setter Property="BorderThickness" TargetName="border" Value="0,0,1,0"></Setter>
+                            <Setter Property="Background" TargetName="border" Value="{DynamicResource settingControlBottonBackground}"></Setter>
+                            <Setter Property="Foreground" Value="{DynamicResource Accent}"></Setter>
+                            <Setter Property="FontWeight" Value="SemiBold"></Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--普通单选：15px 圆圈 + 主色圆点-->
+    <Style x:Key="CommonRadioButtonStyle" TargetType="RadioButton">
+        <Setter Property="Foreground" Value="{DynamicResource mainForeground}"></Setter>
+        <Setter Property="FontSize" Value="12.5"></Setter>
+        <Setter Property="Cursor" Value="Hand"></Setter>
+        <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <StackPanel Orientation="Horizontal" Background="Transparent">
+                        <Border x:Name="circle" Width="15" Height="15" CornerRadius="7.5" BorderThickness="1" BorderBrush="{DynamicResource borderStrongBrush}" Background="{DynamicResource MainWorkAreaBackgroud}" VerticalAlignment="Center">
+                            <Ellipse x:Name="dot" Width="7" Height="7" Fill="{DynamicResource onAccentBrush}" Visibility="Collapsed"></Ellipse>
+                        </Border>
+                        <ContentPresenter x:Name="content" Margin="6,0,0,0" VerticalAlignment="Center" TextElement.Foreground="{TemplateBinding Foreground}" RecognizesAccessKey="True"></ContentPresenter>
+                    </StackPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="{DynamicResource Accent}" TargetName="circle"></Setter>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource Accent}" TargetName="circle"></Setter>
+                            <Setter Property="BorderBrush" Value="{DynamicResource Accent}" TargetName="circle"></Setter>
+                            <Setter Property="Visibility" Value="Visible" TargetName="dot"></Setter>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.45"></Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--普通单选使用新样式-->
+    <Style TargetType="{x:Type RadioButton}" BasedOn="{StaticResource CommonRadioButtonStyle}"/>
+
+    <!--分段选择-->
+    <Style x:Key="SegmentedRadioButtonStyle" TargetType="RadioButton">
+        <Setter Property="Foreground" Value="{DynamicResource textSecondaryBrush}"></Setter>
+        <Setter Property="FontSize" Value="12.5"></Setter>
+        <Setter Property="Height" Value="28"></Setter>
+        <Setter Property="Padding" Value="12,0"></Setter>
+        <Setter Property="Cursor" Value="Hand"></Setter>
+        <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Border Background="Transparent" x:Name="border" CornerRadius="6" BorderThickness="1" BorderBrush="Transparent" Padding="{TemplateBinding Padding}">
+                        <ContentPresenter TextElement.Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"></ContentPresenter>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"></Condition>
+                                <Condition Property="IsChecked" Value="False"></Condition>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Background" TargetName="border" Value="{DynamicResource surface3Brush}"></Setter>
+                        </MultiTrigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Background" TargetName="border" Value="{DynamicResource MainWorkAreaBackgroud}"></Setter>
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource borderBrush}"></Setter>
+                            <Setter Property="Foreground" Value="{DynamicResource mainForeground}"></Setter>
+                            <Setter Property="FontWeight" Value="SemiBold"></Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

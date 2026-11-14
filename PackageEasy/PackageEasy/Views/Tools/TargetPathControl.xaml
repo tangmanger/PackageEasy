@@ -1,105 +1,128 @@
 ﻿<controls:BaseControl x:Class="PackageEasy.Views.Tools.TargetPathControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:PackageEasy.Views.Tools"
              xmlns:controls="clr-namespace:PackageEasy.Controls.Controls;assembly=PackageEasy.Controls"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition></RowDefinition>
-        </Grid.RowDefinitions>
-        <StackPanel Margin="5,5,5,0" Orientation="Horizontal">
-            <TextBlock Style="{StaticResource DefaultTextBlockStyle}" d:Text="展示名称：" Text="{DynamicResource TargetSearchName}" VerticalAlignment="Center" FontSize="16"></TextBlock>
-            <TextBox MinWidth="150" Height="30" Style="{DynamicResource CommonTextBox}" Text="{Binding SearchText}"></TextBox>
-            <Button Style="{StaticResource CommonButtonStyle}" MinWidth="80" d:Content="搜索" Command="{Binding QueryCommand}" Content="{DynamicResource TargetSearchButton}" Margin="5,0,0,0" Height="30"></Button>
-            <Button Style="{StaticResource CommonButtonStyle}" MinWidth="80" d:Content="添加" Margin="5,0,0,0" Height="30" Command="{Binding AddCommand}" Content="{DynamicResource TargetAdd}" ></Button>
-        </StackPanel>
-        <DataGrid Margin="5" Style="{StaticResource DataGridStyle}" Grid.Row="1" CanUserAddRows="False" AutoGenerateColumns="False" ItemsSource="{Binding TargetPaths}" ColumnHeaderHeight="35" RowHeight="35">
-            <DataGrid.Columns>
-                <DataGridTemplateColumn  Width="*" SortMemberPath="DisplayName">
-                    <DataGridTemplateColumn.HeaderTemplate>
-                        <DataTemplate>
-                            <TextBlock  d:Text="展示目录" Text="{DynamicResource TargetPathDisplayName}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></TextBlock>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.HeaderTemplate>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock  Margin="5,0,5,0"  Text="{Binding DisplayName}" Foreground="{DynamicResource DataGridForeground}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn  Width="*" SortMemberPath="TargetPath">
-                    <DataGridTemplateColumn.HeaderTemplate>
-                        <DataTemplate>
-                            <TextBlock  d:Text="目标目录" Text="{DynamicResource TargetPathName}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></TextBlock>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.HeaderTemplate>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Margin="5,0,5,0" Text="{Binding TargetPath}" Foreground="{DynamicResource DataGridForeground}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn  Width="*" SortMemberPath="CreateTime">
-                    <DataGridTemplateColumn.HeaderTemplate>
-                        <DataTemplate>
-                            <TextBlock  d:Text="创建时间" Text="{DynamicResource TargetCreateTime}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></TextBlock>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.HeaderTemplate>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding CreateTime,StringFormat='yyyy-MM-dd HH:mm:ss'}" Foreground="{DynamicResource DataGridForeground}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn  MinWidth="55" SortMemberPath="IsUserCreated">
-                    <DataGridTemplateColumn.HeaderTemplate>
-                        <DataTemplate>
-                            <TextBlock  d:Text="用户创建" Text="{DynamicResource TargetIsUserCreate}" Foreground="{DynamicResource DataGridForeground}" Margin="5,0,5,0"  FontSize="14"></TextBlock>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.HeaderTemplate>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <CheckBox IsEnabled="False" IsChecked="{Binding IsUserCreated}" Foreground="{DynamicResource DataGridForeground}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"></CheckBox>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn  Width="auto" MinWidth="80"  SortMemberPath="FilePath">
-                    <DataGridTemplateColumn.HeaderTemplate>
-                        <DataTemplate>
-                            <TextBlock  d:Text="操作" Text="{DynamicResource TargetOperate}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></TextBlock>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.HeaderTemplate>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button Margin="5,0,5,0" IsEnabled="{Binding IsUserCreated}" Style="{StaticResource CommonButtonStyle}" Command="{Binding DataContext.DelTargetCommand,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}" MinWidth="80" Height="30" CommandParameter="{Binding }" Content="{DynamicResource TargetDel}"></Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+    <Grid Background="{DynamicResource appCanvasBrush}">
+        <Grid Margin="16,16,16,16">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <!--工具条-->
+            <Grid Margin="0,0,0,12">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Border Width="220" Height="32" CornerRadius="6" Background="{DynamicResource commonTextBoxBackground}" BorderBrush="{DynamicResource commonTextBoxBorderBrush}" BorderThickness="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Path Style="{StaticResource IconPathSmallStyle}" Data="{StaticResource IconSearch}" Margin="9,0,4,0" Stroke="{DynamicResource textTertiaryBrush}"></Path>
+                            <TextBox Grid.Column="1" Style="{StaticResource CommonTextBox}" Height="30" BorderThickness="0" Background="Transparent" Padding="6,0,6,0" Margin="0,0,6,2" FocusVisualStyle="{x:Null}"
+                                     Text="{Binding SearchText}"></TextBox>
+                        </Grid>
+                    </Border>
+                    <Button Style="{StaticResource PrimaryButtonStyle}" MinWidth="80" Command="{Binding QueryCommand}" Content="{DynamicResource TargetSearchButton}" Margin="8,0,0,0" Height="32"></Button>
+                    <Button Style="{StaticResource CommonButtonStyle}" MinWidth="80" Margin="8,0,0,0" Height="32" Command="{Binding AddCommand}" Content="{DynamicResource TargetAdd}"></Button>
+                </StackPanel>
+            </Grid>
+
+            <!--表格卡-->
+            <Border Grid.Row="1" Style="{StaticResource CardStyle}" Padding="0">
+                <DataGrid Margin="8,8,8,8" Style="{StaticResource DataGridStyle}" CanUserAddRows="False" AutoGenerateColumns="False" ItemsSource="{Binding TargetPaths}">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Width="*" SortMemberPath="DisplayName">
+                            <DataGridTemplateColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{DynamicResource TargetPathDisplayName}" Foreground="{DynamicResource DataGridForeground}" FontSize="11.5"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.HeaderTemplate>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding DisplayName}" Foreground="{DynamicResource DataGridForeground}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12.5"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Width="*" SortMemberPath="TargetPath">
+                            <DataGridTemplateColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{DynamicResource TargetPathName}" Foreground="{DynamicResource DataGridForeground}" FontSize="11.5"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.HeaderTemplate>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding TargetPath}" Foreground="{DynamicResource DataGridForeground}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12.5"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Width="*" SortMemberPath="CreateTime">
+                            <DataGridTemplateColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{DynamicResource TargetCreateTime}" Foreground="{DynamicResource DataGridForeground}" FontSize="11.5"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.HeaderTemplate>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding CreateTime,StringFormat='yyyy-MM-dd HH:mm:ss'}" Foreground="{DynamicResource DataGridForeground}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12.5"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn MinWidth="55" SortMemberPath="IsUserCreated">
+                            <DataGridTemplateColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{DynamicResource TargetIsUserCreate}" Foreground="{DynamicResource DataGridForeground}" FontSize="11.5"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.HeaderTemplate>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsEnabled="False" IsChecked="{Binding IsUserCreated}" Foreground="{DynamicResource DataGridForeground}" HorizontalAlignment="Center" VerticalAlignment="Center"></CheckBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Width="auto" MinWidth="80" SortMemberPath="FilePath">
+                            <DataGridTemplateColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{DynamicResource TargetOperate}" Foreground="{DynamicResource DataGridForeground}" FontSize="11.5"></TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.HeaderTemplate>
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button IsEnabled="{Binding IsUserCreated}" Style="{StaticResource SmallButtonStyle}" Command="{Binding DataContext.DelTargetCommand,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"
+                                            MinWidth="64" Height="26" CommandParameter="{Binding }" Content="{DynamicResource TargetDel}"></Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+        </Grid>
+
+        <!--新增目标目录浮层-->
         <Grid Grid.RowSpan="2" Visibility="{Binding AddTargetPathVisibility}">
-            <Border Background="{DynamicResource TargetPathControl.AddBorder.Background}" Opacity="0.5" ></Border>
-            <Border Width="auto" Height="auto" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{DynamicResource TargetPathControl.WorkBackground}" CornerRadius="8">
-                <StackPanel Margin="25,20">
-                    <StackPanel Orientation="Horizontal" Margin="5">
-                        <TextBlock d:Text="展示目录" VerticalAlignment="Center"  Style="{StaticResource DefaultTextBlockStyle}"  Text="{DynamicResource TargetPathDisplayName}"></TextBlock>
-                        <TextBlock d:Text="：" VerticalAlignment="Center"  Style="{StaticResource DefaultTextBlockStyle}"  Text="{DynamicResource Format_Colon}"></TextBlock>
-                        <TextBox Width="150" Height="30" Margin="5,0,0,0" Text="{Binding TargetDisplayPath}"  Style="{StaticResource CommonTextBox}"></TextBox>
+            <Border Background="{DynamicResource TargetPathControl.AddBorder.Background}" Opacity="0.5"></Border>
+            <Border Width="auto" Height="auto" HorizontalAlignment="Center" VerticalAlignment="Center" Background="{DynamicResource MainWorkAreaBackgroud}"
+                    BorderBrush="{DynamicResource borderBrush}" BorderThickness="1" CornerRadius="12">
+                <StackPanel Margin="24,20,24,20">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <TextBlock VerticalAlignment="Center" Style="{StaticResource DefaultTextBlockStyle}" Text="{DynamicResource TargetPathDisplayName}" Width="80"></TextBlock>
+                        <TextBlock VerticalAlignment="Center" Style="{StaticResource DefaultTextBlockStyle}" Text="{DynamicResource Format_Colon}"></TextBlock>
+                        <TextBox Width="170" Height="32" Margin="6,0,0,0" Text="{Binding TargetDisplayPath}" Style="{StaticResource CommonTextBox}"></TextBox>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal"  Margin="5">
-                        <TextBlock d:Text="目标目录"  VerticalAlignment="Center" Style="{StaticResource DefaultTextBlockStyle}" Text="{DynamicResource TargetPathName}"></TextBlock>
-                        <TextBlock d:Text="：" VerticalAlignment="Center"  Style="{StaticResource DefaultTextBlockStyle}"  Text="{DynamicResource Format_Colon}"></TextBlock>
-                        <TextBox Width="150" Height="30" Margin="5,0,0,0" Text="{Binding TargetPath}" Style="{StaticResource CommonTextBox}"></TextBox>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                        <TextBlock VerticalAlignment="Center" Style="{StaticResource DefaultTextBlockStyle}" Text="{DynamicResource TargetPathName}" Width="80"></TextBlock>
+                        <TextBlock VerticalAlignment="Center" Style="{StaticResource DefaultTextBlockStyle}" Text="{DynamicResource Format_Colon}"></TextBlock>
+                        <TextBox Width="170" Height="32" Margin="6,0,0,0" Text="{Binding TargetPath}" Style="{StaticResource CommonTextBox}"></TextBox>
                     </StackPanel>
-                    <CheckBox d:Content="保存到本地" Visibility="{Binding SaveLocalVisibility}" Content="{DynamicResource TargetSaveToLocal}" IsChecked="{Binding IsSaveToLocal}" Margin="5"></CheckBox>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
-                        <Button Width="80" Height="30" Command="{Binding SureCommand}" Margin="5,0,0,0" d:Content="确定" Content="{DynamicResource Yes}" Style="{StaticResource CommonButtonStyle}"></Button>
-                        <Button Width="80" Height="30" Command="{Binding CancelCommand}" Margin="15,0,0,0" d:Content="取消"  Content="{DynamicResource Cancel}" Style="{StaticResource CommonButtonStyle}"></Button>
+                    <CheckBox Visibility="{Binding SaveLocalVisibility}" Content="{DynamicResource TargetSaveToLocal}" IsChecked="{Binding IsSaveToLocal}" Margin="86,6,0,6"></CheckBox>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+                        <Button Width="80" Height="32" Command="{Binding SureCommand}" Content="{DynamicResource Yes}" Style="{StaticResource PrimaryButtonStyle}"></Button>
+                        <Button Width="80" Height="32" Command="{Binding CancelCommand}" Margin="8,0,0,0" Content="{DynamicResource Cancel}" Style="{StaticResource CommonButtonStyle}"></Button>
                     </StackPanel>
                 </StackPanel>
             </Border>

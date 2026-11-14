@@ -1,0 +1,39 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--开关：CheckBox 模板化为 34×18 开关，IsChecked 绑定保持不变-->
+    <Style x:Key="SwitchCheckBoxStyle" TargetType="{x:Type CheckBox}">
+        <Setter Property="Cursor" Value="Hand"></Setter>
+        <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource mainForeground}"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type CheckBox}">
+                    <StackPanel Orientation="Horizontal" Background="Transparent">
+                        <Border x:Name="track" Width="34" Height="18" CornerRadius="9" Background="{DynamicResource surface3Brush}" BorderThickness="1" BorderBrush="{DynamicResource borderStrongBrush}" VerticalAlignment="Center">
+                            <Grid>
+                                <Ellipse x:Name="thumb" Width="12" Height="12" Fill="{DynamicResource textSecondaryBrush}" HorizontalAlignment="Left" Margin="2,0,0,0"></Ellipse>
+                            </Grid>
+                        </Border>
+                        <ContentPresenter x:Name="content" Margin="8,0,0,0" VerticalAlignment="Center" TextElement.Foreground="{TemplateBinding Foreground}" RecognizesAccessKey="True"></ContentPresenter>
+                    </StackPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="{DynamicResource Accent}" TargetName="track"></Setter>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource Accent}" TargetName="track"></Setter>
+                            <Setter Property="BorderBrush" Value="{DynamicResource Accent}" TargetName="track"></Setter>
+                            <Setter Property="Fill" Value="{DynamicResource onAccentBrush}" TargetName="thumb"></Setter>
+                            <Setter Property="HorizontalAlignment" Value="Right" TargetName="thumb"></Setter>
+                            <Setter Property="Margin" Value="0,0,2,0" TargetName="thumb"></Setter>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.45"></Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

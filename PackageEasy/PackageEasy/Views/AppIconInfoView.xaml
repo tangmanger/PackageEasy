@@ -2,122 +2,165 @@
 <UserControl x:Class="PackageEasy.Views.AppIconInfoView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:PackageEasy.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Foreground="{DynamicResource baseForeground}">
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="900" Foreground="{DynamicResource baseForeground}">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
-        </Grid.RowDefinitions>
-        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="10,30,0,0" Orientation="Horizontal">
-            <TextBlock d:Text="应用程序&quot;开始菜单&quot;文件夹名称:" Text="{DynamicResource AppIconMenuName}" VerticalAlignment="Center" ></TextBlock>
-            <TextBox Width="220"  HorizontalAlignment="Left" Height="30" Text="{Binding StartMenuName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5,0,0,0" Style="{StaticResource CommonTextBox}"></TextBox>
-        </StackPanel>
-        <StackPanel Orientation="Vertical" Grid.Row="1"  Margin="10,10,0,0" >
-            <CheckBox d:Content="允许用户更改&quot;开始菜单文&quot;件夹名称" Foreground="{DynamicResource baseForeground}" Content="{DynamicResource AppIconAllowChangeMenuName}" IsChecked="{Binding IsCanChangeStartMenuName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" ></CheckBox>
-            <CheckBox d:Content="在&quot;开始菜单&quot;文件夹创建互联网快捷方式" Foreground="{DynamicResource baseForeground}" Content="{DynamicResource AppIconStartShortCuts}" Margin="0,10,0,0" IsChecked="{Binding IsCreateWebUrl,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" ></CheckBox>
-            <CheckBox d:Content="在&quot;开始菜单&quot;创建解除安装图标" Foreground="{DynamicResource baseForeground}" Content="{DynamicResource AppIconStartUninstallShortCuts}" Margin="0,10,0,0" IsChecked="{Binding IsCreateUnInstall,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" ></CheckBox>
-        </StackPanel>
-        <DataGrid Grid.Row="2" Margin="10,10,10,0" Style="{StaticResource DataGridStyle}"
-                  BorderBrush="{DynamicResource borderBrush}" 
-                  ItemsSource="{Binding AppIconInfoList}"
-                  CanUserAddRows="False" 
-                  AutoGenerateColumns="False" ColumnHeaderHeight="35" RowHeight="35">
-            <DataGrid.Columns>
-                <DataGridTemplateColumn  Width="72">
-                    <DataGridTemplateColumn.HeaderTemplate>
-                        <DataTemplate>
-                            <TextBlock d:Text="选择" Text="{DynamicResource AppIconChoose}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></TextBlock>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.HeaderTemplate>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <CheckBox Command="{Binding Path=DataContext.AppIconCheckCommand,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></CheckBox>
-                            <!--<TextBlock Text="{Binding PlateName}" Foreground="{DynamicResource DataGridForeground}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>-->
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn  Width="*">
-                    <DataGridTemplateColumn.HeaderTemplate>
-                        <DataTemplate>
-                            <TextBlock d:Text="目标文件夹" Foreground="{DynamicResource DataGridForeground}" Text="{DynamicResource AppIconTargetDirPath}" FontSize="14"></TextBlock>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.HeaderTemplate>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <!--<TextBox Style="{StaticResource CommonTextBox}" Text="{Binding ShortcutPath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="2"></TextBox>-->
-                            <ComboBox Style="{StaticResource CommonComboBoxStyle}" SelectedItem="{Binding IconDir,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="DisplayName" VerticalContentAlignment="Center" ItemsSource="{Binding DataContext.IconPathDir,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"></ComboBox>
-                            <!--<TextBlock Text="{Binding PlateName}" Foreground="{DynamicResource DataGridForeground}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>-->
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn  Width="*">
-                    <DataGridTemplateColumn.HeaderTemplate>
-                        <DataTemplate>
-                            <TextBlock d:Text="快捷方式名称" Text="{DynamicResource AppIconShortCutName}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></TextBlock>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.HeaderTemplate>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBox Style="{StaticResource CommonTextBox}" Text="{Binding ShortcutPath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="2"></TextBox>
-                            <!--<TextBlock Text="{Binding PlateName}" Foreground="{DynamicResource DataGridForeground}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>-->
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn   Width="*">
-                    <DataGridTemplateColumn.HeaderTemplate>
-                        <DataTemplate>
-                            <TextBlock d:Text="启动参数" Text="{DynamicResource AppIconCutShotParam}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></TextBlock>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.HeaderTemplate>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBox Style="{StaticResource CommonTextBox}" Text="{Binding AppIconCutShotParam,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="2"></TextBox>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                
-                <DataGridTemplateColumn   Width="*">
-                    <DataGridTemplateColumn.HeaderTemplate>
-                        <DataTemplate>
-                            <TextBlock d:Text="目的文件" Text="{DynamicResource AppIconTargetFilePath}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></TextBlock>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.HeaderTemplate>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <!--<TextBox Style="{StaticResource CommonTextBox}" Text="{Binding FilePath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="2"></TextBox>-->
-                            <ComboBox Style="{StaticResource CommonComboBoxStyle}" VirtualizingPanel.IsVirtualizing="True"  SelectedItem="{Binding FilePath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" ItemsSource="{Binding DataContext.TargetFilesList,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"></ComboBox>
-                            <!--<TextBlock Text="{Binding PlateName}" Foreground="{DynamicResource DataGridForeground}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>-->
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn  Width="100">
-                    <DataGridTemplateColumn.HeaderTemplate>
-                        <DataTemplate>
-                            <TextBlock d:Text="操作" Text="{DynamicResource AppIconOperate}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></TextBlock>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.HeaderTemplate>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button Style="{StaticResource CommonButtonStyle}" Width="80" Height="30" Command="{Binding Path=DataContext.DelCommand,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}" CommandParameter="{Binding }" d:Content="删除" Content="{DynamicResource AssemblyDelete}"></Button>
-                            </StackPanel>
-                            <!--<TextBlock Text="{Binding PlateName}" Foreground="{DynamicResource DataGridForeground}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="14"></TextBlock>-->
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="10,5,0,10">
-            <Button Width="80" Height="30" d:Content="添加" Content="{DynamicResource AppIconAdd}" Margin="0,0,5,0"  Command="{Binding AddCommand}" Style="{StaticResource CommonButtonStyle}"></Button>
-            <Button Width="80"  Height="30" d:Content="编辑" Content="{DynamicResource AppIconEdit}" Visibility="Collapsed" Margin="5,0,5,0"  Style="{StaticResource CommonButtonStyle}"></Button>
-            <Button Width="80"  Height="30" IsEnabled="{Binding IsCanDeleted,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Command="{Binding DelSelectCommand}" d:Content="删除选中" Content="{DynamicResource AppIconDelSelected}"  Margin="5,0,5,0"  Style="{StaticResource CommonButtonStyle}"></Button>
-        </StackPanel>
+    <Grid Background="{DynamicResource appCanvasBrush}">
+        <Grid Margin="24,20,24,24">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <!--页头-->
+            <TextBlock Text="{DynamicResource ProjectAppIcon}" Style="{StaticResource PageHeaderStyle}"></TextBlock>
+
+            <!--表单卡-->
+            <Border Grid.Row="1" Style="{StaticResource CardStyle}" Margin="0,16,0,0">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
+                        <Border Style="{StaticResource PanelIconBoxStyle}">
+                            <Path Style="{StaticResource PanelIconPathStyle}" Data="{StaticResource IconShortcut}"></Path>
+                        </Border>
+                        <TextBlock Text="{DynamicResource AppIconShortcutList}" Style="{StaticResource PanelTitleStyle}"></TextBlock>
+                    </StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" MinWidth="130"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="{DynamicResource AppIconMenuName}" Style="{StaticResource FormLabelStyle}"></TextBlock>
+                        <TextBox Grid.Column="1" MinWidth="120" HorizontalAlignment="Left" Style="{StaticResource CommonTextBox}" VerticalContentAlignment="Center"
+                                 Text="{Binding StartMenuName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                        <WrapPanel Grid.Row="1" Grid.Column="1" Margin="0,12,0,0">
+                            <CheckBox Style="{StaticResource SwitchCheckBoxStyle}" Content="{DynamicResource AppIconAllowChangeMenuName}"
+                                      IsChecked="{Binding IsCanChangeStartMenuName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></CheckBox>
+                            <CheckBox Style="{StaticResource SwitchCheckBoxStyle}" Content="{DynamicResource AppIconStartShortCuts}" Margin="28,0,0,0"
+                                      IsChecked="{Binding IsCreateWebUrl,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></CheckBox>
+                            <CheckBox Style="{StaticResource SwitchCheckBoxStyle}" Content="{DynamicResource AppIconStartUninstallShortCuts}" Margin="28,0,0,0"
+                                      IsChecked="{Binding IsCreateUnInstall,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></CheckBox>
+                        </WrapPanel>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!--快捷方式表格卡-->
+            <Border Grid.Row="2" Style="{StaticResource CardStyle}" Margin="0,16,0,0" Padding="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Orientation="Horizontal" Margin="16,14,16,10">
+                        <Border Style="{StaticResource PanelIconBoxStyle}">
+                            <Path Style="{StaticResource PanelIconPathStyle}" Data="{StaticResource IconGrid}"></Path>
+                        </Border>
+                        <TextBlock Text="{DynamicResource AppIconShortCutName}" Style="{StaticResource PanelTitleStyle}"></TextBlock>
+                    </StackPanel>
+
+                    <DataGrid Grid.Row="1" Margin="8,0,8,0" Style="{StaticResource DataGridStyle}"
+                              BorderBrush="{DynamicResource borderBrush}"
+                              ItemsSource="{Binding AppIconInfoList}"
+                              CanUserAddRows="False"
+                              AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Width="72">
+                                <DataGridTemplateColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{DynamicResource AppIconChoose}" Foreground="{DynamicResource DataGridForeground}" FontSize="11.5"></TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.HeaderTemplate>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox Command="{Binding Path=DataContext.AppIconCheckCommand,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IsSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></CheckBox>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width="*">
+                                <DataGridTemplateColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Foreground="{DynamicResource DataGridForeground}" Text="{DynamicResource AppIconTargetDirPath}" FontSize="11.5"></TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.HeaderTemplate>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <ComboBox Style="{StaticResource CommonComboBoxStyle}" Height="26" Margin="0,3" SelectedItem="{Binding IconDir,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="DisplayName" VerticalContentAlignment="Center" ItemsSource="{Binding DataContext.IconPathDir,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"></ComboBox>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width="*">
+                                <DataGridTemplateColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{DynamicResource AppIconShortCutName}" Foreground="{DynamicResource DataGridForeground}" FontSize="11.5"></TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.HeaderTemplate>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Style="{StaticResource CommonTextBox}" Height="26" Text="{Binding ShortcutPath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,0"></TextBox>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width="*">
+                                <DataGridTemplateColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{DynamicResource AppIconCutShotParam}" Foreground="{DynamicResource DataGridForeground}" FontSize="11.5"></TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.HeaderTemplate>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Style="{StaticResource CommonTextBox}" Height="26" Text="{Binding AppIconCutShotParam,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,0"></TextBox>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width="*">
+                                <DataGridTemplateColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{DynamicResource AppIconTargetFilePath}" Foreground="{DynamicResource DataGridForeground}" FontSize="11.5"></TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.HeaderTemplate>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <ComboBox Style="{StaticResource CommonComboBoxStyle}" Height="26" Margin="0,3" VirtualizingPanel.IsVirtualizing="True" SelectedItem="{Binding FilePath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center" ItemsSource="{Binding DataContext.TargetFilesList,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"></ComboBox>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width="76">
+                                <DataGridTemplateColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{DynamicResource AppIconOperate}" Foreground="{DynamicResource DataGridForeground}" FontSize="11.5"></TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.HeaderTemplate>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button Style="{StaticResource SmallButtonStyle}" Width="52" MinWidth="0" Height="26" Margin="0,3"
+                                                Command="{Binding Path=DataContext.DelCommand,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}}"
+                                                CommandParameter="{Binding }" Content="{DynamicResource AssemblyDelete}"></Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Border Grid.Row="2" BorderBrush="{DynamicResource borderBrush}" BorderThickness="0,1,0,0" Padding="16,12">
+                        <StackPanel Orientation="Horizontal">
+                            <Button MinWidth="80" Content="{DynamicResource AppIconAdd}" Command="{Binding AddCommand}" Style="{StaticResource PrimaryButtonStyle}"></Button>
+                            <Button MinWidth="80" Content="{DynamicResource AppIconEdit}" Visibility="Collapsed" Margin="8,0,0,0" Style="{StaticResource CommonButtonStyle}"></Button>
+                            <Button MinWidth="80" IsEnabled="{Binding IsCanDeleted,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Command="{Binding DelSelectCommand}"
+                                    Content="{DynamicResource AppIconDelSelected}" Margin="8,0,0,0" Style="{StaticResource CommonButtonStyle}"></Button>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
     </Grid>
 </UserControl>

@@ -42,17 +42,13 @@ namespace PackageEasy.Helpers
         /// <param name="themeModel"></param>
         public static void UpdateTheme(ThemeModel themeModel)
         {
-            var currentTheme = Themes.Find(p => p.ThemeId == ConfigHelper.Config.ThemeId);
-            if (currentTheme != null)
+            //移除已加载的旧主题字典（ThemeId 与已加载字典不一致时也能正确移除）
+            for (int i = App.Current.Resources.MergedDictionaries.Count - 1; i >= 0; i--)
             {
-                for (int i = 0; i < App.Current.Resources.MergedDictionaries.Count; i++)
+                var d = App.Current.Resources.MergedDictionaries[i];
+                if (d.Source != null && Themes.Exists(p => d.Source.ToString().Contains(p.ThemeName)))
                 {
-                    var d = App.Current.Resources.MergedDictionaries[i];
-                    if (d.Source != null && d.Source.ToString().Contains(currentTheme.ThemeName))
-                    {
-                        App.Current.Resources.MergedDictionaries.RemoveAt(i);
-                        break;
-                    }
+                    App.Current.Resources.MergedDictionaries.RemoveAt(i);
                 }
             }
             var path = Path.Combine(DataHelper.Themes, themeModel.ThemeName);

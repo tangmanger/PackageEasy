@@ -13,90 +13,120 @@
             <i:InvokeCommandAction Command="{Binding LoadedCommand}"></i:InvokeCommandAction>
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <UserControl.Resources>
-        <ControlTemplate x:Key="AddNewProject" TargetType="Button">
-            <Border CornerRadius="8" Background="{DynamicResource projectNewCreateBackground}" x:Name="border" RenderTransformOrigin="0.599,0.647" BorderThickness="1"  BorderBrush="{DynamicResource borderBrush}" >
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Image Source="/Resources/Images/NewProject.png" Height="28" Width="28"></Image>
-                    <TextBlock d:Text="新建工程" Foreground="{DynamicResource projectNewCreateForeground}" Text="{DynamicResource HomeNewProject}" FontSize="16" Margin="0,5,0,0"></TextBlock>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Background="{DynamicResource appCanvasBrush}">
+        <StackPanel Margin="24,20,24,24">
+            <!--页头-->
+            <TextBlock Text="{DynamicResource HomeLibraryTitle}" Style="{StaticResource PageHeaderStyle}"></TextBlock>
+            <TextBlock Text="{DynamicResource HomeLibraryDesc}" Style="{StaticResource PageSubHeaderStyle}" Margin="0,6,0,0"></TextBlock>
+            <!--三张入口卡-->
+            <UniformGrid Columns="3" Margin="0,18,0,0">
+                <Button Style="{StaticResource EntryCardButtonStyle}" Margin="0,0,8,0" Command="{Binding CreateCommand}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Border Width="38" Height="38" CornerRadius="10" Background="{DynamicResource accentWeakBrush}" VerticalAlignment="Top">
+                            <Path Style="{StaticResource IconPathCardStyle}" Data="{StaticResource IconPlus}"></Path>
+                        </Border>
+                        <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
+                            <TextBlock d:Text="新建工程" Text="{DynamicResource HomeNewProject}" Style="{StaticResource SectionHeaderStyle}"></TextBlock>
+                            <TextBlock Text="{DynamicResource HomeEntryNewDesc}" Style="{StaticResource FieldHintStyle}" Margin="0,4,0,0"></TextBlock>
+                        </StackPanel>
+                    </Grid>
+                </Button>
+                <Button Style="{StaticResource EntryCardButtonStyle}" Margin="8,0,8,0" Command="{Binding Main.OpenFileCommand, Source={StaticResource locator}}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Border Width="38" Height="38" CornerRadius="10" Background="{DynamicResource accentWeakBrush}" VerticalAlignment="Top">
+                            <Path Style="{StaticResource IconPathCardStyle}" Data="{StaticResource IconFolder}"></Path>
+                        </Border>
+                        <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="{DynamicResource HomeOpenProject}" Style="{StaticResource SectionHeaderStyle}"></TextBlock>
+                            <TextBlock Text="{DynamicResource HomeEntryOpenDesc}" Style="{StaticResource FieldHintStyle}" Margin="0,4,0,0"></TextBlock>
+                        </StackPanel>
+                    </Grid>
+                </Button>
+                <Button Style="{StaticResource EntryCardButtonStyle}" Margin="8,0,0,0" Command="{Binding Main.ImportScriptCommand, Source={StaticResource locator}}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Border Width="38" Height="38" CornerRadius="10" Background="{DynamicResource accentWeakBrush}" VerticalAlignment="Top">
+                            <Path Style="{StaticResource IconPathCardStyle}" Data="{StaticResource IconFile}"></Path>
+                        </Border>
+                        <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="{DynamicResource HomeImportScript}" Style="{StaticResource SectionHeaderStyle}"></TextBlock>
+                            <TextBlock Text="{DynamicResource HomeEntryImportDesc}" Style="{StaticResource FieldHintStyle}" Margin="0,4,0,0"></TextBlock>
+                        </StackPanel>
+                    </Grid>
+                </Button>
+            </UniformGrid>
+            <!--最近打开-->
+            <TextBlock Text="{DynamicResource HomeRecentTitle}" Style="{StaticResource SectionHeaderStyle}" Margin="0,24,0,10"></TextBlock>
+            <Border Style="{StaticResource CardStyle}" Padding="0">
+                <StackPanel>
+                    <Grid Margin="16,12,16,8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{DynamicResource HomeRecentName}" FontSize="11.5" FontWeight="SemiBold" Foreground="{DynamicResource textTertiaryBrush}"></TextBlock>
+                        <TextBlock Grid.Column="1" Text="{DynamicResource HomeRecentUpdateTime}" FontSize="11.5" FontWeight="SemiBold" Foreground="{DynamicResource textTertiaryBrush}"></TextBlock>
+                    </Grid>
+                    <Border Style="{StaticResource RowSeparatorStyle}"></Border>
+                    <ItemsControl ItemsSource="{Binding RecentlyList}">
+                        <ItemsControl.Template>
+                            <ControlTemplate>
+                                <ItemsPresenter/>
+                            </ControlTemplate>
+                        </ItemsControl.Template>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Button Command="{Binding DataContext.OpenRecentlyCommand,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}}" CommandParameter="{Binding }" HorizontalContentAlignment="Stretch" Cursor="Hand">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border x:Name="row" Background="Transparent" BorderBrush="{DynamicResource borderBrush}" BorderThickness="0,0,0,1" Padding="16,10">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                        <ColumnDefinition></ColumnDefinition>
+                                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Border Width="30" Height="30" CornerRadius="8" Background="{DynamicResource surface2Brush}" BorderBrush="{DynamicResource borderBrush}" BorderThickness="1" VerticalAlignment="Center">
+                                                        <Image Source="{Binding Icon,Converter={StaticResource Base64ToImageConverter},UpdateSourceTrigger=PropertyChanged}" Width="20" Height="20"></Image>
+                                                    </Border>
+                                                    <StackPanel Grid.Column="1" Margin="12,0,12,0" VerticalAlignment="Center">
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock Text="{Binding RecentlyName}" FontSize="12.5" FontWeight="SemiBold" Foreground="{DynamicResource mainForeground}" TextTrimming="CharacterEllipsis"></TextBlock>
+                                                            <Path Style="{StaticResource RecentLockIconStyle}"></Path>
+                                                        </StackPanel>
+                                                        <TextBlock Text="{Binding FilePath}" Style="{StaticResource MonoTextStyle}" Margin="0,2,0,0" Foreground="{DynamicResource textTertiaryBrush}"></TextBlock>
+                                                    </StackPanel>
+                                                    <TextBlock Grid.Column="2" Text="{Binding UpdateTime,StringFormat='yyyy/MM/dd HH:mm:ss'}" FontSize="11.5" Foreground="{DynamicResource textTertiaryBrush}" VerticalAlignment="Center"></TextBlock>
+                                                </Grid>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="true">
+                                                    <Setter Property="Background" Value="{DynamicResource surface2Brush}" TargetName="row"></Setter>
+                                                </Trigger>
+                                                <Trigger Property="IsPressed" Value="true">
+                                                    <Setter Property="Background" Value="{DynamicResource accentWeakBrush}" TargetName="row"></Setter>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <TextBlock Text="{DynamicResource HomeRecentEmpty}" Style="{StaticResource RecentEmptyHintStyle}"></TextBlock>
                 </StackPanel>
             </Border>
-            <ControlTemplate.Triggers>
-                <Trigger Property="IsPressed" Value="true">
-                    <Setter Property="RenderTransform" Value="{DynamicResource buttonScale}" TargetName="border"></Setter>
-                </Trigger>
-                <Trigger Property="IsMouseOver" Value="true">
-                    <Setter Property="BorderBrush" Value="{DynamicResource projectNewCreateIsMouseOver}" TargetName="border"></Setter>
-                </Trigger>
-            </ControlTemplate.Triggers>
-        </ControlTemplate>
-    </UserControl.Resources>
-    <Grid >
-        <!--<Grid.ColumnDefinitions>
-            <ColumnDefinition Width="139"></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        -->
-        <!--<Border Grid.Column="1" BorderBrush="LightGray" BorderThickness="1,0,0,0"></Border>-->
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition></RowDefinition>
-        </Grid.RowDefinitions>
-        <StackPanel Orientation="Vertical">
-            <TextBlock d:Text="新建工程" Text="{DynamicResource HomeNewProject}"  Foreground="{DynamicResource projectNewCreateForeground}"   Margin="20,16.5,0,0" FontSize="16"></TextBlock>
-            <Button Width="262" Height="198" HorizontalAlignment="Left"  Margin="20,16.5,0,0" VerticalAlignment="Top" Command="{Binding CreateCommand}" Template="{StaticResource AddNewProject}"></Button>
         </StackPanel>
-        <ItemsControl Grid.Row="1" ItemsSource="{Binding RecentlyList}" Margin="15">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel></WrapPanel>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.Template>
-                <ControlTemplate>
-                    <ScrollViewer>
-                        <ItemsPresenter/>
-                    </ScrollViewer>
-                </ControlTemplate>
-            </ItemsControl.Template>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Button Command="{Binding DataContext.OpenRecentlyCommand,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ItemsControl}}" CommandParameter="{Binding }">
-                        <Button.Template>
-                            <ControlTemplate TargetType="Button">
-                                <Border Margin="5" RenderTransformOrigin="0.5,0.5" x:Name="border" Width="262" Height="198" BorderThickness="1" BorderBrush="{DynamicResource borderBrush}" CornerRadius="4" Background="{DynamicResource projectNewCreateBackground}">
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition></RowDefinition>
-                                            <RowDefinition Height="auto"></RowDefinition>
-                                        </Grid.RowDefinitions>
-                                        <TextBlock HorizontalAlignment="Right"  Style="{StaticResource IconFontStyle}"  Foreground="{DynamicResource projectNewCreateForeground}"  Visibility="Collapsed" x:Name="locker" Text="&#xe618;" VerticalAlignment="Top" Margin="0,5,5,0"></TextBlock>
-                                        <Image Source="{Binding Icon,Converter={StaticResource Base64ToImageConverter},UpdateSourceTrigger=PropertyChanged}" Height="50" Width="50"></Image>
-                                        <Grid Grid.Row="1" Margin="5,0,5,5">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition></ColumnDefinition>
-                                                <ColumnDefinition Width="auto"></ColumnDefinition>
-                                            </Grid.ColumnDefinitions>
-
-                                            <TextBlock  Foreground="{DynamicResource projectNewCreateForeground}"  Text="{Binding RecentlyName}"></TextBlock>
-                                            <TextBlock  Foreground="{DynamicResource projectNewCreateForeground}"  Text="{Binding UpdateTime,StringFormat='yyyy/MM/dd HH:mm:ss'}" HorizontalAlignment="Right" Grid.Column="1"></TextBlock>
-                                        </Grid>
-                                    </Grid>
-
-                                </Border>
-                                <ControlTemplate.Triggers>
-                                    <DataTrigger Binding="{Binding IsLock}" Value="true">
-                                        <Setter Property="Visibility" Value="Visible" TargetName="locker"></Setter>
-                                    </DataTrigger>
-                                    <Trigger Property="IsPressed" Value="true">
-                                        <Setter Property="RenderTransform" TargetName="border" Value="{StaticResource buttonScale}"></Setter>
-                                    </Trigger>
-                                </ControlTemplate.Triggers>
-                            </ControlTemplate>
-                        </Button.Template>
-                    </Button>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-    </Grid>
+    </ScrollViewer>
 </UserControl>

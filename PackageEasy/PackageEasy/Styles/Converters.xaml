@@ -6,4 +6,5 @@
     <converters:Base64ToImageConverter x:Key="Base64ToImageConverter"></converters:Base64ToImageConverter>
     <converters:BoolRevolveConverter x:Key="BoolRevolveConverter"></converters:BoolRevolveConverter>
     <converters:KeyToLangDescConverter x:Key="KeyToLangDescConverter"></converters:KeyToLangDescConverter>
+    <converters:BoolToResourceConverter x:Key="BoolToResourceConverter"></converters:BoolToResourceConverter>
 </ResourceDictionary>

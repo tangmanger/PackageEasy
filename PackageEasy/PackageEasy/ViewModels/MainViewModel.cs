@@ -44,6 +44,7 @@ namespace PackageEasy.ViewModels
         public MainViewModel(IDataService service)
         {
             Service = service;
+            _isDarkTheme = ConfigHelper.Config.ThemeId == "black";
             Service.CreateProject += Service_CreateProject;
             LanguageHelper.LanguageChanged += LanguageHelper_LanguageChanged;
         }
@@ -134,6 +135,20 @@ namespace PackageEasy.ViewModels
             }
         }
 
+        private bool _isDarkTheme;
+        /// <summary>
+        /// 当前是否为暗色主题
+        /// </summary>
+        public bool IsDarkTheme
+        {
+            get => _isDarkTheme;
+            set
+            {
+                _isDarkTheme = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         #endregion
 
@@ -147,6 +162,21 @@ namespace PackageEasy.ViewModels
             NavigationHelper.GoTo(ViewType.Home);
             IsActived = true;
             IsMenuCanEdit = false;
+        });
+
+        /// <summary>
+        /// 亮色/暗色主题切换
+        /// </summary>
+        public RelayCommand ToggleThemeCommand => new RelayCommand(() =>
+        {
+            var targetId = IsDarkTheme ? "default" : "black";
+            var target = ThemeHelper.Themes.Find(p => p.ThemeId == targetId);
+            if (target == null)
+                return;
+            ConfigHelper.Config.ThemeId = target.ThemeId;
+            ConfigHelper.Save(true);
+            ThemeHelper.UpdateTheme(target);
+            IsDarkTheme = !IsDarkTheme;
         });
         /// <summary>
         /// 切换
@@ -343,14 +373,17 @@ namespace PackageEasy.ViewModels
                             }
                         }
                         List<string> errorMsg = new List<string>();
-                        Wating wating = new Wating();
-                        wating.Show();
+                        CompileProgressWindow compileWindow = new CompileProgressWindow(table.ProjectName);
                         NSISScript nSISScript = new NSISScript();
                         try
                         {
 
 
                             var list = nSISScript.Build(viewCaheModel.BaseProjectViewModel.ProjectInfo);
+                            if (string.IsNullOrWhiteSpace(viewCaheModel.BaseProjectViewModel.ProjectInfo.GetWorkSpace()))
+                            {
+                                compileWindow.ViewModel.SetFailed(CommonSettings.MainCompileFailTips.GetLangText());
+                            }
                             if (!string.IsNullOrWhiteSpace(viewCaheModel.BaseProjectViewModel.ProjectInfo.GetWorkSpace()))
                             {
                                 DirectoryInfo directoryInfo = new DirectoryInfo(viewCaheModel.BaseProjectViewModel.ProjectInfo.GetWorkSpace());
@@ -380,56 +413,42 @@ namespace PackageEasy.ViewModels
                                     process.OutputDataReceived += (s, e) =>
                                     {
                                         Log.Write(e.Data ?? "");
-                                        if (!string.IsNullOrWhiteSpace(e.Data) && e.Data.Contains(nSISScript.OutPutFilePath))
+                                        if (string.IsNullOrWhiteSpace(e.Data))
+                                        {
+                                            return;
+                                        }
+                                        App.Current.Dispatcher.Invoke(() =>
+                                        {
+                                            compileWindow.ViewModel.AppendLog(e.Data);
+                                        });
+                                        if (e.Data.Contains(nSISScript.OutPutFilePath))
                                         {
                                             App.Current.Dispatcher.Invoke(() =>
                                             {
-
-                                                wating.Close();
+                                                compileWindow.ViewModel.SetFinished(nSISScript.OutPutFilePath);
                                             });
-                                            TMessageBox.MainShowMsg("", CommonSettings.MainCompileSuccessTips, MessageLevel.Information);
-
-                                            if (File.Exists(nSISScript.OutPutFilePath))
-                                            {
-                                                FileInfo fileInfo = new FileInfo(nSISScript.OutPutFilePath);
-                                                if (Directory.Exists(fileInfo.DirectoryName))
-                                                {
-                                                    if (fileInfo.Directory != null)
-                                                    {
-                                                        Process process1 = new Process();
-                                                        process1.StartInfo = new ProcessStartInfo()
-                                                        {
-                                                            UseShellExecute = true,
-                                                            FileName = fileInfo.Directory.FullName
-                                                        };
-                                                        process1.Start();
-                                                    }
-
-                                                }
-                                            }
-                                        }
-                                        else
-                                        {
-                                            //TMessageBox.MainShowMsg("", "编译失败!", MessageLevel.Information);
                                         }
                                     };
                                     process.ErrorDataReceived += (s, e) =>
                                     {
                                         Log.Write(e.Data ?? "", LogLevelType.Error);
-                                        if (!string.IsNullOrWhiteSpace(e.Data))
+                                        if (string.IsNullOrWhiteSpace(e.Data))
                                         {
-                                            errorMsg.Add(e.Data);
-                                            if (e.Data.ToLower().Contains("aborting creation process".ToLower()))
+                                            return;
+                                        }
+                                        errorMsg.Add(e.Data);
+                                        App.Current.Dispatcher.Invoke(() =>
+                                        {
+                                            compileWindow.ViewModel.AppendLog(e.Data, true);
+                                        });
+                                        if (e.Data.ToLower().Contains("aborting creation process".ToLower()))
+                                        {
+                                            string format = string.Format(CommonSettings.MainCompileFailExtTips.GetLangText(), $"\r{string.Join("\r", errorMsg)}");
+                                            App.Current.Dispatcher.Invoke(() =>
                                             {
-                                                App.Current.Dispatcher.Invoke(() =>
-                                                {
-
-                                                    wating.Close();
-                                                });
-                                                string format = string.Format(CommonSettings.MainCompileFailExtTips.GetLangText(), $"\r{string.Join("\r", errorMsg)}");
-                                                TMessageBox.MainShowMsg("", format, MessageLevel.Information);
-                                                Log.Write(format);
-                                            }
+                                                compileWindow.ViewModel.SetFailed(format);
+                                            });
+                                            Log.Write(format);
                                         }
                                     };
                                     process.Start();
@@ -455,15 +474,15 @@ namespace PackageEasy.ViewModels
                         }
                         catch (Exception ex)
                         {
-                            wating.Close();
+                            compileWindow.ViewModel.SetFailed(ex.Message);
 
-                            TMessageBox.MainShowMsg("", CommonSettings.MainCompileFailTips, MessageLevel.Information);
                             Log.Write("编译失败!", ex);
                         }
                         finally
                         {
 
                         }
+                        compileWindow.ShowDialog();
                     }
                 }
             }
@@ -703,6 +722,8 @@ namespace PackageEasy.ViewModels
 
         private void LanguageHelper_LanguageChanged()
         {
+            //语言切换后刷新主题按钮提示文案
+            OnPropertyChanged(nameof(IsDarkTheme));
             var services = ServiceHelper.GetDataServices();
             if (services != null)
             {

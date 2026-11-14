@@ -39,6 +39,7 @@
     <!--Basic information-->
     <sys:String x:Key="BaseInfoAppName">Application name:</sys:String>
     <sys:String x:Key="BaseInfoAppVersion">Application version:</sys:String>
+    <sys:String x:Key="BaseInfoAppVersionTips">For example: 1.0.0</sys:String>
     <sys:String x:Key="BaseInfoDisplayUninstall">Displayed during uninstall</sys:String>
     <sys:String x:Key="BaseInfoFileVersion">File version:</sys:String>
     <sys:String x:Key="BaseInfoFileVersionTips">For example: 1.0.0.1</sys:String>
@@ -237,6 +238,8 @@
     <sys:String x:Key="ToolSettingControl">Settings</sys:String>
     <sys:String x:Key="ThemeDefault">Default theme</sys:String>
     <sys:String x:Key="ThemeBlack">Black theme</sys:String>
+    <sys:String x:Key="TitleThemeDark">Switch to dark theme</sys:String>
+    <sys:String x:Key="TitleThemeLight">Switch to light theme</sys:String>
     <sys:String x:Key="SaveSuccess">Save successfully!</sys:String>
     <sys:String x:Key="SaveFail">Save failed!</sys:String>
     <sys:String x:Key="OpenFileError">An error occurred while opening the file!</sys:String>
@@ -268,4 +271,66 @@
 
     <sys:String x:Key="MainDataStore">Data</sys:String>
     <sys:String x:Key="MainTargetPath" >Path Management</sys:String>
+
+    <!--Project navigation-->
+    <sys:String x:Key="ProjectGroupTitle">Project</sys:String>
+
+    <!--Home page-->
+    <sys:String x:Key="HomeLibraryTitle">Project Library</sys:String>
+    <sys:String x:Key="HomeLibraryDesc">Create, open or import an installer project</sys:String>
+    <sys:String x:Key="HomeOpenProject">Open Project</sys:String>
+    <sys:String x:Key="HomeEntryNewDesc">Create a new installer project</sys:String>
+    <sys:String x:Key="HomeEntryOpenDesc">Open an existing .pge project file</sys:String>
+    <sys:String x:Key="HomeImportScript">Import from Script</sys:String>
+    <sys:String x:Key="HomeEntryImportDesc">Generate a project from an NSIS script</sys:String>
+    <sys:String x:Key="HomeRecentTitle">Recently Opened</sys:String>
+    <sys:String x:Key="HomeRecentName">Project name</sys:String>
+    <sys:String x:Key="HomeRecentUpdateTime">Updated</sys:String>
+    <sys:String x:Key="HomeRecentEmpty">No recently opened projects</sys:String>
+
+    <!--Basic information-->
+    <sys:String x:Key="BaseInfoCardAppInfo">Application Identity</sys:String>
+    <sys:String x:Key="BaseInfoCardInstall">Install Location</sys:String>
+    <sys:String x:Key="BaseInfoCardInterface">Interface &amp; Language</sys:String>
+    <sys:String x:Key="BaseInfoCardResource">Resources &amp; Output</sys:String>
+
+    <!--Component information-->
+    <sys:String x:Key="AssemblyGroupTitle">Component Groups</sys:String>
+
+    <!--Application icon-->
+    <sys:String x:Key="AppIconShortcutList">Shortcuts</sys:String>
+
+    <!--Registry-->
+    <sys:String x:Key="RegistryPageDesc">Configure file associations and project encryption</sys:String>
+    <sys:String x:Key="RegistryCardAssoc">File Association</sys:String>
+    <sys:String x:Key="RegistryCardPassword">Project Encryption</sys:String>
+    <sys:String x:Key="RegistryPasswordTip">When enabled, a password is required to open or compile this project again.</sys:String>
+
+    <!--Finish page-->
+    <sys:String x:Key="EndCardInstall">Installation Finish</sys:String>
+    <sys:String x:Key="EndCardProcess">Process Detection</sys:String>
+    <sys:String x:Key="EndCardUninstall">Uninstall Events</sys:String>
+
+    <!--Compile progress window-->
+    <sys:String x:Key="CompileProgressTitle">Build · {0}</sys:String>
+    <sys:String x:Key="CompileStateCompiling">Compiling...</sys:String>
+    <sys:String x:Key="CompileStateSuccess">Build succeeded</sys:String>
+    <sys:String x:Key="CompileStateFailed">Build failed</sys:String>
+    <sys:String x:Key="CompileLogTitle">Compiler Log</sys:String>
+    <sys:String x:Key="CompileWaitingLog">Waiting for compiler output...</sys:String>
+    <sys:String x:Key="CompileOutputFile">Output file</sys:String>
+    <sys:String x:Key="CompileOutputSize">File size</sys:String>
+    <sys:String x:Key="CompileOpenFolder">Open Output Folder</sys:String>
+
+    <!--Additional translations-->
+    <sys:String x:Key="AssemblIgnoreDirectory">Ignore this folder</sys:String>
+    <sys:String x:Key="AssemblyIgnoreDirTips">Ignore the folder and its subfolders (including all files)?</sys:String>
+    <sys:String x:Key="AssemblyIgnoreFileExtension">Ignore this file extension</sys:String>
+    <sys:String x:Key="AssemblyRefresh">Refresh</sys:String>
+    <sys:String x:Key="AppIconCutShotParam">Launch arguments</sys:String>
+    <sys:String x:Key="EndBeforeUnInstall">Before uninstall:</sys:String>
+    <sys:String x:Key="EndEnableBeforeUnInstall">Enable before uninstall event</sys:String>
+    <sys:String x:Key="EndShowReadmeName">Show readme</sys:String>
+    <sys:String x:Key="TargetIsUserCreate">User created</sys:String>
+    <sys:String x:Key="TargetSaveToLocal">Save to local</sys:String>
 </ResourceDictionary>

@@ -2,74 +2,153 @@
 <UserControl x:Class="PackageEasy.Views.EndView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:PackageEasy.Views"
              xmlns:controls="clr-namespace:PackageEasy.Controls.Controls;assembly=PackageEasy.Controls"
              xmlns:lang="clr-namespace:PackageEasy.Common.Data;assembly=PackageEasy.Common"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"  Foreground="{DynamicResource baseForeground}" >
+             mc:Ignorable="d"
+             d:DesignHeight="700" d:DesignWidth="900" Foreground="{DynamicResource baseForeground}">
 
-    <Grid  Margin="30,20,0,0" HorizontalAlignment="Left">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.5*"></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-            <ColumnDefinition Width="0.5*"></ColumnDefinition>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" ></RowDefinition>
-            <RowDefinition  Height="auto" ></RowDefinition>
-            <RowDefinition  Height="auto" ></RowDefinition>
-            <RowDefinition Height="auto" ></RowDefinition>
-            <RowDefinition Height="auto" ></RowDefinition>
-            <RowDefinition Height="auto" ></RowDefinition>
-            <RowDefinition Height="auto" ></RowDefinition>
-            <RowDefinition Height="auto" ></RowDefinition>
-            <RowDefinition Height="auto" ></RowDefinition>
-            <RowDefinition Height="auto" ></RowDefinition>
-            <RowDefinition Height="auto" ></RowDefinition>
-            <RowDefinition Height="auto" ></RowDefinition>
-            <RowDefinition Height="auto" ></RowDefinition>
-            <RowDefinition Height="*" ></RowDefinition>
-        </Grid.RowDefinitions>
-        <TextBlock d:Text="程序:" Text="{DynamicResource EndProcess}" VerticalAlignment="Center" HorizontalAlignment="Right" ></TextBlock>
-        <ComboBox Grid.Column="1"    Width="220" Height="30" Style="{StaticResource CommonComboBoxStyle}" HorizontalAlignment="Left" VerticalContentAlignment="Center" ItemsSource="{Binding TargetFilesList}" SelectedItem="{Binding ApplicationName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Margin="5,0,0,0"></ComboBox>
-        <CheckBox Grid.Column="2" Foreground="{DynamicResource baseForeground}" IsChecked="{Binding IsAutoRun,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Grid.ColumnSpan="2" Margin="5,0,0,0" VerticalAlignment="Center" d:Content="安装完成后启动" Content="{DynamicResource EndStartProcess}"></CheckBox>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" Background="{DynamicResource appCanvasBrush}">
+        <StackPanel Margin="24,20,24,24">
+            <!--页头-->
+            <TextBlock Text="{DynamicResource ProjectEnd}" Style="{StaticResource PageHeaderStyle}"></TextBlock>
 
-        <TextBlock d:Text="参数:" Margin="0,10,0,0" Grid.Row="1" Text="{DynamicResource EndParams}" VerticalAlignment="Center" HorizontalAlignment="Right" ></TextBlock>
-        <TextBox Grid.Column="1"   Grid.Row="1" Width="220" Height="30" Style="{StaticResource CommonTextBox}" Text="{Binding RunParam,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,10,0,0"></TextBox>
+            <!--卡片一：安装完成-->
+            <Border Style="{StaticResource CardStyle}" Margin="0,16,0,0" MaxWidth="960" HorizontalAlignment="Left">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
+                        <Border Style="{StaticResource PanelIconBoxStyle}">
+                            <Path Style="{StaticResource PanelIconPathStyle}" Data="{StaticResource IconFlag}"></Path>
+                        </Border>
+                        <TextBlock Text="{DynamicResource EndCardInstall}" Style="{StaticResource PanelTitleStyle}"></TextBlock>
+                    </StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="130"></ColumnDefinition>
+                            <ColumnDefinition Width="320"></ColumnDefinition>
+                            <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
 
-        <TextBlock d:Text="自述:" Grid.Row="2" Text="{DynamicResource EndReadmeName}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,0,0"></TextBlock>
-        <ComboBox Grid.Column="1"  Grid.Row="2" IsEnabled="{Binding IsShowReadme,UpdateSourceTrigger=PropertyChanged}" Width="220" Height="30" VerticalContentAlignment="Center"  ItemsSource="{Binding TargetFilesList}" SelectedItem="{Binding ReadMeName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource CommonComboBoxStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,10,0,0"></ComboBox>
-        <CheckBox Grid.Column="2"  Grid.Row="2"  IsChecked="{Binding IsShowReadme,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Grid.ColumnSpan="2" Margin="5,10,0,0" VerticalAlignment="Center" VerticalContentAlignment="Center" d:Content="展示自述" Content="{DynamicResource EndShowReadmeName}"></CheckBox>
-        <!--<Border Grid.Row="3" Grid.ColumnSpan="7" BorderBrush="{DynamicResource borderBrush}" Height="30" Background="Red" Margin="0,5,0,0" BorderThickness="0,0.5,0,0"></Border>-->
-        <CheckBox Grid.Row="7"  Foreground="{DynamicResource baseForeground}"  d:Content="使用解除安装程序" Grid.ColumnSpan="2" Margin="0,10,0,0" Visibility="Collapsed" Content="{DynamicResource EndUnInstallMsg}"></CheckBox>
+                        <TextBlock Text="{DynamicResource EndProcess}" Style="{StaticResource FormLabelStyle}"></TextBlock>
+                        <ComboBox Grid.Column="1" Style="{StaticResource CommonComboBoxStyle}" HorizontalAlignment="Stretch" VerticalContentAlignment="Center"
+                                  ItemsSource="{Binding TargetFilesList}" SelectedItem="{Binding ApplicationName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></ComboBox>
+                        <CheckBox Grid.Column="2" Style="{StaticResource SwitchCheckBoxStyle}" Margin="20,0,0,0" VerticalAlignment="Center"
+                                  IsChecked="{Binding IsAutoRun,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="{DynamicResource EndStartProcess}"></CheckBox>
 
-        <TextBlock d:Text="解除安装提示:"  Margin="0,10,0,0" Grid.Row="4" Text="{DynamicResource EndUnInstallTips}" VerticalAlignment="Center" HorizontalAlignment="Right" ></TextBlock>
-        <TextBox Grid.Column="1"   Grid.Row="4" Width="220" MinHeight="30" Style="{StaticResource CommonTextBox}" TextWrapping="Wrap" Text="{Binding UninstallTip,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,10,0,0"></TextBox>
+                        <TextBlock Grid.Row="1" Text="{DynamicResource EndParams}" Style="{StaticResource FormLabelStyle}" Margin="0,14,12,0"></TextBlock>
+                        <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource CommonTextBox}" Margin="0,14,0,0" VerticalAlignment="Center"
+                                 Text="{Binding RunParam,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
-        <TextBlock d:Text="解除安装消息:" Margin="0,10,0,0" Grid.Row="5" Text="{DynamicResource EndUnInstallMsg}"  VerticalAlignment="Center" HorizontalAlignment="Right" ></TextBlock>
-        <TextBox Grid.Column="1"   Grid.Row="5" Width="220" MinHeight="30" Style="{StaticResource CommonTextBox}"   TextWrapping="Wrap" Text="{Binding UninstallMsg,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,10,0,0"></TextBox>
-        <TextBlock d:Text="检测的进程名:" Margin="0,10,0,0" Grid.Row="6" Text="{DynamicResource EndChcekProcessName}" VerticalAlignment="Center" HorizontalAlignment="Right" ></TextBlock>
-        <controls:PlaceholderTextBox  Foreground="{DynamicResource baseForeground}"  CaretBrush="{DynamicResource baseForeground}" Grid.Column="1" d:PlaceHolderText="例如:PackageEasy.exe" PlaceHolderText="{DynamicResource EndChcekProcessExample}" IsEnabled="{Binding IsEnableProcess}" Grid.Row="6" Width="220" MinHeight="30" Style="{StaticResource PlaceholderTextBoxStyle}"   TextWrapping="Wrap" Text="{Binding ProcessName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,10,0,0"></controls:PlaceholderTextBox>
+                        <TextBlock Grid.Row="2" Text="{DynamicResource EndReadmeName}" Style="{StaticResource FormLabelStyle}" Margin="0,14,12,0"></TextBlock>
+                        <ComboBox Grid.Row="2" Grid.Column="1" Style="{StaticResource CommonComboBoxStyle}" Margin="0,14,0,0" VerticalContentAlignment="Center"
+                                  IsEnabled="{Binding IsShowReadme,UpdateSourceTrigger=PropertyChanged}"
+                                  ItemsSource="{Binding TargetFilesList}" SelectedItem="{Binding ReadMeName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></ComboBox>
+                        <CheckBox Grid.Row="2" Grid.Column="2" Style="{StaticResource SwitchCheckBoxStyle}" Margin="20,14,0,0" VerticalAlignment="Center"
+                                  IsChecked="{Binding IsShowReadme,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="{DynamicResource EndShowReadmeName}"></CheckBox>
+                    </Grid>
+                </StackPanel>
+            </Border>
 
-        <TextBlock d:Text="安装提示:" Margin="0,10,0,0" Grid.Row="7" Text="{DynamicResource EndInstallContent}" VerticalAlignment="Center" HorizontalAlignment="Right" ></TextBlock>
-        <TextBox  IsEnabled="{Binding IsEnableProcess}" Grid.Column="1" Grid.Row="7" Width="220" MinHeight="30" Style="{StaticResource CommonTextBox}"   TextWrapping="Wrap" Text="{Binding InstallProcessTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,10,0,0"></TextBox>
-        <TextBlock d:Text="卸载提示:" Margin="0,10,0,0" Grid.Row="8" Text="{DynamicResource EndUnInstallContent}" VerticalAlignment="Center" HorizontalAlignment="Right" ></TextBlock>
-        <TextBox Grid.Column="1" Grid.Row="8" IsEnabled="{Binding IsEnableProcess}"  Width="220" MinHeight="30" Style="{StaticResource CommonTextBox}"   TextWrapping="Wrap" Text="{Binding UninstallProcessTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,10,0,0"></TextBox>
-        <CheckBox Grid.Column="2"  Foreground="{DynamicResource baseForeground}"   Grid.Row="6" IsChecked="{Binding IsEnableProcess,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Grid.ColumnSpan="2" Margin="5,0,0,0" VerticalAlignment="Center" d:Content="启用进程检测" Content="{DynamicResource EndUseCheckProcess}"></CheckBox>
-        <!--<TextBlock Grid.Row="6" Text="解除安装图标:" lang:LanguageManager.LangText="解除安装图标:" VerticalAlignment="Center"  HorizontalAlignment="Right"></TextBlock>
-        <StackPanel Orientation="Horizontal" Grid.Row="6" Grid.Column="1">
-            <TextBox Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Style="{StaticResource CommonTextBox}" Width="150" Height="25" VerticalContentAlignment="Center" Margin="5,10,0,10"></TextBox>
-            <Button Width="50" Height="25" Content="..." Style="{StaticResource CommonButtonStyle}" Margin="5,0,0,0"></Button>
-        </StackPanel>-->
-        <TextBlock d:Text="卸载前事件:" Grid.Row="9" Text="{DynamicResource EndBeforeUnInstall}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,10,0,0"></TextBlock>
-        <ComboBox Grid.Column="1"  Grid.Row="9" IsEnabled="{Binding IsBeforeUnInstall,UpdateSourceTrigger=PropertyChanged}" Width="220" Height="30" VerticalContentAlignment="Center"  ItemsSource="{Binding TargetFilesList}" SelectedItem="{Binding UnInstallApplication,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  Style="{StaticResource CommonComboBoxStyle}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,10,0,0"></ComboBox>
-        <StackPanel Grid.Row="9" Grid.Column="2" Grid.ColumnSpan="2" Orientation="Horizontal">
-            <CheckBox Grid.Column="2"  Grid.Row="9"   IsChecked="{Binding IsQuietInstall,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"  IsEnabled="{Binding IsBeforeUnInstall,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Grid.ColumnSpan="2" Margin="5,10,0,0" VerticalAlignment="Center" VerticalContentAlignment="Center" d:Content="静默安装" Content="{DynamicResource AssemblyQuietInstall}"></CheckBox>
-            <CheckBox Grid.Column="2"  Grid.Row="9"  IsChecked="{Binding IsBeforeUnInstall,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Grid.ColumnSpan="2" Margin="5,10,0,0" VerticalAlignment="Center" VerticalContentAlignment="Center" d:Content="启用" Content="{DynamicResource EndEnableBeforeUnInstall}"></CheckBox>
+            <!--卡片二：进程检测-->
+            <Border Style="{StaticResource CardStyle}" Margin="0,16,0,0"  MaxWidth="960" HorizontalAlignment="Left">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
+                        <Border Style="{StaticResource PanelIconBoxStyle}">
+                            <Path Style="{StaticResource PanelIconPathStyle}" Data="{StaticResource IconBolt}"></Path>
+                        </Border>
+                        <TextBlock Text="{DynamicResource EndCardProcess}" Style="{StaticResource PanelTitleStyle}"></TextBlock>
+                        <CheckBox Style="{StaticResource SwitchCheckBoxStyle}" Margin="20,0,0,0" VerticalAlignment="Center"
+                                  IsChecked="{Binding IsEnableProcess,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="{DynamicResource EndUseCheckProcess}"></CheckBox>
+                    </StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="130"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="{DynamicResource EndChcekProcessName}" Style="{StaticResource FormLabelStyle}"></TextBlock>
+                        <controls:PlaceholderTextBox Grid.Column="1" Style="{StaticResource PlaceholderTextBoxStyle}" MinWidth="320" MaxWidth="620" HorizontalAlignment="Left"
+                                                     Foreground="{DynamicResource baseForeground}" CaretBrush="{DynamicResource baseForeground}"
+                                                     PlaceHolderText="{DynamicResource EndChcekProcessExample}" TextWrapping="Wrap" VerticalContentAlignment="Center"
+                                                     IsEnabled="{Binding IsEnableProcess}"
+                                                     Text="{Binding ProcessName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></controls:PlaceholderTextBox>
+
+                        <TextBlock Grid.Row="1" Text="{DynamicResource EndInstallContent}" Style="{StaticResource FormLabelStyle}" Margin="0,12,12,0" VerticalAlignment="Top"></TextBlock>
+                        <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource CommonTextBox}" Margin="0,12,0,0" MinHeight="60" MaxWidth="620" HorizontalAlignment="Left"
+                                 TextWrapping="Wrap" VerticalContentAlignment="Top" Padding="6,5" AcceptsReturn="True"
+                                 IsEnabled="{Binding IsEnableProcess}"
+                                 Text="{Binding InstallProcessTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+
+                        <TextBlock Grid.Row="2" Text="{DynamicResource EndUnInstallContent}" Style="{StaticResource FormLabelStyle}" Margin="0,12,12,0" VerticalAlignment="Top"></TextBlock>
+                        <TextBox Grid.Row="2" Grid.Column="1" Style="{StaticResource CommonTextBox}" Margin="0,12,0,0" MinHeight="60" MaxWidth="620" HorizontalAlignment="Left"
+                                 TextWrapping="Wrap" VerticalContentAlignment="Top" Padding="6,5" AcceptsReturn="True"
+                                 IsEnabled="{Binding IsEnableProcess}"
+                                 Text="{Binding UninstallProcessTips,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!--卡片三：卸载事件-->
+            <Border Style="{StaticResource CardStyle}" Margin="0,16,0,0" MaxWidth="960" HorizontalAlignment="Left">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
+                        <Border Style="{StaticResource PanelIconBoxStyle}">
+                            <Path Style="{StaticResource PanelIconPathStyle}" Data="{StaticResource IconClose}"></Path>
+                        </Border>
+                        <TextBlock Text="{DynamicResource EndCardUninstall}" Style="{StaticResource PanelTitleStyle}"></TextBlock>
+                    </StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="130"></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="{DynamicResource EndUnInstallTips}" Style="{StaticResource FormLabelStyle}" VerticalAlignment="Top"></TextBlock>
+                        <TextBox Grid.Column="1" Style="{StaticResource CommonTextBox}" MaxWidth="620" HorizontalAlignment="Left" MinHeight="48"
+                                 TextWrapping="Wrap" VerticalContentAlignment="Top" Padding="6,5" AcceptsReturn="True"
+                                 Text="{Binding UninstallTip,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+
+                        <TextBlock Grid.Row="1" Text="{DynamicResource EndUnInstallMsg}" Style="{StaticResource FormLabelStyle}" Margin="0,12,12,0" VerticalAlignment="Top"></TextBlock>
+                        <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource CommonTextBox}" Margin="0,12,0,0" MaxWidth="620" HorizontalAlignment="Left" MinHeight="48"
+                                 TextWrapping="Wrap" VerticalContentAlignment="Top" Padding="6,5" AcceptsReturn="True"
+                                 Text="{Binding UninstallMsg,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></TextBox>
+
+                        <TextBlock Grid.Row="2" Text="{DynamicResource EndBeforeUnInstall}" Style="{StaticResource FormLabelStyle}" Margin="0,14,12,0"></TextBlock>
+                        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" Margin="0,14,0,0">
+                            <ComboBox Style="{StaticResource CommonComboBoxStyle}" Width="320" VerticalContentAlignment="Center"
+                                      IsEnabled="{Binding IsBeforeUnInstall,UpdateSourceTrigger=PropertyChanged}"
+                                      ItemsSource="{Binding TargetFilesList}" SelectedItem="{Binding UnInstallApplication,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></ComboBox>
+                            <CheckBox Style="{StaticResource SwitchCheckBoxStyle}" Margin="20,0,0,0" VerticalAlignment="Center"
+                                      IsChecked="{Binding IsQuietInstall,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      IsEnabled="{Binding IsBeforeUnInstall,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Content="{DynamicResource AssemblyQuietInstall}"></CheckBox>
+                            <CheckBox Style="{StaticResource SwitchCheckBoxStyle}" Margin="20,0,0,0" VerticalAlignment="Center"
+                                      IsChecked="{Binding IsBeforeUnInstall,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                      Content="{DynamicResource EndEnableBeforeUnInstall}"></CheckBox>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!--保留项：使用解除安装程序（当前隐藏）-->
+            <CheckBox Visibility="Collapsed" Content="{DynamicResource EndUnInstallMsg}"></CheckBox>
         </StackPanel>
-
-    </Grid>
+    </ScrollViewer>
 </UserControl>

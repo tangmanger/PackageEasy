@@ -42,6 +42,47 @@ namespace PackageEasy.Domain.Common
 
         #endregion
 
+        #region 编译进度窗口
+
+        /// <summary>
+        /// 编译 · {0}
+        /// </summary>
+        public const string CompileProgressTitle = "CompileProgressTitle";
+        /// <summary>
+        /// 正在编译...
+        /// </summary>
+        public const string CompileStateCompiling = "CompileStateCompiling";
+        /// <summary>
+        /// 编译成功
+        /// </summary>
+        public const string CompileStateSuccess = "CompileStateSuccess";
+        /// <summary>
+        /// 编译失败
+        /// </summary>
+        public const string CompileStateFailed = "CompileStateFailed";
+        /// <summary>
+        /// 编译日志
+        /// </summary>
+        public const string CompileLogTitle = "CompileLogTitle";
+        /// <summary>
+        /// 等待编译输出...
+        /// </summary>
+        public const string CompileWaitingLog = "CompileWaitingLog";
+        /// <summary>
+        /// 输出文件
+        /// </summary>
+        public const string CompileOutputFile = "CompileOutputFile";
+        /// <summary>
+        /// 文件大小
+        /// </summary>
+        public const string CompileOutputSize = "CompileOutputSize";
+        /// <summary>
+        /// 打开输出目录
+        /// </summary>
+        public const string CompileOpenFolder = "CompileOpenFolder";
+
+        #endregion
+
         #region 主页界面
 
         /// <summary>

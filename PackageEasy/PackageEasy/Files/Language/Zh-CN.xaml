@@ -41,6 +41,7 @@
     <!--基础信息-->
     <sys:String x:Key="BaseInfoAppName">应用程序名称：</sys:String>
     <sys:String x:Key="BaseInfoAppVersion">应用程序版本：</sys:String>
+    <sys:String x:Key="BaseInfoAppVersionTips">例如：1.0.0</sys:String>
     <sys:String x:Key="BaseInfoDisplayUninstall">卸载时显示</sys:String>
     <sys:String x:Key="BaseInfoFileVersion">文件版本：</sys:String>
     <sys:String x:Key="BaseInfoFileVersionTips">例如：1.0.0.1</sys:String>
@@ -247,6 +248,8 @@
     <sys:String x:Key="ToolSettingControl">设置</sys:String>
     <sys:String x:Key="ThemeDefault">默认主题</sys:String>
     <sys:String x:Key="ThemeBlack">黑色主题</sys:String>
+    <sys:String x:Key="TitleThemeDark">切换到暗色主题</sys:String>
+    <sys:String x:Key="TitleThemeLight">切换到亮色主题</sys:String>
     <sys:String x:Key="SaveSuccess">保存成功！</sys:String>
     <sys:String x:Key="SaveFail">保存失败！</sys:String>
     <sys:String x:Key="OpenFileError">打开文件发生错误！</sys:String>
@@ -276,4 +279,54 @@
     <sys:String x:Key="TargetAdd">添加</sys:String>
     <sys:String x:Key="TargetIsUserCreate">用户创建</sys:String>
     <sys:String x:Key="TargetSaveToLocal">保存到本地</sys:String>
+
+    <!--工程导航-->
+    <sys:String x:Key="ProjectGroupTitle">工程</sys:String>
+
+    <!--首页-->
+    <sys:String x:Key="HomeLibraryTitle">工程库</sys:String>
+    <sys:String x:Key="HomeLibraryDesc">新建、打开或从脚本导入安装包工程</sys:String>
+    <sys:String x:Key="HomeOpenProject">打开工程</sys:String>
+    <sys:String x:Key="HomeEntryNewDesc">创建新的安装包工程</sys:String>
+    <sys:String x:Key="HomeEntryOpenDesc">打开已有的 .pge 工程文件</sys:String>
+    <sys:String x:Key="HomeImportScript">从脚本导入</sys:String>
+    <sys:String x:Key="HomeEntryImportDesc">从 NSIS 脚本反向生成工程</sys:String>
+    <sys:String x:Key="HomeRecentTitle">最近打开</sys:String>
+    <sys:String x:Key="HomeRecentName">工程名称</sys:String>
+    <sys:String x:Key="HomeRecentUpdateTime">更新时间</sys:String>
+    <sys:String x:Key="HomeRecentEmpty">暂无最近打开的工程</sys:String>
+
+    <!--基础信息-->
+    <sys:String x:Key="BaseInfoCardAppInfo">应用标识</sys:String>
+    <sys:String x:Key="BaseInfoCardInstall">安装位置</sys:String>
+    <sys:String x:Key="BaseInfoCardInterface">界面与语言</sys:String>
+    <sys:String x:Key="BaseInfoCardResource">资源与输出</sys:String>
+
+    <!--组件信息-->
+    <sys:String x:Key="AssemblyGroupTitle">组件组</sys:String>
+
+    <!--应用图标-->
+    <sys:String x:Key="AppIconShortcutList">快捷方式列表</sys:String>
+
+    <!--注册表-->
+    <sys:String x:Key="RegistryPageDesc">配置文件关联信息与工程加密</sys:String>
+    <sys:String x:Key="RegistryCardAssoc">文件关联</sys:String>
+    <sys:String x:Key="RegistryCardPassword">工程加密</sys:String>
+    <sys:String x:Key="RegistryPasswordTip">启用加密后，再次打开或编译该工程时需要输入密码。</sys:String>
+
+    <!--完成界面-->
+    <sys:String x:Key="EndCardInstall">安装完成</sys:String>
+    <sys:String x:Key="EndCardProcess">进程检测</sys:String>
+    <sys:String x:Key="EndCardUninstall">卸载事件</sys:String>
+
+    <!--编译进度窗口-->
+    <sys:String x:Key="CompileProgressTitle">编译 · {0}</sys:String>
+    <sys:String x:Key="CompileStateCompiling">正在编译...</sys:String>
+    <sys:String x:Key="CompileStateSuccess">编译成功</sys:String>
+    <sys:String x:Key="CompileStateFailed">编译失败</sys:String>
+    <sys:String x:Key="CompileLogTitle">编译日志</sys:String>
+    <sys:String x:Key="CompileWaitingLog">等待编译输出...</sys:String>
+    <sys:String x:Key="CompileOutputFile">输出文件</sys:String>
+    <sys:String x:Key="CompileOutputSize">文件大小</sys:String>
+    <sys:String x:Key="CompileOpenFolder">打开输出目录</sys:String>
 </ResourceDictionary>

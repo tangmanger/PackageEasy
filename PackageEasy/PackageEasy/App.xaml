@@ -12,8 +12,10 @@
                 </ResourceDictionary>
                 <ResourceDictionary Source="/Themes/DefaultColor.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/Files/Language/Zh-CN.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="/Styles/Converters.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/Styles/ProcessStyle.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/Styles/TextBlock.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="/Styles/Icons.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/Styles/Button.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/Styles/RadioButton.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/Styles/ScrollViewer.xaml"></ResourceDictionary>
@@ -21,9 +23,12 @@
                 <ResourceDictionary Source="/Styles/ComBobox.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/Styles/DataGrid.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/Styles/Menu.xaml"></ResourceDictionary>
-                <ResourceDictionary Source="/Styles/Converters.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/Styles/PasswordBoxStyle.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/Styles/TableItemStyle.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="/Styles/CheckBox.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="/Styles/Switch.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="/Styles/Cards.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="/Styles/Dialogs.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -1,24 +1,40 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="clr-namespace:PackageEasy.Controls.Controls;assembly=PackageEasy.Controls">
+    <!--普通输入框：32 高、6 圆角、聚焦主色描边 + 淡光晕-->
     <Style x:Key="CommonTextBox" TargetType="TextBox">
         <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+        <Setter Property="Height" Value="32"></Setter>
+        <Setter Property="FontSize" Value="12.5"></Setter>
+        <Setter Property="CaretBrush" Value="{DynamicResource Accent}"></Setter>
         <Setter Property="Background" Value="{DynamicResource commonTextBoxBackground}"></Setter>
         <Setter Property="BorderBrush" Value="{DynamicResource commonTextBoxBorderBrush}"></Setter>
+        <Setter Property="BorderThickness" Value="1"></Setter>
         <Setter Property="Foreground" Value="{DynamicResource commonTextBoxForeground}"></Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TextBox">
-                    <Border CornerRadius="4" Background="{TemplateBinding Background}" x:Name="BORDER" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
-                        <ScrollViewer x:Name="PART_ContentHost" Focusable="False" 
-                              HorizontalScrollBarVisibility="Hidden" 
-                              VerticalScrollBarVisibility="Hidden" 
-                              HorizontalAlignment="Stretch" 
-                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="6,1,6,0" />
-                    </Border>
+                    <Grid>
+                        <Border x:Name="focusRing" CornerRadius="8" Background="{DynamicResource accentWeakBrush}" Margin="-3" Opacity="0"></Border>
+                        <Border CornerRadius="6" Background="{TemplateBinding Background}" x:Name="BORDER" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="False" 
+                                  HorizontalScrollBarVisibility="Hidden" 
+                                  VerticalScrollBarVisibility="Hidden" 
+                                  HorizontalAlignment="Stretch" 
+                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="8,0,8,0" />
+                        </Border>
+                    </Grid>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="{DynamicResource InputBorderHover}" TargetName="BORDER"></Setter>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                            <Setter Property="BorderBrush" Value="{DynamicResource Accent}" TargetName="BORDER"></Setter>
+                            <Setter Property="Opacity" Value="1" TargetName="focusRing"></Setter>
+                        </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background" Value="{DynamicResource commonDisableTextBoxBackground}" TargetName="BORDER"></Setter>
+                            <Setter Property="Foreground" Value="{DynamicResource InputTextDisabled}"></Setter>
                         </Trigger>
                     </ControlTemplate.Triggers>
 
@@ -28,34 +44,49 @@
     </Style>
 
 
+    <!--占位符输入框-->
     <Style x:Key="PlaceholderTextBoxStyle" TargetType="controls:PlaceholderTextBox">
         <Setter Property="BorderBrush" Value="{DynamicResource commonTextBoxBorderBrush}"></Setter>
         <Setter Property="BorderThickness" Value="1"></Setter>
+        <Setter Property="Height" Value="32"></Setter>
+        <Setter Property="FontSize" Value="12.5"></Setter>
         <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+        <Setter Property="Foreground" Value="{DynamicResource commonTextBoxForeground}"></Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:PlaceholderTextBox">
                     <ControlTemplate.Resources>
                         <TextBlock x:Key="ProxyElement"  Text="{Binding }"/>
                     </ControlTemplate.Resources>
-                    <Border Cursor="IBeam"  CornerRadius="{TemplateBinding CornerRadius}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" x:Name="borderRoot">
-                        <Grid>
+                    <Grid>
+                        <Border x:Name="focusRing" CornerRadius="8" Background="{DynamicResource accentWeakBrush}" Margin="-3" Opacity="0"></Border>
+                        <Border Cursor="IBeam"  CornerRadius="{TemplateBinding CornerRadius}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" x:Name="borderRoot">
+                            <Grid>
 
-                            <Border  x:Name="PART_DropButton" Tag="dd"    DataContext="{Binding PlaceHolderText,RelativeSource={RelativeSource Mode=TemplatedParent}}">
-                                <ScrollViewer x:Name="PART_ContentHost" Focusable="False" 
-                           HorizontalScrollBarVisibility="Hidden" 
-                           VerticalScrollBarVisibility="Hidden" 
-                           HorizontalAlignment="Stretch" 
-                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="6,2,6,0" />
-                            </Border>
-                            <ContentControl Visibility="Collapsed"
-          Content="{StaticResource ProxyElement}" DataContext="{Binding PlaceHolderText,RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-                        </Grid>
-                    </Border>
+                                <Border  x:Name="PART_DropButton" Tag="dd"    DataContext="{Binding PlaceHolderText,RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                    <ScrollViewer x:Name="PART_ContentHost" Focusable="False" 
+                               HorizontalScrollBarVisibility="Hidden" 
+                               VerticalScrollBarVisibility="Hidden" 
+                               HorizontalAlignment="Stretch" 
+                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="8,0,8,0" />
+                                </Border>
+                                <ContentControl Visibility="Collapsed"
+              Content="{StaticResource ProxyElement}" DataContext="{Binding PlaceHolderText,RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                            </Grid>
+                        </Border>
+                    </Grid>
 
                     <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="{DynamicResource InputBorderHover}" TargetName="borderRoot"></Setter>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                            <Setter Property="BorderBrush" Value="{DynamicResource Accent}" TargetName="borderRoot"></Setter>
+                            <Setter Property="Opacity" Value="1" TargetName="focusRing"></Setter>
+                        </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background" Value="{DynamicResource commonDisableTextBoxBackground}" TargetName="borderRoot"></Setter>
+                            <Setter Property="Foreground" Value="{DynamicResource InputTextDisabled}"></Setter>
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -63,7 +94,7 @@
                                 <Condition Property="Text" Value="" />
                                 <Condition Property="IsShowError" Value="true"></Condition>
                             </MultiTrigger.Conditions>
-                            <Setter Property="BorderBrush" Value="red" TargetName="borderRoot"></Setter>
+                            <Setter Property="BorderBrush" Value="{DynamicResource dangerBrush}" TargetName="borderRoot"></Setter>
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

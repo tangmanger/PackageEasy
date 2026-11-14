@@ -8,53 +8,51 @@
         mc:Ignorable="d"
         xmlns:lang="clr-namespace:PackageEasy.Common.Data;assembly=PackageEasy.Common"
         ShowInTaskbar="False"
-       
-        AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize" Background="Transparent"  Foreground="{StaticResource mainForeground}" Loaded="Window_Loaded" Height="420" Width="650"
-        WindowStartupLocation="CenterOwner" >
+        AllowsTransparency="False" WindowStyle="None"  Background="{DynamicResource MainWorkAreaBackgroud}" Foreground="{DynamicResource mainForeground}" Loaded="Window_Loaded" Height="440" Width="660"
+        WindowStartupLocation="CenterOwner">
     <i:Interaction.Triggers>
-        <i:EventTrigger EventName="Unload" >
+        <i:EventTrigger EventName="Unload">
             <i:InvokeCommandAction Command="{Binding UnloadCommand}"></i:InvokeCommandAction>
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="30"
-                    GlassFrameThickness="0"
-                    NonClientFrameEdges="None"
-                    CornerRadius="0"
-                    ResizeBorderThickness="3"
-                    UseAeroCaptionButtons="False"
-                     />
-
+        <WindowChrome CaptionHeight="44"
+                      GlassFrameThickness="0,0,0,1"
+                      NonClientFrameEdges="None"
+                      CornerRadius="8"
+                      ResizeBorderThickness="3"
+                      UseAeroCaptionButtons="False" />
     </WindowChrome.WindowChrome>
-    <Border  BorderThickness="0.8" Background="{DynamicResource MainWorkAreaBackgroud}" CornerRadius="4" BorderBrush="{DynamicResource MainWindowBorderBrush}">
-        <Grid >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="32"></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition Height="45"></RowDefinition>
-            </Grid.RowDefinitions>
-            <Border Background="{DynamicResource titleColoBrushes}">
-                <Grid WindowChrome.IsHitTestVisibleInChrome="True" Margin="0,6,0,6">
-                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" >
-                        <Image Height="18" Width="18" VerticalAlignment="Center" Margin="15,0,0,0" Source="/Resources/Images/tools.png"></Image>
-                        <TextBlock  Margin="5,0,0,0" VerticalAlignment="Center" Text="{Binding Title,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
-                    </StackPanel>
 
-                    <StackPanel WindowChrome.IsHitTestVisibleInChrome="True"  Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
-                        <!--<Button Style="{StaticResource IconButtonStyle}" FontSize="16" Margin="10,0,10,0"  Command="{x:Static SystemCommands.MinimizeWindowCommand}"  Foreground="{DynamicResource mainOperateButtonBrushes}" Content="&#xea6a;"></Button>-->
-                        <!--<Button Style="{StaticResource IconButtonStyle}" FontSize="16" Margin="10,0,10,0"  Command="{x:Static SystemCommands.MaximizeWindowCommand}"  x:Name="max" Foreground="{DynamicResource mainOperateButtonBrushes}" Content="&#xe65d;"></Button>-->
-                        <!--<Button Style="{StaticResource IconButtonStyle}" FontSize="16" Margin="10,0,10,0"  Command="{x:Static SystemCommands.RestoreWindowCommand}" x:Name="normal" Foreground="{DynamicResource mainOperateButtonBrushes}" Content="&#xe692;"></Button>-->
-                        <Button Style="{StaticResource IconButtonStyle}" FontSize="16" Foreground="{DynamicResource mainOperateButtonBrushes}" Command="{x:Static SystemCommands.CloseWindowCommand}" Content="&#xe607;"></Button>
+    <Border Background="{DynamicResource appCanvasBrush}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="44"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="56"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <!--标题栏-->
+            <Border Background="{DynamicResource shellBrush}" CornerRadius="0" BorderBrush="{DynamicResource borderBrush}" BorderThickness="0,0,0,1">
+                <Grid>
+                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Margin="16,0,0,0">
+                        <Image Style="{StaticResource AppLogoStyle}" Width="22" Height="22"></Image>
+                        <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource mainForeground}" Text="{Binding Title,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                     </StackPanel>
+                    <Button WindowChrome.IsHitTestVisibleInChrome="True" HorizontalAlignment="Right" Style="{StaticResource CaptionCloseButtonStyle}" FontSize="14" Command="{x:Static SystemCommands.CloseWindowCommand}" Content="&#xe607;"></Button>
                 </Grid>
             </Border>
-            <Border Grid.Row="1" Background="{DynamicResource MainWorkAreaBackgroud}">
+
+            <!--内容-->
+            <Border Grid.Row="1" Background="{DynamicResource appCanvasBrush}" Padding="0">
                 <ContentControl Content="{Binding WorkView}"></ContentControl>
             </Border>
-            <Border Grid.Row="2" Background="{DynamicResource showWindowsBottonBackground}">
-                <StackPanel Grid.Row="2" HorizontalAlignment="Right" Orientation="Horizontal">
-                    <Button Style="{StaticResource CommonButtonStyle}" Visibility="{Binding ShowSureVisibility}" Command="{Binding SaveCommand}" Click="Button_Click" Height="25" MinWidth="80" d:Content="确认" Content="{DynamicResource Yes}"></Button>
-                    <Button Style="{StaticResource CommonButtonStyle}" Margin="10,0,10,0" Height="25"  Click="Button_Click" MinWidth="80" d:Content="取消" Content="{DynamicResource Cancel}" ></Button>
+
+            <!--底部按钮-->
+            <Border Grid.Row="2" Background="{DynamicResource MainWorkAreaBackgroud}" BorderBrush="{DynamicResource borderBrush}" BorderThickness="0,1,0,0" CornerRadius="0">
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,16,0">
+                    <Button Style="{StaticResource PrimaryButtonStyle}" Visibility="{Binding ShowSureVisibility}" Command="{Binding SaveCommand}" Click="Button_Click" MinWidth="88" Height="32" Content="{DynamicResource Yes}"></Button>
+                    <Button Style="{StaticResource CommonButtonStyle}" Margin="8,0,0,0" Click="Button_Click" MinWidth="88" Height="32" Content="{DynamicResource Cancel}"></Button>
                 </StackPanel>
             </Border>
         </Grid>

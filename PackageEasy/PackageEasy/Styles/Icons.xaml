@@ -1,0 +1,77 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--==========================================================
+        线性图标（24×24 描边几何），配合 IconPathStyle 使用：
+        <Path Style="{StaticResource IconPathStyle}" Data="{StaticResource IconInfo}"/>
+    ===========================================================-->
+    <!--信息-->
+    <StreamGeometry x:Key="IconInfo">M12,3 A9,9 0 1 1 11.99,3 Z M12,10.5 L12,17 M12,7.2 L12,7.21</StreamGeometry>
+    <!--组件层-->
+    <StreamGeometry x:Key="IconLayers">M12,3 L21,8 L12,13 L3,8 Z M3,12 L12,17 L21,12 M3,16 L12,21 L21,16</StreamGeometry>
+    <!--快捷方式-->
+    <StreamGeometry x:Key="IconShortcut">M4,19 C4.6,12.2 10,8.8 18.4,8.8 M14.6,4.6 L19.6,8.8 L14.6,13</StreamGeometry>
+    <!--注册表-->
+    <StreamGeometry x:Key="IconRegistry">M6,3 L15,3 L19,7 L19,21 L6,21 Z M15,3 L15,7 L19,7 M9,12 L16,12 M9,16 L16,16</StreamGeometry>
+    <!--语言-->
+    <StreamGeometry x:Key="IconGlobe">M12,3 A9,9 0 1 1 11.99,3 Z M3,12 L21,12 M12,3 C8.4,6.6 8.4,17.4 12,21 M12,3 C15.6,6.6 15.6,17.4 12,21</StreamGeometry>
+    <!--结束-->
+    <StreamGeometry x:Key="IconFlag">M6,21 L6,3.5 M6,4 L17.5,4 L14.8,8 L17.5,12 L6,12</StreamGeometry>
+    <!--新增-->
+    <StreamGeometry x:Key="IconPlus">M12,5 L12,19 M5,12 L19,12</StreamGeometry>
+    <!--搜索-->
+    <StreamGeometry x:Key="IconSearch">M10.5,4 A6.5,6.5 0 1 1 10.49,4 Z M15.4,15.4 L20,20</StreamGeometry>
+    <!--右箭头-->
+    <StreamGeometry x:Key="IconChevron">M9,6 L15,12 L9,18</StreamGeometry>
+    <!--文件夹-->
+    <StreamGeometry x:Key="IconFolder">M3,7 L10,7 L12,9 L21,9 L21,19 L3,19 Z</StreamGeometry>
+    <!--文件-->
+    <StreamGeometry x:Key="IconFile">M7,3 L14,3 L18,7 L18,21 L7,21 Z M14,3 L14,7 L18,7</StreamGeometry>
+    <!--闪电（编译）-->
+    <StreamGeometry x:Key="IconBolt">M13,3 L6,14 L11,14 L10,21 L18,10 L12,10 Z</StreamGeometry>
+    <!--设置-->
+    <StreamGeometry x:Key="IconGear">M12,8.4 A3.6,3.6 0 1 1 11.99,8.4 Z M12,3 L12,5 M12,19 L12,21 M3,12 L5,12 M19,12 L21,12 M5.6,5.6 L7,7 M17,17 L18.4,18.4 M18.4,5.6 L17,7 M7,17 L5.6,18.4</StreamGeometry>
+    <!--表格-->
+    <StreamGeometry x:Key="IconGrid">M4,4 L20,4 L20,20 L4,20 Z M4,9.3 L20,9.3 M4,14.6 L20,14.6 M9.3,4 L9.3,20 M14.6,4 L14.6,20</StreamGeometry>
+    <!--关闭-->
+    <StreamGeometry x:Key="IconClose">M6,6 L18,18 M18,6 L6,18</StreamGeometry>
+    <!--勾选-->
+    <StreamGeometry x:Key="IconCheck">M5,12.5 L10,17.5 L19,6.5</StreamGeometry>
+    <!--加密-->
+    <StreamGeometry x:Key="IconLock">M7,11 L17,11 L17,20 L7,20 Z M9.5,11 L9.5,8 A2.5,2.5 0 0 1 14.5,8 L14.5,11</StreamGeometry>
+    <!--月亮：亮色主题显示（点击切换到暗色）-->
+    <StreamGeometry x:Key="IconMoon">M20,14.5 A8,8 0 1 1 9.5,4 A6.5,6.5 0 0 0 20,14.5 Z</StreamGeometry>
+    <!--太阳：暗色主题显示（点击切换到亮色）-->
+    <StreamGeometry x:Key="IconSun">M12,8 A4,4 0 1 1 11.99,8 Z M12,2.5 L12,5 M12,19 L12,21.5 M2.5,12 L5,12 M19,12 L21.5,12 M5.3,5.3 L7,7 M17,17 L18.7,18.7 M18.7,5.3 L17,7 M7,17 L5.3,18.7</StreamGeometry>
+
+    <!--图标基准样式：描边、圆头、不填充-->
+    <Style x:Key="IconPathStyle" TargetType="Path">
+        <Setter Property="Width" Value="16" />
+        <Setter Property="Height" Value="16" />
+        <Setter Property="Stretch" Value="Uniform" />
+        <Setter Property="Fill" Value="Transparent" />
+        <Setter Property="Stroke" Value="{DynamicResource textSecondaryBrush}" />
+        <Setter Property="StrokeThickness" Value="1.5" />
+        <Setter Property="StrokeLineJoin" Value="Round" />
+        <Setter Property="StrokeStartLineCap" Value="Round" />
+        <Setter Property="StrokeEndLineCap" Value="Round" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="SnapsToDevicePixels" Value="False" />
+    </Style>
+    <!--小号图标 14-->
+    <Style x:Key="IconPathSmallStyle" TargetType="Path" BasedOn="{StaticResource IconPathStyle}">
+        <Setter Property="Width" Value="14" />
+        <Setter Property="Height" Value="14" />
+        <Setter Property="StrokeThickness" Value="1.4" />
+    </Style>
+    <!--导航图标 16，跟随 RadioButton 前景色-->
+    <Style x:Key="IconPathNavStyle" TargetType="Path" BasedOn="{StaticResource IconPathStyle}">
+        <Setter Property="Stroke" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type RadioButton}}}" />
+    </Style>
+    <!--卡片图标 20，跟随 Accent-->
+    <Style x:Key="IconPathCardStyle" TargetType="Path" BasedOn="{StaticResource IconPathStyle}">
+        <Setter Property="Width" Value="20" />
+        <Setter Property="Height" Value="20" />
+        <Setter Property="Stroke" Value="{DynamicResource Accent}" />
+    </Style>
+</ResourceDictionary>

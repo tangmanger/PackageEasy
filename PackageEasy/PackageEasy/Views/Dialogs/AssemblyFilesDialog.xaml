@@ -5,42 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PackageEasy.Views.Dialogs"
         mc:Ignorable="d"
-            AllowsTransparency="True" WindowStyle="None" ResizeMode="CanResize" Height="500" Width="850" Background="Transparent"  Foreground="{StaticResource mainForeground}" Loaded="Window_Loaded"
-    WindowStartupLocation="CenterOwner" >
+        AllowsTransparency="False" WindowStyle="None" ResizeMode="CanResize" Height="520" Width="880" Background="{DynamicResource MainWorkAreaBackgroud}" Foreground="{DynamicResource mainForeground}" Loaded="Window_Loaded"
+    WindowStartupLocation="CenterOwner">
 
     <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="30"
-                GlassFrameThickness="0"
+        <WindowChrome CaptionHeight="44"
+                GlassFrameThickness="0,0,0,1"
                 NonClientFrameEdges="None"
-                CornerRadius="0"
-                ResizeBorderThickness="1"
-                UseAeroCaptionButtons="False"
-                 />
-
+                CornerRadius="8"
+                ResizeBorderThickness="3"
+                UseAeroCaptionButtons="False" />
     </WindowChrome.WindowChrome>
-    <Border  BorderThickness="0.8" Background="{DynamicResource MainWorkAreaBackgroud}" CornerRadius="4" BorderBrush="{DynamicResource MainWindowBorderBrush}">
-        <Grid >
+    <Border Background="{DynamicResource appCanvasBrush}">
+        <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="32"></RowDefinition>
+                <RowDefinition Height="44"></RowDefinition>
                 <RowDefinition></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="56"></RowDefinition>
             </Grid.RowDefinitions>
-            <Border Background="{DynamicResource titleColoBrushes}">
-                <Grid WindowChrome.IsHitTestVisibleInChrome="True" Margin="0,6,0,6">
-                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" >
-                        <Image Height="18" Width="18" VerticalAlignment="Center" Margin="15,0,0,0" Source="/Resources/Images/tools.png"></Image>
-                        <TextBlock  Margin="5,0,0,0" VerticalAlignment="Center" Text="{Binding Title,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+            <!--标题栏-->
+            <Border Background="{DynamicResource shellBrush}" CornerRadius="0" BorderBrush="{DynamicResource borderBrush}" BorderThickness="0,0,0,1">
+                <Grid>
+                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Margin="16,0,0,0">
+                        <Image Style="{StaticResource AppLogoStyle}" Width="22" Height="22"></Image>
+                        <TextBlock Margin="8,0,0,0" VerticalAlignment="Center" FontSize="13" FontWeight="SemiBold" Foreground="{DynamicResource mainForeground}"
+                                   Text="{Binding Title, RelativeSource={RelativeSource AncestorType={x:Type Window}}}"></TextBlock>
                     </StackPanel>
-
-                    <StackPanel WindowChrome.IsHitTestVisibleInChrome="True"  Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
-                        <!--<Button Style="{StaticResource IconButtonStyle}" FontSize="16" Margin="10,0,10,0"  Command="{x:Static SystemCommands.MinimizeWindowCommand}"  Foreground="{DynamicResource mainOperateButtonBrushes}" Content="&#xea6a;"></Button>-->
-                        <!--<Button Style="{StaticResource IconButtonStyle}" FontSize="16" Margin="10,0,10,0"  Command="{x:Static SystemCommands.MaximizeWindowCommand}"  x:Name="max" Foreground="{DynamicResource mainOperateButtonBrushes}" Content="&#xe65d;"></Button>-->
-                        <!--<Button Style="{StaticResource IconButtonStyle}" FontSize="16" Margin="10,0,10,0"  Command="{x:Static SystemCommands.RestoreWindowCommand}" x:Name="normal" Foreground="{DynamicResource mainOperateButtonBrushes}" Content="&#xe692;"></Button>-->
-                        <Button Style="{StaticResource IconButtonStyle}" FontSize="16" Foreground="{DynamicResource mainOperateButtonBrushes}" Command="{x:Static SystemCommands.CloseWindowCommand}" Content="&#xe607;"></Button>
-                    </StackPanel>
+                    <Button WindowChrome.IsHitTestVisibleInChrome="True" HorizontalAlignment="Right" Style="{StaticResource CaptionCloseButtonStyle}" FontSize="14"
+                            Command="{x:Static SystemCommands.CloseWindowCommand}" Content="&#xe607;"></Button>
                 </Grid>
             </Border>
-            <Border Grid.Row="1" Background="{DynamicResource MainWorkAreaBackgroud}">
+            <Border Grid.Row="1" Background="{DynamicResource appCanvasBrush}" Padding="11">
                 <ItemsControl ItemsSource="{Binding FileList}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -61,7 +56,7 @@
                                     <ControlTemplate TargetType="CheckBox">
 
 
-                                        <Border MinWidth="250" MinHeight="250" BorderBrush="{DynamicResource borderBrush}" CornerRadius="4" Background="{DynamicResource projectNewCreateBackground}" BorderThickness="1"  Margin="5">
+                                        <Border MinWidth="250" MinHeight="250" BorderBrush="{DynamicResource borderBrush}" CornerRadius="12" Background="{DynamicResource MainWorkAreaBackgroud}" BorderThickness="1" Margin="5">
                                             <StackPanel Orientation="Vertical" Margin="8">
                                                 <StackPanel Orientation="Horizontal">
                                                     <TextBlock  d:Text="文件目录" Text="{DynamicResource AssemblyDir}" Foreground="{DynamicResource DataGridForeground}"  FontSize="14"></TextBlock>
@@ -104,7 +99,9 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </Border>
-            <Button Height="30" Grid.Row="2" d:Content="确定" Content="{DynamicResource Yes}" Margin="0,5,0,5" Style="{StaticResource CommonButtonStyle}" Width="80"></Button>
+            <Border Grid.Row="2" Background="{DynamicResource MainWorkAreaBackgroud}" BorderBrush="{DynamicResource borderBrush}" BorderThickness="0,1,0,0" CornerRadius="0">
+                <Button Height="32" Content="{DynamicResource Yes}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource PrimaryButtonStyle}" Width="88"></Button>
+            </Border>
 
         </Grid>
     </Border>

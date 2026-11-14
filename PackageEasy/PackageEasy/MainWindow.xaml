@@ -7,20 +7,21 @@
         xmlns:local="clr-namespace:PackageEasy"
         xmlns:PackageControls="clr-namespace:PackageEasy.Common.Controls;assembly=PackageEasy.Common"
         mc:Ignorable="d"
-        Title="Package Easy Bate v1.0"    Background="Transparent" WindowStyle="None" Height="750" Width="1200" WindowStartupLocation="CenterScreen" DataContext="{Binding Main,Source={StaticResource locator}}">
+        Title="Package Easy Bate v1.0"    Background="{DynamicResource shellBrush}" WindowStyle="None" Height="800" Width="1280" MinWidth="1120" MinHeight="700" WindowStartupLocation="CenterScreen" DataContext="{Binding Main,Source={StaticResource locator}}">
 
     <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="30"
-                    GlassFrameThickness="15"
+        <WindowChrome CaptionHeight="44"
+                    GlassFrameThickness="0,0,0,1"
                     NonClientFrameEdges="None"
-                    CornerRadius="5"
-                    ResizeBorderThickness="2"
+                    CornerRadius="8"
+                    ResizeBorderThickness="4"
                     UseAeroCaptionButtons="False"
                      />
 
     </WindowChrome.WindowChrome>
     <Window.InputBindings>
         <KeyBinding Modifiers="Control" Key="S" Command="{Binding SaveCommand}" />
+        <KeyBinding Modifiers="Control" Key="N" Command="{Binding NewProjectCommand}" />
         <KeyBinding Modifiers="Control" Key="O" Command="{Binding OpenFileCommand}" />
         <KeyBinding Modifiers="Control" Key="W" Command="{Binding CloseTableCommand}"/>
         <KeyBinding Modifiers="Control" Key="E" Command="{Binding ExportScriptCommand}"/>
@@ -32,109 +33,123 @@
             <i:InvokeCommandAction Command="{Binding LoadCommand}" ></i:InvokeCommandAction>
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <Border  BorderThickness="0.8" Background="{DynamicResource MainWorkAreaBackgroud}" CornerRadius="3" BorderBrush="{DynamicResource MainWindowBorderBrush}">
+    <Border Background="{DynamicResource shellBrush}" SnapsToDevicePixels="True">
         <Grid >
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="32"></RowDefinition>
+                <RowDefinition Height="44"></RowDefinition>
+                <RowDefinition Height="38"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <Border Background="{DynamicResource titleColoBrushes}" CornerRadius="3,3,0,0">
-                <Grid WindowChrome.IsHitTestVisibleInChrome="True" Margin="0,8,0,8">
-                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" >
-                        <Image Height="18" Width="18" VerticalAlignment="Center" Margin="15,0,0,0" Source="/Resources/Images/tools.png"></Image>
-                        <Menu FontSize="14" Background="Transparent" Margin="10,0,0,0" Foreground="{DynamicResource menuForeground}">
-                            <MenuItem   MinWidth="50" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="14" HorizontalContentAlignment="Center" d:Header="文件" Header="{DynamicResource MainFile}">
-                                <MenuItem Language="" d:Header="新建" Header="{DynamicResource MainNewFile}" Command="{Binding NewProjectCommand}" InputGestureText="    ">
+            <!--标题栏-->
+            <Border Background="{DynamicResource shellBrush}" CornerRadius="0">
+                <Grid WindowChrome.IsHitTestVisibleInChrome="True">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Column="0">
+                        <Image Style="{StaticResource AppLogoStyle}" Width="22" Height="22" Margin="14,0,0,0"></Image>
+                        <Menu Style="{StaticResource MainMenuStyle}" Margin="12,0,0,0" VerticalAlignment="Center">
+                            <MenuItem Height="26" MinWidth="40" d:Header="文件" Header="{DynamicResource MainFile}">
+                                <MenuItem Language="" d:Header="新建" Header="{DynamicResource MainNewFile}" Command="{Binding NewProjectCommand}" InputGestureText="Ctrl+N">
                                 </MenuItem>
                                 <MenuItem d:Header="打开.." Header="{DynamicResource MainOpen}"  Command="{Binding OpenFileCommand}" InputGestureText="Ctrl+O"></MenuItem>
-                                <MenuItem d:Header="关闭" Header="{DynamicResource MainClose}" IsEnabled="{Binding IsMenuCanEdit}" Command="{Binding CloseTableCommand}"   InputGestureText="Ctrl+W"  Width="auto" >
+                                <MenuItem d:Header="关闭" Header="{DynamicResource MainClose}" IsEnabled="{Binding IsMenuCanEdit}" Command="{Binding CloseTableCommand}"   InputGestureText="Ctrl+W">
                                 </MenuItem>
                                 <Separator Style="{StaticResource sep}"/>
                                 <MenuItem d:Header="保存" Header="{DynamicResource MainSave}" IsEnabled="{Binding IsMenuCanEdit}"    InputGestureText="Ctrl+S" Command="{Binding SaveCommand}"></MenuItem>
-                                <MenuItem d:Header="另存为.." Header="{DynamicResource MainSaveAs}" IsEnabled="{Binding IsMenuCanEdit,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"     Command="{Binding SaveAsCommand}" Width="auto" InputGestureText="    ">
+                                <MenuItem d:Header="另存为.." Header="{DynamicResource MainSaveAs}" IsEnabled="{Binding IsMenuCanEdit,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"     Command="{Binding SaveAsCommand}">
                                 </MenuItem>
                                 <Separator Style="{StaticResource sep}"/>
                                 <MenuItem d:Header="导出脚本" Header="{DynamicResource MainExportScript}"  IsEnabled="{Binding IsMenuCanEdit}"    Command="{Binding ExportScriptCommand}" InputGestureText="Ctrl+E"></MenuItem>
                                 <MenuItem d:Header="打开脚本"   Header="{DynamicResource MainImportScript}" Command="{Binding ImportScriptCommand}" InputGestureText="Ctrl+I"></MenuItem>
                                 <Separator Style="{StaticResource sep}"/>
-                                <MenuItem d:Header="退出" Header="{DynamicResource MainExit}" Command="{Binding ExitCommand}" Width="auto" InputGestureText="    "/>
+                                <MenuItem d:Header="退出" Header="{DynamicResource MainExit}" Command="{Binding ExitCommand}"/>
                             </MenuItem>
-                            <MenuItem   MinWidth="50" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="14" HorizontalContentAlignment="Center" d:Header="生成" Header="{DynamicResource MainBulid}">
+                            <MenuItem Height="26" MinWidth="40" d:Header="生成" Header="{DynamicResource MainBulid}">
                                 <MenuItem d:Header="编译" IsEnabled="{Binding IsMenuCanEdit}"  Header="{DynamicResource MainCompile}"  Command="{Binding CompileCommand}" InputGestureText="Ctrl+B"  >
                                     <MenuItem.Icon>
                                         <TextBlock Style="{StaticResource IconFontStyle}" FontSize="12" Text="&#xe613;"></TextBlock>
                                     </MenuItem.Icon>
                                 </MenuItem>
                             </MenuItem>
-                            <MenuItem MinWidth="50" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="14" HorizontalContentAlignment="Center"  d:Header="工具" Header="{DynamicResource MainTools}">
-                                <MenuItem d:Header="设置" Header="{DynamicResource MainSetting}" Command="{Binding SettingCommand}" InputGestureText=""  >
+                            <MenuItem Height="26" MinWidth="40" d:Header="工具" Header="{DynamicResource MainTools}">
+                                <MenuItem d:Header="设置" Header="{DynamicResource MainSetting}" Command="{Binding SettingCommand}">
                                     <MenuItem.Icon>
                                         <TextBlock Style="{StaticResource IconFontStyle}" FontSize="14" Text="&#xe68f;"></TextBlock>
                                     </MenuItem.Icon>
                                 </MenuItem>
                             </MenuItem>
-                            <MenuItem MinWidth="50" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="14" HorizontalContentAlignment="Center"  d:Header="扩展" Header="{DynamicResource MainExtension}">
-                                <MenuItem d:Header="管理扩展" Header="{DynamicResource MainManageExtension}" Command="{Binding PlugInManagerCommand}" InputGestureText=""  >
+                            <MenuItem Height="26" MinWidth="40" d:Header="扩展" Header="{DynamicResource MainExtension}">
+                                <MenuItem d:Header="管理扩展" Header="{DynamicResource MainManageExtension}" Command="{Binding PlugInManagerCommand}">
                                     <MenuItem.Icon>
                                         <TextBlock Style="{StaticResource IconFontStyle}" FontSize="14" Text="&#xe634;"></TextBlock>
                                     </MenuItem.Icon>
                                 </MenuItem>
                             </MenuItem>
-                            <MenuItem MinWidth="50" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="14" HorizontalContentAlignment="Center"  d:Header="数据" Header="{DynamicResource MainDataStore}">
-                                <MenuItem d:Header="路径管理" Header="{DynamicResource MainTargetPath}" Command="{Binding TargetPathCommand}" InputGestureText="" >
+                            <MenuItem Height="26" MinWidth="40" d:Header="数据" Header="{DynamicResource MainDataStore}">
+                                <MenuItem d:Header="路径管理" Header="{DynamicResource MainTargetPath}" Command="{Binding TargetPathCommand}">
                                     <MenuItem.Icon>
                                         <TextBlock Style="{StaticResource IconFontStyle}" FontSize="14" Text="&#xe672;"></TextBlock>
                                     </MenuItem.Icon>
                                 </MenuItem>
                             </MenuItem>
-                            <MenuItem MinWidth="50" VerticalAlignment="Center" VerticalContentAlignment="Center" FontSize="14" HorizontalContentAlignment="Center"  d:Header="帮助" Header="{DynamicResource MainHelp}">
-                                <MenuItem d:Header="关于PackageEasy" Header="{DynamicResource MainAbout}" Command="{Binding AboutCommand}" InputGestureText=""  >
+                            <MenuItem Height="26" MinWidth="40" d:Header="帮助" Header="{DynamicResource MainHelp}">
+                                <MenuItem d:Header="关于PackageEasy" Header="{DynamicResource MainAbout}" Command="{Binding AboutCommand}">
                                 </MenuItem>
                             </MenuItem>
                         </Menu>
                     </StackPanel>
-                    <StackPanel WindowChrome.IsHitTestVisibleInChrome="True"  Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
-                        <Button Style="{StaticResource IconButtonStyle}" FontSize="16" Margin="10,0,10,0"  Command="{x:Static SystemCommands.MinimizeWindowCommand}"  Foreground="{DynamicResource mainOperateButtonBrushes}" Content="&#xea6a;"></Button>
-                        <Button Style="{StaticResource IconButtonStyle}" FontSize="16" Margin="10,0,10,0"  Command="{x:Static SystemCommands.MaximizeWindowCommand}"  x:Name="max" Foreground="{DynamicResource mainOperateButtonBrushes}" Content="&#xe65d;"></Button>
-                        <Button Style="{StaticResource IconButtonStyle}" FontSize="16" Margin="10,0,10,0"  Command="{x:Static SystemCommands.RestoreWindowCommand}" x:Name="normal" Foreground="{DynamicResource mainOperateButtonBrushes}" Content="&#xe692;"></Button>
-                        <Button Style="{StaticResource IconButtonStyle}" FontSize="16" Foreground="{DynamicResource mainOperateButtonBrushes}" Command="{x:Static SystemCommands.CloseWindowCommand}" Content="&#xe607;"></Button>
+                    <StackPanel WindowChrome.IsHitTestVisibleInChrome="True"  Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="2">
+                        <Button Style="{StaticResource TitleBarButtonStyle}" Command="{Binding ToggleThemeCommand}" VerticalAlignment="Center" Margin="0,0,6,0"></Button>
+                        <Button Style="{StaticResource CaptionButtonStyle}" Command="{x:Static SystemCommands.MinimizeWindowCommand}"  Content="&#xea6a;"></Button>
+                        <Button Style="{StaticResource CaptionButtonStyle}" Command="{x:Static SystemCommands.MaximizeWindowCommand}"  x:Name="max" Content="&#xe65d;"></Button>
+                        <Button Style="{StaticResource CaptionButtonStyle}" Command="{x:Static SystemCommands.RestoreWindowCommand}" x:Name="normal" Content="&#xe692;"></Button>
+                        <Button Style="{StaticResource CaptionCloseButtonStyle}" Command="{x:Static SystemCommands.CloseWindowCommand}" Content="&#xe607;"></Button>
                     </StackPanel>
                 </Grid>
             </Border>
-            <Border Grid.Row="1" Background="{DynamicResource mainTablePanelBrushes}" >
+            <!--页签条-->
+            <Border Grid.Row="1" Background="{DynamicResource mainTablePanelBrushes}" BorderBrush="{DynamicResource borderBrush}" BorderThickness="0,0,0,1">
 
                 <Grid >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <PackageControls:IconRadioButton ClickMode="Press" Width="139" Margin="0,0,0,0"  VerticalAlignment="Bottom" GroupName="title" FontSize="14" IsShowClose="False" d:Content="首页" Content="{DynamicResource MainHome}" Command="{Binding BackToHomeCommand}"  IsChecked="{Binding IsActived,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Icon="&#xe8ff;"   Style="{StaticResource IconRadioButtonStyle}">
+                    <PackageControls:IconRadioButton ClickMode="Press" Width="139" Margin="0,0,0,0" VerticalAlignment="Stretch" GroupName="title" IsShowClose="False" d:Content="首页" Content="{DynamicResource MainHome}" Command="{Binding BackToHomeCommand}"  IsChecked="{Binding IsActived,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Icon="&#xe8ff;"   Style="{StaticResource IconRadioButtonStyle}">
                     </PackageControls:IconRadioButton>
                     <!--  Navigation frame  -->
-                    <!--<Frame x:Name="NavigationFrame" Navigated="NavigationFrame_OnNavigated" />-->
-                    <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden" Margin="0,0,0,-5"  x:Name="scroller"  Style="{StaticResource for_scrollviewer1}">
-                        <ItemsControl Grid.Column="1" ItemsSource="{Binding TableList}" MouseWheel="ItemsControl_MouseWheel" Margin="0,0,0,5">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel Orientation="Horizontal"></StackPanel>
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.Template>
-                                <ControlTemplate>
-                                    <ItemsPresenter/>
-                                </ControlTemplate>
-                            </ItemsControl.Template>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <PackageControls:IconRadioButton Margin="1,0,0,0" VerticalAlignment="Bottom"  IsShowClose="True"  FontSize="14" MinWidth="120" Width="auto" MaxWidth="200" GroupName="title" CloseCommand="{Binding Path=DataContext.CloseCommand,RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" Command="{Binding Path=DataContext.SwitchProjectCommand,RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding }"  Style="{StaticResource IconRadioButtonStyle}" Icon="&#xe607;" IsChecked="{Binding IsActive,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="{Binding ProjectName}"></PackageControls:IconRadioButton>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
+                    <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden" Margin="0,0,0,0"  x:Name="scroller"  Style="{StaticResource for_scrollviewer1}">
+                        <StackPanel Orientation="Horizontal">
+                            <ItemsControl ItemsSource="{Binding TableList}" MouseWheel="ItemsControl_MouseWheel" Margin="0,0,0,0">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal"></StackPanel>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.Template>
+                                    <ControlTemplate>
+                                        <ItemsPresenter/>
+                                    </ControlTemplate>
+                                </ItemsControl.Template>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <PackageControls:IconRadioButton Margin="1,0,0,0" VerticalAlignment="Stretch" IsShowClose="True" MinWidth="120" Width="auto" MaxWidth="200" GroupName="title" CloseCommand="{Binding Path=DataContext.CloseCommand,RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" Command="{Binding Path=DataContext.SwitchProjectCommand,RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" CommandParameter="{Binding }"  Style="{StaticResource IconRadioButtonStyle}" Icon="&#xe607;" IsChecked="{Binding IsActive,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Content="{Binding ProjectName}"></PackageControls:IconRadioButton>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <Button Style="{StaticResource GhostButtonStyle}" Width="30" Height="30" MinWidth="30" Padding="0" Margin="2,0,8,0" VerticalAlignment="Center" Focusable="False" Command="{Binding NewProjectCommand}" ToolTip="{DynamicResource MainNewFile}">
+                                <Path Style="{StaticResource IconPathStyle}" Width="14" Height="14" Stroke="{DynamicResource textSecondaryBrush}" Data="{StaticResource IconPlus}"></Path>
+                            </Button>
+                        </StackPanel>
                     </ScrollViewer>
                 </Grid>
             </Border>
-            <ContentControl  Content="{Binding WorkView}" Background="{DynamicResource MainWorkAreaBackgroud}" Grid.Row="2"></ContentControl>
+            <Border Grid.Row="2" Background="{DynamicResource appCanvasBrush}">
+                <ContentControl  Content="{Binding WorkView}" Background="Transparent"></ContentControl>
+            </Border>
         </Grid>
     </Border>
 </Window>

@@ -7,13 +7,16 @@
         xmlns:controls="https://dicgo.com/controls"
         mc:Ignorable="d"
         Title="Wating" Height="450" Background="Transparent" IsHitTestVisible="False" ShowInTaskbar="False" Width="800" WindowStyle="None" WindowStartupLocation="CenterOwner" AllowsTransparency="True">
-  
+
     <Grid Background="Transparent" IsHitTestVisible="true" PreviewMouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown">
-        <Border  Background="{DynamicResource watingBackground}" Opacity="0.1"></Border>
-        <Border Background="{DynamicResource watingBackground}" BorderBrush="{DynamicResource progressColoBrush}" BorderThickness="1"  Width="150" Height="80">
+        <Border Background="{DynamicResource appCanvasBrush}" Opacity="0.1"></Border>
+        <Border Background="{DynamicResource MainWorkAreaBackgroud}" BorderBrush="{DynamicResource borderBrush}" BorderThickness="1" CornerRadius="12" Width="168" Height="84">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="24" ShadowDepth="6" Direction="270" Opacity="0.18" Color="#000000"></DropShadowEffect>
+            </Border.Effect>
             <StackPanel Orientation="Horizontal">
-                <controls:TProgressRing Style="{StaticResource CircleProgressRingStyle}" Margin="5,0,0,0" HorizontalAlignment="Left" Width="60" Height="60"  IsActive="True"></controls:TProgressRing>
-                <TextBlock Margin="5,0,0,0" d:Text="请稍等..." Text="{DynamicResource WatingTips}" VerticalAlignment="Center" HorizontalAlignment="Center" ></TextBlock>
+                <controls:TProgressRing Style="{StaticResource CircleProgressRingStyle}" Margin="10,0,0,0" HorizontalAlignment="Left" Width="56" Height="56" IsActive="True"></controls:TProgressRing>
+                <TextBlock Margin="8,0,0,0" Text="{DynamicResource WatingTips}" FontSize="12.5" Foreground="{DynamicResource mainForeground}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
             </StackPanel>
         </Border>
     </Grid>

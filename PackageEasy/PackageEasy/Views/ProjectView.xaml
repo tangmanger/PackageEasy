@@ -9,29 +9,55 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <Grid>
+    <Grid Background="{DynamicResource appCanvasBrush}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="139" Width="AUTO" ></ColumnDefinition>
+            <ColumnDefinition Width="196"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Border BorderBrush="{DynamicResource borderBrush}" BorderThickness="0.5,0,0,0" Grid.Column="1"></Border>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-                <RowDefinition Height="auto"></RowDefinition>
-            </Grid.RowDefinitions>
-            <RadioButton  Style="{StaticResource SelecetRadioButtonStyle}" IsChecked="True" GroupName="tz"  Margin="4,12,4,0" d:Content="基础信息" Content="{DynamicResource ProjectBaseInfo}"  Command="{Binding ViewCommand}" CommandParameter="2" x:Name="opreate"  Height="48"></RadioButton>
-            <RadioButton Style="{StaticResource SelecetRadioButtonStyle}"  GroupName="tz"   Grid.Row="1"  Margin="4,12,4,0" d:Content="组件信息" Content="{DynamicResource ProjectAssemblyInfo}"  Command="{Binding ViewCommand}" CommandParameter="3"   Height="48"></RadioButton>
-            <RadioButton Style="{StaticResource SelecetRadioButtonStyle}"  GroupName="tz"    Grid.Row="2" Margin="4,12,4,0" d:Content="应用程序图标" Content="{DynamicResource ProjectAppIcon}"  Command="{Binding ViewCommand}" CommandParameter="4"   Height="48"></RadioButton>
-            <RadioButton Style="{StaticResource SelecetRadioButtonStyle}"  GroupName="tz"    Grid.Row="3" Margin="4,12,4,0" d:Content="注册表" Content="{DynamicResource ProjectRegistry}"  Command="{Binding ViewCommand}" CommandParameter="6"   Height="48"></RadioButton>
-            <RadioButton Style="{StaticResource SelecetRadioButtonStyle}"  GroupName="tz"    Grid.Row="4" Margin="4,12,4,0" d:Content="多语言" Content="{DynamicResource ProjectLanguage}"  Command="{Binding ViewCommand}" CommandParameter="7"   Height="48"></RadioButton>
-            <RadioButton Style="{StaticResource SelecetRadioButtonStyle}"  GroupName="tz"    Grid.Row="5" Margin="4,12,4,0" d:Content="结束界面" Content="{DynamicResource ProjectEnd}"  Command="{Binding ViewCommand}" CommandParameter="5"   Height="48"></RadioButton>
-        </Grid>
-        <ContentControl Grid.Column="1" Content="{Binding WorkView}"></ContentControl>
+        <!--左导航-->
+        <Border Background="{DynamicResource shellBrush}" BorderBrush="{DynamicResource borderBrush}" BorderThickness="0,0,1,0">
+            <StackPanel>
+                <TextBlock Text="{DynamicResource ProjectGroupTitle}" FontSize="11" FontWeight="SemiBold" Foreground="{DynamicResource textTertiaryBrush}" Margin="20,16,0,8"></TextBlock>
+                <StackPanel Margin="10,0">
+                    <RadioButton  Style="{StaticResource SelecetRadioButtonStyle}" IsChecked="True" GroupName="tz" Margin="0,2" d:Content="基础信息" Command="{Binding ViewCommand}" CommandParameter="2" x:Name="opreate">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Style="{StaticResource IconPathNavStyle}" Data="{StaticResource IconInfo}"></Path>
+                            <TextBlock Text="{DynamicResource ProjectBaseInfo}" Margin="8,0,0,0" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton Style="{StaticResource SelecetRadioButtonStyle}"  GroupName="tz" Margin="0,2" d:Content="组件信息" Command="{Binding ViewCommand}" CommandParameter="3">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Style="{StaticResource IconPathNavStyle}" Data="{StaticResource IconLayers}"></Path>
+                            <TextBlock Text="{DynamicResource ProjectAssemblyInfo}" Margin="8,0,0,0" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton Style="{StaticResource SelecetRadioButtonStyle}"  GroupName="tz" Margin="0,2" d:Content="应用程序图标" Command="{Binding ViewCommand}" CommandParameter="4">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Style="{StaticResource IconPathNavStyle}" Data="{StaticResource IconShortcut}"></Path>
+                            <TextBlock Text="{DynamicResource ProjectAppIcon}" Margin="8,0,0,0" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton Style="{StaticResource SelecetRadioButtonStyle}"  GroupName="tz" Margin="0,2" d:Content="注册表" Command="{Binding ViewCommand}" CommandParameter="6">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Style="{StaticResource IconPathNavStyle}" Data="{StaticResource IconRegistry}"></Path>
+                            <TextBlock Text="{DynamicResource ProjectRegistry}" Margin="8,0,0,0" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton Style="{StaticResource SelecetRadioButtonStyle}"  GroupName="tz" Margin="0,2" d:Content="多语言" Command="{Binding ViewCommand}" CommandParameter="7">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Style="{StaticResource IconPathNavStyle}" Data="{StaticResource IconGlobe}"></Path>
+                            <TextBlock Text="{DynamicResource ProjectLanguage}" Margin="8,0,0,0" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </RadioButton>
+                    <RadioButton Style="{StaticResource SelecetRadioButtonStyle}"  GroupName="tz" Margin="0,2" d:Content="结束界面" Command="{Binding ViewCommand}" CommandParameter="5">
+                        <StackPanel Orientation="Horizontal">
+                            <Path Style="{StaticResource IconPathNavStyle}" Data="{StaticResource IconFlag}"></Path>
+                            <TextBlock Text="{DynamicResource ProjectEnd}" Margin="8,0,0,0" VerticalAlignment="Center"></TextBlock>
+                        </StackPanel>
+                    </RadioButton>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+        <ContentControl Grid.Column="1" Content="{Binding WorkView}" Background="Transparent"></ContentControl>
     </Grid>
 </UserControl>
